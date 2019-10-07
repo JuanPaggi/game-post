@@ -43,6 +43,12 @@ public class Juegos {
 	@Column(nullable = false)
 	private long analisis_negativos;
 	
+	@Column(nullable = false)
+	private long id_requisito;
+	
+	@Column(nullable = false)
+	private long id_admin_creado;
+	
 	/*
 	 * ------ Getter and Setter ------ 
 	 */
@@ -117,6 +123,22 @@ public class Juegos {
 
 	public void setAnalisis_negativos(long analisis_negativos) {
 		this.analisis_negativos = analisis_negativos;
+	}
+
+	public long getId_requisito() {
+		return id_requisito;
+	}
+
+	public void setId_requisito(long id_requisito) {
+		this.id_requisito = id_requisito;
+	}
+
+	public long getId_admin_creado() {
+		return id_admin_creado;
+	}
+
+	public void setId_admin_creado(long id_admin_creado) {
+		this.id_admin_creado = id_admin_creado;
 	}
 	
 	

@@ -38,6 +38,8 @@ public class JuegosService {
 		juegoItem.fecha_lanzamiento = juego.get().getFecha_lanzamiento();
 		juegoItem.analisis_positivos = juego.get().getAnalisis_positivos();
 		juegoItem.analisis_negativos = juego.get().getAnalisis_negativos();
+		juegoItem.id_requisito = juego.get().getId_requisito();
+		juegoItem.id_admin_creado = juego.get().getId_admin_creado();
 		
 		return juegoItem;
 		
@@ -54,6 +56,8 @@ public class JuegosService {
 		juego.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juego.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juego.setAnalisis_negativos(juegoIn.analisis_negativos);
+		juego.setId_requisito(juegoIn.id_requisito);
+		juego.setId_admin_creado(juegoIn.id_admin_creado);
 
 		juego = juegosRepository.save(juego);
 		
@@ -76,6 +80,8 @@ public class JuegosService {
 			item.fecha_lanzamiento = juego.getFecha_lanzamiento();
 			item.analisis_positivos = juego.getAnalisis_positivos();
 			item.analisis_negativos = juego.getAnalisis_negativos();
+			item.id_requisito = juego.getId_requisito();
+			item.id_admin_creado = juego.getId_admin_creado();
 			out.add(item);
 		}
 		return out;
@@ -103,6 +109,8 @@ public class JuegosService {
 		juegoObj.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juegoObj.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
+		juegoObj.setId_requisito(juegoIn.id_requisito);
+		juegoObj.setId_admin_creado(juegoIn.id_admin_creado);
 
 		juegosRepository.save(juegoObj);
 	}

@@ -31,7 +31,7 @@ import io.swagger.annotations.ApiResponses;
  */
 
 @RestController
-@RequestMapping("${v1API}/juegos")
+@RequestMapping("/juegos")
 public class Juegos {
 	
 	public static Logger logger = LoggerFactory.getLogger(Juegos.class);
