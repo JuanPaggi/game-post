@@ -11,7 +11,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
 @EntityScan("com.game.persistence.models")
-@EnableJpaRepositories("com.game.backend.persistence.repository")
+@EnableJpaRepositories("com.game.persistence.repository")
 public class BackendApplication {
 
 	public static void main(String[] args) {
