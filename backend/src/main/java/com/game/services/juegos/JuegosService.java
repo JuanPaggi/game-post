@@ -90,4 +90,21 @@ public class JuegosService {
 	
 	}
 	
+	public void editJuego(String id, JuegoItem juegoIn) throws JuegosNotFound, NumberFormatException{
+		
+		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
+		if(juego.isEmpty()) throw new JuegosNotFound();
+		Juegos juegoObj = juego.get();
+		juegoObj.setTitulo(juegoIn.titulo);
+		juegoObj.setDescripcion(juegoIn.descripcion);
+		juegoObj.setGenero(juegoIn.genero);
+		juegoObj.setTipo(juegoIn.tipo);
+		juegoObj.setDesarrollador(juegoIn.desarrollador);
+		juegoObj.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
+		juegoObj.setAnalisis_positivos(juegoIn.analisis_positivos);
+		juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
+
+		juegosRepository.save(juegoObj);
+	}
+	
 }
