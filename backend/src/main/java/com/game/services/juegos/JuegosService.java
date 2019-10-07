@@ -37,4 +37,22 @@ public class JuegosService {
 		
 		return juegoItem;
 	}
+	
+	public long addJuego(JuegoItem juegoIn){
+		
+		Juegos juego = new Juegos();
+		juego.setTitulo(juegoIn.titulo);
+		juego.setDescripcion(juegoIn.descripcion);
+		juego.setGenero(juegoIn.genero);
+		juego.setTipo(juegoIn.tipo);
+		juego.setDesarrollador(juegoIn.desarrollador);
+		juego.setAnalisis_positivos(juegoIn.analisis_positivos);
+		juego.setAnalisis_negativos(juegoIn.analisis_negativos);
+
+		juego = noticiasRepository.save(juego);
+		
+		return juego.getId_juego();
+	
+	}
+	
 }
