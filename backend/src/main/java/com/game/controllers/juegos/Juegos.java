@@ -1,5 +1,8 @@
 package com.game.controllers.juegos;
 
+import java.text.ParseException;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +37,24 @@ public class Juegos {
 	@Autowired
 	JuegosService juegosService;
 
+	
+	@GetMapping(path="")
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "OK"),
+		@ApiResponse(code = 404, message = "Not found."),
+		@ApiResponse(code = 500, message = "Unexpected error.")
+		})
+	public @ResponseBody ResponseEntity<List<JuegoItem>> getJuegos(){
+		try {
+			return new ResponseEntity<List<JuegoItem>>(juegosService.getAllJuegos(), HttpStatus.OK);
+		} catch(ParseException e) {
+			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		}catch(Exception e) {
+			logger.error("Internal server error", e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@GetMapping(path = "/{idJuego}")
 	@ApiResponses({ 
 		@ApiResponse(code = 200, message = "OK"),
