@@ -32,9 +32,9 @@ import io.swagger.annotations.ApiResponses;
 
 @RestController
 @RequestMapping("${v1API}/juegos")
-public class Juegos {
+public class JuegosControllers {
 	
-	public static Logger logger = LoggerFactory.getLogger(Juegos.class);
+	public static Logger logger = LoggerFactory.getLogger(JuegosControllers.class);
 
 	@Autowired
 	JuegosService juegosService;
