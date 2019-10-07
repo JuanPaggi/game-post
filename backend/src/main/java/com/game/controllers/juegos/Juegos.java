@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -85,6 +86,27 @@ public class Juegos {
 		} catch(Exception e) {
 			logger.error("Internal server error", e);
 			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@DeleteMapping(path="/{idJuego}")
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "borrado OK"),
+		@ApiResponse(code = 404, message = "Curso inexistente."),
+		@ApiResponse(code = 400, message = "Id no valido."),
+		@ApiResponse(code = 500, message = "Unexpected error.")
+		})
+	public @ResponseBody ResponseEntity<Void> removeCurso(@PathVariable("idJuego") String idJuego) {
+		try {
+			juegosService.removeJuego(idJuego);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch(JuegosNotFound e) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		} catch(NumberFormatException e) {
+			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch(Exception e) {
+			logger.error("Internal server error", e);
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

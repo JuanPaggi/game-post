@@ -22,11 +22,11 @@ import com.game.services.juegos.exceptions.JuegosNotFound;
 public class JuegosService {
 
 	@Autowired
-	JuegosRepository noticiasRepository;
+	JuegosRepository juegosRepository;
 	
 	public JuegoItem getJuego(long id) throws JuegosNotFound {
 		
-		Optional<Juegos> juego = noticiasRepository.findById(id);
+		Optional<Juegos> juego = juegosRepository.findById(id);
 		JuegoItem juegoItem = new JuegoItem();
 		if(juego.isEmpty()) throw new JuegosNotFound();
 		juegoItem.id_juego = juego.get().getId_juego();
@@ -55,7 +55,7 @@ public class JuegosService {
 		juego.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juego.setAnalisis_negativos(juegoIn.analisis_negativos);
 
-		juego = noticiasRepository.save(juego);
+		juego = juegosRepository.save(juego);
 		
 		return juego.getId_juego();
 	
@@ -63,7 +63,7 @@ public class JuegosService {
 	
 	public List<JuegoItem> getAllJuegos() throws ParseException{
 		
-		List<Juegos> juegos = noticiasRepository.findAllNews();
+		List<Juegos> juegos = juegosRepository.findAllNews();
 		List<JuegoItem> out = new ArrayList<JuegoItem>();
 		for(Juegos juego: juegos) {
 			JuegoItem item = new JuegoItem();
@@ -79,6 +79,15 @@ public class JuegosService {
 			out.add(item);
 		}
 		return out;
+		
+	}
+	
+	public void removeJuego(String id) throws JuegosNotFound, NumberFormatException {
+		
+		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
+		if(juego.isEmpty()) throw new JuegosNotFound();
+		juegosRepository.delete(juego.get()); // this can be deleteById but I used this for previous validation exception.
+	
 	}
 	
 }
