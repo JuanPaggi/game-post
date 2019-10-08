@@ -10,7 +10,9 @@ import org.springframework.stereotype.Service;
 
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.persistence.models.Juegos;
+import com.game.persistence.models.Requisitos;
 import com.game.persistence.repository.JuegosRepository;
+import com.game.persistence.repository.RequisitosRepository;
 import com.game.services.juegos.exceptions.JuegosNotFound;
 
 /**
@@ -23,6 +25,9 @@ public class JuegosService {
 
 	@Autowired
 	JuegosRepository juegosRepository;
+	
+	@Autowired
+	RequisitosRepository requisitosRepository;
 	
 	public JuegoItem getJuego(long id) throws JuegosNotFound {
 		
@@ -38,16 +43,18 @@ public class JuegosService {
 		juegoItem.fecha_lanzamiento = juego.get().getFecha_lanzamiento();
 		juegoItem.analisis_positivos = juego.get().getAnalisis_positivos();
 		juegoItem.analisis_negativos = juego.get().getAnalisis_negativos();
-		juegoItem.id_requisito = juego.get().getId_requisito();
+		juegoItem.id_requisitos = juego.get().getRequisitos().getId_requisitos();
 		juegoItem.id_admin_creado = juego.get().getId_admin_creado();
 		
 		return juegoItem;
 		
 	}
 	
-	public long addJuego(JuegoItem juegoIn){
+	public long addJuego(JuegoItem juegoIn) throws JuegosNotFound{
 		
 		Juegos juego = new Juegos();
+		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
+		if(requisitos.isEmpty()) throw new JuegosNotFound();
 		juego.setTitulo(juegoIn.titulo);
 		juego.setDescripcion(juegoIn.descripcion);
 		juego.setGenero(juegoIn.genero);
@@ -56,7 +63,7 @@ public class JuegosService {
 		juego.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juego.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juego.setAnalisis_negativos(juegoIn.analisis_negativos);
-		juego.setId_requisito(juegoIn.id_requisito);
+		juego.setRequisitos(requisitos.get());
 		juego.setId_admin_creado(juegoIn.id_admin_creado);
 
 		juego = juegosRepository.save(juego);
@@ -80,7 +87,7 @@ public class JuegosService {
 			item.fecha_lanzamiento = juego.getFecha_lanzamiento();
 			item.analisis_positivos = juego.getAnalisis_positivos();
 			item.analisis_negativos = juego.getAnalisis_negativos();
-			item.id_requisito = juego.getId_requisito();
+			item.id_requisitos = juego.getRequisitos().getId_requisitos();
 			item.id_admin_creado = juego.getId_admin_creado();
 			out.add(item);
 		}
@@ -99,7 +106,8 @@ public class JuegosService {
 	public void editJuego(String id, JuegoItem juegoIn) throws JuegosNotFound, NumberFormatException{
 		
 		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
-		if(juego.isEmpty()) throw new JuegosNotFound();
+		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
+		if(juego.isEmpty() && requisitos.isEmpty()) throw new JuegosNotFound();
 		Juegos juegoObj = juego.get();
 		juegoObj.setTitulo(juegoIn.titulo);
 		juegoObj.setDescripcion(juegoIn.descripcion);
@@ -109,7 +117,7 @@ public class JuegosService {
 		juegoObj.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juegoObj.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
-		juegoObj.setId_requisito(juegoIn.id_requisito);
+		juegoObj.setRequisitos(requisitos.get());
 		juegoObj.setId_admin_creado(juegoIn.id_admin_creado);
 
 		juegosRepository.save(juegoObj);

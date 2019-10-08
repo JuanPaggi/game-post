@@ -14,7 +14,7 @@ public class JuegoItem {
 	public long analisis_positivos;
 	public long analisis_negativos;
 	
-	public long id_requisito;
+	public long id_requisitos;
 	public long id_admin_creado;
 	
 }

@@ -7,6 +7,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 
 import org.hibernate.search.annotations.Indexed;
 
@@ -43,8 +45,9 @@ public class Juegos {
 	@Column(nullable = false)
 	private long analisis_negativos;
 	
-	@Column(nullable = false)
-	private long id_requisito;
+	@ManyToOne()
+	@JoinColumn(name="id_requisito", referencedColumnName = "id_requisito")
+	private Requisitos requisitos;
 	
 	@Column(nullable = false)
 	private long id_admin_creado;
@@ -125,12 +128,12 @@ public class Juegos {
 		this.analisis_negativos = analisis_negativos;
 	}
 
-	public long getId_requisito() {
-		return id_requisito;
+	public Requisitos getRequisitos() {
+		return requisitos;
 	}
 
-	public void setId_requisito(long id_requisito) {
-		this.id_requisito = id_requisito;
+	public void setRequisitos(Requisitos requisitos) {
+		this.requisitos = requisitos;
 	}
 
 	public long getId_admin_creado() {

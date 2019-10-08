@@ -16,7 +16,7 @@ public class Requisitos {
 	@Id
 	// AutoIncremento del Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long id_requisitos;
+	private long id_requisito;
 	
 	@Column(nullable = false)
 	private String sistema_operativo;
@@ -31,18 +31,18 @@ public class Requisitos {
 	private String grafica;
 	
 	@Column(nullable = false)
-	private String alamcenamiento;
+	private String almacenamiento;
 
 	/*
 	 * ------ Getter and Setter ------ 
 	 */
 	
 	public long getId_requisitos() {
-		return id_requisitos;
+		return id_requisito;
 	}
 
 	public void setId_requisitos(long id_requisitos) {
-		this.id_requisitos = id_requisitos;
+		this.id_requisito = id_requisitos;
 	}
 
 	public String getSistema_operativo() {
@@ -78,11 +78,11 @@ public class Requisitos {
 	}
 
 	public String getAlamcenamiento() {
-		return alamcenamiento;
+		return almacenamiento;
 	}
 
 	public void setAlamcenamiento(String alamcenamiento) {
-		this.alamcenamiento = alamcenamiento;
+		this.almacenamiento = alamcenamiento;
 	}
 	
 }
