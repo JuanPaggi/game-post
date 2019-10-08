@@ -3,7 +3,6 @@ package com.game.persistence.models;
 import java.util.Date;
 import java.util.List;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -14,10 +13,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
-import org.hibernate.search.annotations.Indexed;
-
 @Entity
-@Indexed
 public class Juegos {
 
 	@Id
@@ -53,8 +49,8 @@ public class Juegos {
 	@JoinColumn(name="id_requisito", referencedColumnName = "id_requisito")
 	private Requisitos requisitos;
 	
-	@OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	@JoinColumn(name="id_juego", referencedColumnName = "id_juego")
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_juego", referencedColumnName = "id_juego", nullable = false, insertable = false, updatable = false)
 	private List<Analisis> analisis;
 	
 	@Column(nullable = false)
@@ -151,6 +147,13 @@ public class Juegos {
 	public void setId_admin_creado(long id_admin_creado) {
 		this.id_admin_creado = id_admin_creado;
 	}
-	
+
+	public List<Analisis> getAnalisis() {
+		return analisis;
+	}
+
+	public void setAnalisis(List<Analisis> analisis) {
+		this.analisis = analisis;
+	}
 	
 }

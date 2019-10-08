@@ -78,7 +78,7 @@ public class JuegosService {
 	
 	public List<JuegoItem> getAllJuegos() throws ParseException{
 		
-		List<Juegos> juegos = juegosRepository.findAllNews();
+		List<Juegos> juegos = juegosRepository.findAllJuegos();
 		List<JuegoItem> out = new ArrayList<JuegoItem>();
 		for(Juegos juego: juegos) {
 			JuegoItem item = new JuegoItem();
@@ -103,6 +103,7 @@ public class JuegosService {
 		
 		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
 		if(juego.isEmpty()) throw new JuegosNotFound();
+//		analisisRepository.deleteAll(juego.get().getAnalisis());
 		juegosRepository.delete(juego.get());
 	
 	}
