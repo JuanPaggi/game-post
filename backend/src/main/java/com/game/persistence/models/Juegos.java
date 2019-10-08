@@ -4,6 +4,7 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -45,7 +46,7 @@ public class Juegos {
 	@Column(nullable = false)
 	private long analisis_negativos;
 	
-	@ManyToOne()
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name="id_requisito", referencedColumnName = "id_requisito")
 	private Requisitos requisitos;
 	

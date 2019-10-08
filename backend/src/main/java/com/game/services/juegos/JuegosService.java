@@ -99,7 +99,7 @@ public class JuegosService {
 		
 		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
 		if(juego.isEmpty()) throw new JuegosNotFound();
-		juegosRepository.delete(juego.get()); // this can be deleteById but I used this for previous validation exception.
+		juegosRepository.delete(juego.get());
 	
 	}
 	
