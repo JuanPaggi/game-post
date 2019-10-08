@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.persistence.models.Juegos;
 import com.game.persistence.models.Requisitos;
+import com.game.persistence.repository.AnalisisRepository;
 import com.game.persistence.repository.JuegosRepository;
 import com.game.persistence.repository.RequisitosRepository;
 import com.game.services.juegos.exceptions.JuegosNotFound;
@@ -28,6 +29,9 @@ public class JuegosService {
 	
 	@Autowired
 	RequisitosRepository requisitosRepository;
+	
+	@Autowired
+	AnalisisRepository analisisRepository;
 	
 	public JuegoItem getJuego(long id) throws JuegosNotFound {
 		
