@@ -118,7 +118,7 @@ public class JuegosControllers {
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> editCurso(@PathVariable("idJuego") String idJuego, @RequestBody JuegoItem body) {
+	public @ResponseBody ResponseEntity<Void> editJuego(@PathVariable("idJuego") String idJuego, @RequestBody JuegoItem body) {
 		try {
 			juegosService.editJuego( idJuego, body);
 			return new ResponseEntity<Void>(HttpStatus.OK);

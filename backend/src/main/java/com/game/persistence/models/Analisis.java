@@ -2,7 +2,6 @@ package com.game.persistence.models;
 
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -31,7 +30,7 @@ public class Analisis {
 	@Column(nullable = false)
 	private Date fecha_publicacion;
 	
-	@ManyToOne(optional = false, cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.EAGER)
 	@JoinColumn(name="id_juego", referencedColumnName = "id_juego")
 	private Juegos juego;
 	
