@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.persistence.models.Juegos;
 import com.game.persistence.models.Requisitos;
+import com.game.persistence.repository.AnalisisRepository;
 import com.game.persistence.repository.JuegosRepository;
 import com.game.persistence.repository.RequisitosRepository;
 import com.game.services.juegos.exceptions.JuegosNotFound;
@@ -28,6 +29,9 @@ public class JuegosService {
 	
 	@Autowired
 	RequisitosRepository requisitosRepository;
+	
+	@Autowired
+	AnalisisRepository analisisRepository;
 	
 	public JuegoItem getJuego(long id) throws JuegosNotFound {
 		
@@ -74,7 +78,7 @@ public class JuegosService {
 	
 	public List<JuegoItem> getAllJuegos() throws ParseException{
 		
-		List<Juegos> juegos = juegosRepository.findAllNews();
+		List<Juegos> juegos = juegosRepository.findAllJuegos();
 		List<JuegoItem> out = new ArrayList<JuegoItem>();
 		for(Juegos juego: juegos) {
 			JuegoItem item = new JuegoItem();
@@ -99,6 +103,7 @@ public class JuegosService {
 		
 		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
 		if(juego.isEmpty()) throw new JuegosNotFound();
+//		analisisRepository.deleteAll(juego.get().getAnalisis());
 		juegosRepository.delete(juego.get());
 	
 	}

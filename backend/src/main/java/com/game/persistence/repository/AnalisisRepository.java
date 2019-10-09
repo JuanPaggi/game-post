@@ -13,4 +13,5 @@ public interface AnalisisRepository extends JpaRepository<Analisis , Long>{
 
 	@Query(value="select * from analisis", nativeQuery=true) 
 	List<Analisis> findAllAnalisis();
+	
 }

@@ -1,6 +1,7 @@
 package com.game.persistence.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,11 +11,9 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
-
-import org.hibernate.search.annotations.Indexed;
+import javax.persistence.OneToMany;
 
 @Entity
-@Indexed
 public class Juegos {
 
 	@Id
@@ -46,9 +45,13 @@ public class Juegos {
 	@Column(nullable = false)
 	private long analisis_negativos;
 	
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name="id_requisito", referencedColumnName = "id_requisito")
 	private Requisitos requisitos;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_juego", referencedColumnName = "id_juego", nullable = false, insertable = false, updatable = false)
+	private List<Analisis> analisis;
 	
 	@Column(nullable = false)
 	private long id_admin_creado;
@@ -144,6 +147,13 @@ public class Juegos {
 	public void setId_admin_creado(long id_admin_creado) {
 		this.id_admin_creado = id_admin_creado;
 	}
-	
+
+	public List<Analisis> getAnalisis() {
+		return analisis;
+	}
+
+	public void setAnalisis(List<Analisis> analisis) {
+		this.analisis = analisis;
+	}
 	
 }

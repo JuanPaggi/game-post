@@ -4,17 +4,13 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
-import org.hibernate.search.annotations.Indexed;
-
 @Entity
-@Indexed
 public class Analisis {
 
 	@Id
@@ -30,7 +26,7 @@ public class Analisis {
 	@Column(nullable = false)
 	private Date fecha_publicacion;
 	
-	@ManyToOne(optional = false, fetch = FetchType.EAGER)
+	@ManyToOne(optional = false)
 	@JoinColumn(name="id_juego", referencedColumnName = "id_juego")
 	private Juegos juego;
 	

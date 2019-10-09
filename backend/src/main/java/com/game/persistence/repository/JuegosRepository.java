@@ -12,6 +12,6 @@ import com.game.persistence.models.Juegos;
 public interface JuegosRepository extends JpaRepository<Juegos , Long> {
 
 	@Query(value="select * from juegos", nativeQuery=true) 
-	List<Juegos> findAllNews();
+	List<Juegos> findAllJuegos();
 	
 }
