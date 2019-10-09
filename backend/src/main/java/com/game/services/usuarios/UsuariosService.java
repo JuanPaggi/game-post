@@ -8,8 +8,11 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.game.controllers.usuarios.dto.AmigoItem;
 import com.game.controllers.usuarios.dto.UsuarioItem;
+import com.game.persistence.models.Lista_amigos;
 import com.game.persistence.models.Usuarios;
+import com.game.persistence.repository.Lista_amigosRepository;
 import com.game.persistence.repository.UsuariosRepository;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
@@ -23,6 +26,9 @@ public class UsuariosService {
 
 	@Autowired
 	UsuariosRepository usuariosrepository;
+	
+	@Autowired
+	Lista_amigosRepository lista_amigosRepository;
 	
 	public UsuarioItem getUsuario(long id) throws UsuariosNotFound {
 		
@@ -110,6 +116,24 @@ public class UsuariosService {
 		usuarioObj.setEmail_verificado(usuarioIn.email_verificado);
 
 		usuariosrepository.save(usuarioObj);
+	}
+	
+	public long addAmigo(AmigoItem amigoIn) throws UsuariosNotFound{
+		
+		Optional<Lista_amigos> lista = lista_amigosRepository.findByIdUsuario(amigoIn.id_usuario, amigoIn.id_amigo);
+		if(lista.isEmpty()) {
+			Optional<Usuarios> usuario = usuariosrepository.findById(amigoIn.id_usuario);
+			Optional<Usuarios> usuario_amigo = usuariosrepository.findById(amigoIn.id_amigo);
+			Lista_amigos lista_amigo = new Lista_amigos();
+			lista_amigo.setUsuario(usuario.get());
+			lista_amigo.setUsuario_amigo(usuario_amigo.get());
+			
+			lista_amigosRepository.save(lista_amigo);
+			return lista_amigo.getId_lista_amigos();
+		} else {
+			throw new UsuariosNotFound();
+		}
+		
 	}
 	
 }

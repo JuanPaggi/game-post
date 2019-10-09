@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.game.controllers.usuarios.dto.AmigoItem;
 import com.game.controllers.usuarios.dto.UsuarioItem;
 import com.game.services.usuarios.UsuariosService;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
@@ -125,6 +126,24 @@ public class UsuariosControllers {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		} catch(NumberFormatException e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
+		} catch(Exception e) {
+			logger.error("Internal server error", e);
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(path="/amigo")
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "OK, devuelve el id del usuario insertado"),
+		@ApiResponse(code = 404, message = "Usuario inexistente."),
+		@ApiResponse(code = 500, message = "Unexpected error.")
+		})
+	public @ResponseBody ResponseEntity<Void> addAmigos( @RequestBody AmigoItem body){
+		try {
+			usuariosService.addAmigo(body);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch(UsuariosNotFound e) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		} catch(Exception e) {
 			logger.error("Internal server error", e);
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
