@@ -103,7 +103,6 @@ public class JuegosService {
 		
 		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
 		if(juego.isEmpty()) throw new JuegosNotFound();
-//		analisisRepository.deleteAll(juego.get().getAnalisis());
 		juegosRepository.delete(juego.get());
 	
 	}

@@ -11,8 +11,10 @@ import org.springframework.stereotype.Service;
 import com.game.controllers.analisis.dto.AnalisisItem;
 import com.game.persistence.models.Analisis;
 import com.game.persistence.models.Juegos;
+import com.game.persistence.models.Usuarios;
 import com.game.persistence.repository.AnalisisRepository;
 import com.game.persistence.repository.JuegosRepository;
+import com.game.persistence.repository.UsuariosRepository;
 import com.game.services.analisis.exceptions.AnalisisNotFound;
 
 /**
@@ -29,6 +31,9 @@ public class AnalisisService {
 	@Autowired
 	JuegosRepository juegosRepository;
 	
+	@Autowired
+	UsuariosRepository usuariosRepository;
+	
 	public AnalisisItem getAnalisis(long id) throws AnalisisNotFound {
 		
 		Optional<Analisis> analisis = analisisRepository.findById(id);
@@ -40,7 +45,7 @@ public class AnalisisService {
 		analisisItem.valoracion = analisis.get().isValoracion();
 		analisisItem.fecha_publicacion = analisis.get().getFecha_publicacion();
 		analisisItem.id_juego = analisis.get().getJuego().getId_juego();
-		analisisItem.id_usuario = analisis.get().getId_usuario();
+		analisisItem.id_usuario = analisis.get().getUsuario().getId_usuario();
 		
 		return analisisItem;
 	}
@@ -49,12 +54,13 @@ public class AnalisisService {
 		
 		Analisis analisis = new Analisis();
 		Optional<Juegos> juego = juegosRepository.findById(analisisIn.id_juego);
+		Optional<Usuarios> usuario = usuariosRepository.findById(analisisIn.id_usuario);
 		if(juego.isEmpty()) throw new AnalisisNotFound();
 		analisis.setAnalisis(analisisIn.analisis);
 		analisis.setFecha_publicacion(analisisIn.fecha_publicacion);
 		analisis.setValoracion(analisisIn.valoracion);
 		analisis.setJuego(juego.get());
-		analisis.setId_usuario(analisisIn.id_usuario);
+		analisis.setUsuario(usuario.get());
 
 		analisis = analisisRepository.save(analisis);
 		
@@ -73,7 +79,7 @@ public class AnalisisService {
 			item.analisis = analisisAux.getAnalisis();
 			item.fecha_publicacion = analisisAux.getFecha_publicacion();
 			item.id_juego = analisisAux.getJuego().getId_juego();
-			item.id_usuario = analisisAux.getId_usuario();
+			item.id_usuario = analisisAux.getUsuario().getId_usuario();
 			out.add(item);
 		}
 		return out;
@@ -91,13 +97,14 @@ public class AnalisisService {
 		
 		Optional<Analisis> analisis = analisisRepository.findById(Long.parseLong(id));
 		Optional<Juegos> juego = juegosRepository.findById(analisisIn.id_juego);
+		Optional<Usuarios> usuario = usuariosRepository.findById(analisisIn.id_usuario);
 		if(analisis.isEmpty() && juego.isEmpty()) throw new AnalisisNotFound();
 		Analisis analisisObj = analisis.get();
 		analisisObj.setAnalisis(analisisIn.analisis);
 		analisisObj.setValoracion(analisisIn.valoracion);
 		analisisObj.setFecha_publicacion(analisisIn.fecha_publicacion);
 		analisisObj.setJuego(juego.get());
-		analisisObj.setId_usuario(analisisIn.id_usuario);
+		analisisObj.setUsuario(usuario.get());
 
 		analisisRepository.save(analisisObj);
 	}
