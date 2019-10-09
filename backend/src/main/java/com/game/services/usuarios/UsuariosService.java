@@ -51,6 +51,7 @@ public class UsuariosService {
 		List<UsuarioItem> out = new ArrayList<UsuarioItem>();
 		for(Usuarios usuario: usuarios) {
 			UsuarioItem item = new UsuarioItem();
+			item.id_usuario = usuario.getId_usuario();
 			item.nombre = usuario.getNombre();
 			item.apellido = usuario.getApellido();
 			item.email = usuario.getEmail();
@@ -83,6 +84,32 @@ public class UsuariosService {
 		usuario = usuariosrepository.save(usuario);
 		
 		return usuario.getId_usuario();
+	}
+	
+	public void removeUsuario(String id) throws UsuariosNotFound, NumberFormatException {
+		
+		Optional<Usuarios> usuario = usuariosrepository.findById(Long.parseLong(id));
+		if(usuario.isEmpty()) throw new UsuariosNotFound();
+		usuariosrepository.delete(usuario.get());
+	
+	}
+	
+	public void editUsuario(String id, UsuarioItem usuarioIn) throws UsuariosNotFound, NumberFormatException{
+		
+		Optional<Usuarios> usuario = usuariosrepository.findById(Long.parseLong(id));
+		if(usuario.isEmpty()) throw new UsuariosNotFound();
+		Usuarios usuarioObj = usuario.get();
+		usuarioObj.setNombre(usuarioIn.nombre);
+		usuarioObj.setApellido(usuarioIn.apellido);
+		usuarioObj.setEmail(usuarioIn.email);
+		usuarioObj.setUsuario(usuarioIn.usuario);
+		usuarioObj.setClave(usuarioIn.clave);
+		usuarioObj.setPais(usuarioIn.pais);
+		usuarioObj.setNivel(usuarioIn.nivel);
+		usuarioObj.setPuntos(usuarioIn.puntos);
+		usuarioObj.setEmail_verificado(usuarioIn.email_verificado);
+
+		usuariosrepository.save(usuarioObj);
 	}
 	
 }

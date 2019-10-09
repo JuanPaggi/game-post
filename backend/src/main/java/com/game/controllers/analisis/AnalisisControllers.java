@@ -97,7 +97,7 @@ public class AnalisisControllers {
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> removeCurso(@PathVariable("idAnalisis") String idAnalisis) {
+	public @ResponseBody ResponseEntity<Void> removeAnalisis(@PathVariable("idAnalisis") String idAnalisis) {
 		try {
 			analisisService.removeAnalisis(idAnalisis);
 			return new ResponseEntity<Void>(HttpStatus.OK);
