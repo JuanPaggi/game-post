@@ -56,8 +56,7 @@ public class Usuarios {
 	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
 	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
-	@JoinColumn(name="id_amigo", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
-	private List<Usuarios> usuarios;
+	private List<Lista_amigos> usuarios;
 
 	/*
 	 * ------ Getter and Setter ------ 
