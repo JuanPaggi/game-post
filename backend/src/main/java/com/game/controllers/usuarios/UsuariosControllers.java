@@ -1,4 +1,4 @@
-package com.game.controllers.analisis;
+package com.game.controllers.usuarios;
 
 import java.text.ParseException;
 import java.util.List;
@@ -18,9 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.game.controllers.analisis.dto.AnalisisItem;
-import com.game.services.analisis.AnalisisService;
-import com.game.services.analisis.exceptions.AnalisisNotFound;
+import com.game.controllers.usuarios.dto.UsuarioItem;
+import com.game.services.usuarios.UsuariosService;
+import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -31,14 +31,32 @@ import io.swagger.annotations.ApiResponses;
  */
 
 @RestController
-@RequestMapping("${v1API}/analisis")
-public class AnalisisControllers {
-	
-	public static Logger logger = LoggerFactory.getLogger(AnalisisControllers.class);
+@RequestMapping("${v1API}/usuarios")
+public class UsuariosControllers {
+
+	public static Logger logger = LoggerFactory.getLogger(UsuariosControllers.class);
 	
 	@Autowired
-	AnalisisService analisisService;
+	UsuariosService usuariosService;
 	
+	@GetMapping(path = "/{idUsuario}")
+	@ApiResponses({ 
+		@ApiResponse(code = 200, message = "OK"),
+		@ApiResponse(code = 404, message = "Not found."),
+		@ApiResponse(code = 500, message = "Unexpected error.") })
+	public @ResponseBody ResponseEntity<UsuarioItem> getUsuarioByID(
+			@PathVariable("idUsuario") String idUsuario){
+		try {
+			return new ResponseEntity<UsuarioItem>(
+					usuariosService.getUsuario(Long.parseLong(idUsuario)),
+					HttpStatus.OK);
+		} catch (UsuariosNotFound e) {
+			return new ResponseEntity<UsuarioItem>(HttpStatus.NOT_FOUND);
+		} catch (Exception e) {
+			logger.error("Internal server error", e);
+			return new ResponseEntity<UsuarioItem>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
 	
 	@GetMapping(path="")
 	@ApiResponses({
@@ -46,9 +64,9 @@ public class AnalisisControllers {
 		@ApiResponse(code = 404, message = "Not found."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<List<AnalisisItem>> getAnalisis(){
+	public @ResponseBody ResponseEntity<List<UsuarioItem>> getUsuarios(){
 		try {
-			return new ResponseEntity<List<AnalisisItem>>(analisisService.getAllAnalisis(), HttpStatus.OK);
+			return new ResponseEntity<List<UsuarioItem>>(usuariosService.getAllUsuarios(), HttpStatus.OK);
 		} catch(ParseException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}catch(Exception e) {
@@ -57,51 +75,32 @@ public class AnalisisControllers {
 		}
 	}
 	
-	@GetMapping(path = "/{idAnalisis}")
-	@ApiResponses({ 
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 404, message = "Not found."),
-		@ApiResponse(code = 500, message = "Unexpected error.") })
-	public @ResponseBody ResponseEntity<AnalisisItem> getAnalisisByID(
-			@PathVariable("idAnalisis") String idAnalisis){
-		try {
-			return new ResponseEntity<AnalisisItem>(
-					analisisService.getAnalisis(Long.parseLong(idAnalisis)),
-					HttpStatus.OK);
-		} catch (AnalisisNotFound e) {
-			return new ResponseEntity<AnalisisItem>(HttpStatus.NOT_FOUND);
-		} catch (Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<AnalisisItem>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
 	@PostMapping(path="")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK, devuelve el id del analisis insertado"),
+		@ApiResponse(code = 200, message = "OK, devuelve el id del usuario insertado"),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Long> addAnalisis( @RequestBody AnalisisItem body){
+	public @ResponseBody ResponseEntity<Long> addUsuarios( @RequestBody UsuarioItem body){
 		try {
-			return new ResponseEntity<Long>(analisisService.addAnalisis(body), HttpStatus.OK);
+			return new ResponseEntity<Long>(usuariosService.addUsuario(body), HttpStatus.OK);
 		} catch(Exception e) {
 			logger.error("Internal server error", e);
 			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@DeleteMapping(path="/{idAnalisis}")
+	@DeleteMapping(path="/{idUsuario}")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "borrado OK"),
-		@ApiResponse(code = 404, message = "Analisis inexistente."),
+		@ApiResponse(code = 404, message = "Usuario inexistente."),
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> removeAnalisis(@PathVariable("idAnalisis") String idAnalisis) {
+	public @ResponseBody ResponseEntity<Void> removeUsuario(@PathVariable("idUsuario") String idUsuario) {
 		try {
-			analisisService.removeAnalisis(idAnalisis);
+			usuariosService.removeUsuario(idUsuario);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(AnalisisNotFound e) {
+		} catch(UsuariosNotFound e) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		} catch(NumberFormatException e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -111,18 +110,18 @@ public class AnalisisControllers {
 		}
 	}
 	
-	@PutMapping(path="/{idAnalisis}")
+	@PutMapping(path="/{idUsuario}")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "Editado OK"),
-		@ApiResponse(code = 404, message = "Analisis inexistente."),
+		@ApiResponse(code = 404, message = "Usuario inexistente."),
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> editAnalisis(@PathVariable("idAnalisis") String idAnalisis, @RequestBody AnalisisItem body) {
+	public @ResponseBody ResponseEntity<Void> editUsuario(@PathVariable("idUsuario") String idUsuario, @RequestBody UsuarioItem body) {
 		try {
-			analisisService.editAnalisis( idAnalisis, body);
+			usuariosService.editUsuario( idUsuario, body);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(AnalisisNotFound e) {
+		} catch(UsuariosNotFound e) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		} catch(NumberFormatException e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);

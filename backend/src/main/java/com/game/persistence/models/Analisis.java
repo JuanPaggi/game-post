@@ -30,8 +30,9 @@ public class Analisis {
 	@JoinColumn(name="id_juego", referencedColumnName = "id_juego")
 	private Juegos juego;
 	
-	@Column(nullable = false)
-	private long id_usuario;
+	@ManyToOne(optional = false)
+	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario")
+	private Usuarios usuario;
 
 	public long getId_analisis() {
 		return id_analisis;
@@ -73,12 +74,12 @@ public class Analisis {
 		this.juego = juego;
 	}
 
-	public long getId_usuario() {
-		return id_usuario;
+	public Usuarios getUsuario() {
+		return usuario;
 	}
 
-	public void setId_usuario(long id_usuario) {
-		this.id_usuario = id_usuario;
+	public void setUsuario(Usuarios usuario) {
+		this.usuario = usuario;
 	}
 	
 }
