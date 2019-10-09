@@ -68,6 +68,7 @@ public class AnalisisService {
 		List<AnalisisItem> out = new ArrayList<AnalisisItem>();
 		for(Analisis analisisAux: analisis) {
 			AnalisisItem item = new AnalisisItem();
+			item.id_analisis = analisisAux.getId_analisis();
 			item.id_juego = analisisAux.getId_analisis();
 			item.analisis = analisisAux.getAnalisis();
 			item.fecha_publicacion = analisisAux.getFecha_publicacion();
