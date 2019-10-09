@@ -78,7 +78,7 @@ public class JuegosService {
 	
 	public List<JuegoItem> getAllJuegos() throws ParseException{
 		
-		List<Juegos> juegos = juegosRepository.findAllJuegos();
+		List<Juegos> juegos = juegosRepository.findAll();
 		List<JuegoItem> out = new ArrayList<JuegoItem>();
 		for(Juegos juego: juegos) {
 			JuegoItem item = new JuegoItem();

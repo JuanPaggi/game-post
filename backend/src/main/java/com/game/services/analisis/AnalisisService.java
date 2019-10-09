@@ -70,7 +70,7 @@ public class AnalisisService {
 	
 	public List<AnalisisItem> getAllAnalisis() throws ParseException{
 		
-		List<Analisis> analisis = analisisRepository.findAllAnalisis();
+		List<Analisis> analisis = analisisRepository.findAll();
 		List<AnalisisItem> out = new ArrayList<AnalisisItem>();
 		for(Analisis analisisAux: analisis) {
 			AnalisisItem item = new AnalisisItem();
