@@ -37,7 +37,7 @@ public class JuegosService {
 	
 	@Autowired
 	TagRepository tagRepository;
-	
+
 	public JuegoItem getJuego(long id) throws JuegosNotFound {
 		
 		Optional<Juegos> juego = juegosRepository.findById(id);
@@ -55,6 +55,14 @@ public class JuegosService {
 		juegoItem.id_requisitos = juego.get().getRequisitos().getId_requisitos();
 		juegoItem.id_admin_creado = juego.get().getId_admin_creado();
 		
+		List<Tag> tag_juego = juego.get().getTag();
+		ArrayList<Long> tag_id = new ArrayList<>();
+		
+		for (Tag tag : tag_juego) {
+			tag_id.add(tag.getId_tag());
+		}
+		
+		juegoItem.tags = tag_id;
 		
 		return juegoItem;
 		
@@ -102,6 +110,16 @@ public class JuegosService {
 			item.analisis_negativos = juego.getAnalisis_negativos();
 			item.id_requisitos = juego.getRequisitos().getId_requisitos();
 			item.id_admin_creado = juego.getId_admin_creado();
+			
+			List<Tag> tag_juego = juego.getTag();
+			ArrayList<Long> tag_id = new ArrayList<>();
+			
+			for (Tag tag : tag_juego) {
+				tag_id.add(tag.getId_tag());
+			}
+			
+			item.tags = tag_id;
+			
 			out.add(item);
 		}
 		return out;
