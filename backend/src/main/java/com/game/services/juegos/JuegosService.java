@@ -11,9 +11,11 @@ import org.springframework.stereotype.Service;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.persistence.models.Juegos;
 import com.game.persistence.models.Requisitos;
+import com.game.persistence.models.Tag;
 import com.game.persistence.repository.AnalisisRepository;
 import com.game.persistence.repository.JuegosRepository;
 import com.game.persistence.repository.RequisitosRepository;
+import com.game.persistence.repository.TagRepository;
 import com.game.services.juegos.exceptions.JuegosNotFound;
 
 /**
@@ -32,6 +34,9 @@ public class JuegosService {
 	
 	@Autowired
 	AnalisisRepository analisisRepository;
+	
+	@Autowired
+	TagRepository tagRepository;
 	
 	public JuegoItem getJuego(long id) throws JuegosNotFound {
 		
@@ -69,6 +74,9 @@ public class JuegosService {
 		juego.setAnalisis_negativos(juegoIn.analisis_negativos);
 		juego.setRequisitos(requisitos.get());
 		juego.setId_admin_creado(juegoIn.id_admin_creado);
+		
+		List<Tag> lista_tag = tagRepository.findAllById(juegoIn.tags);
+		juego.setTag(lista_tag);
 
 		juego = juegosRepository.save(juego);
 		

@@ -1,5 +1,6 @@
 package com.game.controllers.juegos.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class JuegoItem {
@@ -17,4 +18,5 @@ public class JuegoItem {
 	public long id_requisitos;
 	public long id_admin_creado;
 	
+	public ArrayList<Long> tags;
 }

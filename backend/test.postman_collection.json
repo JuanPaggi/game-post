@@ -102,6 +102,55 @@
 			"response": []
 		},
 		{
+			"name": "Get Amigo",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/amigos/4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"amigos",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Tag",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/tags",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Crear analisis",
 			"request": {
 				"method": "POST",
@@ -155,7 +204,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23\n}",
+					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"tags\":\n\t[1]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -195,7 +244,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"nombre\": \"x\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true\n    }",
+					"raw": "{\n    \"nombre\": \"x123123\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x\",\n    \"clave\": \"x\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2,\n    \"email_verificado\": true\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -262,6 +311,86 @@
 			"response": []
 		},
 		{
+			"name": "Crear Amigo",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id_usuario\":4,\n        \"id_amigo\":7\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/amigos",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"amigos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Tag",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"etiqueta\": \"accion\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/tags",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"tags"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete analisis",
 			"request": {
 				"method": "DELETE",
@@ -292,7 +421,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/juegos/3",
+					"raw": "http://127.0.0.1:8081/api/v1/juegos/12",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -305,7 +434,7 @@
 						"api",
 						"v1",
 						"juegos",
-						"3"
+						"12"
 					]
 				}
 			},
@@ -317,7 +446,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/usuarios/3",
+					"raw": "http://127.0.0.1:8081/api/v1/usuarios/12",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -330,7 +459,7 @@
 						"api",
 						"v1",
 						"usuarios",
-						"3"
+						"12"
 					]
 				}
 			},
@@ -356,6 +485,71 @@
 						"v1",
 						"requisitos",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Amigo",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id_usuario\": 6,\n        \"id_amigo\": 6\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/amigos",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"amigos"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Tag",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/tags/2",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"tags",
+						"2"
 					]
 				}
 			},
@@ -457,7 +651,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"nombre\": \"x123123\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true\n    }",
+					"raw": "    {\n        \"nombre\": \"x12ijl8i6hikjh3123\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -465,7 +659,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/usuarios/4",
+					"raw": "http://127.0.0.1:8081/api/v1/usuarios/8",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -478,7 +672,7 @@
 						"api",
 						"v1",
 						"usuarios",
-						"4"
+						"8"
 					]
 				}
 			},
@@ -520,6 +714,47 @@
 						"v1",
 						"juegos",
 						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Tag",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"etiqueta\": \"terror\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/tags/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"tags",
+						"1"
 					]
 				}
 			},

@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -55,6 +57,14 @@ public class Juegos {
 	
 	@Column(nullable = false)
 	private long id_admin_creado;
+	
+	@ManyToMany(fetch = FetchType.LAZY) 
+    @JoinTable(name = "juegos_tag", 
+    joinColumns = 
+    @JoinColumn(name = "id_juego", referencedColumnName = "id_juego"), 
+    inverseJoinColumns = 
+    @JoinColumn(name = "id_tag", referencedColumnName = "id_tag"))
+	private List<Tag> Tag;
 	
 	/*
 	 * ------ Getter and Setter ------ 
@@ -154,6 +164,14 @@ public class Juegos {
 
 	public void setAnalisis(List<Analisis> analisis) {
 		this.analisis = analisis;
+	}
+
+	public List<Tag> getTag() {
+		return Tag;
+	}
+
+	public void setTag(List<Tag> tag) {
+		Tag = tag;
 	}
 	
 }
