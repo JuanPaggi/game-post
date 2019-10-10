@@ -55,6 +55,7 @@ public class JuegosService {
 		juegoItem.id_requisitos = juego.get().getRequisitos().getId_requisitos();
 		juegoItem.id_admin_creado = juego.get().getId_admin_creado();
 		
+		
 		return juegoItem;
 		
 	}
@@ -63,7 +64,8 @@ public class JuegosService {
 		
 		Juegos juego = new Juegos();
 		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
-		if(requisitos.isEmpty()) throw new JuegosNotFound();
+		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
+		if(requisitos.isEmpty() || lista_tag.size() != juegoIn.tags.size()) throw new JuegosNotFound();
 		juego.setTitulo(juegoIn.titulo);
 		juego.setDescripcion(juegoIn.descripcion);
 		juego.setGenero(juegoIn.genero);
@@ -75,7 +77,6 @@ public class JuegosService {
 		juego.setRequisitos(requisitos.get());
 		juego.setId_admin_creado(juegoIn.id_admin_creado);
 		
-		List<Tag> lista_tag = tagRepository.findAllById(juegoIn.tags);
 		juego.setTag(lista_tag);
 
 		juego = juegosRepository.save(juego);
