@@ -1,4 +1,4 @@
-package com.game.controllers.usuarios;
+package com.game.controllers.lista_amigos;
 
 import java.text.ParseException;
 import java.util.List;
@@ -12,14 +12,13 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.game.controllers.usuarios.dto.UsuarioItem;
-import com.game.services.usuarios.UsuariosService;
+import com.game.controllers.lista_amigos.dto.ListaAmigosItem;
+import com.game.services.lista_amigos.ListaAmigosService;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
 import io.swagger.annotations.ApiResponse;
@@ -31,44 +30,28 @@ import io.swagger.annotations.ApiResponses;
  */
 
 @RestController
-@RequestMapping("${v1API}/usuarios")
-public class UsuariosControllers {
-
-	public static Logger logger = LoggerFactory.getLogger(UsuariosControllers.class);
+@RequestMapping("${v1API}/amigos")
+public class ListaAmigosControllers {
 	
 	@Autowired
-	UsuariosService usuariosService;
+	ListaAmigosService listaAmigosService;
 	
-	@GetMapping(path = "/{idUsuario}")
-	@ApiResponses({ 
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 404, message = "Not found."),
-		@ApiResponse(code = 500, message = "Unexpected error.") })
-	public @ResponseBody ResponseEntity<UsuarioItem> getUsuarioByID(
-			@PathVariable("idUsuario") String idUsuario){
-		try {
-			return new ResponseEntity<UsuarioItem>(
-					usuariosService.getUsuario(Long.parseLong(idUsuario)),
-					HttpStatus.OK);
-		} catch (UsuariosNotFound e) {
-			return new ResponseEntity<UsuarioItem>(HttpStatus.NOT_FOUND);
-		} catch (Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<UsuarioItem>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
+	public static Logger logger = LoggerFactory.getLogger(ListaAmigosControllers.class);
 	
-	@GetMapping(path="")
+	@GetMapping(path="{idUsuario}")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "OK"),
+		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 404, message = "Not found."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<List<UsuarioItem>> getUsuarios(){
+	public @ResponseBody ResponseEntity<List<ListaAmigosItem>> getUsuarios(@PathVariable("idUsuario") String idUsuario){
 		try {
-			return new ResponseEntity<List<UsuarioItem>>(usuariosService.getAllUsuarios(), HttpStatus.OK);
+			return new ResponseEntity<List<ListaAmigosItem>>(listaAmigosService.getAllAmigos(idUsuario), HttpStatus.OK);
 		} catch(ParseException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+		} catch(UsuariosNotFound e) {
+			return new ResponseEntity<>(HttpStatus.NOT_FOUND);
 		}catch(Exception e) {
 			logger.error("Internal server error", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -78,27 +61,31 @@ public class UsuariosControllers {
 	@PostMapping(path="")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "OK, devuelve el id del usuario insertado"),
+		@ApiResponse(code = 404, message = "Usuario inexistente."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Long> addUsuarios( @RequestBody UsuarioItem body){
+	public @ResponseBody ResponseEntity<Void> addAmigos( @RequestBody ListaAmigosItem body){
 		try {
-			return new ResponseEntity<Long>(usuariosService.addUsuario(body), HttpStatus.OK);
+			listaAmigosService.addAmigo(body);
+			return new ResponseEntity<Void>(HttpStatus.OK);
+		} catch(UsuariosNotFound e) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		} catch(Exception e) {
 			logger.error("Internal server error", e);
-			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@DeleteMapping(path="/{idUsuario}")
+	@DeleteMapping(path="")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "borrado OK"),
 		@ApiResponse(code = 404, message = "Usuario inexistente."),
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> removeUsuario(@PathVariable("idUsuario") String idUsuario) {
+	public @ResponseBody ResponseEntity<Void> removeUsuario(@RequestBody ListaAmigosItem body) {
 		try {
-			usuariosService.removeUsuario(idUsuario);
+			listaAmigosService.removeAmigo(body.id_usuario, body.id_amigo);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch(UsuariosNotFound e) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
@@ -109,26 +96,4 @@ public class UsuariosControllers {
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@PutMapping(path="/{idUsuario}")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "Editado OK"),
-		@ApiResponse(code = 404, message = "Usuario inexistente."),
-		@ApiResponse(code = 400, message = "Id no valido."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Void> editUsuario(@PathVariable("idUsuario") String idUsuario, @RequestBody UsuarioItem body) {
-		try {
-			usuariosService.editUsuario( idUsuario, body);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(UsuariosNotFound e) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		} catch(NumberFormatException e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
 }
