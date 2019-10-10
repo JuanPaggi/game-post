@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.game.controllers.usuarios.dto.UsuarioItem;
 import com.game.persistence.models.Usuarios;
+import com.game.persistence.repository.Lista_amigosRepository;
 import com.game.persistence.repository.UsuariosRepository;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
@@ -23,6 +24,9 @@ public class UsuariosService {
 
 	@Autowired
 	UsuariosRepository usuariosrepository;
+	
+	@Autowired
+	Lista_amigosRepository lista_amigosRepository;
 	
 	public UsuarioItem getUsuario(long id) throws UsuariosNotFound {
 		
