@@ -150,6 +150,10 @@ public class JuegosService {
 		juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
 		juegoObj.setRequisitos(requisitos.get());
 		juegoObj.setId_admin_creado(juegoIn.id_admin_creado);
+		
+		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
+		if(lista_tag.size() != juegoIn.tags.size()) throw new JuegosNotFound();
+		juegoObj.setTag(lista_tag);
 
 		juegosRepository.save(juegoObj);
 	}
