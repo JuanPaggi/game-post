@@ -175,6 +175,83 @@
 			"response": []
 		},
 		{
+			"name": "Get Solicitudes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": ""
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/solicitudes/8",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"solicitudes",
+						"8"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Mensajes",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/mensajes/9/10",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"mensajes",
+						"9",
+						"10"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Crear analisis",
 			"request": {
 				"method": "POST",
@@ -228,7 +305,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"tags\":\n\t[3,5]\n}",
+					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 3,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"tags\":\n\t[3,5]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -455,12 +532,28 @@
 			"response": []
 		},
 		{
-			"name": "Delete analisis",
+			"name": "Crear Solicitud",
 			"request": {
-				"method": "DELETE",
-				"header": [],
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id_usuario\":7,\n        \"id_amigo\":8,\n        \"fecha_solicitud\": \"2019-08-10T03:00:00.000+0000\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/analisis/11",
+					"raw": "http://127.0.0.1:8081/api/v1/solicitudes",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -472,8 +565,87 @@
 					"path": [
 						"api",
 						"v1",
-						"analisis",
-						"11"
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Mensaje",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id_escritor\": 9,\n        \"id_lector\": 10,\n        \"cuerpo\": \"hola como estas\",\n        \"fecha\": \"2019-08-10T03:00:00.000+0000\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/mensajes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"mensajes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete analisis",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id_escritor\": 9,\n\t\"id_lector\":10,\n\t\"cuerpo\": \"hola como estas\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/mensajes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"mensajes"
 					]
 				}
 			},
@@ -510,7 +682,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/usuarios/12",
+					"raw": "http://127.0.0.1:8081/api/v1/usuarios/10",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -523,7 +695,7 @@
 						"api",
 						"v1",
 						"usuarios",
-						"12"
+						"10"
 					]
 				}
 			},
@@ -639,6 +811,71 @@
 						"v1",
 						"admin",
 						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Solicitud",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\t\"id_usuario\":7,\n\t\"id_amigo\":8\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/solicitudes",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"solicitudes"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Mensaje",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/analisis/11",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"analisis",
+						"11"
 					]
 				}
 			},
