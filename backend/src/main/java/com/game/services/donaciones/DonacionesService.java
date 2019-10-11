@@ -31,6 +31,7 @@ public class DonacionesService {
 	public List<DonacionesItem> getDonaciones(long id) throws UsuariosNotFound {
 		
 		List<Donaciones> donaciones = donacionesRepository.findByIdDonaciones(id);
+		if(donaciones.isEmpty())  throw new UsuariosNotFound();
 		List<DonacionesItem> out = new ArrayList<DonacionesItem>();
 		for(Donaciones donacion: donaciones) {
 			DonacionesItem item = new DonacionesItem();

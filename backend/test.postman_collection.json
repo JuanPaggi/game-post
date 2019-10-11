@@ -252,6 +252,94 @@
 			"response": []
 		},
 		{
+			"name": "Get Donaciones",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/donaciones/4",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"donaciones",
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Notificaciones",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/notificaciones/6",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"notificaciones",
+						"6"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Crear analisis",
 			"request": {
 				"method": "POST",
@@ -612,6 +700,86 @@
 			"response": []
 		},
 		{
+			"name": "Crear Donacion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id_usuario\": 4,\n        \"monto\": 1000,\n        \"fecha_donacion\": \"2019-08-10T03:00:00.000+0000\",\n        \"comentario\": \"gracias\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/donaciones",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"donaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Crear Notificacion",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"id_usuario\": 6,\n        \"notificacion\": \"soli\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/notificaciones",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"notificaciones"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete analisis",
 			"request": {
 				"method": "DELETE",
@@ -682,7 +850,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/usuarios/10",
+					"raw": "http://127.0.0.1:8081/api/v1/usuarios/6",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -695,7 +863,7 @@
 						"api",
 						"v1",
 						"usuarios",
-						"10"
+						"6"
 					]
 				}
 			},
@@ -876,6 +1044,56 @@
 						"v1",
 						"analisis",
 						"11"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Donaciones",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/donaciones/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"donaciones",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Notificaciones",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/notificaciones/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"notificaciones",
+						"1"
 					]
 				}
 			},
