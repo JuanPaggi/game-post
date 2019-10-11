@@ -38,7 +38,6 @@ public class ListaAmigosService {
 			Lista_amigos lista_amigo = new Lista_amigos();
 			lista_amigo.setUsuario(usuario.get());
 			lista_amigo.setUsuario_amigo(usuario_amigo.get());
-			
 			lista_amigosRepository.save(lista_amigo);
 			return lista_amigo.getId_lista_amigos();
 		} else {
@@ -58,7 +57,6 @@ public class ListaAmigosService {
 			item.id_amigo = lista_amigo.getUsuario_amigo().getId_usuario();
 			out.add(item);
 		}
-		
 		return out;
 		
 	}
@@ -70,4 +68,5 @@ public class ListaAmigosService {
 		lista_amigosRepository.delete(lista_amigo.get());
 	
 	}
+	
 }

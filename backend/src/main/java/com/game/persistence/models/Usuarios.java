@@ -12,11 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+/**
+ * @author pachi
+ * Modelo de la tabla usuarios.
+ */
+
 @Entity
 public class Usuarios {
 	
 	@Id
-	// AutoIncremento del Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_usuario;
 	
@@ -61,6 +65,14 @@ public class Usuarios {
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
 	@JoinColumn(name="id_amigo", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
 	private List<Lista_amigos> usuarios_amigo;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
+	private List<SolicitudesAmistad> usuarios_solicitud;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_amigo", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
+	private List<SolicitudesAmistad> usuarios_amigo_solicitud;
 
 	/*
 	 * ------ Getter and Setter ------ 

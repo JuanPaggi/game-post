@@ -5,7 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.game.persistence.models.Requisitos;
 
+/**
+ * @author pachi
+ * Repositorio de la tabla requisitos.
+ */
+
 @Repository
-public interface RequisitosRepository extends JpaRepository<Requisitos , Long> {
+public interface RequisitosRepository extends JpaRepository <Requisitos , Long> {
 
 }

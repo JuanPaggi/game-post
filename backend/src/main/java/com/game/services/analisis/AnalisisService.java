@@ -46,8 +46,8 @@ public class AnalisisService {
 		analisisItem.fecha_publicacion = analisis.get().getFecha_publicacion();
 		analisisItem.id_juego = analisis.get().getJuego().getId_juego();
 		analisisItem.id_usuario = analisis.get().getUsuario().getId_usuario();
-		
 		return analisisItem;
+		
 	}
 	
 	public long addAnalisis(AnalisisItem analisisIn) throws AnalisisNotFound{
@@ -61,9 +61,7 @@ public class AnalisisService {
 		analisis.setValoracion(analisisIn.valoracion);
 		analisis.setJuego(juego.get());
 		analisis.setUsuario(usuario.get());
-
 		analisis = analisisRepository.save(analisis);
-		
 		return analisis.getId_analisis();
 	
 	}
@@ -83,6 +81,7 @@ public class AnalisisService {
 			out.add(item);
 		}
 		return out;
+		
 	}
 	
 	public void removeAnalisis(String id) throws AnalisisNotFound, NumberFormatException {
@@ -105,7 +104,8 @@ public class AnalisisService {
 		analisisObj.setFecha_publicacion(analisisIn.fecha_publicacion);
 		analisisObj.setJuego(juego.get());
 		analisisObj.setUsuario(usuario.get());
-
 		analisisRepository.save(analisisObj);
+		
 	}
+	
 }

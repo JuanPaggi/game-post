@@ -31,8 +31,8 @@ public class TagService {
 		if(tag.isEmpty()) throw new TagNotFound();
 		tagItem.id_tag = tag.get().getId_tag();
 		tagItem.etiqueta = tag.get().getEtiqueta();
-		
 		return tagItem;
+		
 	}
 	
 	public List<TagItem> getAllTags() throws ParseException{
@@ -54,8 +54,8 @@ public class TagService {
 		Tag tag = new Tag();
 		tag.setEtiqueta(tagIn.etiqueta);
 		tag = tagRepository.save(tag);
-		
 		return tag.getId_tag();
+		
 	}
 	
 	public void removeTag(String id) throws TagNotFound, NumberFormatException {
@@ -63,6 +63,7 @@ public class TagService {
 		Optional<Tag> tag = tagRepository.findById(Long.parseLong(id));
 		if(tag.isEmpty()) throw new TagNotFound();
 		tagRepository.delete(tag.get());
+		
 	}
 	
 	public void editTag(String id, TagItem tagIn) throws TagNotFound, NumberFormatException{
@@ -71,9 +72,8 @@ public class TagService {
 		if(tag.isEmpty()) throw new TagNotFound();
 		Tag tagObj = tag.get();
 		tagObj.setEtiqueta(tagIn.etiqueta);
-
 		tagRepository.save(tagObj);
+		
 	}
-	
 	
 }

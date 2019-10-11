@@ -59,16 +59,12 @@ public class JuegosService {
 		juegoItem.analisis_negativos = juego.get().getAnalisis_negativos();
 		juegoItem.id_requisitos = juego.get().getRequisitos().getId_requisitos();
 		juegoItem.id_admin_creado = juego.get().getAdmin().getId_admin();
-		
 		List<Tag> tag_juego = juego.get().getTag();
 		ArrayList<Long> tag_id = new ArrayList<>();
-		
 		for (Tag tag : tag_juego) {
 			tag_id.add(tag.getId_tag());
 		}
-		
 		juegoItem.tags = tag_id;
-		
 		return juegoItem;
 		
 	}
@@ -90,11 +86,8 @@ public class JuegosService {
 		juego.setAnalisis_negativos(juegoIn.analisis_negativos);
 		juego.setRequisitos(requisitos.get());
 		juego.setAdmin(admin.get());
-		
 		juego.setTag(lista_tag);
-
 		juego = juegosRepository.save(juego);
-		
 		return juego.getId_juego();
 	
 	}
@@ -116,16 +109,12 @@ public class JuegosService {
 			item.analisis_negativos = juego.getAnalisis_negativos();
 			item.id_requisitos = juego.getRequisitos().getId_requisitos();
 			item.id_admin_creado = juego.getAdmin().getId_admin();
-			
 			List<Tag> tag_juego = juego.getTag();
 			ArrayList<Long> tag_id = new ArrayList<>();
-			
 			for (Tag tag : tag_juego) {
 				tag_id.add(tag.getId_tag());
 			}
-			
 			item.tags = tag_id;
-			
 			out.add(item);
 		}
 		return out;
@@ -155,12 +144,11 @@ public class JuegosService {
 		juegoObj.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
 		juegoObj.setRequisitos(requisitos.get());
-		
 		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
 		if(lista_tag.size() != juegoIn.tags.size()) throw new JuegosNotFound();
 		juegoObj.setTag(lista_tag);
-
 		juegosRepository.save(juegoObj);
+		
 	}
 	
 }

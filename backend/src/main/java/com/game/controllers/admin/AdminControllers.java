@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.controllers.admin.dto.AdminItem;
-import com.game.controllers.usuarios.UsuariosControllers;
 import com.game.services.admin.AdminService;
 import com.game.services.admin.exceptions.AdminNotFound;
 
@@ -28,14 +27,16 @@ import io.swagger.annotations.ApiResponses;
 
 /**
  * @author pachi
- *
+ * Controlador de Admins con get, post, put, y delete.
+ * Tenemos dos Get, uno para devolver un admin seleccionado
+ * por su id y otro get para devolver todos los admins.
  */
 
 @RestController
 @RequestMapping("${v1API}/admin")
 public class AdminControllers {
 
-	public static Logger logger = LoggerFactory.getLogger(UsuariosControllers.class);
+	public static Logger logger = LoggerFactory.getLogger(AdminControllers.class);
 	
 	@Autowired
 	AdminService adminService;

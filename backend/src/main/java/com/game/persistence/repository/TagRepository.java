@@ -5,7 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.game.persistence.models.Tag;
 
+/**
+ * @author pachi
+ * Repositorio de la tabla tag.
+ */
+
 @Repository
-public interface TagRepository extends JpaRepository<Tag , Long> {
+public interface TagRepository extends JpaRepository <Tag , Long> {
 
 }

@@ -27,7 +27,9 @@ import io.swagger.annotations.ApiResponses;
 
 /**
  * @author pachi
- *
+ * Controlador de Tag con get, post, put, y delete.
+ * Tenemos dos Get, uno para devolver un Tag seleccionado
+ * por su id y otro get para devolver todos los Tags.
  */
 
 @RestController
@@ -96,7 +98,7 @@ public class TagControllers {
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> removeJuego(@PathVariable("idTag") String idTag) {
+	public @ResponseBody ResponseEntity<Void> removeTag(@PathVariable("idTag") String idTag) {
 		try {
 			tagService.removeTag(idTag);
 			return new ResponseEntity<Void>(HttpStatus.OK);
@@ -117,7 +119,7 @@ public class TagControllers {
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> editJuego(@PathVariable("idTag") String idTag, @RequestBody TagItem body) {
+	public @ResponseBody ResponseEntity<Void> editTag(@PathVariable("idTag") String idTag, @RequestBody TagItem body) {
 		try {
 			tagService.editTag( idTag, body);
 			return new ResponseEntity<Void>(HttpStatus.OK);

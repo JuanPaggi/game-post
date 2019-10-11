@@ -1,4 +1,4 @@
-package com.game.controllers.lista_amigos;
+package com.game.controllers.solicitud_amistad;
 
 import java.text.ParseException;
 import java.util.List;
@@ -17,8 +17,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.game.controllers.lista_amigos.dto.ListaAmigosItem;
-import com.game.services.lista_amigos.ListaAmigosService;
+import com.game.controllers.solicitud_amistad.dto.SolicitudAmistadItem;
+import com.game.services.solicitud_amistad.SolicitudAmistadService;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
 import io.swagger.annotations.ApiResponse;
@@ -26,28 +26,28 @@ import io.swagger.annotations.ApiResponses;
 
 /**
  * @author pachi
- * Controlador de ListaAmigos con get, post y delete.
+ * Controlador de SolicitudAmistad con get, post y delete.
  */
 
 @RestController
-@RequestMapping("${v1API}/amigos")
-public class ListaAmigosControllers {
-	
+@RequestMapping("${v1API}/solicitudes")
+public class SolicitudAmistadControllers {
+
 	@Autowired
-	ListaAmigosService listaAmigosService;
+	SolicitudAmistadService solicitudAmistadService;
 	
-	public static Logger logger = LoggerFactory.getLogger(ListaAmigosControllers.class);
-	
-	@GetMapping(path="{idUsuario}")
+	public static Logger logger = LoggerFactory.getLogger(SolicitudAmistadControllers.class);
+
+	@GetMapping(path="{idSolicitud}")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "OK"),
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 404, message = "Not found."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<List<ListaAmigosItem>> getUsuarios(@PathVariable("idUsuario") String idUsuario){
+	public @ResponseBody ResponseEntity<List<SolicitudAmistadItem>> getSolicitudes(@PathVariable("idSolicitud") String idSolicitud){
 		try {
-			return new ResponseEntity<List<ListaAmigosItem>>(listaAmigosService.getAllAmigos(idUsuario), HttpStatus.OK);
+			return new ResponseEntity<List<SolicitudAmistadItem>>(solicitudAmistadService.getAllSolicitudes(idSolicitud), HttpStatus.OK);
 		} catch(ParseException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		} catch(UsuariosNotFound e) {
@@ -60,13 +60,13 @@ public class ListaAmigosControllers {
 	
 	@PostMapping(path="")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK, devuelve el id del usuario insertado"),
+		@ApiResponse(code = 200, message = "OK, devuelve el id de la solicitud insertado"),
 		@ApiResponse(code = 404, message = "Usuario inexistente."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> addAmigos( @RequestBody ListaAmigosItem body){
+	public @ResponseBody ResponseEntity<Void> addSolicitud( @RequestBody SolicitudAmistadItem body){
 		try {
-			listaAmigosService.addAmigo(body);
+			solicitudAmistadService.addSolicitud(body);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch(UsuariosNotFound e) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
@@ -83,9 +83,9 @@ public class ListaAmigosControllers {
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> removeUsuario(@RequestBody ListaAmigosItem body) {
+	public @ResponseBody ResponseEntity<Void> removeSolicitud(@RequestBody SolicitudAmistadItem body) {
 		try {
-			listaAmigosService.removeAmigo(body.id_usuario, body.id_amigo);
+			solicitudAmistadService.removeSolicitud(body.id_usuario, body.id_amigo);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch(UsuariosNotFound e) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);

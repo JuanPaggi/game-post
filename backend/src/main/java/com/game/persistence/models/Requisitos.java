@@ -6,11 +6,15 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/**
+ * @author pachi
+ * Modelo de la tabla requisitos.
+ */
+
 @Entity
 public class Requisitos {
 	
 	@Id
-	// AutoIncremento del Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_requisito;
 	
