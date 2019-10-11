@@ -151,6 +151,30 @@
 			"response": []
 		},
 		{
+			"name": "Get Admin",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/admin",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"admin"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Crear analisis",
 			"request": {
 				"method": "POST",
@@ -164,7 +188,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"analisis\": \"Holsadqwa el pelo\",\n\"valoracion\": 1,\n\"fecha_publicacion\": \"2019-10-08T22:22:27.303+0000\",\n\"id_juego\": 3,\n\"id_usuario\": 4\n}",
+					"raw": "    {\n        \"usuario\": \"2321123\",\n        \"clave\": \"12346\"\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -172,7 +196,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/analisis",
+					"raw": "http://127.0.0.1:8081/api/v1/admin",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -184,7 +208,7 @@
 					"path": [
 						"api",
 						"v1",
-						"analisis"
+						"admin"
 					]
 				}
 			},
@@ -204,7 +228,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"tags\":\n\t[1]\n}",
+					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"tags\":\n\t[3,5]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -391,6 +415,46 @@
 			"response": []
 		},
 		{
+			"name": "Crear Admin",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"analisis\": \"Holsadqwa el pelo\",\n\"valoracion\": 1,\n\"fecha_publicacion\": \"2019-10-08T22:22:27.303+0000\",\n\"id_juego\": 3,\n\"id_usuario\": 4\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/analisis",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"analisis"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete analisis",
 			"request": {
 				"method": "DELETE",
@@ -421,7 +485,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/juegos/12",
+					"raw": "http://127.0.0.1:8081/api/v1/juegos/20",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -434,7 +498,7 @@
 						"api",
 						"v1",
 						"juegos",
-						"12"
+						"20"
 					]
 				}
 			},
@@ -536,7 +600,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/tags/2",
+					"raw": "http://127.0.0.1:8081/api/v1/tags/4",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -549,7 +613,32 @@
 						"api",
 						"v1",
 						"tags",
-						"2"
+						"4"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Admin",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/admin/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"admin",
+						"1"
 					]
 				}
 			},
@@ -569,7 +658,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"sistema_operativo\": \"x123d12\",\n        \"procesador\": \"x2\",\n        \"memoria\": \"x\",\n        \"grafica\": \"x\",\n        \"almacenamiento\": \"x\"\n    }",
+					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"tags\":\n\t[5,3]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -577,7 +666,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/requisitos/2",
+					"raw": "http://127.0.0.1:8081/api/v1/juegos/24",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -589,8 +678,8 @@
 					"path": [
 						"api",
 						"v1",
-						"requisitos",
-						"2"
+						"juegos",
+						"24"
 					]
 				}
 			},
@@ -754,6 +843,47 @@
 						"api",
 						"v1",
 						"tags",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Actualizar Admin",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "    {\n        \"usuario\": \"pachi\",\n        \"clave\": \"123456\"\n    }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/admin/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"admin",
 						"1"
 					]
 				}
