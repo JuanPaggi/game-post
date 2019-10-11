@@ -27,7 +27,9 @@ import io.swagger.annotations.ApiResponses;
 
 /**
  * @author pachi
- *
+ * Controlador de Admins con get, post, put, y delete.
+ * Tenemos dos Get, uno para devolver un admin seleccionado
+ * por su id y otro get para devolver todos los admins.
  */
 
 @RestController

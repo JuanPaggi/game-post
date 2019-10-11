@@ -27,7 +27,9 @@ import io.swagger.annotations.ApiResponses;
 
 /**
  * @author pachi
- *
+ * Controlador de Requisitos con get, post, put, y delete.
+ * Tenemos dos Get, uno para devolver un requisito seleccionado
+ * por su id y otro get para devolver todos los requisitos.
  */
 
 @RestController
@@ -130,4 +132,5 @@ public class RequisitosControllers {
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 }

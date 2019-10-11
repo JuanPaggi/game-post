@@ -36,6 +36,7 @@ public class AdminService {
 			out.add(item);
 		}
 		return out;
+		
 	}
 	
 	public AdminItem getAdmin(long id) throws AdminNotFound {
@@ -46,7 +47,6 @@ public class AdminService {
 		adminItem.id_admin = admin.get().getId_admin();
 		adminItem.usuario = admin.get().getUsuario();
 		adminItem.clave = admin.get().getClave();
-		
 		return adminItem;
 		
 	}
@@ -57,10 +57,9 @@ public class AdminService {
 		admin.setId_admin(adminIn.id_admin);
 		admin.setUsuario(adminIn.usuario);
 		admin.setClave(adminIn.clave);
-
 		admin = adminRepository.save(admin);
-		
 		return admin.getId_admin();
+		
 	}
 	
 	public void removeAdmin(String id) throws AdminNotFound, NumberFormatException {
@@ -78,7 +77,8 @@ public class AdminService {
 		Admin adminObj = admin.get();
 		adminObj.setUsuario(adminIn.usuario);
 		adminObj.setClave(adminIn.clave);
-
 		adminRepository.save(adminObj);
+		
 	}
+	
 }

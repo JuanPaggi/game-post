@@ -39,7 +39,6 @@ public class SolicitudAmistadService {
 			lista_amigo.setUsuario(usuario.get());
 			lista_amigo.setUsuario_amigo(usuario_amigo.get());
 			lista_amigo.setFecha_solicitud(solicitudIn.fecha_solicitud);
-			
 			solicitudesAmistadRepository.save(lista_amigo);
 			return lista_amigo.getId_solicitud_amistad();
 		} else {
@@ -60,7 +59,6 @@ public class SolicitudAmistadService {
 			item.fecha_solicitud = lista_amigo.getFecha_solicitud();
 			out.add(item);
 		}
-		
 		return out;
 		
 	}

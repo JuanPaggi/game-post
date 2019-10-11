@@ -12,11 +12,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+/**
+ * @author pachi
+ * Modelo de la tabla usuarios.
+ */
+
 @Entity
 public class Usuarios {
 	
 	@Id
-	// AutoIncremento del Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_usuario;
 	

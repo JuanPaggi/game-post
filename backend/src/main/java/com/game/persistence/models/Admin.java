@@ -11,11 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 
+/**
+ * @author pachi
+ * Modelo de la tabla admin.
+ */
+
 @Entity
 public class Admin {
 
 	@Id
-	// AutoIncremento del Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_admin;
 	
@@ -29,6 +33,10 @@ public class Admin {
 	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin", nullable = false, insertable = false, updatable = false)
 	private List<Juegos> juegos;
 
+	/*
+	 * ------ Getter and Setter ------ 
+	 */
+	
 	public long getId_admin() {
 		return id_admin;
 	}

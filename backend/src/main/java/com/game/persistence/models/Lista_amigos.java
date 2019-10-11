@@ -8,11 +8,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * @author pachi
+ * Modelo de la tabla lista_amigos.
+ */
+
 @Entity
 public class Lista_amigos {
 	
 	@Id
-	// AutoIncremento del Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_lista_amigos;
 	
@@ -24,6 +28,10 @@ public class Lista_amigos {
 	@JoinColumn(name="id_amigo", referencedColumnName = "id_usuario")
 	private Usuarios usuario_amigo;
 
+	/*
+	 * ------ Getter and Setter ------ 
+	 */
+	
 	public long getId_lista_amigos() {
 		return id_lista_amigos;
 	}

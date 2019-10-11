@@ -5,7 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.game.persistence.models.Juegos;
 
+/**
+ * @author pachi
+ * Repositorio de la tabla juegos.
+ */
+
 @Repository
-public interface JuegosRepository extends JpaRepository<Juegos , Long> {
+public interface JuegosRepository extends JpaRepository <Juegos , Long> {
 	
 }

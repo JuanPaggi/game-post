@@ -10,6 +10,11 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * @author pachi
+ * Modelo de la tabla analisis.
+ */
+
 @Entity
 public class Analisis {
 
@@ -34,6 +39,10 @@ public class Analisis {
 	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario")
 	private Usuarios usuario;
 
+	/*
+	 * ------ Getter and Setter ------ 
+	 */
+	
 	public long getId_analisis() {
 		return id_analisis;
 	}

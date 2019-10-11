@@ -44,7 +44,6 @@ public class UsuariosService {
 		usuarioItem.puntos = usuario.get().getPuntos();
 		usuarioItem.fecha_inscripcion = usuario.get().getFecha_inscripcion();
 		usuarioItem.email_verificado = usuario.get().isEmail_verificado();
-		
 		return usuarioItem;
 		
 	}
@@ -69,6 +68,7 @@ public class UsuariosService {
 			out.add(item);
 		}
 		return out;
+		
 	}
 	
 	public long addUsuario(UsuarioItem usuarioIn) {
@@ -84,10 +84,9 @@ public class UsuariosService {
 		usuario.setPuntos(usuarioIn.puntos);
 		usuario.setFecha_inscripcion(usuarioIn.fecha_inscripcion);
 		usuario.setEmail_verificado(usuarioIn.email_verificado);
-
 		usuario = usuariosrepository.save(usuario);
-		
 		return usuario.getId_usuario();
+		
 	}
 	
 	public void removeUsuario(String id) throws UsuariosNotFound, NumberFormatException {
@@ -112,8 +111,8 @@ public class UsuariosService {
 		usuarioObj.setNivel(usuarioIn.nivel);
 		usuarioObj.setPuntos(usuarioIn.puntos);
 		usuarioObj.setEmail_verificado(usuarioIn.email_verificado);
-
 		usuariosrepository.save(usuarioObj);
+		
 	}
 	
 }

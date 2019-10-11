@@ -27,7 +27,9 @@ import io.swagger.annotations.ApiResponses;
 
 /**
  * @author pachi
- *
+ * Controlador de Juegos con get, post, put, y delete.
+ * Tenemos dos Get, uno para devolver un juego seleccionado
+ * por su id y otro get para devolver todos los juegos.
  */
 
 @RestController
@@ -39,7 +41,6 @@ public class JuegosControllers {
 	@Autowired
 	JuegosService juegosService;
 
-	
 	@GetMapping(path="")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "OK"),
@@ -131,4 +132,5 @@ public class JuegosControllers {
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 }

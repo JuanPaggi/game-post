@@ -26,7 +26,7 @@ import io.swagger.annotations.ApiResponses;
 
 /**
  * @author pachi
- *
+ * Controlador de ListaAmigos con get, post y delete.
  */
 
 @RestController
@@ -96,4 +96,5 @@ public class ListaAmigosControllers {
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
+	
 }

@@ -5,7 +5,12 @@ import org.springframework.stereotype.Repository;
 
 import com.game.persistence.models.Admin;
 
+/**
+ * @author pachi
+ * Repositorio de la tabla admin.
+ */
+
 @Repository
-public interface AdminRepository extends JpaRepository<Admin , Long> {
+public interface AdminRepository extends JpaRepository <Admin , Long> {
 
 }

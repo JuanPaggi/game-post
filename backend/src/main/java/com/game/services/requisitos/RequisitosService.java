@@ -35,8 +35,8 @@ public class RequisitosService {
 		requisitoItem.memoria = requisito.get().getMemoria();
 		requisitoItem.grafica = requisito.get().getGrafica();
 		requisitoItem.almacenamiento = requisito.get().getAlamcenamiento();
-		
 		return requisitoItem;
+		
 	}
 	
 	public List<RequisitoItem> getAllRequisitos() throws ParseException{
@@ -51,7 +51,6 @@ public class RequisitosService {
 			item.memoria = requisito.getMemoria();
 			item.grafica = requisito.getMemoria();
 			item.almacenamiento = requisito.getAlamcenamiento();
-
 			out.add(item);
 		}
 		return out;
@@ -66,9 +65,7 @@ public class RequisitosService {
 		requisito.setMemoria(requisitoIn.memoria);
 		requisito.setGrafica(requisitoIn.grafica);
 		requisito.setAlamcenamiento(requisitoIn.almacenamiento);
-
 		requisito = requisitosRepository.save(requisito);
-		
 		return requisito.getId_requisitos();
 	
 	}
@@ -91,7 +88,8 @@ public class RequisitosService {
 		requisitoObj.setMemoria(requisitoIn.memoria);
 		requisitoObj.setGrafica(requisitoIn.grafica);
 		requisitoObj.setAlamcenamiento(requisitoIn.almacenamiento);
-
 		requisitosRepository.save(requisitoObj);
+		
 	}
+	
 }

@@ -11,11 +11,15 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
+/**
+ * @author pachi
+ * Modelo de la tabla requisitos.
+ */
+
 @Entity
 public class SolicitudesAmistad{
 
 	@Id
-	// AutoIncremento del Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_solicitud_amistad;
 	
@@ -65,6 +69,5 @@ public class SolicitudesAmistad{
 	public void setFecha_solicitud(Date fecha_solicitud2) {
 		this.fecha_solicitud = fecha_solicitud2;
 	}
-	
 	
 }

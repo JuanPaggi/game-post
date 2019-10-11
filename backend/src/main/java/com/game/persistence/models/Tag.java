@@ -12,11 +12,15 @@ import javax.persistence.JoinColumn;
 import javax.persistence.JoinTable;
 import javax.persistence.ManyToMany;
 
+/**
+ * @author pachi
+ * Modelo de la tabla tag.
+ */
+
 @Entity
 public class Tag {
 
 	@Id
-	// AutoIncremento del Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_tag;
 	
@@ -31,6 +35,10 @@ public class Tag {
     @JoinColumn(name = "id_juego", referencedColumnName = "id_juego"))
 	private List<Juegos> juegos;
 
+	/*
+	 * ------ Getter and Setter ------ 
+	 */
+	
 	public long getId_tag() {
 		return id_tag;
 	}

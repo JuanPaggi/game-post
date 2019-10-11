@@ -15,11 +15,15 @@ import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
+/**
+ * @author pachi
+ * Modelo de la tabla juegos.
+ */
+
 @Entity
 public class Juegos {
 
 	@Id
-	// AutoIncremento del Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long id_juego;
 	
