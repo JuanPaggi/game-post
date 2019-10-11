@@ -19,6 +19,7 @@ import com.game.persistence.repository.JuegosRepository;
 import com.game.persistence.repository.RequisitosRepository;
 import com.game.persistence.repository.TagRepository;
 import com.game.services.juegos.exceptions.JuegosNotFound;
+import com.game.services.tag.exceptions.TagNotFound;
 
 /**
  * @author pachi
@@ -69,13 +70,13 @@ public class JuegosService {
 		
 	}
 	
-	public long addJuego(JuegoItem juegoIn) throws JuegosNotFound{
+	public long addJuego(JuegoItem juegoIn) throws TagNotFound{
 		
 		Juegos juego = new Juegos();
 		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
 		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
 		Optional<Admin> admin = adminRepository.findById(juegoIn.id_admin_creado);
-		if(requisitos.isEmpty() || lista_tag.size() != juegoIn.tags.size()) throw new JuegosNotFound();
+		if(requisitos.isEmpty() || lista_tag.size() != juegoIn.tags.size()) throw new TagNotFound();
 		juego.setTitulo(juegoIn.titulo);
 		juego.setDescripcion(juegoIn.descripcion);
 		juego.setGenero(juegoIn.genero);
@@ -129,7 +130,7 @@ public class JuegosService {
 	
 	}
 	
-	public void editJuego(String id, JuegoItem juegoIn) throws JuegosNotFound, NumberFormatException{
+	public void editJuego(String id, JuegoItem juegoIn) throws JuegosNotFound,TagNotFound, NumberFormatException{
 		
 		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
 		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
@@ -145,7 +146,7 @@ public class JuegosService {
 		juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
 		juegoObj.setRequisitos(requisitos.get());
 		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
-		if(lista_tag.size() != juegoIn.tags.size()) throw new JuegosNotFound();
+		if(lista_tag.size() != juegoIn.tags.size()) throw new TagNotFound();
 		juegoObj.setTag(lista_tag);
 		juegosRepository.save(juegoObj);
 		

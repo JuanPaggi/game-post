@@ -340,6 +340,30 @@
 			"response": []
 		},
 		{
+			"name": "Get Privilegios",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/privilegios",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"privilegios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Crear analisis",
 			"request": {
 				"method": "POST",
@@ -433,7 +457,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"nombre\": \"x123123\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x\",\n    \"clave\": \"x\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2,\n    \"email_verificado\": true\n}",
+					"raw": "{\n    \"nombre\": \"x123123\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x\",\n    \"clave\": \"x\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2,\n    \"email_verificado\": true,\n    \"privilegios\": [3,2]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -593,7 +617,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n\"analisis\": \"Holsadqwa el pelo\",\n\"valoracion\": 1,\n\"fecha_publicacion\": \"2019-10-08T22:22:27.303+0000\",\n\"id_juego\": 3,\n\"id_usuario\": 4\n}",
+					"raw": "{\n\"usuario\": \"juan\",\n\"clave\": \"1234\",\n\"privilegios\":[2,3]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -601,7 +625,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/analisis",
+					"raw": "http://127.0.0.1:8081/api/v1/admin",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -613,7 +637,7 @@
 					"path": [
 						"api",
 						"v1",
-						"analisis"
+						"admin"
 					]
 				}
 			},
@@ -780,6 +804,46 @@
 			"response": []
 		},
 		{
+			"name": "Crear Privilegio",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n\"privilegio\": \"212312338\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/privilegios",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"privilegios"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Delete analisis",
 			"request": {
 				"method": "DELETE",
@@ -850,7 +914,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/usuarios/6",
+					"raw": "http://127.0.0.1:8081/api/v1/usuarios/11",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -863,7 +927,7 @@
 						"api",
 						"v1",
 						"usuarios",
-						"6"
+						"11"
 					]
 				}
 			},
@@ -965,7 +1029,7 @@
 				"method": "DELETE",
 				"header": [],
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/admin/1",
+					"raw": "http://127.0.0.1:8081/api/v1/admin/7",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -978,7 +1042,7 @@
 						"api",
 						"v1",
 						"admin",
-						"1"
+						"7"
 					]
 				}
 			},
@@ -1100,6 +1164,31 @@
 			"response": []
 		},
 		{
+			"name": "Delete Privilegio",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://127.0.0.1:8081/api/v1/privilegios/1",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "8081",
+					"path": [
+						"api",
+						"v1",
+						"privilegios",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
 			"name": "Actualizar juego",
 			"request": {
 				"method": "PUT",
@@ -1195,7 +1284,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"nombre\": \"x12ijl8i6hikjh3123\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true\n    }",
+					"raw": "    {\n        \"nombre\": \"x12ijl8i6hikjh3123\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true,\n        \"privilegios\": [2]\n    }",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1203,7 +1292,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/usuarios/8",
+					"raw": "http://127.0.0.1:8081/api/v1/usuarios/11",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -1216,7 +1305,7 @@
 						"api",
 						"v1",
 						"usuarios",
-						"8"
+						"11"
 					]
 				}
 			},
@@ -1318,7 +1407,7 @@
 				],
 				"body": {
 					"mode": "raw",
-					"raw": "    {\n        \"usuario\": \"pachi\",\n        \"clave\": \"123456\"\n    }",
+					"raw": "{\n\"usuario\": \"juan\",\n\"clave\": \"1234\",\n\"privilegios\":[3]\n}",
 					"options": {
 						"raw": {
 							"language": "json"
@@ -1326,7 +1415,7 @@
 					}
 				},
 				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/admin/1",
+					"raw": "http://127.0.0.1:8081/api/v1/admin/6",
 					"protocol": "http",
 					"host": [
 						"127",
@@ -1339,7 +1428,7 @@
 						"api",
 						"v1",
 						"admin",
-						"1"
+						"6"
 					]
 				}
 			},
