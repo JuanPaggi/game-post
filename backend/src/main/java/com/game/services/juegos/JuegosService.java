@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.game.controllers.juegos.dto.JuegoItem;
+import com.game.persistence.models.Admin;
 import com.game.persistence.models.Juegos;
 import com.game.persistence.models.Requisitos;
+import com.game.persistence.models.Tag;
+import com.game.persistence.repository.AdminRepository;
 import com.game.persistence.repository.AnalisisRepository;
 import com.game.persistence.repository.JuegosRepository;
 import com.game.persistence.repository.RequisitosRepository;
+import com.game.persistence.repository.TagRepository;
 import com.game.services.juegos.exceptions.JuegosNotFound;
 
 /**
@@ -33,6 +37,12 @@ public class JuegosService {
 	@Autowired
 	AnalisisRepository analisisRepository;
 	
+	@Autowired
+	TagRepository tagRepository;
+	
+	@Autowired
+	AdminRepository adminRepository;
+
 	public JuegoItem getJuego(long id) throws JuegosNotFound {
 		
 		Optional<Juegos> juego = juegosRepository.findById(id);
@@ -48,7 +58,16 @@ public class JuegosService {
 		juegoItem.analisis_positivos = juego.get().getAnalisis_positivos();
 		juegoItem.analisis_negativos = juego.get().getAnalisis_negativos();
 		juegoItem.id_requisitos = juego.get().getRequisitos().getId_requisitos();
-		juegoItem.id_admin_creado = juego.get().getId_admin_creado();
+		juegoItem.id_admin_creado = juego.get().getAdmin().getId_admin();
+		
+		List<Tag> tag_juego = juego.get().getTag();
+		ArrayList<Long> tag_id = new ArrayList<>();
+		
+		for (Tag tag : tag_juego) {
+			tag_id.add(tag.getId_tag());
+		}
+		
+		juegoItem.tags = tag_id;
 		
 		return juegoItem;
 		
@@ -58,7 +77,9 @@ public class JuegosService {
 		
 		Juegos juego = new Juegos();
 		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
-		if(requisitos.isEmpty()) throw new JuegosNotFound();
+		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
+		Optional<Admin> admin = adminRepository.findById(juegoIn.id_admin_creado);
+		if(requisitos.isEmpty() || lista_tag.size() != juegoIn.tags.size()) throw new JuegosNotFound();
 		juego.setTitulo(juegoIn.titulo);
 		juego.setDescripcion(juegoIn.descripcion);
 		juego.setGenero(juegoIn.genero);
@@ -68,7 +89,9 @@ public class JuegosService {
 		juego.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juego.setAnalisis_negativos(juegoIn.analisis_negativos);
 		juego.setRequisitos(requisitos.get());
-		juego.setId_admin_creado(juegoIn.id_admin_creado);
+		juego.setAdmin(admin.get());
+		
+		juego.setTag(lista_tag);
 
 		juego = juegosRepository.save(juego);
 		
@@ -92,7 +115,17 @@ public class JuegosService {
 			item.analisis_positivos = juego.getAnalisis_positivos();
 			item.analisis_negativos = juego.getAnalisis_negativos();
 			item.id_requisitos = juego.getRequisitos().getId_requisitos();
-			item.id_admin_creado = juego.getId_admin_creado();
+			item.id_admin_creado = juego.getAdmin().getId_admin();
+			
+			List<Tag> tag_juego = juego.getTag();
+			ArrayList<Long> tag_id = new ArrayList<>();
+			
+			for (Tag tag : tag_juego) {
+				tag_id.add(tag.getId_tag());
+			}
+			
+			item.tags = tag_id;
+			
 			out.add(item);
 		}
 		return out;
@@ -122,7 +155,10 @@ public class JuegosService {
 		juegoObj.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
 		juegoObj.setRequisitos(requisitos.get());
-		juegoObj.setId_admin_creado(juegoIn.id_admin_creado);
+		
+		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
+		if(lista_tag.size() != juegoIn.tags.size()) throw new JuegosNotFound();
+		juegoObj.setTag(lista_tag);
 
 		juegosRepository.save(juegoObj);
 	}

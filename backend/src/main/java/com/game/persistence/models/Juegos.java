@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -53,8 +55,17 @@ public class Juegos {
 	@JoinColumn(name="id_juego", referencedColumnName = "id_juego", nullable = false, insertable = false, updatable = false)
 	private List<Analisis> analisis;
 	
-	@Column(nullable = false)
-	private long id_admin_creado;
+	@ManyToMany(fetch = FetchType.LAZY) 
+    @JoinTable(name = "juegos_tag", 
+    joinColumns = 
+    @JoinColumn(name = "id_juego", referencedColumnName = "id_juego"), 
+    inverseJoinColumns = 
+    @JoinColumn(name = "id_tag", referencedColumnName = "id_tag"))
+	private List<Tag> Tag;
+	
+	@ManyToOne(optional = false)
+	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin")
+	private Admin admin;
 	
 	/*
 	 * ------ Getter and Setter ------ 
@@ -140,20 +151,28 @@ public class Juegos {
 		this.requisitos = requisitos;
 	}
 
-	public long getId_admin_creado() {
-		return id_admin_creado;
-	}
-
-	public void setId_admin_creado(long id_admin_creado) {
-		this.id_admin_creado = id_admin_creado;
-	}
-
 	public List<Analisis> getAnalisis() {
 		return analisis;
 	}
 
 	public void setAnalisis(List<Analisis> analisis) {
 		this.analisis = analisis;
+	}
+
+	public List<Tag> getTag() {
+		return Tag;
+	}
+
+	public void setTag(List<Tag> tag) {
+		Tag = tag;
+	}
+
+	public Admin getAdmin() {
+		return admin;
+	}
+
+	public void setAdmin(Admin admin) {
+		this.admin = admin;
 	}
 	
 }
