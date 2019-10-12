@@ -9,9 +9,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.game.controllers.usuarios.dto.UsuarioItem;
+import com.game.persistence.models.Privilegios;
 import com.game.persistence.models.Usuarios;
 import com.game.persistence.repository.Lista_amigosRepository;
+import com.game.persistence.repository.PrivilegiosRepository;
 import com.game.persistence.repository.UsuariosRepository;
+import com.game.services.privilegios.exceptions.PrivilegioNotFound;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
 /**
@@ -27,6 +30,9 @@ public class UsuariosService {
 	
 	@Autowired
 	Lista_amigosRepository lista_amigosRepository;
+	
+	@Autowired
+	PrivilegiosRepository privilegiosRepository;
 	
 	public UsuarioItem getUsuario(long id) throws UsuariosNotFound {
 		
@@ -44,6 +50,14 @@ public class UsuariosService {
 		usuarioItem.puntos = usuario.get().getPuntos();
 		usuarioItem.fecha_inscripcion = usuario.get().getFecha_inscripcion();
 		usuarioItem.email_verificado = usuario.get().isEmail_verificado();
+		
+		List<Privilegios> privilegio_usuario = usuario.get().getPrivilegios();
+		ArrayList<Long> privilegio_id = new ArrayList<>();
+		for (Privilegios privilegio : privilegio_usuario) {
+			privilegio_id.add(privilegio.getId_privilegio());
+		}
+		usuarioItem.privilegios = privilegio_id;
+		
 		return usuarioItem;
 		
 	}
@@ -65,15 +79,25 @@ public class UsuariosService {
 			item.puntos = usuario.getPuntos();
 			item.fecha_inscripcion = usuario.getFecha_inscripcion();
 			item.email_verificado = usuario.isEmail_verificado();
+			
+			List<Privilegios> privilegio_usuario = usuario.getPrivilegios();
+			ArrayList<Long> privilegio_id = new ArrayList<>();
+			for (Privilegios privilegio : privilegio_usuario) {
+				privilegio_id.add(privilegio.getId_privilegio());
+			}
+			item.privilegios = privilegio_id;
+			
 			out.add(item);
 		}
 		return out;
 		
 	}
 	
-	public long addUsuario(UsuarioItem usuarioIn) {
+	public long addUsuario(UsuarioItem usuarioIn) throws PrivilegioNotFound{
 		
 		Usuarios usuario = new Usuarios();
+		List<Privilegios> lista_privilegios= privilegiosRepository.findAllById(usuarioIn.privilegios);
+		if(lista_privilegios.size() != usuarioIn.privilegios.size()) throw new PrivilegioNotFound();
 		usuario.setNombre(usuarioIn.nombre);
 		usuario.setApellido(usuarioIn.apellido);
 		usuario.setEmail(usuarioIn.email);
@@ -84,6 +108,7 @@ public class UsuariosService {
 		usuario.setPuntos(usuarioIn.puntos);
 		usuario.setFecha_inscripcion(usuarioIn.fecha_inscripcion);
 		usuario.setEmail_verificado(usuarioIn.email_verificado);
+		usuario.setPrivilegios(lista_privilegios);
 		usuario = usuariosrepository.save(usuario);
 		return usuario.getId_usuario();
 		
@@ -97,7 +122,7 @@ public class UsuariosService {
 	
 	}
 	
-	public void editUsuario(String id, UsuarioItem usuarioIn) throws UsuariosNotFound, NumberFormatException{
+	public void editUsuario(String id, UsuarioItem usuarioIn) throws UsuariosNotFound,PrivilegioNotFound, NumberFormatException{
 		
 		Optional<Usuarios> usuario = usuariosrepository.findById(Long.parseLong(id));
 		if(usuario.isEmpty()) throw new UsuariosNotFound();
@@ -111,6 +136,9 @@ public class UsuariosService {
 		usuarioObj.setNivel(usuarioIn.nivel);
 		usuarioObj.setPuntos(usuarioIn.puntos);
 		usuarioObj.setEmail_verificado(usuarioIn.email_verificado);
+		List<Privilegios> lista_privilegios= privilegiosRepository.findAllById(usuarioIn.privilegios);
+		if(lista_privilegios.size() != usuarioIn.privilegios.size()) throw new PrivilegioNotFound();
+		usuarioObj.setPrivilegios(lista_privilegios);
 		usuariosrepository.save(usuarioObj);
 		
 	}

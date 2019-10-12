@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.game.controllers.admin.dto.AdminItem;
 import com.game.services.admin.AdminService;
 import com.game.services.admin.exceptions.AdminNotFound;
+import com.game.services.privilegios.exceptions.PrivilegioNotFound;
 
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -85,6 +86,8 @@ public class AdminControllers {
 	public @ResponseBody ResponseEntity<Long> addAdmin( @RequestBody AdminItem body){
 		try {
 			return new ResponseEntity<Long>(adminService.addAdmin(body), HttpStatus.OK);
+		} catch(PrivilegioNotFound e) {
+			return new ResponseEntity<Long>(HttpStatus.NOT_FOUND);
 		} catch(Exception e) {
 			logger.error("Internal server error", e);
 			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);

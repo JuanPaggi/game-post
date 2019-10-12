@@ -1,5 +1,6 @@
 package com.game.controllers.usuarios.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class UsuarioItem {
@@ -15,5 +16,7 @@ public class UsuarioItem {
 	public int nivel;
 	public int puntos;
 	public boolean email_verificado;
+	
+	public ArrayList<Long> privilegios;
 	
 }

@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.services.juegos.JuegosService;
 import com.game.services.juegos.exceptions.JuegosNotFound;
+import com.game.services.tag.exceptions.TagNotFound;
 
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -124,6 +125,8 @@ public class JuegosControllers {
 			juegosService.editJuego( idJuego, body);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch(JuegosNotFound e) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		} catch(TagNotFound e) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		} catch(NumberFormatException e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);

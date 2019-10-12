@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.controllers.usuarios.dto.UsuarioItem;
+import com.game.services.privilegios.exceptions.PrivilegioNotFound;
 import com.game.services.usuarios.UsuariosService;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
@@ -85,6 +86,8 @@ public class UsuariosControllers {
 	public @ResponseBody ResponseEntity<Long> addUsuarios( @RequestBody UsuarioItem body){
 		try {
 			return new ResponseEntity<Long>(usuariosService.addUsuario(body), HttpStatus.OK);
+		} catch(PrivilegioNotFound e) {
+			return new ResponseEntity<Long>(HttpStatus.NOT_FOUND);
 		} catch(Exception e) {
 			logger.error("Internal server error", e);
 			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
@@ -124,6 +127,8 @@ public class UsuariosControllers {
 			usuariosService.editUsuario( idUsuario, body);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch(UsuariosNotFound e) {
+			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+		} catch(PrivilegioNotFound e) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		} catch(NumberFormatException e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
