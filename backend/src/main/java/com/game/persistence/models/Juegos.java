@@ -71,6 +71,14 @@ public class Juegos {
 	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin")
 	private Admin admin;
 	
+	@ManyToMany(fetch = FetchType.LAZY) 
+    @JoinTable(name = "juegos_modos", 
+    joinColumns = 
+    @JoinColumn(name = "id_juego", referencedColumnName = "id_juego"), 
+    inverseJoinColumns = 
+    @JoinColumn(name = "id_modo", referencedColumnName = "id_modo"))
+	private List<Modos> modos;
+	
 	/*
 	 * ------ Getter and Setter ------ 
 	 */
@@ -178,5 +186,15 @@ public class Juegos {
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
+
+	public List<Modos> getModos() {
+		return modos;
+	}
+
+	public void setModos(List<Modos> modos) {
+		this.modos = modos;
+	}
+
+	
 	
 }

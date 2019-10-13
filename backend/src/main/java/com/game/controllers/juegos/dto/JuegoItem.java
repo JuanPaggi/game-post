@@ -17,5 +17,6 @@ public class JuegoItem {
 	public long id_requisitos;
 	public long id_admin_creado;
 	public ArrayList<Long> tags;
+	public ArrayList<Long> modos;
 	
 }
