@@ -99,6 +99,10 @@ public class Usuarios {
     inverseJoinColumns = 
     @JoinColumn(name = "id_privilegio", referencedColumnName = "id_privilegio"))
 	private List<Privilegios> privilegios;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
+	private List<UsuariosBloqueados> usuarios_bloqueados;
 
 	/*
 	 * ------ Getter and Setter ------ 
@@ -270,6 +274,14 @@ public class Usuarios {
 
 	public void setPrivilegios(List<Privilegios> privilegios) {
 		this.privilegios = privilegios;
+	}
+
+	public List<UsuariosBloqueados> getUsuarios_bloqueados() {
+		return usuarios_bloqueados;
+	}
+
+	public void setUsuarios_bloqueados(List<UsuariosBloqueados> usuarios_bloqueados) {
+		this.usuarios_bloqueados = usuarios_bloqueados;
 	}
 	
 }
