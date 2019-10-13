@@ -233,20 +233,9 @@ CREATE TABLE `comentarios` (
   `comentario` VARCHAR(2048) NOT NULL,
   `fecha_publicacion` TIMESTAMP NOT NULL,
   `id_usuario` INT NOT NULL,
-  PRIMARY KEY (`id_comentario`)
-);
-
--- ---
--- Table 'noticias_comentarios'
--- 
--- ---
-
-DROP TABLE IF EXISTS `noticias_comentarios`;
-		
-CREATE TABLE `noticias_comentarios` (
-  `id_noticias` INT NOT NULL,
-  `id_comentario` INT NOT NULL,
-  PRIMARY KEY (`id_noticias`, `id_comentario`)
+  `id_noticia` INT NOT NULL,
+  PRIMARY KEY (`id_comentario`),
+KEY (`id_usuario`, `id_noticia`)
 );
 
 -- ---
@@ -392,8 +381,7 @@ ALTER TABLE `noticias_imagenes` ADD FOREIGN KEY (id_noticia) REFERENCES `noticia
 ALTER TABLE `noticias_imagenes` ADD FOREIGN KEY (id_imagen) REFERENCES `imagenes` (`id_imagen`);
 ALTER TABLE `donaciones` ADD FOREIGN KEY (id_usuario) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `comentarios` ADD FOREIGN KEY (id_usuario) REFERENCES `usuarios` (`id_usuario`);
-ALTER TABLE `noticias_comentarios` ADD FOREIGN KEY (id_noticias) REFERENCES `noticias` (`id_noticia`);
-ALTER TABLE `noticias_comentarios` ADD FOREIGN KEY (id_comentario) REFERENCES `comentarios` (`id_comentario`);
+ALTER TABLE `comentarios` ADD FOREIGN KEY (id_noticia) REFERENCES `noticias` (`id_noticia`);
 ALTER TABLE `noticias_tag` ADD FOREIGN KEY (id_tag) REFERENCES `tag` (`id_tag`);
 ALTER TABLE `noticias_tag` ADD FOREIGN KEY (id_noticia) REFERENCES `noticias` (`id_noticia`);
 ALTER TABLE `usuarios_privilegios` ADD FOREIGN KEY (id_usuario) REFERENCES `usuarios` (`id_usuario`);
