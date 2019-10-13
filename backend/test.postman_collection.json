@@ -1,1438 +1,1700 @@
 {
 	"info": {
-		"_postman_id": "7880765c-2534-4601-a406-9ef8c1d2e1a4",
+		"_postman_id": "7903ecfa-6e24-4f25-9dff-83b0330ddbd3",
 		"name": "test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
 	"item": [
 		{
-			"name": "Get analisis",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/analisis",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"analisis"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get juegos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/juegos",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"juegos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get usuarios",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/usuarios",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"usuarios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get requisitos",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/requisitos",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"requisitos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Amigo",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/amigos/4",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"amigos",
-						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Tag",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/tags",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"tags"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Admin",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/admin",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"admin"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Solicitudes",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [],
-				"body": {
-					"mode": "raw",
-					"raw": ""
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/solicitudes/8",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"solicitudes",
-						"8"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Mensajes",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Juegos",
+			"item": [
+				{
+					"name": "Get juegos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/juegos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"juegos"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/mensajes/9/10",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"mensajes",
-						"9",
-						"10"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Donaciones",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Crear juego",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 3,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"tags\":\n\t[3,5]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/juegos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"juegos"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/donaciones/4",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"donaciones",
-						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Notificaciones",
-			"protocolProfileBehavior": {
-				"disableBodyPruning": true
-			},
-			"request": {
-				"method": "GET",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Delete juego",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/juegos/20",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"juegos",
+								"20"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/notificaciones/6",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"notificaciones",
-						"6"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Get Privilegios",
-			"request": {
-				"method": "GET",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/privilegios",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"privilegios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear analisis",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"usuario\": \"2321123\",\n        \"clave\": \"12346\"\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Actualizar juego",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"tags\":\n\t[5,3]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/juegos/24",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"juegos",
+								"24"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/admin",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"admin"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Crear juego",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 3,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"tags\":\n\t[3,5]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Analisis",
+			"item": [
+				{
+					"name": "Get analisis",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/analisis",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"analisis"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/juegos",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"juegos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Usuario",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n    \"nombre\": \"x123123\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x\",\n    \"clave\": \"x\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2,\n    \"email_verificado\": true,\n    \"privilegios\": [3,2]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Crear analisis",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"usuario\": \"2321123\",\n        \"clave\": \"12346\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/admin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"admin"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/usuarios",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"usuarios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear requisito",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"sistema_operativo\": \"x123d12\",\n        \"procesador\": \"x\",\n        \"memoria\": \"x\",\n        \"grafica\": \"x\",\n        \"almacenamiento\": \"x\"\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Actualizar analisis",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/analisis/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"analisis",
+								"4"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/requisitos",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"requisitos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Amigo",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"id_usuario\":4,\n        \"id_amigo\":7\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Delete analisis",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_escritor\": 9,\n\t\"id_lector\":10,\n\t\"cuerpo\": \"hola como estas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/mensajes",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"mensajes"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/amigos",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"amigos"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Crear Tag",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"etiqueta\": \"accion\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Usuarios",
+			"item": [
+				{
+					"name": "Get usuarios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/usuarios",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/tags",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"tags"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Admin",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"usuario\": \"juan\",\n\"clave\": \"1234\",\n\"privilegios\":[2,3]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Crear Usuario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"nombre\": \"x123123\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x\",\n    \"clave\": \"x\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2,\n    \"email_verificado\": true,\n    \"privilegios\": [1,2]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/usuarios",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"usuarios"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/admin",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"admin"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Solicitud",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"id_usuario\":7,\n        \"id_amigo\":8,\n        \"fecha_solicitud\": \"2019-08-10T03:00:00.000+0000\"\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Delete Usuario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/usuarios/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"11"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/solicitudes",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"solicitudes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Mensaje",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"id_escritor\": 9,\n        \"id_lector\": 10,\n        \"cuerpo\": \"hola como estas\",\n        \"fecha\": \"2019-08-10T03:00:00.000+0000\"\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Actualizar usuario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"nombre\": \"x12ijl8i6hikjh3123\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true,\n        \"privilegios\": [2]\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/usuarios/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"usuarios",
+								"11"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/mensajes",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"mensajes"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Crear Donacion",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"id_usuario\": 4,\n        \"monto\": 1000,\n        \"fecha_donacion\": \"2019-08-10T03:00:00.000+0000\",\n        \"comentario\": \"gracias\"\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Requisitos",
+			"item": [
+				{
+					"name": "Get requisitos",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/requisitos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"requisitos"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/donaciones",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"donaciones"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Notificacion",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"id_usuario\": 6,\n        \"notificacion\": \"soli\"\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Crear requisito",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"sistema_operativo\": \"x123d12\",\n        \"procesador\": \"x\",\n        \"memoria\": \"x\",\n        \"grafica\": \"x\",\n        \"almacenamiento\": \"x\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/requisitos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"requisitos"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/notificaciones",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"notificaciones"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Crear Privilegio",
-			"request": {
-				"method": "POST",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"privilegio\": \"212312338\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Delete requisitos",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/requisitos/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"requisitos",
+								"1"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/privilegios",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"privilegios"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete analisis",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"id_escritor\": 9,\n\t\"id_lector\":10,\n\t\"cuerpo\": \"hola como estas\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Actualizar requisito",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/juegos/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"juegos",
+								"2"
+							]
 						}
-					}
-				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/mensajes",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"mensajes"
-					]
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Delete juego",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/juegos/20",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"juegos",
-						"20"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Usuario",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/usuarios/11",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"usuarios",
-						"11"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete requisitos",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/requisitos/1",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"requisitos",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Amigo",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"id_usuario\": 6,\n        \"id_amigo\": 6\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Admin",
+			"item": [
+				{
+					"name": "Get Admin",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/admin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"admin"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/amigos",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"amigos"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Tag",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/tags/4",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"tags",
-						"4"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Admin",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/admin/7",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"admin",
-						"7"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Solicitud",
-			"request": {
-				"method": "DELETE",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\t\"id_usuario\":7,\n\t\"id_amigo\":8\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Crear Admin",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"usuario\": \"juan\",\n\"clave\": \"1234\",\n\"privilegios\":[2,3]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/admin",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"admin"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/solicitudes",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"solicitudes"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Mensaje",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/analisis/11",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"analisis",
-						"11"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Donaciones",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/donaciones/1",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"donaciones",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Notificaciones",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/notificaciones/1",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"notificaciones",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Delete Privilegio",
-			"request": {
-				"method": "DELETE",
-				"header": [],
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/privilegios/1",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"privilegios",
-						"1"
-					]
-				}
-			},
-			"response": []
-		},
-		{
-			"name": "Actualizar juego",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"tags\":\n\t[5,3]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+				{
+					"name": "Delete Admin",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/admin/7",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"7"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/juegos/24",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"juegos",
-						"24"
-					]
+				{
+					"name": "Actualizar Admin",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"usuario\": \"juan\",\n\"clave\": \"1234\",\n\"privilegios\":[3]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/admin/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"admin",
+								"6"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Actualizar analisis",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Privilegios",
+			"item": [
+				{
+					"name": "Get Privilegios",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/privilegios",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"privilegios"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/analisis/4",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"analisis",
-						"4"
-					]
+				{
+					"name": "Crear Privilegio",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"privilegio\": \"212312338\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/privilegios",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"privilegios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Privilegio",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/privilegios/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"privilegios",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Actualizar usuario",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"type": "text",
-						"value": "application/json"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "    {\n        \"nombre\": \"x12ijl8i6hikjh3123\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true,\n        \"privilegios\": [2]\n    }",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Tags",
+			"item": [
+				{
+					"name": "Get Tag",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/tags",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"tags"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/usuarios/11",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"usuarios",
-						"11"
-					]
+				{
+					"name": "Crear Tag",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"etiqueta\": \"accion\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/tags",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"tags"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Tag",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/tags/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"tags",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Actualizar Tag",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"etiqueta\": \"terror\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/tags/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"tags",
+								"1"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Actualizar requisito",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Amigo",
+			"item": [
+				{
+					"name": "Get Amigo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/amigos/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"amigos",
+								"4"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/juegos/2",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"juegos",
-						"2"
-					]
+				{
+					"name": "Crear Amigo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id_usuario\":4,\n        \"id_amigo\":7\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/amigos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"amigos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Amigo",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id_usuario\": 6,\n        \"id_amigo\": 6\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/amigos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"amigos"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Actualizar Tag",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"etiqueta\": \"terror\"\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Solicitudes",
+			"item": [
+				{
+					"name": "Get Solicitudes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/solicitudes/8",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"solicitudes",
+								"8"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/tags/1",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"tags",
-						"1"
-					]
+				{
+					"name": "Crear Solicitud",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id_usuario\":7,\n        \"id_amigo\":8,\n        \"fecha_solicitud\": \"2019-08-10T03:00:00.000+0000\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/solicitudes",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"solicitudes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Solicitud",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_usuario\":7,\n\t\"id_amigo\":8\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/solicitudes",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"solicitudes"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Actualizar Admin",
-			"request": {
-				"method": "PUT",
-				"header": [
-					{
-						"key": "Content-Type",
-						"name": "Content-Type",
-						"value": "application/json",
-						"type": "text"
-					}
-				],
-				"body": {
-					"mode": "raw",
-					"raw": "{\n\"usuario\": \"juan\",\n\"clave\": \"1234\",\n\"privilegios\":[3]\n}",
-					"options": {
-						"raw": {
-							"language": "json"
+			"name": "Mensajes",
+			"item": [
+				{
+					"name": "Get Mensajes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/mensajes/9/10",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"mensajes",
+								"9",
+								"10"
+							]
 						}
-					}
+					},
+					"response": []
 				},
-				"url": {
-					"raw": "http://127.0.0.1:8081/api/v1/admin/6",
-					"protocol": "http",
-					"host": [
-						"127",
-						"0",
-						"0",
-						"1"
-					],
-					"port": "8081",
-					"path": [
-						"api",
-						"v1",
-						"admin",
-						"6"
-					]
+				{
+					"name": "Crear Mensaje",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id_escritor\": 9,\n        \"id_lector\": 10,\n        \"cuerpo\": \"hola como estas\",\n        \"fecha\": \"2019-08-10T03:00:00.000+0000\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/mensajes",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"mensajes"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Mensaje",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/analisis/11",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"analisis",
+								"11"
+							]
+						}
+					},
+					"response": []
 				}
-			},
-			"response": []
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Donaciones",
+			"item": [
+				{
+					"name": "Get Donaciones",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/donaciones/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"donaciones",
+								"4"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Donacion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id_usuario\": 4,\n        \"monto\": 1000,\n        \"fecha_donacion\": \"2019-08-10T03:00:00.000+0000\",\n        \"comentario\": \"gracias\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/donaciones",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"donaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Donaciones",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/donaciones/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"donaciones",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Notificaciones",
+			"item": [
+				{
+					"name": "Get Notificaciones",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/notificaciones/6",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"notificaciones",
+								"6"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear Notificacion",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"id_usuario\": 6,\n        \"notificacion\": \"soli\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/notificaciones",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"notificaciones"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Notificaciones",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/notificaciones/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"notificaciones",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "UsuariosBloqueados",
+			"item": [
+				{
+					"name": "Get usuariosBloqueados",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/usuariosBloqueados",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"usuariosBloqueados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear UsuarioBloqueado",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"id_usuario\": 2,\n    \"id_admin\": 1,\n    \"fecha_bloqueo\": \"2011-11-11T03:00:00.000+0000\",\n    \"motivo\": \"asd12341wed\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/usuariosBloqueados",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"usuariosBloqueados"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete UsuarioBloqueado",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/usuariosBloqueados/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"usuariosBloqueados",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Modos",
+			"item": [
+				{
+					"name": "Get modo",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/modos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"modos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear modo",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"modo\": \"pedro\"\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/modos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"modos"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete modo",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/modos/3",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"modos",
+								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
 		}
 	],
 	"protocolProfileBehavior": {}
