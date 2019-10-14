@@ -62,6 +62,10 @@ public class Usuarios {
 	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
 	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
+	private List<Comentarios> comentarios;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
 	private List<Lista_amigos> usuarios;
 	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
@@ -282,6 +286,14 @@ public class Usuarios {
 
 	public void setUsuarios_bloqueados(List<UsuariosBloqueados> usuarios_bloqueados) {
 		this.usuarios_bloqueados = usuarios_bloqueados;
+	}
+
+	public List<Comentarios> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentarios> comentarios) {
+		this.comentarios = comentarios;
 	}
 	
 }

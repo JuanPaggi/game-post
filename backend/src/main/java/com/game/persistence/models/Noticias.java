@@ -1,6 +1,7 @@
 package com.game.persistence.models;
 
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 
 /**
  * @author negro
@@ -38,6 +40,10 @@ public class Noticias {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin")
 	private Admin admin;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_noticia", referencedColumnName = "id_noticia", nullable = false, insertable = false, updatable = false)
+	private List<Comentarios> comentarios;
 	
 	/*
 	 * ------ Getter and Setter ------ 
@@ -90,6 +96,13 @@ public class Noticias {
 	public void setAdmin(Admin admin) {
 		this.admin = admin;
 	}
-	
 
+	public List<Comentarios> getComentarios() {
+		return comentarios;
+	}
+
+	public void setComentarios(List<Comentarios> comentarios) {
+		this.comentarios = comentarios;
+	}
+	
 }

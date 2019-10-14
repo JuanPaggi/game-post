@@ -1,4 +1,4 @@
-package com.game.controllers.noticias;
+package com.game.controllers.comentarios;
 
 import java.text.ParseException;
 import java.util.List;
@@ -18,7 +18,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.game.controllers.comentarios.dto.ComentarioItem;
+import com.game.controllers.noticias.NoticiasControllers;
 import com.game.controllers.noticias.dto.NoticiaItem;
+import com.game.services.comentarios.ComentariosService;
+import com.game.services.comentarios.exceptions.ComentariosNotFound;
 import com.game.services.noticias.NoticiasService;
 import com.game.services.noticias.exceptions.NoticiasNotFound;
 
@@ -27,17 +31,17 @@ import io.swagger.annotations.ApiResponses;
 
 /**
  * @author negro
- * Controlador de Noticias con get, post, put, y delete.
+ * Controlador de Comentarios con get, post, put, y delete.
  */
 
 @RestController
-@RequestMapping("${v1API}/noticias")
-public class NoticiasControllers {
-	
-	public static Logger logger = LoggerFactory.getLogger(NoticiasControllers.class);
+@RequestMapping("${v1API}/comentarios")
+public class ComentariosControllers {
+
+	public static Logger logger = LoggerFactory.getLogger(ComentariosControllers.class);
 
 	@Autowired
-	NoticiasService noticiasService;
+	ComentariosService comentariosService;
 
 	@GetMapping(path="")
 	@ApiResponses({
@@ -45,9 +49,9 @@ public class NoticiasControllers {
 		@ApiResponse(code = 404, message = "Not found."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<List<NoticiaItem>> getNoticias(){
+	public @ResponseBody ResponseEntity<List<ComentarioItem>> getComentarios(){
 		try {
-			return new ResponseEntity<List<NoticiaItem>>(noticiasService.getAllNoticias(), HttpStatus.OK);
+			return new ResponseEntity<List<ComentarioItem>>(comentariosService.getAllComentarios(), HttpStatus.OK);
 		} catch(ParseException e) {
 			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
 		}catch(Exception e) {
@@ -56,51 +60,51 @@ public class NoticiasControllers {
 		}
 	}
 	
-	@GetMapping(path = "/{idNoticia}")
+	@GetMapping(path = "/{idComentario}")
 	@ApiResponses({ 
 		@ApiResponse(code = 200, message = "OK"),
 		@ApiResponse(code = 404, message = "Not found."),
 		@ApiResponse(code = 500, message = "Unexpected error.") })
-	public @ResponseBody ResponseEntity<NoticiaItem> getNoticiaByID(
-			@PathVariable("idNoticia") String idNoticia){
+	public @ResponseBody ResponseEntity<ComentarioItem> getComentarioByID(
+			@PathVariable("idComentario") String idComentario){
 		try {
-			return new ResponseEntity<NoticiaItem>(
-					noticiasService.getNoticias(Long.parseLong(idNoticia)),
+			return new ResponseEntity<ComentarioItem>(
+					comentariosService.getComentario(Long.parseLong(idComentario)),
 					HttpStatus.OK);
-		} catch (NoticiasNotFound e) {
-			return new ResponseEntity<NoticiaItem>(HttpStatus.NOT_FOUND);
+		} catch (ComentariosNotFound e) {
+			return new ResponseEntity<ComentarioItem>(HttpStatus.NOT_FOUND);
 		} catch (Exception e) {
 			logger.error("Internal server error", e);
-			return new ResponseEntity<NoticiaItem>(HttpStatus.INTERNAL_SERVER_ERROR);
+			return new ResponseEntity<ComentarioItem>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@PostMapping(path="")
 	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK, devuelve el id de la noticia insertado"),
+		@ApiResponse(code = 200, message = "OK, devuelve el id del comentario insertado"),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Long> addNoticia( @RequestBody NoticiaItem body){
+	public @ResponseBody ResponseEntity<Long> addComentario( @RequestBody ComentarioItem body){
 		try {
-			return new ResponseEntity<Long>(noticiasService.addNoticia(body), HttpStatus.OK);
+			return new ResponseEntity<Long>(comentariosService.addComentario(body), HttpStatus.OK);
 		} catch(Exception e) {
 			logger.error("Internal server error", e);
 			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@DeleteMapping(path="/{idNoticia}")
+	@DeleteMapping(path="/{idComentario}")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "borrado OK"),
-		@ApiResponse(code = 404, message = "Noticia inexistente."),
+		@ApiResponse(code = 404, message = "Comentario inexistente."),
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> removeNoticia(@PathVariable("idNoticia") String idNoticia) {
+	public @ResponseBody ResponseEntity<Void> removeComentario(@PathVariable("idComentario") String idComentario) {
 		try {
-			noticiasService.removeNoticia(idNoticia);
+			comentariosService.removeComentario(idComentario);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(NoticiasNotFound e) {
+		} catch(ComentariosNotFound e) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		} catch(NumberFormatException e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -110,18 +114,18 @@ public class NoticiasControllers {
 		}
 	}
 	
-	@PutMapping(path="/{idNoticia}")
+	@PutMapping(path="/{idComentario}")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "Editado OK"),
-		@ApiResponse(code = 404, message = "Noticia inexistente."),
+		@ApiResponse(code = 404, message = "Comentario inexistente."),
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> editNoticia(@PathVariable("idNoticia") String idNoticia, @RequestBody NoticiaItem body) {
+	public @ResponseBody ResponseEntity<Void> editComentario(@PathVariable("idComentario") String idComentario, @RequestBody ComentarioItem body) {
 		try {
-			noticiasService.editNoticia( idNoticia, body);
+			comentariosService.editComentario( idComentario, body);
 			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(NoticiasNotFound e) {
+		} catch(ComentariosNotFound e) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		} catch(NumberFormatException e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
@@ -130,5 +134,4 @@ public class NoticiasControllers {
 			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
 }
