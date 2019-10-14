@@ -34,6 +34,14 @@ public class Tag {
     inverseJoinColumns = 
     @JoinColumn(name = "id_juego", referencedColumnName = "id_juego"))
 	private List<Juegos> juegos;
+	
+	@ManyToMany(fetch = FetchType.LAZY) 
+    @JoinTable(name = "noticias_tag", 
+    joinColumns = 
+    @JoinColumn(name = "id_tag", referencedColumnName = "id_tag"), 
+    inverseJoinColumns = 
+    @JoinColumn(name = "id_noticia", referencedColumnName = "id_noticia"))
+	private List<Noticias> noticias;
 
 	/*
 	 * ------ Getter and Setter ------ 
