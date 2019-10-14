@@ -1,0 +1,14 @@
+<div class="container">
+        <div class="container">
+            <div class="row panels-row" >
+                <div class="col-xs-12 col-sm-6 col-md-3" *ngFor="let noticia of noticias">
+                    <a class="panel panel-default panel-md" (click)="clicked(noticia)">
+                        <div class="panel-body">
+                            <h3>{{noticia.titulo}}</h3>
+                            <p class="lead">{{ noticia.descripcion }}</p>  
+                        </div>
+                    </a>
+                </div>
+            </div>
+        </div>
+</div>
