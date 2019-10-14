@@ -25,8 +25,8 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 
 /**
- * @author pachi
- * Controlador de Modos con get, post, put, y delete.
+ * @author negro
+ * Controlador de Modos con get, post y delete.
  */
 
 @RestController

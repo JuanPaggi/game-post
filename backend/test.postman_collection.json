@@ -1,6 +1,6 @@
 {
 	"info": {
-		"_postman_id": "7903ecfa-6e24-4f25-9dff-83b0330ddbd3",
+		"_postman_id": "d122b941-1c05-4ce1-a0b4-033bcf77910c",
 		"name": "test",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
 	},
@@ -333,7 +333,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"x123123\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x\",\n    \"clave\": \"x\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2,\n    \"email_verificado\": true,\n    \"privilegios\": [1,2]\n}",
+							"raw": "{\n    \"nombre\": \"x123123\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x\",\n    \"clave\": \"x\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2,\n    \"email_verificado\": true,\n    \"privilegios\": []\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -365,7 +365,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuarios/11",
+							"raw": "http://127.0.0.1:8081/api/v1/usuarios/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -378,7 +378,7 @@
 								"api",
 								"v1",
 								"usuarios",
-								"11"
+								"1"
 							]
 						}
 					},
@@ -605,7 +605,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"usuario\": \"juan\",\n\"clave\": \"1234\",\n\"privilegios\":[2,3]\n}",
+							"raw": "{\n\"usuario\": \"juan\",\n\"clave\": \"1234\",\n\"privilegios\":[]\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -637,7 +637,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/admin/7",
+							"raw": "http://127.0.0.1:8081/api/v1/admin/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -650,7 +650,7 @@
 								"api",
 								"v1",
 								"admin",
-								"7"
+								"1"
 							]
 						}
 					},
@@ -1688,6 +1688,196 @@
 								"v1",
 								"modos",
 								"3"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Noticia",
+			"item": [
+				{
+					"name": "Get noticia",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/noticias",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"noticias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear noticia",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"titulo\": \"pedro\",\r\n        \"descripcion\":\"xxx\",\r\n        \"cuerpo\":\"xxxx\",\r\n        \"fecha_publicacion\":\"2019-08-11\",\r\n        \"id_admin_creado\":2\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/noticias",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"noticias"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete noticia",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/noticias/4",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"noticias",
+								"4"
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"protocolProfileBehavior": {}
+		},
+		{
+			"name": "Comentario",
+			"item": [
+				{
+					"name": "Get comentario",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/comentarios",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"comentarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Crear comentario",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": " {\r\n        \"comentario\": \"xxxxxx\",\r\n        \"fecha_publicacion\": \"2019-08-11\",\r\n        \"id_usuario\":1,\r\n        \"id_noticia\":4\r\n }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/comentarios",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"comentarios"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete comentario",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "http://127.0.0.1:8081/api/v1/comentarios/1",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"api",
+								"v1",
+								"comentarios",
+								"1"
 							]
 						}
 					},

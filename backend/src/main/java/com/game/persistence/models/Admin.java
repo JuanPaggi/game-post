@@ -34,6 +34,10 @@ public class Admin {
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
 	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin", nullable = false, insertable = false, updatable = false)
 	private List<Juegos> juegos;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin", nullable = false, insertable = false, updatable = false)
+	private List<Noticias> noticias;
 
 	@ManyToMany(fetch = FetchType.LAZY) 
     @JoinTable(name = "privilegios_admin", 
@@ -98,5 +102,15 @@ public class Admin {
 	public void setUsuarios_bloqueados(List<UsuariosBloqueados> usuarios_bloqueados) {
 		this.usuarios_bloqueados = usuarios_bloqueados;
 	}
+
+	public List<Noticias> getNoticias() {
+		return noticias;
+	}
+
+	public void setNoticias(List<Noticias> noticias) {
+		this.noticias = noticias;
+	}
+	
+	
 	
 }
