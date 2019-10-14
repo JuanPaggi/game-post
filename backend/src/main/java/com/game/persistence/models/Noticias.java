@@ -10,6 +10,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.JoinTable;
+import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 
@@ -40,6 +42,14 @@ public class Noticias {
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
 	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin")
 	private Admin admin;
+	
+	@ManyToMany(fetch = FetchType.LAZY) 
+    @JoinTable(name = "noticias_tag", 
+    joinColumns = 
+    @JoinColumn(name = "id_noticia", referencedColumnName = "id_noticia"), 
+    inverseJoinColumns = 
+    @JoinColumn(name = "id_tag", referencedColumnName = "id_tag"))
+	private List<Tag> tags;
 	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
 	@JoinColumn(name="id_noticia", referencedColumnName = "id_noticia", nullable = false, insertable = false, updatable = false)
@@ -104,5 +114,15 @@ public class Noticias {
 	public void setComentarios(List<Comentarios> comentarios) {
 		this.comentarios = comentarios;
 	}
+
+	public List<Tag> getTags() {
+		return tags;
+	}
+
+	public void setTags(List<Tag> tags) {
+		this.tags = tags;
+	}
+
+	
 	
 }

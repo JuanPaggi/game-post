@@ -1,5 +1,6 @@
 package com.game.controllers.noticias.dto;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 public class NoticiaItem {
@@ -9,5 +10,6 @@ public class NoticiaItem {
 	public String cuerpo;
 	public Date fecha_publicacion;
 	public long id_admin_creado;
+	public ArrayList<Long> tags;
 
 }
