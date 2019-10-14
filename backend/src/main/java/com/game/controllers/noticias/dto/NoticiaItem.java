@@ -11,5 +11,6 @@ public class NoticiaItem {
 	public Date fecha_publicacion;
 	public long id_admin_creado;
 	public ArrayList<Long> tags;
+	public ArrayList<Long> comentarios;
 
 }
