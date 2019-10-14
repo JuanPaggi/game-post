@@ -11,14 +11,18 @@ import org.springframework.stereotype.Service;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.persistence.models.Admin;
 import com.game.persistence.models.Juegos;
+import com.game.persistence.models.Modos;
 import com.game.persistence.models.Requisitos;
 import com.game.persistence.models.Tag;
 import com.game.persistence.repository.AdminRepository;
 import com.game.persistence.repository.AnalisisRepository;
 import com.game.persistence.repository.JuegosRepository;
+import com.game.persistence.repository.ModosRepository;
 import com.game.persistence.repository.RequisitosRepository;
 import com.game.persistence.repository.TagRepository;
 import com.game.services.juegos.exceptions.JuegosNotFound;
+import com.game.services.modos.exceptions.ModosNotFound;
+import com.game.services.tag.exceptions.TagNotFound;
 
 /**
  * @author pachi
@@ -41,6 +45,9 @@ public class JuegosService {
 	TagRepository tagRepository;
 	
 	@Autowired
+	ModosRepository modosRepository;
+	
+	@Autowired
 	AdminRepository adminRepository;
 
 	public JuegoItem getJuego(long id) throws JuegosNotFound {
@@ -60,22 +67,29 @@ public class JuegosService {
 		juegoItem.id_requisitos = juego.get().getRequisitos().getId_requisitos();
 		juegoItem.id_admin_creado = juego.get().getAdmin().getId_admin();
 		List<Tag> tag_juego = juego.get().getTag();
+		List<Modos> modo_juego = juego.get().getModos();
 		ArrayList<Long> tag_id = new ArrayList<>();
 		for (Tag tag : tag_juego) {
 			tag_id.add(tag.getId_tag());
 		}
+		ArrayList<Long> modo_id = new ArrayList<>();
+		for (Modos modo : modo_juego) {
+			modo_id.add(modo.getId_modo());
+		}
 		juegoItem.tags = tag_id;
+		juegoItem.modos = modo_id;
 		return juegoItem;
 		
 	}
 	
-	public long addJuego(JuegoItem juegoIn) throws JuegosNotFound{
+	public long addJuego(JuegoItem juegoIn) throws TagNotFound{
 		
 		Juegos juego = new Juegos();
 		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
 		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
+		List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
 		Optional<Admin> admin = adminRepository.findById(juegoIn.id_admin_creado);
-		if(requisitos.isEmpty() || lista_tag.size() != juegoIn.tags.size()) throw new JuegosNotFound();
+		if(requisitos.isEmpty() || lista_tag.size() != juegoIn.tags.size() || lista_modo.size() != juegoIn.modos.size()) throw new TagNotFound();
 		juego.setTitulo(juegoIn.titulo);
 		juego.setDescripcion(juegoIn.descripcion);
 		juego.setGenero(juegoIn.genero);
@@ -87,6 +101,7 @@ public class JuegosService {
 		juego.setRequisitos(requisitos.get());
 		juego.setAdmin(admin.get());
 		juego.setTag(lista_tag);
+		juego.setModos(lista_modo);
 		juego = juegosRepository.save(juego);
 		return juego.getId_juego();
 	
@@ -110,11 +125,17 @@ public class JuegosService {
 			item.id_requisitos = juego.getRequisitos().getId_requisitos();
 			item.id_admin_creado = juego.getAdmin().getId_admin();
 			List<Tag> tag_juego = juego.getTag();
+			List<Modos> modo_juego = juego.getModos();
 			ArrayList<Long> tag_id = new ArrayList<>();
 			for (Tag tag : tag_juego) {
 				tag_id.add(tag.getId_tag());
 			}
+			ArrayList<Long> modo_id = new ArrayList<>();
+			for (Modos modo : modo_juego) {
+				modo_id.add(modo.getId_modo());
+			}
 			item.tags = tag_id;
+			item.modos = modo_id;
 			out.add(item);
 		}
 		return out;
@@ -129,7 +150,7 @@ public class JuegosService {
 	
 	}
 	
-	public void editJuego(String id, JuegoItem juegoIn) throws JuegosNotFound, NumberFormatException{
+	public void editJuego(String id, JuegoItem juegoIn) throws JuegosNotFound,TagNotFound, NumberFormatException, ModosNotFound{
 		
 		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
 		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
@@ -145,8 +166,11 @@ public class JuegosService {
 		juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
 		juegoObj.setRequisitos(requisitos.get());
 		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
-		if(lista_tag.size() != juegoIn.tags.size()) throw new JuegosNotFound();
+		List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
+		if(lista_tag.size() != juegoIn.tags.size()) throw new TagNotFound();
 		juegoObj.setTag(lista_tag);
+		if(lista_modo.size() != juegoIn.modos.size()) throw new ModosNotFound();
+		juegoObj.setModos(lista_modo);
 		juegosRepository.save(juegoObj);
 		
 	}
