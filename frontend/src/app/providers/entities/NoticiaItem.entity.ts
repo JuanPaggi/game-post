@@ -6,4 +6,5 @@ export class NoticiaItem {
     fecha_publicacion: Date;
     id_admin_creado: number;
     tags: number[];
+    comentarios: number[];
 }

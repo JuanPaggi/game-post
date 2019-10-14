@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NoticiasService } from '../services/noticias.service';
-import { NoticiaItem } from '../providers/entities/NoticiaItem';
+import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { NoticiasRequestDto } from '../providers/dto/NoticiasRequestDto';
 
 @Component({
@@ -21,11 +21,11 @@ export class NoticiasComponent implements OnInit {
   }
 
   getNoticias() {
-    this.noticiasSrv.getNoticiasAll(new NoticiasRequestDto()).subscribe(
+    this.noticiasSrv.getAllNoticias(new NoticiasRequestDto()).subscribe(
       response => {
         this.noticias = response;
-        console.log(this.noticias);
       }
     );
-}
+  }
+
 }
