@@ -24,7 +24,7 @@ export class NoticiasService {
 
   public getNoticia(body: NoticiaByIdDto): Observable<NoticiaItem> {
     let headers = {};
-    return this.http.get<NoticiaItem>( environment.apiEndpoint + '/noticias/' + body.idNoticia, headers );
+    return this.http.get<NoticiaItem>( environment.apiEndpoint + '/noticias/' + body.id_noticia, headers );
   }
 
   public addNoticia(body: CrearNoticiaDto): Observable<Response> {

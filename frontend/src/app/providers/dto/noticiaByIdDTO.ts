@@ -1,7 +1,7 @@
 export class NoticiaByIdDto {
-    idNoticia: number;
+    id_noticia: number;
 
-    constructor(idNoticia: number) {
-        this.idNoticia = idNoticia;
+    constructor(id_noticia: number) {
+        this.id_noticia = id_noticia;
     }
 }

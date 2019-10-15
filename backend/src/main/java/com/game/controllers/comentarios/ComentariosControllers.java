@@ -19,12 +19,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.controllers.comentarios.dto.ComentarioItem;
-import com.game.controllers.noticias.NoticiasControllers;
-import com.game.controllers.noticias.dto.NoticiaItem;
 import com.game.services.comentarios.ComentariosService;
 import com.game.services.comentarios.exceptions.ComentariosNotFound;
-import com.game.services.noticias.NoticiasService;
-import com.game.services.noticias.exceptions.NoticiasNotFound;
 
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
