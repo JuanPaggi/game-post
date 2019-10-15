@@ -3,7 +3,6 @@ import { NoticiasService } from '../services/noticias.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { NoticiaByIdDto } from '../providers/dto/noticiaByIdDTO';
 import { ActivatedRoute } from '@angular/router';
-import { LocationStrategy } from '@angular/common';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -20,16 +19,13 @@ export class NoticiaComponent implements OnInit {
   fecha_publicacion: Date;
   apiURL: string;
   id_noticia: number;
+  tags: number[];
+  comentarios: number[];
 
-  constructor(private noticiasSrv: NoticiasService,
-    private route: ActivatedRoute,
-    private location: LocationStrategy) {
-      this.location.onPopState(() => {
-        if (location.back) {
-            this.getNoticia();
-        }
-        });
-    }
+  constructor(
+    private noticiasSrv: NoticiasService,
+    private route: ActivatedRoute)
+  {}
 
   ngOnInit() {
     this.apiURL = environment.apiEndpoint;
@@ -60,6 +56,8 @@ export class NoticiaComponent implements OnInit {
     this.descripcion = noticia.descripcion;
     this.cuerpo = noticia.cuerpo;
     this.fecha_publicacion = noticia.fecha_publicacion;
+    this.tags = noticia.tags;
+    this.comentarios = noticia.comentarios;
   }
 
 }

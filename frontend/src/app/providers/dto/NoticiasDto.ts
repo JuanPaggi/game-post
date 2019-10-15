@@ -1,4 +1,4 @@
-export class NoticiasRequestDto {
+export class NoticiasDto {
     NoticiaId?: number;
     elementesPerPage?: number;
     page?: number;

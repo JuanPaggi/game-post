@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NoticiasRequestDto } from '../providers/dto/NoticiasRequestDto';
+import { NoticiasDto } from '../providers/dto/NoticiasDto';
 import { Observable } from 'rxjs';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { environment } from 'src/environments/environment';
@@ -14,7 +14,7 @@ export class NoticiasService {
 
   constructor(private http: HttpClient) { }
 
-  public getAllNoticias(body: NoticiasRequestDto): Observable<NoticiaItem[]> {
+  public getAllNoticias(body: NoticiasDto): Observable<NoticiaItem[]> {
     let headers = {};
     return this.http.get<NoticiaItem[]>(
         environment.apiEndpoint + '/noticias',

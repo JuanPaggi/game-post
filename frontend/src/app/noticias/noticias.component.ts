@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NoticiasService } from '../services/noticias.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
-import { NoticiasRequestDto } from '../providers/dto/NoticiasRequestDto';
+import { NoticiasDto } from '../providers/dto/NoticiasDto';
 
 @Component({
   selector: 'app-noticias',
@@ -21,7 +21,7 @@ export class NoticiasComponent implements OnInit {
   }
 
   getNoticias() {
-    this.noticiasSrv.getAllNoticias(new NoticiasRequestDto()).subscribe(
+    this.noticiasSrv.getAllNoticias(new NoticiasDto()).subscribe(
       response => {
         this.noticias = response;
       }
