@@ -19,6 +19,8 @@ export class NoticiaComponent implements OnInit {
   fecha_publicacion: Date;
   apiURL: string;
   id_noticia: number;
+  tags: number[];
+  comentarios: number[];
 
   constructor(
     private noticiasSrv: NoticiasService,
@@ -54,6 +56,8 @@ export class NoticiaComponent implements OnInit {
     this.descripcion = noticia.descripcion;
     this.cuerpo = noticia.cuerpo;
     this.fecha_publicacion = noticia.fecha_publicacion;
+    this.tags = noticia.tags;
+    this.comentarios = noticia.comentarios;
   }
 
 }
