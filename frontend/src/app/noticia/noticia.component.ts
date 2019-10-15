@@ -3,7 +3,6 @@ import { NoticiasService } from '../services/noticias.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { NoticiaByIdDto } from '../providers/dto/noticiaByIdDTO';
 import { ActivatedRoute } from '@angular/router';
-import { LocationStrategy } from '@angular/common';
 import { environment } from 'src/environments/environment';
 
 @Component({
@@ -21,15 +20,10 @@ export class NoticiaComponent implements OnInit {
   apiURL: string;
   id_noticia: number;
 
-  constructor(private noticiasSrv: NoticiasService,
-    private route: ActivatedRoute,
-    private location: LocationStrategy) {
-      this.location.onPopState(() => {
-        if (location.back) {
-            this.getNoticia();
-        }
-        });
-    }
+  constructor(
+    private noticiasSrv: NoticiasService,
+    private route: ActivatedRoute)
+  {}
 
   ngOnInit() {
     this.apiURL = environment.apiEndpoint;
