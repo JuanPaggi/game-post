@@ -34,4 +34,21 @@ export class NoticiasService {
     );
   }
 
+  public deleteNoticia(id_noticia: number): Observable<Response> {
+    let headers = {};
+    return this.http.delete<Response>(
+        environment.apiEndpoint + '/noticias/' + id_noticia,
+        headers
+    );
+  }
+
+  public editNoticia(body: CrearNoticiaDto, id_noticia: string): Observable<Response> {
+    let headers = {};
+    return this.http.put<Response>(
+        environment.apiEndpoint + '/noticias/' + id_noticia,
+        body,
+        headers
+    );
+  }
+
 }
