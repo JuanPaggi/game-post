@@ -10,3 +10,68 @@
         </div>
     </div>
 </div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-12">
+            <h2 class="modal-title">Crear noticia</h2>
+    
+            <form [formGroup] = "formAddNoticia">
+                    <ul class="list-group">
+    
+                        <li class="list-group-item">
+                            <div class="media-body media-middle form-group item-form">
+                                <label>Titulo</label>
+                                <input type="text" class="form-control" [(ngModel)]="titulo" required minlength="10" [ngModelOptions]="{standalone: true}">
+                                <div *ngIf="!titulo" class="alert alert-danger">
+                                    <div>
+                                        Titulo es requerido.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+    
+                        <li class="list-group-item">
+                            <div class="media-body media-middle form-group item-form">
+                                <label>Descripcion</label>
+                                <textarea class="form-control" [(ngModel)]="descripcion" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                <div *ngIf="!descripcion" class="alert alert-danger">
+                                    <div>
+                                        El descripcion es requerida.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+    
+                        <li class="list-group-item">
+                            <div class="media-body media-middle">
+                                <label>Cuerpo</label>
+                                <textarea class="form-control" [(ngModel)]="cuerpo" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                <div *ngIf="!cuerpo" class="alert alert-danger">
+                                    <div>
+                                        El cuerpo es requerido.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+    
+                        <li class="list-group-item">
+                            <div class="media-body media-middle">
+                                <label>Fecha Publicacion</label>
+                                <textarea class="form-control" [(ngModel)]="fecha_publicacion" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                <div *ngIf="!fecha_publicacion" class="alert alert-danger">
+                                    <div>
+                                        La Fecha es requerido.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+    
+                    </ul>
+                </form>
+    
+            <button class="btn btn-success" (click)="agregarNoticia()">Guardar</button>
+        </div>
+    </div> 
+</div>
+       

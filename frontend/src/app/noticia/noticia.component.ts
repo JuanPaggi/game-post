@@ -1,9 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { NoticiasService } from '../services/noticias.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
-import { NoticiaByIdDto } from '../providers/dto/noticiaByIdDTO';
+import { NoticiaByIdDto } from '../providers/dto/noticiaByIdDto';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
+import { TagsService } from '../services/tags.service';
+import { TagsDto } from '../providers/dto/TagsDto';
+import { TagItem } from '../providers/entities/TagItem.entity';
 
 @Component({
   selector: 'app-noticia',
@@ -19,11 +22,13 @@ export class NoticiaComponent implements OnInit {
   fecha_publicacion: Date;
   apiURL: string;
   id_noticia: number;
-  tags: number[];
-  comentarios: number[];
+  tags: TagItem[] = [];
+  tagsEtiquetas: String[] = [];
+  comentarios: number[]= [];
 
   constructor(
     private noticiasSrv: NoticiasService,
+    private tagsSrv: TagsService,
     private route: ActivatedRoute)
   {}
 
@@ -33,6 +38,8 @@ export class NoticiaComponent implements OnInit {
         this.id_noticia = parseInt(params.id_noticia, 10);
     });
     this.getNoticia();
+    this.getTags();
+    console.log(this.tagsEtiquetas);
   }
 
   getNoticia() {
@@ -51,13 +58,42 @@ export class NoticiaComponent implements OnInit {
     );
   }
 
+  getTags(){
+    this.tagsSrv.getAllTags(new TagsDto()).subscribe(
+      response => {
+        if (response) {
+        this.tags = response;
+        this.showDataTags(this.noticia);
+      }
+    },
+    err => {
+      console.log(err);
+      if (err === 401) {
+      }
+    }
+    );
+  }
+
   showDataNoticia(noticia: NoticiaItem) {
     this.titulo = noticia.titulo;
     this.descripcion = noticia.descripcion;
     this.cuerpo = noticia.cuerpo;
     this.fecha_publicacion = noticia.fecha_publicacion;
-    this.tags = noticia.tags;
     this.comentarios = noticia.comentarios;
+  }
+
+  showDataTags(noticia: NoticiaItem) {
+
+    for (let index = 0; index < this.tags.length; index++) {
+      if (this.tags[index].id_tag == noticia.tags[index]) {
+        this.tagsEtiquetas.push(this.tags[index].etiqueta);
+      }
+    }
+
+  }
+
+  borrarNoticia(){
+    this.noticiasSrv.deleteNoticia(this.noticia.id_noticia).subscribe();
   }
 
 }
