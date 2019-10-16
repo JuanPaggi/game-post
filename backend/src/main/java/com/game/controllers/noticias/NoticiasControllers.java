@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiResponses;
  */
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE})
 @RequestMapping("${v1API}/noticias")
 public class NoticiasControllers {
 	
