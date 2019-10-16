@@ -140,9 +140,6 @@ public class NoticiasService {
 		List<Tag> lista_tag= tagRepository.findAllById(noticiaIn.tags);
 		if(lista_tag.size() != noticiaIn.tags.size()) throw new TagNotFound();
 		noticiaObj.setTags(lista_tag);
-		List<Comentarios> lista_comentario= comentariosRepository.findAllById(noticiaIn.comentarios);
-		if(lista_comentario.size() != noticiaIn.comentarios.size()) throw new ComentariosNotFound();
-		noticiaObj.setComentarios(lista_comentario);
 		noticiasRepository.save(noticiaObj);
 	}
 }
