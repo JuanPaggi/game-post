@@ -182,6 +182,11 @@ public class NoticiasService {
 		for (byte[] imagen : noticiaIn.archivoImagen) {
 			imagenes.add(fileService.uploadImageFile(imagen, noticiaIn.nombreImagen , admin.get()));
 		}
+		
+		for (Imagenes imagen : noticia.get().getImagenes()) {
+			fileService.removeImage(imagen.getId_imagen());
+		}
+		
 		noticiaObj.setImagenes(imagenes);	
 		
 		noticiasRepository.save(noticiaObj);

@@ -216,6 +216,11 @@ public class JuegosService {
 		for (byte[] imagen : juegoIn.imagenes) {
 			imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));
 		}
+		
+		for (Imagenes imagen : juego.get().getImagenes()) {
+			fileService.removeImage(imagen.getId_imagen());
+		}
+		
 		juegoObj.setImagenes(imagenes);	
 		
 		juegosRepository.save(juegoObj);
