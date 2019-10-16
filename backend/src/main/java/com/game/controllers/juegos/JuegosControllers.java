@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.game.controllers.juegos.dto.JuegoInput;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.services.juegos.JuegosService;
 import com.game.services.juegos.exceptions.JuegosNotFound;
@@ -83,7 +84,7 @@ public class JuegosControllers {
 		@ApiResponse(code = 200, message = "OK, devuelve el id del juego insertado"),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Long> addJuego( @RequestBody JuegoItem body){
+	public @ResponseBody ResponseEntity<Long> addJuego( @RequestBody JuegoInput body){
 		try {
 			return new ResponseEntity<Long>(juegosService.addJuego(body), HttpStatus.OK);
 		} catch(Exception e) {
@@ -120,7 +121,7 @@ public class JuegosControllers {
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> editJuego(@PathVariable("idJuego") String idJuego, @RequestBody JuegoItem body) {
+	public @ResponseBody ResponseEntity<Void> editJuego(@PathVariable("idJuego") String idJuego, @RequestBody JuegoInput body) {
 		try {
 			juegosService.editJuego( idJuego, body);
 			return new ResponseEntity<Void>(HttpStatus.OK);

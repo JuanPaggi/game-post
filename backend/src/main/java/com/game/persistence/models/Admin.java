@@ -51,6 +51,10 @@ public class Admin {
 	@JoinColumn(name="id_admin", referencedColumnName = "id_admin", nullable = false, insertable = false, updatable = false)
 	private List<UsuariosBloqueados> usuarios_bloqueados;
 	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin", nullable = false, insertable = false, updatable = false)
+	private List<Imagenes> imagenes;
+	
 	/*
 	 * ------ Getter and Setter ------ 
 	 */

@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.game.controllers.noticias.dto.NoticiaInput;
 import com.game.controllers.noticias.dto.NoticiaItem;
 import com.game.services.noticias.NoticiasService;
 import com.game.services.noticias.exceptions.NoticiasNotFound;
@@ -83,7 +84,7 @@ public class NoticiasControllers {
 		@ApiResponse(code = 200, message = "OK, devuelve el id de la noticia insertado"),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Long> addNoticia( @RequestBody NoticiaItem body){
+	public @ResponseBody ResponseEntity<Long> addNoticia( @RequestBody NoticiaInput body){
 		try {
 			return new ResponseEntity<Long>(noticiasService.addNoticia(body), HttpStatus.OK);
 		} catch(Exception e) {
@@ -120,7 +121,7 @@ public class NoticiasControllers {
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> editNoticia(@PathVariable("idNoticia") String idNoticia, @RequestBody NoticiaItem body) {
+	public @ResponseBody ResponseEntity<Void> editNoticia(@PathVariable("idNoticia") String idNoticia, @RequestBody NoticiaInput body) {
 		try {
 			noticiasService.editNoticia( idNoticia, body);
 			return new ResponseEntity<Void>(HttpStatus.OK);
