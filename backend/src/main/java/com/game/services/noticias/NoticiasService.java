@@ -102,19 +102,16 @@ public class NoticiasService {
 	public long addNoticia(NoticiaItem noticiaIn) throws AdminNotFound,TagNotFound,ComentariosNotFound{
 		
 		List<Tag> lista_tag= tagRepository.findAllById(noticiaIn.tags);
-		List<Comentarios> lista_comentario= comentariosRepository.findAllById(noticiaIn.comentarios);
 		Optional<Admin> admin = adminRepository.findById(noticiaIn.id_admin_creado);	
 		Noticias noticia = new Noticias();
 		if(admin.isEmpty()) throw new AdminNotFound();
 		if(lista_tag.size() != noticiaIn.tags.size()) throw new TagNotFound();
-		if(lista_comentario.size() != noticiaIn.comentarios.size()) throw new ComentariosNotFound();
 		noticia.setTitulo(noticiaIn.titulo);
 		noticia.setDescripcion(noticiaIn.descripcion);
 		noticia.setCuerpo(noticiaIn.cuerpo);
 		noticia.setFecha_publicacion(noticiaIn.fecha_publicacion);
 		noticia.setAdmin(admin.get());
 		noticia.setTags(lista_tag);
-		noticia.setComentarios(lista_comentario);
 		noticia = noticiasRepository.save(noticia);
 		return noticia.getId_noticia();
 	

@@ -5,7 +5,7 @@ import { Observable } from 'rxjs';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { environment } from 'src/environments/environment';
 import { NoticiaByIdDto } from '../providers/dto/noticiaByIdDto';
-import { CrearNoticiaDto } from '../providers/dto/CreateNoticiaDto';
+import { CrearNoticiaDto } from '../providers/dto/CrearNoticiaDto';
 
 @Injectable({
   providedIn: 'root'

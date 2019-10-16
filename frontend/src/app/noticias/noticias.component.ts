@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NoticiasService } from '../services/noticias.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { NoticiasDto } from '../providers/dto/NoticiasDto';
+import { CrearNoticiaDto } from '../providers/dto/CrearNoticiaDto';
 
 @Component({
   selector: 'app-noticias',
@@ -26,6 +27,17 @@ export class NoticiasComponent implements OnInit {
         this.noticias = response;
       }
     );
+  }
+
+  agregarNoticia(){
+    const noticia = new CrearNoticiaDto();
+    noticia.cuerpo = "cuerpo";
+    noticia.titulo = "titulo"
+    noticia.descripcion = "descripcion";
+    noticia.fecha_publicacion = "2019-08-10T03:00:00.000+0000";
+    noticia.id_admin_creado = 1;
+    noticia.tags = [1];
+    this.noticiasSrv.addNoticia(noticia).subscribe()
   }
 
 }
