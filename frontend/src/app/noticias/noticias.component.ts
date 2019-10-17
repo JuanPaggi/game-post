@@ -17,7 +17,7 @@ export class NoticiasComponent implements OnInit {
 
   noticias: NoticiaItem[];
   tags: TagItem[];
-  tagsId: number;
+  tagsId: String;
 
   noticia = NoticiaItem;
   titulo: string;
@@ -99,7 +99,7 @@ export class NoticiasComponent implements OnInit {
       noticia.titulo = this.titulo;
       noticia.fecha_publicacion = this.fecha_publicacion;
       noticia.id_admin_creado = 1;
-      noticia.tags = [this.tagsId];
+      noticia.tags = this.tagsId.split(',').map(Number);
       noticia.nombreImagen = "hola";
       noticia.archivoImagen = this.imageFile;
       this.noticiasSrv.addNoticia(noticia).subscribe();
