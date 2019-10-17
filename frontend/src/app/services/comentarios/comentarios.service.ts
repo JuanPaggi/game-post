@@ -5,6 +5,7 @@ import { ComentarioItem } from 'src/app/providers/entities/ComentarioItem.entity
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { ComentarioByIdDto } from 'src/app/providers/dto/ComentarioByIdDto';
+import { CrearComentarioDto } from 'src/app/providers/dto/dtoCrear/CrearComentarioDto';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,30 @@ export class ComentariosService {
   public getComentario(body: ComentarioByIdDto): Observable<ComentarioItem> {
     let headers = {};
     return this.http.get<ComentarioItem>( environment.apiEndpoint + '/comentario/' + body.id_comentario, headers );
+  }
+
+  public addNoticia(body: CrearComentarioDto): Observable<Response> {
+    return this.http.post<Response>(
+        environment.apiEndpoint + '/comentarios',
+        body
+    );
+  }
+
+  public deleteComentario(id_comentario: number): Observable<Response> {
+    let headers = {};
+    return this.http.delete<Response>(
+        environment.apiEndpoint + '/comentarios/' + id_comentario,
+        headers
+    );
+  }
+
+  public editComentario(body: CrearComentarioDto, id_comentario: string): Observable<Response> {
+    let headers = {};
+    return this.http.put<Response>(
+        environment.apiEndpoint + '/comentarios/' + id_comentario,
+        body,
+        headers
+    );
   }
 
 }

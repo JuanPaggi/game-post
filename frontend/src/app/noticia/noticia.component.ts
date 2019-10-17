@@ -79,8 +79,6 @@ export class NoticiaComponent implements OnInit {
     },
     err => {
         console.log(err);
-        if (err === 401) {
-        }
     }
     );
   }
@@ -95,8 +93,6 @@ export class NoticiaComponent implements OnInit {
     },
     err => {
       console.log(err);
-      if (err === 401) {
-      }
     }
     );
   }
