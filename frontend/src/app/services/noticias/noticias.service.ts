@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { NoticiasDto } from '../providers/dto/NoticiasDto';
+import { NoticiasDto } from '../../providers/dto/NoticiasDto';
 import { Observable } from 'rxjs';
-import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
+import { NoticiaItem } from '../../providers/entities/NoticiaItem.entity';
 import { environment } from 'src/environments/environment';
-import { NoticiaByIdDto } from '../providers/dto/noticiaByIdDto';
-import { CrearNoticiaDto } from '../providers/dto/CrearNoticiaDto';
+import { NoticiaByIdDto } from '../../providers/dto/noticiaByIdDto';
+import { CrearNoticiaDto } from '../../providers/dto/CrearNoticiaDto';
 
 @Injectable({
   providedIn: 'root'

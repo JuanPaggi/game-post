@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { TagsDto } from '../providers/dto/TagsDto';
-import { TagItem } from '../providers/entities/TagItem.entity';
+import { TagsDto } from '../../providers/dto/TagsDto';
+import { TagItem } from '../../providers/entities/TagItem.entity';
 import { environment } from 'src/environments/environment';
 
 @Injectable({

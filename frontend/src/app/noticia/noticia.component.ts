@@ -1,10 +1,10 @@
 import { Component, OnInit } from '@angular/core';
-import { NoticiasService } from '../services/noticias.service';
+import { NoticiasService } from '../services/noticias/noticias.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { NoticiaByIdDto } from '../providers/dto/noticiaByIdDto';
 import { ActivatedRoute } from '@angular/router';
 import { environment } from 'src/environments/environment';
-import { TagsService } from '../services/tags.service';
+import { TagsService } from '../services/tags/tags.service';
 import { TagsDto } from '../providers/dto/TagsDto';
 import { TagItem } from '../providers/entities/TagItem.entity';
 import { LocationStrategy } from '@angular/common';
@@ -42,7 +42,6 @@ export class NoticiaComponent implements OnInit {
 
     this.location.onPopState(() => {
       if (location.back) {
-          // window.location.reload();
           this.getNoticia();
       }
       });

@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
-import { NoticiasService } from '../services/noticias.service';
+import { NoticiasService } from '../services/noticias/noticias.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { NoticiasDto } from '../providers/dto/NoticiasDto';
 import { CrearNoticiaDto } from '../providers/dto/CrearNoticiaDto';
