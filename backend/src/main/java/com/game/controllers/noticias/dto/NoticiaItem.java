@@ -12,6 +12,6 @@ public class NoticiaItem {
 	public long id_admin_creado;
 	public ArrayList<Long> tags;
 	public ArrayList<Long> comentarios;
-	public ArrayList<String> Imagenes;
+	public ArrayList<String> imagenes;
 
 }

@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import { TagsService } from '../services/tags.service';
 import { TagsDto } from '../providers/dto/TagsDto';
 import { TagItem } from '../providers/entities/TagItem.entity';
+import { LocationStrategy } from '@angular/common';
 
 @Component({
   selector: 'app-noticia',
@@ -22,15 +23,30 @@ export class NoticiaComponent implements OnInit {
   fecha_publicacion: Date;
   apiURL: string;
   id_noticia: number;
-  tags: TagItem[] = [];
-  tagsEtiquetas: String[] = [];
-  comentarios: number[]= [];
+  tags: TagItem[];
+  tagsEtiquetas: String[];
+  comentarios: number[];
+
+  urlImagen: String[];
+  hayImagen: boolean;
 
   constructor(
     private noticiasSrv: NoticiasService,
     private tagsSrv: TagsService,
-    private route: ActivatedRoute)
-  {}
+    private route: ActivatedRoute,
+    private location: LocationStrategy)
+  {
+    this.tags = [];
+    this.tagsEtiquetas = [];
+    this.comentarios = [];
+
+    this.location.onPopState(() => {
+      if (location.back) {
+          // window.location.reload();
+          this.getNoticia();
+      }
+      });
+  }
 
   ngOnInit() {
     this.apiURL = environment.apiEndpoint;
@@ -38,8 +54,6 @@ export class NoticiaComponent implements OnInit {
         this.id_noticia = parseInt(params.id_noticia, 10);
     });
     this.getNoticia();
-    this.getTags();
-    console.log(this.tagsEtiquetas);
   }
 
   getNoticia() {
@@ -47,7 +61,14 @@ export class NoticiaComponent implements OnInit {
       response => {
         if (response) {
         this.noticia = response;
+        if (this.noticia.imagenes != null) {
+          this.urlImagen = this.noticia.imagenes;
+          this.hayImagen = true;
+        } else {
+          this.hayImagen = false;
+        }
         this.showDataNoticia(this.noticia);
+        this.getTags();
       }
     },
     err => {
@@ -62,8 +83,10 @@ export class NoticiaComponent implements OnInit {
     this.tagsSrv.getAllTags(new TagsDto()).subscribe(
       response => {
         if (response) {
+        //setTimeout( () => {
         this.tags = response;
         this.showDataTags(this.noticia);
+        //},500);
       }
     },
     err => {
@@ -80,6 +103,7 @@ export class NoticiaComponent implements OnInit {
     this.cuerpo = noticia.cuerpo;
     this.fecha_publicacion = noticia.fecha_publicacion;
     this.comentarios = noticia.comentarios;
+    this.urlImagen = noticia.imagenes;
   }
 
   showDataTags(noticia: NoticiaItem) {

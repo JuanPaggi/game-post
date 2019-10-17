@@ -7,4 +7,5 @@ export class NoticiaItem {
     id_admin_creado: number;
     tags: number[];
     comentarios: number[];
+    imagenes: String[];
 }
