@@ -66,6 +66,22 @@
                                 </div>
                             </div>
                         </li>
+
+                        <li class="list-group-item">
+                            <div class="media-body">
+                                <label>Imagen</label>
+                                <button type="button" class="btn btn-primary" (click)="openImage()">Elegir imagen</button>
+                                <input type="file" #imageUpload accept="image/*" style="display: none"/>
+                                <div *ngIf="!imageUpload" class="alert alert-danger">
+                                    <div>
+                                        La imagen es requerida.
+                                    </div>
+                                </div>
+                                <div class="previews">
+                                    <img *ngFor="let imagen of imagenesUrl; let i = index" [src]="imagen" (click)="deleteImage(i)" style="width: 50px; height: 50px;cursor: not-allowed;" />
+                                </div>
+                            </div>
+                        </li>
     
                     </ul>
                 </form>

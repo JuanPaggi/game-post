@@ -32,9 +32,17 @@
 
       <div class="media m-y-4">
         <div class="media-body" >
-          <p class="m-b-0 clearfix" >{{ comentarios }}</p>
+          <p class="m-b-0 clearfix" >{{ comentarioss }}</p>
         </div>
       </div>
+
+      <div class=" carousel-item active row panels-row" *ngIf="hayImagen">
+        <div class="col-sm-12" *ngFor="let imagen of urlImagen">
+            <img [src]="apiURL + imagen" class="panel panel-default panel-lg" style="width: 40px; height: 40px;" />
+        </div>
+      </div>
+
+      <br><br><br><br><br>
 
       <button class="btn btn-success" (click)="borrarNoticia()">Borrar Noticia</button>
 

@@ -5,4 +5,6 @@ export class CrearNoticiaDto {
     fecha_publicacion: string;
     id_admin_creado: number;
     tags: number[];
+    nombreImagen: String;
+    archivoImagen: number[][];
 }

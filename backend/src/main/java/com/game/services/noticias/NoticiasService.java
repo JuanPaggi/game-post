@@ -86,7 +86,7 @@ public class NoticiasService {
 				imagenes.add("/image/"+imagen.getId_imagen()+"/"+formatSeo(noticia.get().getTitulo())+".jpg");
 			}
 		}
-		noticiaItem.Imagenes = imagenes;
+		noticiaItem.imagenes = imagenes;
 		
 		return noticiaItem;
 		
@@ -123,7 +123,7 @@ public class NoticiasService {
 					imagenes.add("/image/"+imagen.getId_imagen()+"/"+formatSeo(noticia.getTitulo())+".jpg");
 				}
 			}
-			item.Imagenes = imagenes;
+			item.imagenes = imagenes;
 			
 			out.add(item);
 		}
