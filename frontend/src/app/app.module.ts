@@ -13,6 +13,7 @@ import { NoticiaComponent } from './noticia/noticia.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { JuegosComponent } from './juegos/juegos.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     NoticiasComponent,
     NoticiaComponent,
     LoginComponent,
-    RegistroComponent
+    RegistroComponent,
+    JuegosComponent
   ],
   imports: [
     BrowserModule,
