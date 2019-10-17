@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { JuegosService } from '../services/juegos/juegos.service';
+import { JuegosDto } from '../providers/dto/JuegosDto';
+import { JuegoItem } from '../providers/entities/juegoItem.entity';
 
 @Component({
   selector: 'app-juegos',
@@ -7,9 +10,22 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JuegosComponent implements OnInit {
 
-  constructor() { }
+  juegos: JuegoItem[];
+
+  constructor(
+    private juegosSrv: JuegosService
+  ) { }
 
   ngOnInit() {
+    this.getJuegos();
+  }
+
+  getJuegos() {
+    this.juegosSrv.getJuegos(new JuegosDto()).subscribe(
+      response => {
+        this.juegos = response;
+      }
+    );
   }
 
 }

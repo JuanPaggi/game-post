@@ -1,1 +1,18 @@
-<p>juegos works!</p>
+<div class="container">
+    <div class="row" >
+        <div class="col" *ngFor="let juego of juegos">
+            <h3>{{juego.titulo}}</h3>
+            <p>{{ juego.descripcion }}</p> 
+            <p>{{ juego.genero }}</p> 
+            <p>{{ juego.tipo }}</p>
+            <p>{{ juego.desarrollador }}</p>
+            <p>{{ juego.fecha_lanzamiento }}</p>
+            <p>{{ juego.analisis_positivos }}</p>
+            <p>{{ juego.analisis_negativos }}</p>
+            <p>{{ juego.id_requisitos }}</p>
+            <p>{{ juego.id_admin_creado }}</p>
+            <p>{{ juego.tags }}</p>
+            <p>{{ juego.modos }}</p>
+        </div>
+    </div>
+</div>
