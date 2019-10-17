@@ -1,12 +1,12 @@
 import { TestBed } from '@angular/core/testing';
 
-import { NoticiasService } from './noticias/noticias.service';
+import { ComentariosService } from './comentarios.service';
 
-describe('NoticiasService', () => {
+describe('ComentariosService', () => {
   beforeEach(() => TestBed.configureTestingModule({}));
 
   it('should be created', () => {
-    const service: NoticiasService = TestBed.get(NoticiasService);
+    const service: ComentariosService = TestBed.get(ComentariosService);
     expect(service).toBeTruthy();
   });
 });

@@ -2,8 +2,11 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { NoticiasService } from '../services/noticias/noticias.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { NoticiasDto } from '../providers/dto/NoticiasDto';
-import { CrearNoticiaDto } from '../providers/dto/CrearNoticiaDto';
+import { CrearNoticiaDto } from '../providers/dto/dtoCrear/CrearNoticiaDto';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { TagsService } from '../services/tags/tags.service';
+import { TagItem } from '../providers/entities/TagItem.entity';
+import { TagsDto } from '../providers/dto/TagsDto';
 
 @Component({
   selector: 'app-noticias',
@@ -13,6 +16,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 export class NoticiasComponent implements OnInit {
 
   noticias: NoticiaItem[];
+  tags: TagItem[];
+  tagsId: number;
 
   noticia = NoticiaItem;
   titulo: string;
@@ -28,7 +33,8 @@ export class NoticiasComponent implements OnInit {
 
 
   constructor(
-    private noticiasSrv: NoticiasService
+    private noticiasSrv: NoticiasService,
+    private tagsSrv: TagsService
   ) { 
     this.imageFile = [];
     this.imagenesUrl = [];
@@ -42,6 +48,7 @@ export class NoticiasComponent implements OnInit {
       copete: new FormControl(Validators.required),
       epigrafe: new FormControl(Validators.required),
       autor: new FormControl(Validators.required),
+      tagsId: new FormControl(Validators.required),
     });
   }
 
@@ -49,6 +56,15 @@ export class NoticiasComponent implements OnInit {
     this.noticiasSrv.getAllNoticias(new NoticiasDto()).subscribe(
       response => {
         this.noticias = response;
+        this.getTags();
+      }
+    );
+  }
+
+  getTags() {
+    this.tagsSrv.getAllTags(new TagsDto()).subscribe(
+      response => {
+        this.tags = response;
       }
     );
   }
@@ -83,7 +99,7 @@ export class NoticiasComponent implements OnInit {
       noticia.titulo = this.titulo;
       noticia.fecha_publicacion = this.fecha_publicacion;
       noticia.id_admin_creado = 1;
-      noticia.tags = [1];
+      noticia.tags = [this.tagsId];
       noticia.nombreImagen = "hola";
       noticia.archivoImagen = this.imageFile;
       this.noticiasSrv.addNoticia(noticia).subscribe();

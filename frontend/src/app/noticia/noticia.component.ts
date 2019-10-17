@@ -8,6 +8,9 @@ import { TagsService } from '../services/tags/tags.service';
 import { TagsDto } from '../providers/dto/TagsDto';
 import { TagItem } from '../providers/entities/TagItem.entity';
 import { LocationStrategy } from '@angular/common';
+import { ComentariosService } from '../services/comentarios/comentarios.service';
+import { ComentariosDto } from '../providers/dto/ComentariosDto';
+import { ComentarioItem } from '../providers/entities/ComentarioItem.entity';
 
 @Component({
   selector: 'app-noticia',
@@ -25,13 +28,15 @@ export class NoticiaComponent implements OnInit {
   id_noticia: number;
   tags: TagItem[];
   tagsEtiquetas: String[];
-  comentarios: number[];
+  comentarios: ComentarioItem[];
+  comentariosTexto: String[];
 
   urlImagen: String[];
   hayImagen: boolean;
 
   constructor(
     private noticiasSrv: NoticiasService,
+    private ComentariosSrv: ComentariosService,
     private tagsSrv: TagsService,
     private route: ActivatedRoute,
     private location: LocationStrategy)
@@ -39,6 +44,7 @@ export class NoticiaComponent implements OnInit {
     this.tags = [];
     this.tagsEtiquetas = [];
     this.comentarios = [];
+    this.comentariosTexto = [];
 
     this.location.onPopState(() => {
       if (location.back) {
@@ -68,12 +74,11 @@ export class NoticiaComponent implements OnInit {
         }
         this.showDataNoticia(this.noticia);
         this.getTags();
+        this.getComentarios();
       }
     },
     err => {
         console.log(err);
-        if (err === 401) {
-        }
     }
     );
   }
@@ -82,10 +87,22 @@ export class NoticiaComponent implements OnInit {
     this.tagsSrv.getAllTags(new TagsDto()).subscribe(
       response => {
         if (response) {
-        //setTimeout( () => {
         this.tags = response;
         this.showDataTags(this.noticia);
-        //},500);
+      }
+    },
+    err => {
+      console.log(err);
+    }
+    );
+  }
+
+  getComentarios(){
+    this.ComentariosSrv.getComentarios(new ComentariosDto()).subscribe(
+      response => {
+        if (response) {
+        this.comentarios = response;
+        this.showDataComentarios(this.noticia);
       }
     },
     err => {
@@ -101,7 +118,6 @@ export class NoticiaComponent implements OnInit {
     this.descripcion = noticia.descripcion;
     this.cuerpo = noticia.cuerpo;
     this.fecha_publicacion = noticia.fecha_publicacion;
-    this.comentarios = noticia.comentarios;
     this.urlImagen = noticia.imagenes;
   }
 
@@ -110,6 +126,16 @@ export class NoticiaComponent implements OnInit {
     for (let index = 0; index < this.tags.length; index++) {
       if (this.tags[index].id_tag == noticia.tags[index]) {
         this.tagsEtiquetas.push(this.tags[index].etiqueta);
+      }
+    }
+
+  }
+
+  showDataComentarios(noticia: NoticiaItem) {
+
+    for (let index = 0; index < this.comentarios.length; index++) {
+      if (this.comentarios[index].id_comentario == noticia.comentarios[index]) {
+        this.comentariosTexto.push(this.comentarios[index].comentario);
       }
     }
 

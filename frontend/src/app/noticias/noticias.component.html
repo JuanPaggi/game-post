@@ -68,6 +68,15 @@
                         </li>
 
                         <li class="list-group-item">
+                            <div class="media-body media-middle">
+                                <label>Tags:</label>
+                                <div *ngFor="let tag of tags"> {{tag.id_tag}}.{{tag.etiqueta}}</div>
+                                <p>Ingrese el numero de la etiqueta: (por el momento una sola)</p>
+                                <textarea class="form-control" [(ngModel)]="tagsId" required maxlength="1" [ngModelOptions]="{standalone: true}"></textarea>
+                            </div>
+                        </li>
+
+                        <li class="list-group-item">
                             <div class="media-body">
                                 <label>Imagen</label>
                                 <button type="button" class="btn btn-primary" (click)="openImage()">Elegir imagen</button>
