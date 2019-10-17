@@ -1,6 +1,6 @@
 export class CrearComentarioDto {
-    comentario: string;
-    fecha_publicacion: string;
+    comentario: String;
+    fecha_publicacion: Date;
     id_usuario: number;
     id_noticia: number;
 }

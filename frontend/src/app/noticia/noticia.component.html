@@ -46,4 +46,14 @@
 
       <button class="btn btn-success" (click)="borrarNoticia()">Borrar Noticia</button>
 
+      <br><br><br><br><br>
+
+      <li class="list-group-item">
+        <div class="media-body media-middle">
+            <label>Agregar Comentario:</label>
+            <textarea class="form-control" [(ngModel)]="comentarioIngresado" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+            <button class="btn btn-success" (click)="agregarComentario()">Agregar</button>
+        </div>
+    </li>
+
 </section>

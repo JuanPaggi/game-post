@@ -27,7 +27,7 @@ export class ComentariosService {
     return this.http.get<ComentarioItem>( environment.apiEndpoint + '/comentario/' + body.id_comentario, headers );
   }
 
-  public addNoticia(body: CrearComentarioDto): Observable<Response> {
+  public addComentario(body: CrearComentarioDto): Observable<Response> {
     return this.http.post<Response>(
         environment.apiEndpoint + '/comentarios',
         body

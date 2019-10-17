@@ -33,7 +33,7 @@ import io.swagger.annotations.ApiResponses;
  */
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST})
 @RequestMapping("${v1API}/comentarios")
 public class ComentariosControllers {
 
