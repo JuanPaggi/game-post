@@ -30,9 +30,9 @@
         </div>
       </div>
 
-      <div class="media m-y-4">
-        <div class="media-body" >
-          <p class="m-b-0 clearfix" >{{ comentarioss }}</p>
+      <div>
+        <div *ngFor="let comentarios of comentariosTexto">
+          <p>{{ comentarios }}</p>
         </div>
       </div>
 
