@@ -11,6 +11,8 @@ import { LocationStrategy } from '@angular/common';
 import { ComentariosService } from '../services/comentarios/comentarios.service';
 import { ComentariosDto } from '../providers/dto/ComentariosDto';
 import { ComentarioItem } from '../providers/entities/ComentarioItem.entity';
+import { Validators, FormControl, FormGroup } from '@angular/forms';
+import { CrearComentarioDto } from '../providers/dto/dtoCrear/CrearComentarioDto';
 
 @Component({
   selector: 'app-noticia',
@@ -33,6 +35,9 @@ export class NoticiaComponent implements OnInit {
 
   urlImagen: String[];
   hayImagen: boolean;
+
+  comentarioIngresado: String;
+  formAddComentario: FormGroup;
 
   constructor(
     private noticiasSrv: NoticiasService,
@@ -59,6 +64,10 @@ export class NoticiaComponent implements OnInit {
         this.id_noticia = parseInt(params.id_noticia, 10);
     });
     this.getNoticia();
+
+    this.formAddComentario = new FormGroup({
+      comentarioIngresado: new FormControl(Validators.required),
+    });
   }
 
   getNoticia() {
@@ -75,6 +84,7 @@ export class NoticiaComponent implements OnInit {
         this.showDataNoticia(this.noticia);
         this.getTags();
         this.getComentarios();
+        console.log(this);
       }
     },
     err => {
@@ -113,6 +123,19 @@ export class NoticiaComponent implements OnInit {
     );
   }
 
+  agregarComentario(){
+    if (this.formAddComentario.valid) {
+      const comentarioIn = new CrearComentarioDto();
+      comentarioIn.comentario = this.comentarioIngresado;
+      comentarioIn.fecha_publicacion = new Date();
+      comentarioIn.id_noticia = this.noticia.id_noticia;
+      comentarioIn.id_usuario = 1;
+      this.ComentariosSrv.addComentario(comentarioIn).subscribe();
+    } else {
+      console.log('Formulario invalido');
+    }
+  }
+
   showDataNoticia(noticia: NoticiaItem) {
     this.titulo = noticia.titulo;
     this.descripcion = noticia.descripcion;
@@ -123,8 +146,10 @@ export class NoticiaComponent implements OnInit {
 
   showDataTags(noticia: NoticiaItem) {
 
+    let i = 0;
     for (let index = 0; index < this.tags.length; index++) {
-      if (this.tags[index].id_tag == noticia.tags[index]) {
+      if (this.tags[index].id_tag === noticia.tags[i]) {
+        i++;
         this.tagsEtiquetas.push(this.tags[index].etiqueta);
       }
     }
@@ -133,8 +158,10 @@ export class NoticiaComponent implements OnInit {
 
   showDataComentarios(noticia: NoticiaItem) {
 
+    let i = 0;
     for (let index = 0; index < this.comentarios.length; index++) {
-      if (this.comentarios[index].id_comentario == noticia.comentarios[index]) {
+      if (this.comentarios[index].id_comentario === noticia.comentarios[i]) {
+        i++;
         this.comentariosTexto.push(this.comentarios[index].comentario);
       }
     }
