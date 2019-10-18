@@ -1,12 +1,53 @@
 .footer{
-    height: 50px;
-	background:linear-gradient(to bottom, #585858 5%, #2c2c2c 100%);
+    height: auto;
+	background:linear-gradient(to bottom, #2B2B2B 5%, #1a1a1a 100%);
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+}
+
+.secciones-footer{
+    display: flex;
+    justify-content: space-around;
+    margin: 30px;
+}
+
+.seccion-item{
+    display: flex;
+    flex-direction: column;
 }
 
 .derechos-footer{
     color: rgb(207, 207, 207);
-    display: inherit;
+    display: flex;
     align-items: flex-end;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.enlace-footer{
+    display: flex;
+    justify-content: center;
+    color: white;
+    text-decoration: none;
+    margin-top: 5px;
+    color: gray;
+}
+
+.enlace-footer:hover{
+    color: rgb(211, 211, 211);
+}
+
+.enlace-titulo{
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    color: white;
+    font-size: 16px;
+}
+
+@media (min-width: 1280px){
+    .container {
+        max-width: 1280px;
+    }
+
 }
