@@ -1,0 +1,12 @@
+.footer{
+    height: 50px;
+	background:linear-gradient(to bottom, #585858 5%, #2c2c2c 100%);
+    display: flex;
+    justify-content: center;
+}
+
+.derechos-footer{
+    color: rgb(207, 207, 207);
+    display: inherit;
+    align-items: flex-end;
+}
