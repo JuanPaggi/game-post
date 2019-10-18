@@ -130,7 +130,11 @@ export class NoticiaComponent implements OnInit {
       comentarioIn.fecha_publicacion = new Date();
       comentarioIn.id_noticia = this.noticia.id_noticia;
       comentarioIn.id_usuario = 1;
-      this.ComentariosSrv.addComentario(comentarioIn).subscribe();
+      this.ComentariosSrv.addComentario(comentarioIn).subscribe(
+        response => {
+          this.comentariosTexto.push(comentarioIn.comentario);
+        }
+      );
     } else {
       console.log('Formulario invalido');
     }

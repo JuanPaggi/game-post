@@ -1,0 +1,35 @@
+.noticia{
+    background-color: white;
+    margin-bottom: 30px ;
+}
+
+.noticia-titulo{
+    display: flex;
+    justify-content: center;
+}
+
+.noticia-descripcion{
+    margin: 10px;
+}
+
+.noticia-cuerpo{
+    margin: 10px;
+}
+
+.noticia-fecha{
+    margin: 10px;
+}
+
+.noticia-tags{
+    margin: 10px;
+    display: flex;
+}
+
+.noticia-comentario{
+    margin: 10px;
+}
+
+.noticia-imagen{
+    margin: 10px;
+    display: flex;
+}
