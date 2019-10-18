@@ -2,7 +2,7 @@ export class CrearNoticiaDto {
     titulo: string;
     descripcion: string;
     cuerpo: string;
-    fecha_publicacion: string;
+    fecha_publicacion: String;
     id_admin_creado: number;
     tags: number[];
     nombreImagen: String;

@@ -26,6 +26,7 @@ export class NoticiaComponent implements OnInit {
   descripcion: string;
   cuerpo: string;
   fecha_publicacion: Date;
+  fecha:String;
   apiURL: string;
   id_noticia: number;
   tags: TagItem[];
@@ -146,6 +147,9 @@ export class NoticiaComponent implements OnInit {
     this.cuerpo = noticia.cuerpo;
     this.fecha_publicacion = noticia.fecha_publicacion;
     this.urlImagen = noticia.imagenes;
+    this.fecha = this.fecha_publicacion.toString();
+    this.fecha = this.fecha.slice(0, 10);
+    console.log(this.fecha);
   }
 
   showDataTags(noticia: NoticiaItem) {
