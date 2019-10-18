@@ -1,59 +1,54 @@
-<section>
+<section class="container">
+  <div class="noticia">
 
-      <div class="media m-y-4">
-        <div class="media-body">
-          <p class="m-b-0 clearfix" >{{ titulo }}</p>
-        </div>
+    <div class="noticia-titulo">
+      <h2>{{ titulo }}</h2>
+    </div>
+
+    <div class="noticia-descripcion">
+      <p>{{ descripcion }}</p>
+    </div>
+
+    <div class="noticia-cuerpo">
+      <p>{{ cuerpo }}</p>
+    </div>
+
+    <div class="noticia-fecha">
+      <p class="m-b-0 clearfix" >{{ fecha_publicacion }}</p>
+    </div>
+
+    <div class="noticia-tags">
+      <div *ngFor="let tags of tagsEtiquetas">
+        <p>{{ tags }} &nbsp; </p>
       </div>
+    </div>
 
-      <div class="media m-y-4">
-        <div class="media-body">
-          <p class="m-b-0 clearfix" >{{ descripcion }}</p>
-        </div>
+    <div class="noticia-imagen" *ngIf="hayImagen">
+      <div  *ngFor="let imagen of urlImagen">
+          <img [src]="apiURL + imagen" style="width: 40px; height: 40px;" />
       </div>
+    </div>
 
-      <div class="media m-y-4">
-        <div class="media-body">
-          <p class="m-b-0 clearfix" >{{ cuerpo }}</p>
-        </div>
+    <div class="noticia-comentario">
+      <div *ngFor="let comentarios of comentariosTexto">
+        <p>{{ comentarios }}</p>
       </div>
+    </div>
 
-      <div class="media m-y-4">
-        <div class="media-body">
-          <p class="m-b-0 clearfix" >{{ fecha_publicacion }}</p>
-        </div>
+    <br><br><br>
+
+    <li class="list-group-item">
+      <div class="media-body media-middle">
+          <label>Agregar Comentario:</label>
+          <textarea class="form-control" [(ngModel)]="comentarioIngresado" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+          <button class="btn btn-success" (click)="agregarComentario()">Agregar</button>
       </div>
-
-      <div>
-        <div *ngFor="let tags of tagsEtiquetas">
-          <p>{{ tags }}</p>
-        </div>
-      </div>
-
-      <div>
-        <div *ngFor="let comentarios of comentariosTexto">
-          <p>{{ comentarios }}</p>
-        </div>
-      </div>
-
-      <div class=" carousel-item active row panels-row" *ngIf="hayImagen">
-        <div class="col-sm-12" *ngFor="let imagen of urlImagen">
-            <img [src]="apiURL + imagen" class="panel panel-default panel-lg" style="width: 40px; height: 40px;" />
-        </div>
-      </div>
-
-      <br><br><br><br><br>
-
-      <button class="btn btn-success" (click)="borrarNoticia()">Borrar Noticia</button>
-
-      <br><br><br><br><br>
-
-      <li class="list-group-item">
-        <div class="media-body media-middle">
-            <label>Agregar Comentario:</label>
-            <textarea class="form-control" [(ngModel)]="comentarioIngresado" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
-            <button class="btn btn-success" (click)="agregarComentario();">Agregar</button>
-        </div>
     </li>
+
+    <br><br><br>
+
+    <button class="btn btn-success" (click)="borrarNoticia()">Borrar Noticia</button>
+
+  </div>
 
 </section>

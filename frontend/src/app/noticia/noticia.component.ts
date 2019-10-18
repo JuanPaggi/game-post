@@ -131,8 +131,8 @@ export class NoticiaComponent implements OnInit {
       comentarioIn.id_noticia = this.noticia.id_noticia;
       comentarioIn.id_usuario = 1;
       this.ComentariosSrv.addComentario(comentarioIn).subscribe(
-        response =>{
-            this.comentariosTexto.push(this.comentarioIngresado);
+        response => {
+          this.comentariosTexto.push(comentarioIn.comentario);
         }
       );
     } else {

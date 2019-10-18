@@ -7,6 +7,7 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TagsService } from '../services/tags/tags.service';
 import { TagItem } from '../providers/entities/TagItem.entity';
 import { TagsDto } from '../providers/dto/TagsDto';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-noticias',
@@ -19,7 +20,7 @@ export class NoticiasComponent implements OnInit {
   tags: TagItem[];
   tagsId: String;
 
-  noticia = NoticiaItem;
+  noticia: NoticiaItem;
   titulo: string;
   descripcion: string;
   cuerpo: string;
@@ -34,6 +35,7 @@ export class NoticiasComponent implements OnInit {
 
   constructor(
     private noticiasSrv: NoticiasService,
+    private router: Router,
     private tagsSrv: TagsService
   ) { 
     this.imageFile = [];
@@ -111,6 +113,11 @@ export class NoticiasComponent implements OnInit {
   deleteImage(idx: number) {
     this.imageFile.splice(idx,1);
     this.imagenesUrl.splice(idx,1);
+  }
+
+  clicked(noticia: NoticiaItem) {
+    this.noticia = noticia;
+    this.router.navigateByUrl(`/noticias/${noticia.id_noticia}`);
   }
 
 }
