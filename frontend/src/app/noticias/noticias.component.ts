@@ -123,7 +123,6 @@ export class NoticiasComponent implements OnInit {
   getFecha(noticia: NoticiaItem){
     this.fecha = noticia.fecha_publicacion.toString();
     this.fecha = this.fecha.slice(0,10);
-    console.log(this.fecha);
     return this.fecha;
   }
 

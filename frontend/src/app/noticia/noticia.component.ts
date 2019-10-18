@@ -149,7 +149,6 @@ export class NoticiaComponent implements OnInit {
     this.urlImagen = noticia.imagenes;
     this.fecha = this.fecha_publicacion.toString();
     this.fecha = this.fecha.slice(0, 10);
-    console.log(this.fecha);
   }
 
   showDataTags(noticia: NoticiaItem) {
