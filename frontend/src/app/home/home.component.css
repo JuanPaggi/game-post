@@ -1,3 +1,25 @@
-.a{
-    height: 50vh;
+.home{
+    height: 1000px;
+    display: grid;
+    grid-template-areas: "main menu-lateral"
+                         "ultimo menu-lateral";
+    grid-template-rows: 70% 30%;
+    grid-template-columns: 70% 30%;
+}
+
+.item{
+    background-color: turquoise;
+    border: 1px solid red;
+}
+
+.main{
+    grid-area: main;
+}
+
+.menu-lateral{
+    grid-area: menu-lateral;
+}
+
+.ultimo{
+    grid-area: ultimo;
 }
