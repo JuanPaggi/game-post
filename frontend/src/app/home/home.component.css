@@ -1,10 +1,8 @@
 .home{
-    height: 1000px;
+    height: 500px;
     display: grid;
-    grid-template-areas: "main menu-lateral"
-                         "ultimo menu-lateral";
-    grid-template-rows: 70% 30%;
-    grid-template-columns: 70% 30%;
+    grid-template-areas: "main";
+    margin: 0 3%;
 }
 
 .item{
@@ -14,12 +12,4 @@
 
 .main{
     grid-area: main;
-}
-
-.menu-lateral{
-    grid-area: menu-lateral;
-}
-
-.ultimo{
-    grid-area: ultimo;
 }

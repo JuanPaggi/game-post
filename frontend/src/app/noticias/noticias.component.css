@@ -1,0 +1,26 @@
+.noticias{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.titulo-noticias{
+    color:white;
+}
+
+.noticia-container{
+    border-radius: 15px;
+    margin: 10px 0;
+    padding: 20px;
+    background-color: white;
+}
+
+.noticia-titulo{
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.enlase-noticia{
+    cursor: pointer;
+}
