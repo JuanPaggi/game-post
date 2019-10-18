@@ -4,10 +4,10 @@
             <h2 class="titulo-noticias">Noticias</h2>
             <div class="col-12" *ngFor="let noticia of noticias">
                 <a class="enlase-noticia" (click)="clicked(noticia)">
-                    <div class="noticia-container">
+                    <div class="noticia-container" >
                         <h3 class="detalle-noticia">{{noticia.titulo}}</h3>
                         <p class="detalle-noticia">{{ noticia.descripcion }}</p> 
-                        <p class="detalle-noticia">{{ noticia.fecha_publicacion }}</p>
+                        <p class="detalle-noticia">{{ getFecha(noticia) }}</p>
                     </div>
                 </a>
             </div>

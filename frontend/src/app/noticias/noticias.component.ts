@@ -24,7 +24,8 @@ export class NoticiasComponent implements OnInit {
   titulo: string;
   descripcion: string;
   cuerpo: string;
-  fecha_publicacion: string;
+  fecha_publicacion: Date;
+  fecha: String;
   formAddNoticia: FormGroup;
 
   imageFile: number[][];
@@ -58,7 +59,6 @@ export class NoticiasComponent implements OnInit {
     this.noticiasSrv.getAllNoticias(new NoticiasDto()).subscribe(
       response => {
         this.noticias = response;
-        this.getTags();
       }
     );
   }
@@ -118,6 +118,13 @@ export class NoticiasComponent implements OnInit {
   clicked(noticia: NoticiaItem) {
     this.noticia = noticia;
     this.router.navigateByUrl(`/noticias/${noticia.id_noticia}`);
+  }
+
+  getFecha(noticia: NoticiaItem){
+    this.fecha = noticia.fecha_publicacion.toString();
+    this.fecha = this.fecha.slice(0,10);
+    console.log(this.fecha);
+    return this.fecha;
   }
 
 }
