@@ -59,6 +59,7 @@ export class NoticiasComponent implements OnInit {
     this.noticiasSrv.getAllNoticias(new NoticiasDto()).subscribe(
       response => {
         this.noticias = response;
+        this.getTags();
       }
     );
   }
