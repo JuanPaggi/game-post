@@ -6,6 +6,7 @@ import { HomeComponent } from './home/home.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { JuegosComponent } from './juegos/juegos.component';
+import { JuegoComponent } from './juego/juego.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,10 @@ const routes: Routes = [
   {
     path: 'juegos',
     component: JuegosComponent
+  },
+  {
+    path: 'juegos/:id_juego',
+    component: JuegoComponent
   }
 ];
 

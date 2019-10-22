@@ -27,14 +27,14 @@ export class JuegosService {
     return this.http.get<JuegoItem>( environment.apiEndpoint + '/juegos/' + body.id_juego, headers );
   }
 
-  public addComentario(body: CrearJuegoDto): Observable<Response> {
+  public addJuego(body: CrearJuegoDto): Observable<Response> {
     return this.http.post<Response>(
         environment.apiEndpoint + '/juegos',
         body
     );
   }
 
-  public deleteComentario(id_juego: number): Observable<Response> {
+  public deleteJuego(id_juego: number): Observable<Response> {
     let headers = {};
     return this.http.delete<Response>(
         environment.apiEndpoint + '/juegos/' + id_juego,
@@ -42,7 +42,7 @@ export class JuegosService {
     );
   }
 
-  public editComentario(body: CrearJuegoDto, id_juego: string): Observable<Response> {
+  public editJuego(body: CrearJuegoDto, id_juego: string): Observable<Response> {
     let headers = {};
     return this.http.put<Response>(
         environment.apiEndpoint + '/juegos/' + id_juego,

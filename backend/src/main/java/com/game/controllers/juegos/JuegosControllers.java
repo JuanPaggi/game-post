@@ -37,7 +37,7 @@ import io.swagger.annotations.ApiResponses;
  */
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.DELETE})
 @RequestMapping("${v1API}/juegos")
 public class JuegosControllers {
 	

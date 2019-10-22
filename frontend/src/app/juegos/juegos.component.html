@@ -1,18 +1,25 @@
-<div class="container">
-    <div class="row" >
-        <div class="col" *ngFor="let juego of juegos">
-            <h3>{{juego.titulo}}</h3>
-            <p>{{ juego.descripcion }}</p> 
-            <p>{{ juego.genero }}</p> 
-            <p>{{ juego.tipo }}</p>
-            <p>{{ juego.desarrollador }}</p>
-            <p>{{ juego.fecha_lanzamiento }}</p>
-            <p>{{ juego.analisis_positivos }}</p>
-            <p>{{ juego.analisis_negativos }}</p>
-            <p>{{ juego.id_requisitos }}</p>
-            <p>{{ juego.id_admin_creado }}</p>
-            <p>{{ juego.tags }}</p>
-            <p>{{ juego.modos }}</p>
+<section class="juegos-container">
+    <div class="container">
+        <div class="row juegos" >
+            <h2 class="titulo-juego">Juegos</h2>
+            <div class="col-12" *ngFor="let juego of juegos">
+                <a class="enlace-juego" (click)="clicked(juego)">
+                    <div class="juego-container">
+                        <h3>{{juego.titulo}}</h3>
+                        <p>{{ juego.descripcion }}</p> 
+                        <p>{{ juego.genero }}</p> 
+                        <p>{{ juego.tipo }}</p>
+                        <p>{{ juego.desarrollador }}</p>
+                        <p>{{ juego.fecha_lanzamiento }}</p>
+                        <p>{{ juego.analisis_positivos }}</p>
+                        <p>{{ juego.analisis_negativos }}</p>
+                        <p>{{ juego.id_requisitos }}</p>
+                        <p>{{ juego.id_admin_creado }}</p>
+                        <p>{{ juego.tags }}</p>
+                        <p>{{ juego.modos }}</p>
+                    </div>
+                </a>
+            </div>
         </div>
     </div>
-</div>
+</section>

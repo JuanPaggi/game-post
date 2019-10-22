@@ -1,0 +1,43 @@
+.juego{
+    background-color: white;
+    margin-bottom: 30px ;
+}
+
+.juego-titulo{
+    display: flex;
+    justify-content: center;
+}
+
+.juego-descripcion{
+    margin: 10px;
+}
+
+.juego-genero{
+    margin: 10px;
+}
+
+.juego-tipo{
+    margin: 10px;
+}
+
+.juego-analisis-positivos{
+    margin: 10px;
+}
+
+.juego-analisis-negativos{
+    margin: 10px;
+}
+
+.juego-desarrollador{
+    margin: 10px;
+}
+
+.juego-tags{
+    margin: 10px;
+    display: flex;
+}
+
+.juego-imagen{
+    margin: 10px;
+    display: flex;
+}

@@ -1,4 +1,5 @@
 export class JuegoItem {
+	id_juego: number;
 	titulo: String;
 	descripcion: String;
 	genero: String;

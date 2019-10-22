@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { JuegosService } from '../services/juegos/juegos.service';
 import { JuegosDto } from '../providers/dto/JuegosDto';
 import { JuegoItem } from '../providers/entities/juegoItem.entity';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-juegos',
@@ -11,8 +12,10 @@ import { JuegoItem } from '../providers/entities/juegoItem.entity';
 export class JuegosComponent implements OnInit {
 
   juegos: JuegoItem[];
+  juego: JuegoItem;
 
   constructor(
+    private router: Router,
     private juegosSrv: JuegosService
   ) { }
 
@@ -26,6 +29,11 @@ export class JuegosComponent implements OnInit {
         this.juegos = response;
       }
     );
+  }
+
+  clicked(juego: JuegoItem) {
+    this.juego = juego;
+    this.router.navigateByUrl(`/juegos/${juego.id_juego}`);
   }
 
 }

@@ -13,3 +13,7 @@
 .main{
     grid-area: main;
 }
+
+.enlace-juego{
+    cursor: pointer;
+}
