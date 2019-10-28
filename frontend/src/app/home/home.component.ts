@@ -15,8 +15,12 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
   }
 
-  clicked(){
+  clickedJuegos(){
     this.router.navigateByUrl(`/juegos`);
+  }
+
+  clickedNoticias(){
+    this.router.navigateByUrl(`/noticias`);
   }
 
 }

@@ -85,7 +85,6 @@ export class NoticiaComponent implements OnInit {
         this.showDataNoticia(this.noticia);
         this.getTags();
         this.getComentarios();
-        console.log(this);
       }
     },
     err => {

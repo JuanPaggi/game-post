@@ -94,6 +94,7 @@ export class JuegoComponent implements OnInit {
     this.id_admin_creado = juego.id_admin_creado;
     this.id_requisitos = juego.id_requisitos;
     this.urlImagen = juego.archivoImagen;
+    console.log(this.urlImagen);
     
     this.fecha_lanzamiento = juego.fecha_lanzamiento;
     this.fecha = this.fecha_lanzamiento.toString();

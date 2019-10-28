@@ -33,5 +33,5 @@ public class JuegoInput {
 	
 	public ArrayList<Long> modos;
 	
-	public ArrayList<byte[]> imagenes;
+	public ArrayList<byte[]> archivoImagen;
 }
