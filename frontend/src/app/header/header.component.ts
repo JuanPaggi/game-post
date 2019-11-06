@@ -22,5 +22,4 @@ export class HeaderComponent implements OnInit {
       this.usuario = this.user.username;
     }
   }
-
 }

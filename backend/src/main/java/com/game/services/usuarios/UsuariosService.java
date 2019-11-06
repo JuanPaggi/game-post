@@ -17,6 +17,7 @@ import com.game.persistence.repository.Lista_amigosRepository;
 import com.game.persistence.repository.PrivilegiosRepository;
 import com.game.persistence.repository.UsuariosRepository;
 import com.game.services.privilegios.exceptions.PrivilegioNotFound;
+import com.game.services.usuarios.exceptions.UsuarioExistent;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
 /**
@@ -103,8 +104,10 @@ public class UsuariosService {
 		
 	}
 	
-	public long addUsuario(UsuarioInput usuarioIn){
+	public long addUsuario(UsuarioInput usuarioIn) throws UsuarioExistent{
 		
+		Optional<Usuarios> usuarioExistente = usuariosrepository.findByUserName(usuarioIn.usuario);
+		if(!usuarioExistente.isEmpty()) throw new UsuarioExistent();
 		Usuarios usuario = new Usuarios();
 		ArrayList<Privilegios> privilegios = new ArrayList<Privilegios>();
 		usuario.setNombre(usuarioIn.nombre);

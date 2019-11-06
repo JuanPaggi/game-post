@@ -20,6 +20,8 @@ export class RegistroComponent implements OnInit {
   pais: String;
   formAddNoticia: FormGroup;
 
+  htmlToAdd: String;
+
   user: User;
 
   constructor(
@@ -47,8 +49,15 @@ export class RegistroComponent implements OnInit {
       usuario.nombre = this.nombre;
       usuario.apellido = this.apellido;
       usuario.pais = this.pais;
-      this.usuariosSrv.addUsuario(usuario).subscribe();
-      this.router.navigateByUrl(`/login`);
+      this.usuariosSrv.addUsuario(usuario).subscribe(
+        response => {
+          this.router.navigateByUrl(`/login`);
+        }, err => {
+          if(err.status === 400){
+            this.htmlToAdd = '<p class="list-group-item">Datos Incorrectos<p>';
+          }
+        }
+      )
     } else {
       console.log('Formulario invalido');
     }

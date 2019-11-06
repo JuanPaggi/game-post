@@ -14,6 +14,7 @@ export class LoginComponent implements OnInit {
 
   usuario: String;
   clave: String;
+  htmlToAdd: String;
 
   id_usuario:number;
 
@@ -41,6 +42,8 @@ export class LoginComponent implements OnInit {
           this.id_usuario = response;
           this.logIn(this.usuario, this.id_usuario, event);
           window.location.href = "/";
+        } else{
+          this.htmlToAdd = '<p class="list-group-item">Datos Incorrectos<p>';
         }
       }
     )
