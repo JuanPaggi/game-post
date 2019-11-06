@@ -2,12 +2,14 @@ package com.game.services.usuarios;
 
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.game.controllers.usuarios.dto.UsuarioInput;
 import com.game.controllers.usuarios.dto.UsuarioItem;
 import com.game.persistence.models.Privilegios;
 import com.game.persistence.models.Usuarios;
@@ -101,22 +103,21 @@ public class UsuariosService {
 		
 	}
 	
-	public long addUsuario(UsuarioItem usuarioIn) throws PrivilegioNotFound{
+	public long addUsuario(UsuarioInput usuarioIn){
 		
 		Usuarios usuario = new Usuarios();
-		List<Privilegios> lista_privilegios= privilegiosRepository.findAllById(usuarioIn.privilegios);
-		if(lista_privilegios.size() != usuarioIn.privilegios.size()) throw new PrivilegioNotFound();
+		ArrayList<Privilegios> privilegios = new ArrayList<Privilegios>();
 		usuario.setNombre(usuarioIn.nombre);
 		usuario.setApellido(usuarioIn.apellido);
 		usuario.setEmail(usuarioIn.email);
 		usuario.setUsuario(usuarioIn.usuario);
 		usuario.setClave(usuarioIn.clave);
 		usuario.setPais(usuarioIn.pais);
-		usuario.setNivel(usuarioIn.nivel);
-		usuario.setPuntos(usuarioIn.puntos);
-		usuario.setFecha_inscripcion(usuarioIn.fecha_inscripcion);
-		usuario.setEmail_verificado(usuarioIn.email_verificado);
-		usuario.setPrivilegios(lista_privilegios);
+		usuario.setNivel(0);
+		usuario.setPuntos(0);
+		usuario.setFecha_inscripcion(new Date());
+		usuario.setEmail_verificado(false);
+		usuario.setPrivilegios(privilegios);
 		usuario = usuariosrepository.save(usuario);
 		return usuario.getId_usuario();
 		

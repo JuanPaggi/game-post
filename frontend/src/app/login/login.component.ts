@@ -20,12 +20,15 @@ export class LoginComponent implements OnInit {
 
   usuarios: UsuarioItem[];
 
+  user: User;
+
   constructor(
     private router: Router,
     private usuariosSrv: UsuariosService,
   ) { }
 
   ngOnInit() {
+    this.user = this.usuariosSrv.getUserLoggedIn();
   }
 
   ComprobarUsuario(){

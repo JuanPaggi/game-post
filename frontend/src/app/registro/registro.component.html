@@ -1,5 +1,5 @@
-<section class="container">
-    <form>
+<section class="container" *ngIf="!user">
+    <form [formGroup] = "formAddNoticia">
         <ul class="list-group">
 
             <li class="list-group-item">
@@ -76,7 +76,7 @@
 
         </ul>
 
-        <button class="btn btn-primary">Registrarse</button>
+        <button class="btn btn-primary" (click)="agregarUsuario()">Registrarse</button>
 
     </form>
 </section>
