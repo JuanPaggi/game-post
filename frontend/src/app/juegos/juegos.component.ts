@@ -8,6 +8,8 @@ import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TagsService } from '../services/tags/tags.service';
 import { TagsDto } from '../providers/dto/TagsDto';
 import { CrearJuegoDto } from '../providers/dto/dtoCrear/CrearJuegoDto';
+import { User } from '../providers/model/user.model';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-juegos',
@@ -39,12 +41,15 @@ export class JuegosComponent implements OnInit {
   imageFile: number[][];
   imagenesUrl: string[];
 
+  user: User;
+
   @ViewChild('imageUpload', {static: false}) imagInput: ElementRef;
 
   constructor(
     private router: Router,
     private juegosSrv: JuegosService,
-    private tagsSrv: TagsService
+    private tagsSrv: TagsService,
+    private usuariosSrv: UsuariosService,
   ) { 
     this.imageFile = [];
     this.imagenesUrl = [];
@@ -61,6 +66,7 @@ export class JuegosComponent implements OnInit {
       id_requisitos: new FormControl(Validators.required),
       tagsId: new FormControl(Validators.required),
     });
+    this.user = this.usuariosSrv.getUserLoggedIn();
   }
 
   getJuegos() {

@@ -47,7 +47,9 @@
 
           <br><br><br>
 
-          <button class="btn btn-success" (click)="borrarJuego()">Borrar Juego</button>
+          <div *ngIf="user">
+            <button class="btn btn-success" (click)="borrarJuego()">Borrar Juego</button>
+          </div>
 
         </div>
       

@@ -8,6 +8,8 @@ import { TagsService } from '../services/tags/tags.service';
 import { TagItem } from '../providers/entities/TagItem.entity';
 import { TagsDto } from '../providers/dto/TagsDto';
 import { Router } from '@angular/router';
+import { User } from '../providers/model/user.model';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-noticias',
@@ -31,13 +33,16 @@ export class NoticiasComponent implements OnInit {
   imageFile: number[][];
   imagenesUrl: string[];
 
+  user: User;
+
   @ViewChild('imageUpload', {static: false}) imagInput: ElementRef;
 
 
   constructor(
     private noticiasSrv: NoticiasService,
     private router: Router,
-    private tagsSrv: TagsService
+    private tagsSrv: TagsService,
+    private usuariosSrv: UsuariosService,
   ) { 
     this.imageFile = [];
     this.imagenesUrl = [];
@@ -53,6 +58,7 @@ export class NoticiasComponent implements OnInit {
       autor: new FormControl(Validators.required),
       tagsId: new FormControl(Validators.required),
     });
+    this.user = this.usuariosSrv.getUserLoggedIn();
   }
 
   getNoticias() {

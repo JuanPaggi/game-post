@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import '../services/usuarios/usuarios.service';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
+import { User } from '../providers/model/user.model';
 
 @Component({
   selector: 'app-home',
@@ -8,11 +11,15 @@ import { Router } from '@angular/router';
 })
 export class HomeComponent implements OnInit {
 
+  user: User;
+
   constructor(
-    private router: Router
+    private router: Router,
+    private usuariosSrv: UsuariosService,
   ) { }
 
   ngOnInit() {
+    this.user = this.usuariosSrv.getUserLoggedIn();
   }
 
   clickedJuegos(){

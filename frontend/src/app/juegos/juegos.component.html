@@ -13,9 +13,9 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="user">
             <div class="col-md-12">
-                <h2 class="noticia-titulo">Crear Juego</h2>
+                <h2 class="titulo-juego">Crear Juego</h2>
         
                 <form [formGroup] = "formAddJuego">
                         <ul class="list-group">

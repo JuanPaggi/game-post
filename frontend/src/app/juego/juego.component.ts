@@ -8,6 +8,8 @@ import { environment } from 'src/environments/environment';
 import { JuegoByIdDto } from '../providers/dto/JuegoByIdDto';
 import { JuegoItem } from '../providers/entities/juegoItem.entity';
 import { TagsDto } from '../providers/dto/TagsDto';
+import { User } from '../providers/model/user.model';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-juego',
@@ -38,10 +40,13 @@ export class JuegoComponent implements OnInit {
   urlImagen: String[];
   hayImagen: boolean;
 
+  user: User;
+
   constructor(
     private juegosSrv: JuegosService,
     private tagsSrv: TagsService,
     private route: ActivatedRoute,
+    private usuariosSrv: UsuariosService,
     private location: LocationStrategy)
   {
     this.tags = [];
@@ -60,6 +65,7 @@ export class JuegoComponent implements OnInit {
         this.id_juego = parseInt(params.id_juego, 10);
     });
     this.getJuego();
+    this.user = this.usuariosSrv.getUserLoggedIn();
   }
 
   getJuego(){
