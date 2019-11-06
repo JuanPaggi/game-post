@@ -40,7 +40,7 @@ export class LoginComponent implements OnInit {
         if(response != 0){
           this.id_usuario = response;
           this.logIn(this.usuario, this.id_usuario, event);
-          this.router.navigateByUrl(`/`);
+          window.location.href = "/";
         }
       }
     )
