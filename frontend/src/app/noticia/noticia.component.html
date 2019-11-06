@@ -14,7 +14,7 @@
     </div>
 
     <div class="noticia-fecha">
-      <p class="m-b-0 clearfix" >{{ fecha_publicacion }}</p>
+      <p class="m-b-0 clearfix" >Fecha de publicacion: {{ fecha }}</p>
     </div>
 
     <div class="noticia-tags">
@@ -37,17 +37,21 @@
 
     <br><br><br>
 
-    <li class="list-group-item">
-      <div class="media-body media-middle">
-          <label>Agregar Comentario:</label>
-          <textarea class="form-control" [(ngModel)]="comentarioIngresado" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
-          <button class="btn btn-success" (click)="agregarComentario()">Agregar</button>
-      </div>
-    </li>
+    <div *ngIf="user">
+      <li class="list-group-item">
+        <div class="media-body media-middle">
+            <label>Agregar Comentario:</label>
+            <textarea class="form-control" [(ngModel)]="comentarioIngresado" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+            <button class="btn btn-success" (click)="agregarComentario()">Agregar</button>
+        </div>
+      </li>
+    </div>
 
     <br><br><br>
 
-    <button class="btn btn-success" (click)="borrarNoticia()">Borrar Noticia</button>
+    <div *ngIf="user">
+      <button class="btn btn-success" (click)="borrarNoticia()">Borrar Noticia</button>
+    </div>
 
   </div>
 

@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import '../services/usuarios/usuarios.service';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
+import { User } from '../providers/model/user.model';
 
 @Component({
   selector: 'app-home',
@@ -7,9 +11,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  user: User;
+
+  constructor(
+    private router: Router,
+    private usuariosSrv: UsuariosService,
+  ) { }
 
   ngOnInit() {
+    this.user = this.usuariosSrv.getUserLoggedIn();
+  }
+
+  clickedJuegos(){
+    this.router.navigateByUrl(`/juegos`);
+  }
+
+  clickedNoticias(){
+    this.router.navigateByUrl(`/noticias`);
+  }
+
+  clickedLogin(){
+    this.router.navigateByUrl(`/login`);
+  }
+
+  clickedRegistrarse(){
+    this.router.navigateByUrl(`/registro`);
+  }
+
+  clickedSalir(){
+    this.usuariosSrv.setUserLoggedOut();
+    window.location.reload();
   }
 
 }

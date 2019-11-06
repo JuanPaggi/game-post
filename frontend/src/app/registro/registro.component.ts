@@ -7,6 +7,13 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroComponent implements OnInit {
 
+  usuario: String;
+  clave: String;
+  email: String;
+  nombre: String;
+  apellido: String;
+  pais: String;
+
   constructor() { }
 
   ngOnInit() {

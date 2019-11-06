@@ -13,6 +13,10 @@ import { ComentariosDto } from '../providers/dto/ComentariosDto';
 import { ComentarioItem } from '../providers/entities/ComentarioItem.entity';
 import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { CrearComentarioDto } from '../providers/dto/dtoCrear/CrearComentarioDto';
+import { UsuarioItem } from '../providers/entities/UsuarioItem.entity';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
+import { UsuarioByIdDto } from '../providers/dto/UsuarioByIdDto';
+import { User } from '../providers/model/user.model';
 
 @Component({
   selector: 'app-noticia',
@@ -22,12 +26,15 @@ import { CrearComentarioDto } from '../providers/dto/dtoCrear/CrearComentarioDto
 export class NoticiaComponent implements OnInit {
 
   noticia: NoticiaItem;
+  usuario: UsuarioItem;
   titulo: string;
   descripcion: string;
   cuerpo: string;
   fecha_publicacion: Date;
+  fecha:String;
   apiURL: string;
   id_noticia: number;
+  id_usuario: number;
   tags: TagItem[];
   tagsEtiquetas: String[];
   comentarios: ComentarioItem[];
@@ -39,10 +46,13 @@ export class NoticiaComponent implements OnInit {
   comentarioIngresado: String;
   formAddComentario: FormGroup;
 
+  user: User;
+
   constructor(
     private noticiasSrv: NoticiasService,
     private ComentariosSrv: ComentariosService,
     private tagsSrv: TagsService,
+    private usuariosSrv: UsuariosService,
     private route: ActivatedRoute,
     private location: LocationStrategy)
   {
@@ -62,13 +72,15 @@ export class NoticiaComponent implements OnInit {
     this.apiURL = environment.apiEndpoint;
     this.route.params.subscribe(params => {
         this.id_noticia = parseInt(params.id_noticia, 10);
+        this.id_usuario = 1;
     });
     this.getNoticia();
-    
+    this.getUsuario();
 
     this.formAddComentario = new FormGroup({
       comentarioIngresado: new FormControl(Validators.required),
     });
+    this.user = this.usuariosSrv.getUserLoggedIn();
   }
 
   getNoticia() {
@@ -129,7 +141,8 @@ export class NoticiaComponent implements OnInit {
       comentarioIn.comentario = this.comentarioIngresado;
       comentarioIn.fecha_publicacion = new Date();
       comentarioIn.id_noticia = this.noticia.id_noticia;
-      comentarioIn.id_usuario = 1;
+      console.log(this.usuario.id_usuario)
+      comentarioIn.id_usuario = this.usuario.id_usuario;
       this.ComentariosSrv.addComentario(comentarioIn).subscribe(
         response => {
           this.comentariosTexto.push(comentarioIn.comentario);
@@ -140,12 +153,22 @@ export class NoticiaComponent implements OnInit {
     }
   }
 
+  getUsuario(){
+    this.usuariosSrv.getUsuario(new UsuarioByIdDto(this.id_usuario)).subscribe(
+      response => {
+        this.usuario = response;
+      }
+    );
+  }
+
   showDataNoticia(noticia: NoticiaItem) {
     this.titulo = noticia.titulo;
     this.descripcion = noticia.descripcion;
     this.cuerpo = noticia.cuerpo;
     this.fecha_publicacion = noticia.fecha_publicacion;
     this.urlImagen = noticia.imagenes;
+    this.fecha = this.fecha_publicacion.toString();
+    this.fecha = this.fecha.slice(0, 10);
   }
 
   showDataTags(noticia: NoticiaItem) {

@@ -8,6 +8,8 @@ import { TagsService } from '../services/tags/tags.service';
 import { TagItem } from '../providers/entities/TagItem.entity';
 import { TagsDto } from '../providers/dto/TagsDto';
 import { Router } from '@angular/router';
+import { User } from '../providers/model/user.model';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-noticias',
@@ -24,11 +26,14 @@ export class NoticiasComponent implements OnInit {
   titulo: string;
   descripcion: string;
   cuerpo: string;
-  fecha_publicacion: string;
+  fecha_publicacion: Date;
+  fecha: String;
   formAddNoticia: FormGroup;
 
   imageFile: number[][];
   imagenesUrl: string[];
+
+  user: User;
 
   @ViewChild('imageUpload', {static: false}) imagInput: ElementRef;
 
@@ -36,7 +41,8 @@ export class NoticiasComponent implements OnInit {
   constructor(
     private noticiasSrv: NoticiasService,
     private router: Router,
-    private tagsSrv: TagsService
+    private tagsSrv: TagsService,
+    private usuariosSrv: UsuariosService,
   ) { 
     this.imageFile = [];
     this.imagenesUrl = [];
@@ -52,6 +58,7 @@ export class NoticiasComponent implements OnInit {
       autor: new FormControl(Validators.required),
       tagsId: new FormControl(Validators.required),
     });
+    this.user = this.usuariosSrv.getUserLoggedIn();
   }
 
   getNoticias() {
@@ -118,6 +125,12 @@ export class NoticiasComponent implements OnInit {
   clicked(noticia: NoticiaItem) {
     this.noticia = noticia;
     this.router.navigateByUrl(`/noticias/${noticia.id_noticia}`);
+  }
+
+  getFecha(noticia: NoticiaItem){
+    this.fecha = noticia.fecha_publicacion.toString();
+    this.fecha = this.fecha.slice(0,10);
+    return this.fecha;
   }
 
 }

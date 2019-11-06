@@ -1,0 +1,56 @@
+<section class="container">
+        <div class="juego">
+      
+          <div class="juego-titulo">
+            <h2>{{ titulo }}</h2>
+          </div>
+      
+          <div class="juego-descripcion">
+            <p>{{ descripcion }}</p>
+          </div>
+      
+          <div class="juego-tipo">
+            <p>{{ tipo }}</p>
+          </div>
+      
+          <div class="juego-genero">
+            <p>{{ genero }}</p>
+          </div>
+
+          <div class="juego-analisis-positivos">
+            <p>{{ analisis_positivos }}</p>
+          </div>
+
+          <div class="juego-analisis-negativos">
+            <p>{{ analisis_negativos }}</p>
+          </div>
+
+          <div class="juego-desarrollador">
+            <p>{{ desarrollador }}</p>
+          </div>
+      
+          <div class="juego-fecha">
+            <p class="m-b-0 clearfix" >Fecha de publicacion: {{ fecha }}</p>
+          </div>
+      
+          <div class="juego-tags">
+            <div *ngFor="let tags of tagsEtiquetas">
+              <p>{{ tags }} &nbsp; </p>
+            </div>
+          </div>
+      
+          <div class="juego-imagen" *ngIf="hayImagen">
+            <div  *ngFor="let imagen of urlImagen">
+                <img [src]="apiURL + imagen" style="width: 40px; height: 40px;" />
+            </div>
+          </div>
+
+          <br><br><br>
+
+          <div *ngIf="user">
+            <button class="btn btn-success" (click)="borrarJuego()">Borrar Juego</button>
+          </div>
+
+        </div>
+      
+      </section>

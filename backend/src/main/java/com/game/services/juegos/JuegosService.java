@@ -99,7 +99,7 @@ public class JuegosService {
 				imagenes.add("/image/"+imagen.getId_imagen()+"/"+formatSeo(juego.get().getTitulo())+".jpg");
 			}
 		}
-		juegoItem.Imagenes = imagenes;
+		juegoItem.archivoImagen = imagenes;
 		
 		return juegoItem;
 		
@@ -127,7 +127,7 @@ public class JuegosService {
 		juego.setModos(lista_modo);
 		
 		Set<Imagenes> imagenes = new HashSet<Imagenes>();
-		for (byte[] imagen : juegoIn.imagenes) {
+		for (byte[] imagen : juegoIn.archivoImagen) {
 			imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));
 		}
 		juego.setImagenes(imagenes);	
@@ -173,7 +173,7 @@ public class JuegosService {
 					imagenes.add("/image/"+imagen.getId_imagen()+"/"+formatSeo(juego.getTitulo())+".jpg");
 				}
 			}
-			item.Imagenes = imagenes;
+			item.archivoImagen = imagenes;
 			
 			out.add(item);
 		}
@@ -213,7 +213,7 @@ public class JuegosService {
 		juegoObj.setModos(lista_modo);
 		
 		Set<Imagenes> imagenes = new HashSet<Imagenes>();
-		for (byte[] imagen : juegoIn.imagenes) {
+		for (byte[] imagen : juegoIn.archivoImagen) {
 			imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));
 		}
 		

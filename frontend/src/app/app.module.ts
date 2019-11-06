@@ -14,6 +14,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JuegosComponent } from './juegos/juegos.component';
+import { JuegoComponent } from './juego/juego.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { JuegosComponent } from './juegos/juegos.component';
     NoticiaComponent,
     LoginComponent,
     RegistroComponent,
-    JuegosComponent
+    JuegosComponent,
+    JuegoComponent
   ],
   imports: [
     BrowserModule,
