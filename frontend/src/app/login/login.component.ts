@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { UsuarioItem } from '../providers/entities/UsuarioItem.entity';
-import { UsuariosDto } from '../providers/dto/UsuariosDto';
 import { Router } from '@angular/router';
 import { User } from '../providers/model/user.model';
 import { LoginDto } from '../providers/dto/dtoLogin/LoginDto';
@@ -29,6 +28,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.user = this.usuariosSrv.getUserLoggedIn();
+
   }
 
   ComprobarUsuario(){
@@ -47,11 +47,9 @@ export class LoginComponent implements OnInit {
   }
 
   logIn(username: String, id_usuario: number, event: Event) {
-    event.preventDefault(); // Avoid default action for the submit button of the login form
-
+    event.preventDefault(); 
     let u: User = {username, id_usuario};  
     this.usuariosSrv.setUserLoggedIn(u);
-
   }
 
 }
