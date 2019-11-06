@@ -7,6 +7,7 @@ import { UsuariosDto } from 'src/app/providers/dto/UsuariosDto';
 import { UsuarioByIdDto } from 'src/app/providers/dto/UsuarioByIdDto';
 import { CrearUsuarioDto } from 'src/app/providers/dto/dtoCrear/CrearUsuarioDto';
 import { User } from '../../providers/model/user.model';
+import { LoginDto } from '../../providers/dto/dtoLogin/LoginDto';
 
 @Injectable({
   providedIn: 'root'
@@ -57,11 +58,24 @@ export class UsuariosService {
     );
   }
 
+  public verificarUsuario(body: LoginDto): Observable<number> {
+    return this.http.post<number>(
+        environment.apiEndpoint + '/usuarios/login',
+        body
+    );
+  }
+
   setUserLoggedIn(user:User) {
     this.isUserLoggedIn = true;
     this.usserLogged = user;
     localStorage.setItem('currentUser', JSON.stringify(user));
-  
+  }
+
+  setUserLoggedOut() {
+    this.isUserLoggedIn = false;
+    this.usserLogged = null;
+    console.log("we");
+    localStorage.setItem('currentUser', JSON.stringify(null));
   }
 
   getUserLoggedIn() {

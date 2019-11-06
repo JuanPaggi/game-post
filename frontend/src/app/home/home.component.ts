@@ -30,4 +30,17 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl(`/noticias`);
   }
 
+  clickedLogin(){
+    this.router.navigateByUrl(`/login`);
+  }
+
+  clickedRegistrarse(){
+    this.router.navigateByUrl(`/registro`);
+  }
+
+  clickedSalir(){
+    this.usuariosSrv.setUserLoggedOut();
+    window.location.reload();
+  }
+
 }

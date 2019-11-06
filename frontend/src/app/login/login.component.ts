@@ -4,6 +4,7 @@ import { UsuarioItem } from '../providers/entities/UsuarioItem.entity';
 import { UsuariosDto } from '../providers/dto/UsuariosDto';
 import { Router } from '@angular/router';
 import { User } from '../providers/model/user.model';
+import { LoginDto } from '../providers/dto/dtoLogin/LoginDto';
 
 @Component({
   selector: 'app-login',
@@ -15,6 +16,8 @@ export class LoginComponent implements OnInit {
   usuario: String;
   clave: String;
 
+  id_usuario:number;
+
   usuarios: UsuarioItem[];
 
   constructor(
@@ -23,24 +26,21 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
-    this.getUsuarios();
-  }
-
-  getUsuarios(){
-    this.usuariosSrv.getUsuarios(new UsuariosDto()).subscribe(
-      response => {
-        this.usuarios = response;
-      }
-    )
   }
 
   ComprobarUsuario(){
-    this.usuarios.forEach(usuario => {
-      if(usuario.usuario === this.usuario && usuario.clave === this.clave){
-        this.logIn(this.usuario, usuario.id_usuario, event);
-        this.router.navigateByUrl(`/`);
+    let login = new LoginDto();
+    login.usuario = this.usuario;
+    login.clave = this.clave;
+    this.usuariosSrv.verificarUsuario(login).subscribe(
+      response => {
+        if(response != 0){
+          this.id_usuario = response;
+          this.logIn(this.usuario, this.id_usuario, event);
+          this.router.navigateByUrl(`/`);
+        }
       }
-    });
+    )
   }
 
   logIn(username: String, id_usuario: number, event: Event) {

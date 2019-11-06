@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.controllers.usuarios.dto.UsuarioItem;
+import com.game.controllers.usuarios.dto.UsuarioLogin;
 import com.game.services.privilegios.exceptions.PrivilegioNotFound;
 import com.game.services.usuarios.UsuariosService;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
@@ -36,7 +37,7 @@ import io.swagger.annotations.ApiResponses;
  */
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET})
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST})
 @RequestMapping("${v1API}/usuarios")
 public class UsuariosControllers {
 
@@ -61,6 +62,20 @@ public class UsuariosControllers {
 		} catch (Exception e) {
 			logger.error("Internal server error", e);
 			return new ResponseEntity<UsuarioItem>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(path="/login")
+	@ApiResponses({
+		@ApiResponse(code = 200, message = "OK, devuelve el id del usuario"),
+		@ApiResponse(code = 500, message = "Unexpected error.")
+		})
+	public @ResponseBody ResponseEntity<Long> verificarUsuario( @RequestBody UsuarioLogin body){
+		try {
+			return new ResponseEntity<Long>(usuariosService.verificarLogin(body.usuario, body.clave), HttpStatus.OK);
+		} catch(Exception e) {
+			logger.error("Internal server error", e);
+			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

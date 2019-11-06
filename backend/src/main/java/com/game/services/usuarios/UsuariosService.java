@@ -62,6 +62,14 @@ public class UsuariosService {
 		
 	}
 	
+	public long verificarLogin(String usuario, String clave){
+		
+		Optional<Usuarios> user = usuariosrepository.findByUser(usuario,clave);
+		if(user.isEmpty()) return 0;
+		return user.get().getId_usuario();
+		
+	}
+	
 	public List<UsuarioItem> getAllUsuarios() throws ParseException{
 		
 		List<Usuarios> usuarios = usuariosrepository.findAll();
