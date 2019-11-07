@@ -4,7 +4,7 @@ import { ComentariosDto } from 'src/app/providers/dto/ComentariosDto';
 import { ComentarioItem } from 'src/app/providers/entities/ComentarioItem.entity';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { ComentarioByIdDto } from 'src/app/providers/dto/ComentarioByIdDto';
+import { ComentarioByIdDto } from 'src/app/providers/dto/dtoById/ComentarioByIdDto';
 import { CrearComentarioDto } from 'src/app/providers/dto/dtoCrear/CrearComentarioDto';
 
 @Injectable({

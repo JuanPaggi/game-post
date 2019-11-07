@@ -4,7 +4,7 @@ import { JuegosDto } from 'src/app/providers/dto/JuegosDto';
 import { Observable } from 'rxjs';
 import { JuegoItem } from 'src/app/providers/entities/juegoItem.entity';
 import { environment } from 'src/environments/environment';
-import { JuegoByIdDto } from 'src/app/providers/dto/JuegoByIdDto';
+import { JuegoByIdDto } from 'src/app/providers/dto/dtoById/JuegoByIdDto';
 import { CrearJuegoDto } from 'src/app/providers/dto/dtoCrear/CrearJuegoDto';
 
 @Injectable({
