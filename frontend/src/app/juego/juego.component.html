@@ -38,6 +38,12 @@
               <p>{{ tags }} &nbsp; </p>
             </div>
           </div>
+
+          <div class="juego-modos">
+            <div *ngFor="let modos of modosLista">
+              <p>{{ modos }} &nbsp; </p>
+            </div>
+          </div>
       
           <div class="juego-imagen" *ngIf="hayImagen">
             <div  *ngFor="let imagen of urlImagen">

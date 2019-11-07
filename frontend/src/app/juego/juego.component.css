@@ -37,6 +37,11 @@
     display: flex;
 }
 
+.juego-modos{
+    margin: 10px;
+    display: flex;
+}
+
 .juego-imagen{
     margin: 10px;
     display: flex;
