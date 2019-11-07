@@ -20,10 +20,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.game.controllers.usuarios.dto.UsuarioInput;
 import com.game.controllers.usuarios.dto.UsuarioItem;
 import com.game.controllers.usuarios.dto.UsuarioLogin;
 import com.game.services.privilegios.exceptions.PrivilegioNotFound;
 import com.game.services.usuarios.UsuariosService;
+import com.game.services.usuarios.exceptions.UsuarioExistent;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
 import io.swagger.annotations.ApiResponse;
@@ -99,13 +101,15 @@ public class UsuariosControllers {
 	@PostMapping(path="")
 	@ApiResponses({
 		@ApiResponse(code = 200, message = "OK, devuelve el id del usuario insertado"),
+		@ApiResponse(code = 400, message = "El usuario ya existe"),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Long> addUsuarios( @RequestBody UsuarioItem body){
+	public @ResponseBody ResponseEntity<Long> addUsuarios( @RequestBody UsuarioInput body){
 		try {
 			return new ResponseEntity<Long>(usuariosService.addUsuario(body), HttpStatus.OK);
-		} catch(PrivilegioNotFound e) {
-			return new ResponseEntity<Long>(HttpStatus.NOT_FOUND);
+		} catch(UsuarioExistent e) {
+			logger.error("Internal server error", e);
+			return new ResponseEntity<Long>(HttpStatus.BAD_REQUEST);
 		} catch(Exception e) {
 			logger.error("Internal server error", e);
 			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);

@@ -10,6 +10,9 @@ import { JuegoItem } from '../providers/entities/juegoItem.entity';
 import { TagsDto } from '../providers/dto/TagsDto';
 import { User } from '../providers/model/user.model';
 import { UsuariosService } from '../services/usuarios/usuarios.service';
+import { ModoItem } from '../providers/entities/ModoItem.entity';
+import { ModosService } from '../services/modos/modos.service';
+import { ModosDto } from '../providers/dto/ModosDto';
 
 @Component({
   selector: 'app-juego',
@@ -20,6 +23,9 @@ export class JuegoComponent implements OnInit {
 
   tags: TagItem[];
   tagsEtiquetas: String[];
+
+  modos: ModoItem[];
+  modosLista: String[];
 
   titulo: String;
   descripcion: String;
@@ -45,12 +51,17 @@ export class JuegoComponent implements OnInit {
   constructor(
     private juegosSrv: JuegosService,
     private tagsSrv: TagsService,
+    private modosSrv: ModosService,
     private route: ActivatedRoute,
     private usuariosSrv: UsuariosService,
     private location: LocationStrategy)
   {
     this.tags = [];
     this.tagsEtiquetas = [];
+
+    this.modos = [];
+    this.modosLista = [];
+
 
     this.location.onPopState(() => {
       if (location.back) {
@@ -81,6 +92,7 @@ export class JuegoComponent implements OnInit {
         }
         this.showDataJuego(this.juego);
         this.getTags();
+        this.getModos();
       }
     },
     err => {
@@ -100,7 +112,6 @@ export class JuegoComponent implements OnInit {
     this.id_admin_creado = juego.id_admin_creado;
     this.id_requisitos = juego.id_requisitos;
     this.urlImagen = juego.archivoImagen;
-    console.log(this.urlImagen);
     
     this.fecha_lanzamiento = juego.fecha_lanzamiento;
     this.fecha = this.fecha_lanzamiento.toString();
@@ -122,6 +133,20 @@ export class JuegoComponent implements OnInit {
     );
   }
 
+  getModos(){
+    this.modosSrv.getAllModos(new ModosDto()).subscribe(
+      response => {
+        if (response) {
+        this.modos = response;
+        this.showDataModos(this.juego);
+      }
+    },
+    err => {
+      console.log(err);
+    }
+    );
+  }
+
   showDataTags(juego: JuegoItem) {
 
     let i = 0;
@@ -129,6 +154,18 @@ export class JuegoComponent implements OnInit {
       if (this.tags[index].id_tag === juego.tags[i]) {
         i++;
         this.tagsEtiquetas.push(this.tags[index].etiqueta);
+      }
+    }
+
+  }
+
+  showDataModos(juego: JuegoItem){
+
+    let i = 0;
+    for (let index = 0; index < this.modos.length; index++) {
+      if (this.modos[index].id_modo === juego.modos[i]) {
+        i++;
+        this.modosLista.push(this.modos[index].modo);
       }
     }
 

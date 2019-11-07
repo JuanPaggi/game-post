@@ -34,7 +34,7 @@ public class RequisitosService {
 		requisitoItem.procesador = requisito.get().getProcesador();
 		requisitoItem.memoria = requisito.get().getMemoria();
 		requisitoItem.grafica = requisito.get().getGrafica();
-		requisitoItem.almacenamiento = requisito.get().getAlamcenamiento();
+		requisitoItem.almacenamiento = requisito.get().getAlmacenamiento();
 		return requisitoItem;
 		
 	}
@@ -50,7 +50,7 @@ public class RequisitosService {
 			item.procesador = requisito.getProcesador();
 			item.memoria = requisito.getMemoria();
 			item.grafica = requisito.getMemoria();
-			item.almacenamiento = requisito.getAlamcenamiento();
+			item.almacenamiento = requisito.getAlmacenamiento();
 			out.add(item);
 		}
 		return out;
@@ -64,7 +64,7 @@ public class RequisitosService {
 		requisito.setProcesador(requisitoIn.procesador);
 		requisito.setMemoria(requisitoIn.memoria);
 		requisito.setGrafica(requisitoIn.grafica);
-		requisito.setAlamcenamiento(requisitoIn.almacenamiento);
+		requisito.setAlmacenamiento(requisitoIn.almacenamiento);
 		requisito = requisitosRepository.save(requisito);
 		return requisito.getId_requisitos();
 	
@@ -87,7 +87,7 @@ public class RequisitosService {
 		requisitoObj.setProcesador(requisitoIn.procesador);
 		requisitoObj.setMemoria(requisitoIn.memoria);
 		requisitoObj.setGrafica(requisitoIn.grafica);
-		requisitoObj.setAlamcenamiento(requisitoIn.almacenamiento);
+		requisitoObj.setAlmacenamiento(requisitoIn.almacenamiento);
 		requisitosRepository.save(requisitoObj);
 		
 	}

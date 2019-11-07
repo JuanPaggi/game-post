@@ -10,6 +10,9 @@ import { TagsDto } from '../providers/dto/TagsDto';
 import { CrearJuegoDto } from '../providers/dto/dtoCrear/CrearJuegoDto';
 import { User } from '../providers/model/user.model';
 import { UsuariosService } from '../services/usuarios/usuarios.service';
+import { ModosService } from '../services/modos/modos.service';
+import { ModoItem } from '../providers/entities/ModoItem.entity';
+import { ModosDto } from '../providers/dto/ModosDto';
 
 @Component({
   selector: 'app-juegos',
@@ -21,7 +24,7 @@ export class JuegosComponent implements OnInit {
   juegos: JuegoItem[];
   tags: TagItem[];
   tagsId: String;
-  modos: TagItem[];
+  modos: ModoItem[];
   modosId: String;
 
   juego: JuegoItem;
@@ -49,6 +52,7 @@ export class JuegosComponent implements OnInit {
     private router: Router,
     private juegosSrv: JuegosService,
     private tagsSrv: TagsService,
+    private modosSrv: ModosService,
     private usuariosSrv: UsuariosService,
   ) { 
     this.imageFile = [];
@@ -74,6 +78,7 @@ export class JuegosComponent implements OnInit {
       response => {
         this.juegos = response;
         this.getTags();
+        this.getModos();
       }
     );
   }
@@ -82,6 +87,14 @@ export class JuegosComponent implements OnInit {
     this.tagsSrv.getAllTags(new TagsDto()).subscribe(
       response => {
         this.tags = response;
+      }
+    );
+  }
+  
+  getModos() {
+    this.modosSrv.getAllModos(new ModosDto()).subscribe(
+      response => {
+        this.modos = response;
       }
     );
   }
@@ -123,9 +136,8 @@ export class JuegosComponent implements OnInit {
       juego.id_admin_creado = 1;
       juego.id_requisitos = 1;
       juego.tags = this.tagsId.split(',').map(Number);
-      juego.modos = [];
+      juego.modos = this.modosId.split(',').map(Number);
       juego.nombreImagen = "hola";
-      console.log(this.imageFile);
       juego.archivoImagen = this.imageFile;
       this.juegosSrv.addJuego(juego).subscribe();
     } else {

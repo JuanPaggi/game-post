@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { UsuarioItem } from '../providers/entities/UsuarioItem.entity';
-import { UsuariosDto } from '../providers/dto/UsuariosDto';
 import { Router } from '@angular/router';
 import { User } from '../providers/model/user.model';
 import { LoginDto } from '../providers/dto/dtoLogin/LoginDto';
@@ -15,10 +14,13 @@ export class LoginComponent implements OnInit {
 
   usuario: String;
   clave: String;
+  htmlToAdd: String;
 
   id_usuario:number;
 
   usuarios: UsuarioItem[];
+
+  user: User;
 
   constructor(
     private router: Router,
@@ -26,6 +28,8 @@ export class LoginComponent implements OnInit {
   ) { }
 
   ngOnInit() {
+    this.user = this.usuariosSrv.getUserLoggedIn();
+
   }
 
   ComprobarUsuario(){
@@ -37,18 +41,18 @@ export class LoginComponent implements OnInit {
         if(response != 0){
           this.id_usuario = response;
           this.logIn(this.usuario, this.id_usuario, event);
-          this.router.navigateByUrl(`/`);
+          window.location.href = "/";
+        } else{
+          this.htmlToAdd = '<p class="list-group-item">Datos Incorrectos<p>';
         }
       }
     )
   }
 
   logIn(username: String, id_usuario: number, event: Event) {
-    event.preventDefault(); // Avoid default action for the submit button of the login form
-
+    event.preventDefault(); 
     let u: User = {username, id_usuario};  
     this.usuariosSrv.setUserLoggedIn(u);
-
   }
 
 }

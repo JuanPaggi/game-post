@@ -77,11 +77,11 @@ public class Requisitos {
 		this.grafica = grafica;
 	}
 
-	public String getAlamcenamiento() {
+	public String getAlmacenamiento() {
 		return almacenamiento;
 	}
 
-	public void setAlamcenamiento(String alamcenamiento) {
+	public void setAlmacenamiento(String alamcenamiento) {
 		this.almacenamiento = alamcenamiento;
 	}
 	
