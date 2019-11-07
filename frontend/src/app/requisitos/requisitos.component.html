@@ -1,0 +1,76 @@
+
+<div class="container">
+    <div class="row" *ngIf="user">
+        <div class="col-md-12">
+            <h2 class="titulo-requisito">Crear Requisito</h2>
+    
+            <form [formGroup] = "formAddRequisito">
+                    <ul class="list-group">
+    
+                        <li class="list-group-item">
+                            <div class="media-body media-middle form-group item-form">
+                                <label>Sistema Operativo</label>
+                                <input type="text" class="form-control" [(ngModel)]="sistema_operativo" required minlength="10" [ngModelOptions]="{standalone: true}">
+                                <div *ngIf="!sistema_operativo" class="alert alert-danger">
+                                    <div>
+                                        El Sistema Operativo es requerido.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+    
+                        <li class="list-group-item">
+                            <div class="media-body media-middle form-group item-form">
+                                <label>Procesador</label>
+                                <textarea class="form-control" [(ngModel)]="procesador" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                <div *ngIf="!procesador" class="alert alert-danger">
+                                    <div>
+                                        El procesador es requerida.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+    
+                        <li class="list-group-item">
+                            <div class="media-body media-middle">
+                                <label>Memoria</label>
+                                <textarea class="form-control" [(ngModel)]="memoria" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                <div *ngIf="!memoria" class="alert alert-danger">
+                                    <div>
+                                        La memoria es requerido.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+    
+                        <li class="list-group-item">
+                            <div class="media-body media-middle">
+                                <label>Grafica</label>
+                                <textarea class="form-control" [(ngModel)]="grafica" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                <div *ngIf="!grafica" class="alert alert-danger">
+                                    <div>
+                                        La grafica es requerida.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+    
+                        <li class="list-group-item">
+                            <div class="media-body media-middle">
+                                <label>Almacenamiento</label>
+                                <textarea class="form-control" [(ngModel)]="almacenamiento" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                <div *ngIf="!almacenamiento" class="alert alert-danger">
+                                    <div>
+                                        El almacenamiento es requerido.
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+
+                    </ul>
+                </form>
+    
+            <button class="btn btn-success" (click)="agregarRequisito()">Guardar</button>
+        </div>
+    </div> 
+</div>

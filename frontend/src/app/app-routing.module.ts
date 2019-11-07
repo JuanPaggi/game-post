@@ -7,6 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { JuegosComponent } from './juegos/juegos.component';
 import { JuegoComponent } from './juego/juego.component';
+import { RequisitosComponent } from './requisitos/requisitos.component';
 
 
 const routes: Routes = [
@@ -37,6 +38,10 @@ const routes: Routes = [
   {
     path: 'juegos/:id_juego',
     component: JuegoComponent
+  },
+  {
+    path: 'requisitos',
+    component: RequisitosComponent
   }
 ];
 

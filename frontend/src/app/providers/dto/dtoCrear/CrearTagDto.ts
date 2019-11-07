@@ -1,3 +1,3 @@
 export class CrearTagDto {
-    etiqueta: String;
+    etiqueta: string;
 }
