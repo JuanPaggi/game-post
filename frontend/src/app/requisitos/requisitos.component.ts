@@ -4,6 +4,7 @@ import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CrearRequisitoDto } from '../providers/dto/dtoCrear/CrearRequisitoDto';
 import { RequisitosService } from '../services/requisitos/requisitos.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-requisitos',
@@ -24,6 +25,7 @@ export class RequisitosComponent implements OnInit {
 
   constructor(
     private usuariosSrv: UsuariosService,
+    private router: Router,
     private requisitoSrv: RequisitosService,
   ) { }
 
@@ -50,6 +52,10 @@ export class RequisitosComponent implements OnInit {
     } else {
       console.log('Formulario invalido');
     }
+  }
+
+  volverHome(){
+    this.router.navigateByUrl(`/`);
   }
 
 }

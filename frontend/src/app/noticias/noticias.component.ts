@@ -137,4 +137,8 @@ export class NoticiasComponent implements OnInit {
     return this.fecha;
   }
 
+  volverHome(){
+    this.router.navigateByUrl(`/`);
+  }
+
 }

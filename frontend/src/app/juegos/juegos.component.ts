@@ -144,7 +144,7 @@ export class JuegosComponent implements OnInit {
       }else{
         juego.modos= [];
       }
-      juego.nombreImagen = "hola";
+      juego.nombreImagen = "image";
       juego.archivoImagen = this.imageFile;
       this.juegosSrv.addJuego(juego).subscribe();
     } else {
@@ -166,6 +166,10 @@ export class JuegosComponent implements OnInit {
   clicked(juego: JuegoItem) {
     this.juego = juego;
     this.router.navigateByUrl(`/juegos/${juego.id_juego}`);
+  }
+
+  volverHome(){
+    this.router.navigateByUrl(`/`);
   }
 
 }
