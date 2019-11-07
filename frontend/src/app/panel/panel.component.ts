@@ -1,18 +1,18 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '../providers/model/user.model';
-import { UsuariosService } from '../services/usuarios/usuarios.service';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { CrearRequisitoDto } from '../providers/dto/dtoCrear/CrearRequisitoDto';
+import { FormControl, Validators, FormGroup } from '@angular/forms';
 import { RequisitosService } from '../services/requisitos/requisitos.service';
 import { Router } from '@angular/router';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
+import { User } from '../providers/model/user.model';
 
 @Component({
-  selector: 'app-requisitos',
-  templateUrl: './requisitos.component.html',
-  styleUrls: ['./requisitos.component.css']
+  selector: 'app-panel',
+  templateUrl: './panel.component.html',
+  styleUrls: ['./panel.component.css']
 })
-export class RequisitosComponent implements OnInit {
-
+export class PanelComponent implements OnInit {
+  
   sistema_operativo: String;
   procesador: String;
   memoria: String;

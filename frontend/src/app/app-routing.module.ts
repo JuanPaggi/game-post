@@ -7,7 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { RegistroComponent } from './registro/registro.component';
 import { JuegosComponent } from './juegos/juegos.component';
 import { JuegoComponent } from './juego/juego.component';
-import { RequisitosComponent } from './requisitos/requisitos.component';
+import { PanelComponent } from './panel/panel.component';
 
 
 const routes: Routes = [
@@ -40,8 +40,8 @@ const routes: Routes = [
     component: JuegoComponent
   },
   {
-    path: 'requisitos',
-    component: RequisitosComponent
+    path: 'panel',
+    component: PanelComponent
   }
 ];
 

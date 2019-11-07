@@ -4,7 +4,7 @@ import { RequisitosDto } from 'src/app/providers/dto/RequisitosDto';
 import { RequisitoItem } from 'src/app/providers/entities/RequisitoItem.entity';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { RequisitoByIdDto } from 'src/app/providers/dto/RequisitoByIdDto';
+import { RequisitoByIdDto } from 'src/app/providers/dto/dtoById/RequisitoByIdDto';
 import { CrearRequisitoDto } from 'src/app/providers/dto/dtoCrear/CrearRequisitoDto';
 
 @Injectable({

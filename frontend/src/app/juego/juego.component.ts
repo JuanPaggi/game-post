@@ -5,7 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { LocationStrategy } from '@angular/common';
 import { TagItem } from '../providers/entities/TagItem.entity';
 import { environment } from 'src/environments/environment';
-import { JuegoByIdDto } from '../providers/dto/JuegoByIdDto';
+import { JuegoByIdDto } from '../providers/dto/dtoById/JuegoByIdDto';
 import { JuegoItem } from '../providers/entities/juegoItem.entity';
 import { TagsDto } from '../providers/dto/TagsDto';
 import { User } from '../providers/model/user.model';

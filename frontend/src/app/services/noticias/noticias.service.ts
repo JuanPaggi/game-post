@@ -4,7 +4,7 @@ import { NoticiasDto } from '../../providers/dto/NoticiasDto';
 import { Observable } from 'rxjs';
 import { NoticiaItem } from '../../providers/entities/NoticiaItem.entity';
 import { environment } from 'src/environments/environment';
-import { NoticiaByIdDto } from '../../providers/dto/noticiaByIdDto';
+import { NoticiaByIdDto } from '../../providers/dto/dtoById/noticiaByIdDto';
 import { CrearNoticiaDto } from '../../providers/dto/dtoCrear/CrearNoticiaDto';
 
 @Injectable({

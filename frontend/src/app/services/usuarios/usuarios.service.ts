@@ -4,7 +4,7 @@ import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { UsuarioItem } from 'src/app/providers/entities/UsuarioItem.entity';
 import { UsuariosDto } from 'src/app/providers/dto/UsuariosDto';
-import { UsuarioByIdDto } from 'src/app/providers/dto/UsuarioByIdDto';
+import { UsuarioByIdDto } from 'src/app/providers/dto/dtoById/UsuarioByIdDto';
 import { CrearUsuarioDto } from 'src/app/providers/dto/dtoCrear/CrearUsuarioDto';
 import { User } from '../../providers/model/user.model';
 import { LoginDto } from '../../providers/dto/dtoLogin/LoginDto';

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { NoticiasService } from '../services/noticias/noticias.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
-import { NoticiaByIdDto } from '../providers/dto/noticiaByIdDto';
+import { NoticiaByIdDto } from '../providers/dto/dtoById/noticiaByIdDto';
 import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { TagsService } from '../services/tags/tags.service';
@@ -15,7 +15,7 @@ import { Validators, FormControl, FormGroup } from '@angular/forms';
 import { CrearComentarioDto } from '../providers/dto/dtoCrear/CrearComentarioDto';
 import { UsuarioItem } from '../providers/entities/UsuarioItem.entity';
 import { UsuariosService } from '../services/usuarios/usuarios.service';
-import { UsuarioByIdDto } from '../providers/dto/UsuarioByIdDto';
+import { UsuarioByIdDto } from '../providers/dto/dtoById/UsuarioByIdDto';
 import { User } from '../providers/model/user.model';
 
 @Component({

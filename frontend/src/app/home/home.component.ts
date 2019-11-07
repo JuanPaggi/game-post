@@ -37,8 +37,8 @@ export class HomeComponent implements OnInit {
   clickedRegistrarse(){
     this.router.navigateByUrl(`/registro`);
   }
-  clickedRequisitos(){
-    this.router.navigateByUrl(`/requisitos`);
+  clickedPanel(){
+    this.router.navigateByUrl(`/panel`);
   }
 
   clickedSalir(){
