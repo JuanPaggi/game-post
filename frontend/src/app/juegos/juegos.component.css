@@ -1,0 +1,22 @@
+.juego-container{
+    border-radius: 15px;
+    margin: 10px 0;
+    padding: 20px;
+    background-color: white;
+}
+
+.enlace-juego{
+    cursor: pointer;
+}
+
+.titulo-juego{
+    display: flex;
+    justify-content: center;
+    color: white;
+}
+
+.juegos{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}

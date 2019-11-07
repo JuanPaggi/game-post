@@ -2,6 +2,7 @@ package com.game.persistence.models;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -50,6 +51,14 @@ public class Noticias {
     inverseJoinColumns = 
     @JoinColumn(name = "id_tag", referencedColumnName = "id_tag"))
 	private List<Tag> tags;
+	
+	@ManyToMany(fetch = FetchType.LAZY) 
+    @JoinTable(name = "noticias_imagenes", 
+    joinColumns = 
+    @JoinColumn(name = "id_noticia", referencedColumnName = "id_noticia"), 
+    inverseJoinColumns = 
+    @JoinColumn(name = "id_imagen", referencedColumnName = "id_imagen"))
+	private Set<Imagenes> imagenes;
 	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
 	@JoinColumn(name="id_noticia", referencedColumnName = "id_noticia", nullable = false, insertable = false, updatable = false)
@@ -123,6 +132,12 @@ public class Noticias {
 		this.tags = tags;
 	}
 
-	
+	public Set<Imagenes> getImagenes() {
+		return imagenes;
+	}
+
+	public void setImagenes(Set<Imagenes> imagenes) {
+		this.imagenes = imagenes;
+	}
 	
 }

@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -15,9 +16,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.game.controllers.juegos.dto.JuegoInput;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.services.juegos.JuegosService;
 import com.game.services.juegos.exceptions.JuegosNotFound;
@@ -34,6 +37,7 @@ import io.swagger.annotations.ApiResponses;
  */
 
 @RestController
+@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.DELETE,RequestMethod.POST})
 @RequestMapping("${v1API}/juegos")
 public class JuegosControllers {
 	
@@ -83,7 +87,7 @@ public class JuegosControllers {
 		@ApiResponse(code = 200, message = "OK, devuelve el id del juego insertado"),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Long> addJuego( @RequestBody JuegoItem body){
+	public @ResponseBody ResponseEntity<Long> addJuego( @RequestBody JuegoInput body){
 		try {
 			return new ResponseEntity<Long>(juegosService.addJuego(body), HttpStatus.OK);
 		} catch(Exception e) {
@@ -120,7 +124,7 @@ public class JuegosControllers {
 		@ApiResponse(code = 400, message = "Id no valido."),
 		@ApiResponse(code = 500, message = "Unexpected error.")
 		})
-	public @ResponseBody ResponseEntity<Void> editJuego(@PathVariable("idJuego") String idJuego, @RequestBody JuegoItem body) {
+	public @ResponseBody ResponseEntity<Void> editJuego(@PathVariable("idJuego") String idJuego, @RequestBody JuegoInput body) {
 		try {
 			juegosService.editJuego( idJuego, body);
 			return new ResponseEntity<Void>(HttpStatus.OK);

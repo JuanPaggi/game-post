@@ -1,15 +1,21 @@
 package com.game.services.juegos;
 
+import java.security.NoSuchAlgorithmException;
 import java.text.ParseException;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.game.controllers.juegos.dto.JuegoInput;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.persistence.models.Admin;
+import com.game.persistence.models.Imagenes;
 import com.game.persistence.models.Juegos;
 import com.game.persistence.models.Modos;
 import com.game.persistence.models.Requisitos;
@@ -20,6 +26,7 @@ import com.game.persistence.repository.JuegosRepository;
 import com.game.persistence.repository.ModosRepository;
 import com.game.persistence.repository.RequisitosRepository;
 import com.game.persistence.repository.TagRepository;
+import com.game.services.fileService.FileService;
 import com.game.services.juegos.exceptions.JuegosNotFound;
 import com.game.services.modos.exceptions.ModosNotFound;
 import com.game.services.tag.exceptions.TagNotFound;
@@ -49,6 +56,13 @@ public class JuegosService {
 	
 	@Autowired
 	AdminRepository adminRepository;
+	
+	@Autowired
+	FileService fileService;
+	
+	public String formatSeo(String text) {
+		return StringUtils.strip(text.replaceAll("([^a-zA-Z0-9]+)", "-"), "-");
+	}
 
 	public JuegoItem getJuego(long id) throws JuegosNotFound {
 		
@@ -78,11 +92,20 @@ public class JuegosService {
 		}
 		juegoItem.tags = tag_id;
 		juegoItem.modos = modo_id;
+		
+		ArrayList<String> imagenes = new ArrayList<String>();
+		for (Imagenes imagen : juego.get().getImagenes()) {
+			if(imagen != null) {
+				imagenes.add("/image/"+imagen.getId_imagen()+"/"+formatSeo(juego.get().getTitulo())+".jpg");
+			}
+		}
+		juegoItem.archivoImagen = imagenes;
+		
 		return juegoItem;
 		
 	}
 	
-	public long addJuego(JuegoItem juegoIn) throws TagNotFound{
+	public long addJuego(JuegoInput juegoIn) throws TagNotFound, NoSuchAlgorithmException{
 		
 		Juegos juego = new Juegos();
 		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
@@ -102,6 +125,13 @@ public class JuegosService {
 		juego.setAdmin(admin.get());
 		juego.setTag(lista_tag);
 		juego.setModos(lista_modo);
+		
+		Set<Imagenes> imagenes = new HashSet<Imagenes>();
+		for (byte[] imagen : juegoIn.archivoImagen) {
+			imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));
+		}
+		juego.setImagenes(imagenes);	
+		
 		juego = juegosRepository.save(juego);
 		return juego.getId_juego();
 	
@@ -136,6 +166,15 @@ public class JuegosService {
 			}
 			item.tags = tag_id;
 			item.modos = modo_id;
+			
+			ArrayList<String> imagenes = new ArrayList<String>();
+			for (Imagenes imagen : juego.getImagenes()) {
+				if(imagen != null) {
+					imagenes.add("/image/"+imagen.getId_imagen()+"/"+formatSeo(juego.getTitulo())+".jpg");
+				}
+			}
+			item.archivoImagen = imagenes;
+			
 			out.add(item);
 		}
 		return out;
@@ -150,10 +189,11 @@ public class JuegosService {
 	
 	}
 	
-	public void editJuego(String id, JuegoItem juegoIn) throws JuegosNotFound,TagNotFound, NumberFormatException, ModosNotFound{
+	public void editJuego(String id, JuegoInput juegoIn) throws JuegosNotFound,TagNotFound, NumberFormatException, ModosNotFound, NoSuchAlgorithmException{
 		
 		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
 		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
+		Optional<Admin> admin = adminRepository.findById(juegoIn.id_admin_creado);
 		if(juego.isEmpty() && requisitos.isEmpty()) throw new JuegosNotFound();
 		Juegos juegoObj = juego.get();
 		juegoObj.setTitulo(juegoIn.titulo);
@@ -171,6 +211,18 @@ public class JuegosService {
 		juegoObj.setTag(lista_tag);
 		if(lista_modo.size() != juegoIn.modos.size()) throw new ModosNotFound();
 		juegoObj.setModos(lista_modo);
+		
+		Set<Imagenes> imagenes = new HashSet<Imagenes>();
+		for (byte[] imagen : juegoIn.archivoImagen) {
+			imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));
+		}
+		
+		for (Imagenes imagen : juego.get().getImagenes()) {
+			fileService.removeImage(imagen.getId_imagen());
+		}
+		
+		juegoObj.setImagenes(imagenes);	
+		
 		juegosRepository.save(juegoObj);
 		
 	}

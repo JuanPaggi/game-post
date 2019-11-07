@@ -1,0 +1,15 @@
+<header class="container-fluid header">
+  <nav class="navbar">
+    <a class="logo-header" href="#">
+      <img src="../../assets/ganador.svg" alt="" height="50" width="50">
+      <h1 class="titulo-header">World Game</h1>
+    </a>
+    <div *ngIf="user">
+      <p class="login-bienvenido">Bienvenido {{usuario}}</p>
+    </div>
+  </nav>
+  <div class="buscador-header">
+    <input type="text" class="input-header">
+    <button class="boton-buscar">Buscar</button>
+  </div>
+</header>

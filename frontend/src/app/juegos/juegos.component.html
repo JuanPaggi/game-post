@@ -1,0 +1,138 @@
+<section class="juegos-container">
+    <div class="container">
+        <div class="row juegos" >
+            <h2 class="titulo-juego">Juegos</h2>
+            <div class="col-12" *ngFor="let juego of juegos">
+                <a class="enlace-juego" (click)="clicked(juego)">
+                    <div class="juego-container">
+                        <h3>{{juego.titulo}}</h3>
+                        <p>{{ juego.descripcion }}</p> 
+                        <p>Fecha de lanzamiento: {{ getFecha(juego) }}</p>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="user">
+            <div class="col-md-12">
+                <h2 class="titulo-juego">Crear Juego</h2>
+        
+                <form [formGroup] = "formAddJuego">
+                        <ul class="list-group">
+        
+                            <li class="list-group-item">
+                                <div class="media-body media-middle form-group item-form">
+                                    <label>Titulo</label>
+                                    <input type="text" class="form-control" [(ngModel)]="titulo" required minlength="10" [ngModelOptions]="{standalone: true}">
+                                    <div *ngIf="!titulo" class="alert alert-danger">
+                                        <div>
+                                            Titulo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+        
+                            <li class="list-group-item">
+                                <div class="media-body media-middle form-group item-form">
+                                    <label>Descripcion</label>
+                                    <textarea class="form-control" [(ngModel)]="descripcion" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                    <div *ngIf="!descripcion" class="alert alert-danger">
+                                        <div>
+                                            El descripcion es requerida.
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+        
+                            <li class="list-group-item">
+                                <div class="media-body media-middle">
+                                    <label>Genero</label>
+                                    <textarea class="form-control" [(ngModel)]="genero" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                    <div *ngIf="!genero" class="alert alert-danger">
+                                        <div>
+                                            El genero es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="media-body media-middle">
+                                    <label>Tipo</label>
+                                    <textarea class="form-control" [(ngModel)]="tipo" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                    <div *ngIf="!tipo" class="alert alert-danger">
+                                        <div>
+                                            El tipo es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="media-body media-middle">
+                                    <label>Desarrollador</label>
+                                    <textarea class="form-control" [(ngModel)]="desarrollador" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                    <div *ngIf="!desarrollador" class="alert alert-danger">
+                                        <div>
+                                            El desarrollador es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+        
+                            <li class="list-group-item">
+                                <div class="media-body media-middle">
+                                    <label>Fecha Lanzamiento</label>
+                                    <textarea class="form-control" [(ngModel)]="fecha_lanzamiento" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                                    <div *ngIf="!fecha_lanzamiento" class="alert alert-danger">
+                                        <div>
+                                            La Fecha es requerido.
+                                        </div>
+                                    </div>
+                                </div>
+                            </li>
+    
+                            <li class="list-group-item">
+                                <div class="media-body media-middle">
+                                    <label>Tags:</label>
+                                    <div *ngFor="let tag of tags"> {{tag.id_tag}}.{{tag.etiqueta}}</div>
+                                    <p>Ingrese el numero de la etiqueta: (separados por comas)</p>
+                                    <textarea class="form-control" [(ngModel)]="tagsId" [ngModelOptions]="{standalone: true}"></textarea>
+                                </div>
+                            </li>
+
+                            <li class="list-group-item">
+                                <div class="media-body media-middle">
+                                    <label>Modos:</label>
+                                    <div *ngFor="let modo of modos"> {{modo.id_modo}}.{{modo.modo}}</div>
+                                    <p>Ingrese el numero del Modo: (separados por comas)</p>
+                                    <textarea class="form-control" [(ngModel)]="modosId" [ngModelOptions]="{standalone: true}"></textarea>
+                                </div>
+                            </li>
+    
+                            <li class="list-group-item">
+                                <div class="media-body">
+                                    <label>Imagen</label>
+                                    <button type="button" class="btn btn-primary" (click)="openImage()">Elegir imagen</button>
+                                    <input type="file" #imageUpload accept="image/*" style="display: none"/>
+                                    <div *ngIf="!imageUpload" class="alert alert-danger">
+                                        <div>
+                                            La imagen es requerida.
+                                        </div>
+                                    </div>
+                                    <div class="previews">
+                                        <img *ngFor="let imagen of imagenesUrl; let i = index" [src]="imagen" (click)="deleteImage(i)" style="width: 50px; height: 50px;cursor: not-allowed;" />
+                                    </div>
+                                </div>
+                            </li>
+        
+                        </ul>
+                        <button class="btn btn-success" (click)="agregarJuego()">Guardar</button>
+                    </form>
+            </div>
+        </div> 
+
+        <button class="btn btn-primary m-3" (click)="volverHome()">Volver</button>
+
+    </div>
+</section>

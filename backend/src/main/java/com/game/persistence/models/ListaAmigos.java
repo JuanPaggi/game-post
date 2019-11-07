@@ -14,7 +14,7 @@ import javax.persistence.ManyToOne;
  */
 
 @Entity
-public class Lista_amigos {
+public class ListaAmigos {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

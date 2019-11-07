@@ -66,11 +66,11 @@ public class Usuarios {
 	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
 	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
-	private List<Lista_amigos> usuarios;
+	private List<ListaAmigos> usuarios;
 	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
 	@JoinColumn(name="id_amigo", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
-	private List<Lista_amigos> usuarios_amigo;
+	private List<ListaAmigos> usuarios_amigo;
 	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
 	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
@@ -208,19 +208,19 @@ public class Usuarios {
 		this.analisis = analisis;
 	}
 
-	public List<Lista_amigos> getUsuarios() {
+	public List<ListaAmigos> getUsuarios() {
 		return usuarios;
 	}
 
-	public void setUsuarios(List<Lista_amigos> usuarios) {
+	public void setUsuarios(List<ListaAmigos> usuarios) {
 		this.usuarios = usuarios;
 	}
 
-	public List<Lista_amigos> getUsuarios_amigo() {
+	public List<ListaAmigos> getUsuarios_amigo() {
 		return usuarios_amigo;
 	}
 
-	public void setUsuarios_amigo(List<Lista_amigos> usuarios_amigo) {
+	public void setUsuarios_amigo(List<ListaAmigos> usuarios_amigo) {
 		this.usuarios_amigo = usuarios_amigo;
 	}
 

@@ -1,0 +1,10 @@
+<section class="home">
+    <div class="main">
+        <button class="enlace-juego" (click)="clickedJuegos()">Juegos</button>
+        <button class="enlace-juego" (click)="clickedNoticias()">Noticias</button>
+        <button *ngIf="user" class="enlace-juego" (click)="clickedPanel()">Panel</button>
+        <button *ngIf="!user" class="enlace-juego" (click)="clickedLogin()">Login</button>
+        <button *ngIf="!user" class="enlace-juego" (click)="clickedRegistrarse()">Registrarse</button>
+        <button *ngIf="user" class="enlace-juego" (click)="clickedSalir()">Salir</button>
+    </div>
+</section>

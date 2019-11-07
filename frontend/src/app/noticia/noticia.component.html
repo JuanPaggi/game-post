@@ -1,0 +1,60 @@
+<section class="container">
+  <div class="noticia">
+
+    <div class="noticia-titulo">
+      <h2>{{ titulo }}</h2>
+    </div>
+
+    <div class="noticia-descripcion">
+      <p>{{ descripcion }}</p>
+    </div>
+
+    <div class="noticia-cuerpo">
+      <p>{{ cuerpo }}</p>
+    </div>
+
+    <div class="noticia-fecha">
+      <p class="m-b-0 clearfix" >Fecha de publicacion: {{ fecha }}</p>
+    </div>
+
+    <div class="noticia-tags">
+      <div *ngFor="let tags of tagsEtiquetas">
+        <p>{{ tags }} &nbsp; </p>
+      </div>
+    </div>
+
+    <div class="noticia-imagen" *ngIf="hayImagen">
+      <div  *ngFor="let imagen of urlImagen">
+          <img [src]="apiURL + imagen" style="width: 40px; height: 40px;" />
+      </div>
+    </div>
+
+    <div class="noticia-comentario">
+      <div *ngFor="let comentarios of comentariosTexto">
+        <p>{{ comentarios }}</p>
+      </div>
+    </div>
+
+    <br><br><br>
+
+    <div *ngIf="user">
+      <li class="list-group-item">
+        <div class="media-body media-middle">
+            <label>Agregar Comentario:</label>
+            <textarea class="form-control" [(ngModel)]="comentarioIngresado" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+            <button class="btn btn-success" (click)="agregarComentario()">Agregar</button>
+        </div>
+      </li>
+    </div>
+
+    <br><br><br>
+
+    <div *ngIf="user">
+      <button class="btn btn-success" (click)="borrarNoticia()">Borrar Noticia</button>
+    </div>
+
+  </div>
+
+  <button class="btn btn-primary" (click)="volverNoticias()">Volver</button>
+
+</section>
