@@ -15,7 +15,7 @@ import { RegistroComponent } from './registro/registro.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JuegosComponent } from './juegos/juegos.component';
 import { JuegoComponent } from './juego/juego.component';
-import { RequisitosComponent } from './requisitos/requisitos.component';
+import { PanelComponent } from './panel/panel.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +29,7 @@ import { RequisitosComponent } from './requisitos/requisitos.component';
     RegistroComponent,
     JuegosComponent,
     JuegoComponent,
-    RequisitosComponent
+    PanelComponent
   ],
   imports: [
     BrowserModule,
