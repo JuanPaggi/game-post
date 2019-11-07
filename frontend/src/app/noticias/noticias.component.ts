@@ -108,7 +108,11 @@ export class NoticiasComponent implements OnInit {
       noticia.titulo = this.titulo;
       noticia.fecha_publicacion = this.fecha_publicacion;
       noticia.id_admin_creado = 1;
-      noticia.tags = this.tagsId.split(',').map(Number);
+      if (this.tagsId != null) {
+        noticia.tags = this.tagsId.split(',').map(Number);
+      }else{
+        noticia.tags= [];
+      }
       noticia.nombreImagen = "hola";
       noticia.archivoImagen = this.imageFile;
       this.noticiasSrv.addNoticia(noticia).subscribe();
@@ -131,6 +135,10 @@ export class NoticiasComponent implements OnInit {
     this.fecha = noticia.fecha_publicacion.toString();
     this.fecha = this.fecha.slice(0,10);
     return this.fecha;
+  }
+
+  volverHome(){
+    this.router.navigateByUrl(`/`);
   }
 
 }

@@ -18,7 +18,8 @@ CREATE TABLE `usuarios` (
   `puntos` INT NOT NULL,
   `fecha_inscripcion` TIMESTAMP NOT NULL,
   `email_verificado` bit NOT NULL,
-  PRIMARY KEY (`id_usuario`)
+  PRIMARY KEY (`id_usuario`),
+  UNIQUE KEY (`email`, `usuario`)
 );
 
 -- ---
@@ -41,7 +42,8 @@ CREATE TABLE `juegos` (
   `analisis_positivos` INT NOT NULL,
   `analisis_negativos` INT NOT NULL,
   PRIMARY KEY (`id_juego`),
-KEY (`id_admin_creado`, `id_requisito`)
+KEY (`id_admin_creado`, `id_requisito`),
+  UNIQUE KEY (`titulo`)
 );
 
 -- ---
@@ -72,12 +74,13 @@ DROP TABLE IF EXISTS `imagenes`;
 CREATE TABLE `imagenes` (
   `id_imagen` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(256) NOT NULL,
-  `imagen` BLOB NOT NULL,
+  `imagen` MEDIUMBLOB NOT NULL,
   `imagen_checksum` BINARY(20) NOT NULL DEFAULT 'NUL',
   `id_admin_subido` INT NOT NULL,
   `fecha_subida` DATE NOT NULL,
   PRIMARY KEY (`id_imagen`),
-KEY (`id_admin_subido`)
+KEY (`id_admin_subido`),
+  UNIQUE KEY (`nombre`, `imagen_checksum`)
 );
 
 -- ---
@@ -91,7 +94,8 @@ CREATE TABLE `admin` (
   `id_admin` INT NOT NULL AUTO_INCREMENT,
   `usuario` VARCHAR(64) NOT NULL,
   `clave` VARCHAR(64) NOT NULL,
-  PRIMARY KEY (`id_admin`)
+  PRIMARY KEY (`id_admin`),
+  UNIQUE KEY (`usuario`)
 );
 
 -- ---
@@ -104,7 +108,8 @@ DROP TABLE IF EXISTS `privilegios`;
 CREATE TABLE `privilegios` (
   `id_privilegio` INT NOT NULL AUTO_INCREMENT,
   `privilegio` VARCHAR(256) NOT NULL,
-  PRIMARY KEY (`id_privilegio`)
+  PRIMARY KEY (`id_privilegio`),
+  UNIQUE KEY (`privilegio`)
 );
 
 -- ---
@@ -130,7 +135,8 @@ DROP TABLE IF EXISTS `tag`;
 CREATE TABLE `tag` (
   `id_tag` INT NOT NULL AUTO_INCREMENT,
   `etiqueta` VARCHAR(128) NOT NULL,
-  PRIMARY KEY (`id_tag`)
+  PRIMARY KEY (`id_tag`),
+  UNIQUE KEY (`etiqueta`)
 );
 
 -- ---
@@ -156,7 +162,8 @@ DROP TABLE IF EXISTS `modos`;
 CREATE TABLE `modos` (
   `id_modo` INT NOT NULL AUTO_INCREMENT,
   `modo` VARCHAR(128) NOT NULL,
-  PRIMARY KEY (`id_modo`)
+  PRIMARY KEY (`id_modo`),
+  UNIQUE KEY (`modo`)
 );
 
 -- ---
@@ -187,7 +194,8 @@ CREATE TABLE `noticias` (
   `fecha_publicacion` DATE NOT NULL,
   `id_admin_creado` INT NOT NULL,
   PRIMARY KEY (`id_noticia`),
-KEY (`id_admin_creado`)
+KEY (`id_admin_creado`),
+  UNIQUE KEY (`titulo`)
 );
 
 -- ---

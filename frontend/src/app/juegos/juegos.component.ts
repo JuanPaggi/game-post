@@ -129,15 +129,22 @@ export class JuegosComponent implements OnInit {
       juego.genero = this.genero;
       juego.tipo = this.tipo;
       juego.desarrollador = this.desarrollador;
-      juego.desarrollador = this.desarrollador;
       juego.fecha_lanzamiento = this.fecha_lanzamiento;
       juego.analisis_negativos = 0;
       juego.analisis_positivos = 0;
       juego.id_admin_creado = 1;
       juego.id_requisitos = 1;
-      juego.tags = this.tagsId.split(',').map(Number);
-      juego.modos = this.modosId.split(',').map(Number);
-      juego.nombreImagen = "hola";
+      if (this.tagsId != null) {
+        juego.tags = this.tagsId.split(',').map(Number);
+      }else{
+        juego.tags= [];
+      }
+      if (this.modosId != null) {
+        juego.modos = this.modosId.split(',').map(Number);
+      }else{
+        juego.modos= [];
+      }
+      juego.nombreImagen = "image";
       juego.archivoImagen = this.imageFile;
       this.juegosSrv.addJuego(juego).subscribe();
     } else {
@@ -159,6 +166,10 @@ export class JuegosComponent implements OnInit {
   clicked(juego: JuegoItem) {
     this.juego = juego;
     this.router.navigateByUrl(`/juegos/${juego.id_juego}`);
+  }
+
+  volverHome(){
+    this.router.navigateByUrl(`/`);
   }
 
 }

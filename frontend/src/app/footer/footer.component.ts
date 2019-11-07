@@ -14,8 +14,12 @@ export class FooterComponent implements OnInit {
   }
 
 
-  clicked() {
+  clickedNoticias() {
     this.router.navigateByUrl(`/noticias`);
+  }
+
+  clickedJuegos() {
+    this.router.navigateByUrl(`/juegos`);
   }
 
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { JuegosService } from '../services/juegos/juegos.service';
 import { TagsService } from '../services/tags/tags.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { LocationStrategy } from '@angular/common';
 import { TagItem } from '../providers/entities/TagItem.entity';
 import { environment } from 'src/environments/environment';
@@ -53,6 +53,7 @@ export class JuegoComponent implements OnInit {
     private tagsSrv: TagsService,
     private modosSrv: ModosService,
     private route: ActivatedRoute,
+    private router: Router,
     private usuariosSrv: UsuariosService,
     private location: LocationStrategy)
   {
@@ -173,5 +174,9 @@ export class JuegoComponent implements OnInit {
 
   borrarJuego(){
     this.juegosSrv.deleteJuego(this.juego.id_juego).subscribe();
+  }
+
+  volverJuegos(){
+    this.router.navigateByUrl(`/juegos`);
   }
 }

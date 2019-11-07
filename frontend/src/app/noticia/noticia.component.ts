@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NoticiasService } from '../services/noticias/noticias.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { NoticiaByIdDto } from '../providers/dto/noticiaByIdDto';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { environment } from 'src/environments/environment';
 import { TagsService } from '../services/tags/tags.service';
 import { TagsDto } from '../providers/dto/TagsDto';
@@ -54,6 +54,7 @@ export class NoticiaComponent implements OnInit {
     private tagsSrv: TagsService,
     private usuariosSrv: UsuariosService,
     private route: ActivatedRoute,
+    private router: Router,
     private location: LocationStrategy)
   {
     this.tags = [];
@@ -197,6 +198,10 @@ export class NoticiaComponent implements OnInit {
 
   borrarNoticia(){
     this.noticiasSrv.deleteNoticia(this.noticia.id_noticia).subscribe();
+  }
+
+  volverNoticias(){
+    this.router.navigateByUrl(`/noticias`);
   }
 
 }
