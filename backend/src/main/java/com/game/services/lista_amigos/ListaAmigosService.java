@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.game.controllers.lista_amigos.dto.ListaAmigosItem;
-import com.game.persistence.models.Lista_amigos;
+import com.game.persistence.models.ListaAmigos;
 import com.game.persistence.models.Usuarios;
 import com.game.persistence.repository.Lista_amigosRepository;
 import com.game.persistence.repository.UsuariosRepository;
@@ -31,11 +31,11 @@ public class ListaAmigosService {
 	
 	public long addAmigo(ListaAmigosItem amigoIn) throws UsuariosNotFound{
 		
-		Optional<Lista_amigos> lista = lista_amigosRepository.findByIdUsuario(amigoIn.id_usuario, amigoIn.id_amigo);
+		Optional<ListaAmigos> lista = lista_amigosRepository.findByIdUsuario(amigoIn.id_usuario, amigoIn.id_amigo);
 		if(lista.isEmpty()) {
 			Optional<Usuarios> usuario = usuariosrepository.findById(amigoIn.id_usuario);
 			Optional<Usuarios> usuario_amigo = usuariosrepository.findById(amigoIn.id_amigo);
-			Lista_amigos lista_amigo = new Lista_amigos();
+			ListaAmigos lista_amigo = new ListaAmigos();
 			lista_amigo.setUsuario(usuario.get());
 			lista_amigo.setUsuario_amigo(usuario_amigo.get());
 			lista_amigosRepository.save(lista_amigo);
@@ -48,10 +48,10 @@ public class ListaAmigosService {
 	
 	public List<ListaAmigosItem> getAllAmigos(String id) throws ParseException, UsuariosNotFound{
 		
-		List<Lista_amigos> lista_amigos = lista_amigosRepository.findAmigosById(Long.parseLong(id));
+		List<ListaAmigos> listaAmigos = lista_amigosRepository.findAmigosById(Long.parseLong(id));
 		List<ListaAmigosItem> out = new ArrayList<ListaAmigosItem>();
-		if(lista_amigos.isEmpty()) { throw new UsuariosNotFound(); }
-		for(Lista_amigos lista_amigo: lista_amigos) {
+		if(listaAmigos.isEmpty()) { throw new UsuariosNotFound(); }
+		for(ListaAmigos lista_amigo: listaAmigos) {
 			ListaAmigosItem item = new ListaAmigosItem();
 			item.id_usuario = lista_amigo.getUsuario().getId_usuario();
 			item.id_amigo = lista_amigo.getUsuario_amigo().getId_usuario();
@@ -63,7 +63,7 @@ public class ListaAmigosService {
 	
 	public void removeAmigo(long id_usuario, long id_amigo) throws UsuariosNotFound, NumberFormatException {
 		
-		Optional<Lista_amigos> lista_amigo = lista_amigosRepository.findByIdUsuario(id_usuario, id_amigo);
+		Optional<ListaAmigos> lista_amigo = lista_amigosRepository.findByIdUsuario(id_usuario, id_amigo);
 		if(lista_amigo.isEmpty()) throw new UsuariosNotFound();
 		lista_amigosRepository.delete(lista_amigo.get());
 	
