@@ -13,6 +13,7 @@ import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { ModosService } from '../services/modos/modos.service';
 import { ModoItem } from '../providers/entities/ModoItem.entity';
 import { ModosDto } from '../providers/dto/ModosDto';
+import { AdminService } from '../services/admin/admin.service';
 
 @Component({
   selector: 'app-juegos',
@@ -44,7 +45,7 @@ export class JuegosComponent implements OnInit {
   imageFile: number[][];
   imagenesUrl: string[];
 
-  user: User;
+  userAdm: User;
 
   @ViewChild('imageUpload', {static: false}) imagInput: ElementRef;
 
@@ -53,7 +54,7 @@ export class JuegosComponent implements OnInit {
     private juegosSrv: JuegosService,
     private tagsSrv: TagsService,
     private modosSrv: ModosService,
-    private usuariosSrv: UsuariosService,
+    private adminSrv: AdminService,
   ) { 
     this.imageFile = [];
     this.imagenesUrl = [];
@@ -70,7 +71,7 @@ export class JuegosComponent implements OnInit {
       id_requisitos: new FormControl(Validators.required),
       tagsId: new FormControl(Validators.required),
     });
-    this.user = this.usuariosSrv.getUserLoggedIn();
+    this.userAdm = this.adminSrv.getUserLoggedIn();
   }
 
   getJuegos() {

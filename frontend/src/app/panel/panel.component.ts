@@ -5,6 +5,7 @@ import { RequisitosService } from '../services/requisitos/requisitos.service';
 import { Router } from '@angular/router';
 import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { User } from '../providers/model/user.model';
+import { AdminService } from '../services/admin/admin.service';
 
 @Component({
   selector: 'app-panel',
@@ -21,16 +22,16 @@ export class PanelComponent implements OnInit {
 
   formAddRequisito: FormGroup;
 
-  user: User;
+  userAdm: User;
 
   constructor(
-    private usuariosSrv: UsuariosService,
+    private adminSrv: AdminService,
     private router: Router,
     private requisitoSrv: RequisitosService,
   ) { }
 
   ngOnInit() {
-    this.user = this.usuariosSrv.getUserLoggedIn();
+    this.userAdm = this.adminSrv.getUserLoggedIn();
     this.formAddRequisito = new FormGroup({
       sistema_operativo: new FormControl(Validators.required),
       procesador: new FormControl(Validators.required),

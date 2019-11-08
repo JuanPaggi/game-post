@@ -13,6 +13,7 @@ import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { ModoItem } from '../providers/entities/ModoItem.entity';
 import { ModosService } from '../services/modos/modos.service';
 import { ModosDto } from '../providers/dto/ModosDto';
+import { AdminService } from '../services/admin/admin.service';
 
 @Component({
   selector: 'app-juego',
@@ -47,6 +48,7 @@ export class JuegoComponent implements OnInit {
   hayImagen: boolean;
 
   user: User;
+  userAdm: User;
 
   constructor(
     private juegosSrv: JuegosService,
@@ -54,7 +56,7 @@ export class JuegoComponent implements OnInit {
     private modosSrv: ModosService,
     private route: ActivatedRoute,
     private router: Router,
-    private usuariosSrv: UsuariosService,
+    private adminSrv: AdminService,
     private location: LocationStrategy)
   {
     this.tags = [];
@@ -77,7 +79,7 @@ export class JuegoComponent implements OnInit {
         this.id_juego = parseInt(params.id_juego, 10);
     });
     this.getJuego();
-    this.user = this.usuariosSrv.getUserLoggedIn();
+    this.userAdm = this.adminSrv.getUserLoggedIn();
   }
 
   getJuego(){
