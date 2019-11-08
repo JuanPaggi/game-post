@@ -17,6 +17,7 @@ import { UsuarioItem } from '../providers/entities/UsuarioItem.entity';
 import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { UsuarioByIdDto } from '../providers/dto/dtoById/UsuarioByIdDto';
 import { User } from '../providers/model/user.model';
+import { AdminService } from '../services/admin/admin.service';
 
 @Component({
   selector: 'app-noticia',
@@ -47,12 +48,14 @@ export class NoticiaComponent implements OnInit {
   formAddComentario: FormGroup;
 
   user: User;
+  userAdm: User;
 
   constructor(
     private noticiasSrv: NoticiasService,
     private ComentariosSrv: ComentariosService,
     private tagsSrv: TagsService,
     private usuariosSrv: UsuariosService,
+    private adminSrv: AdminService,
     private route: ActivatedRoute,
     private router: Router,
     private location: LocationStrategy)
@@ -82,6 +85,7 @@ export class NoticiaComponent implements OnInit {
       comentarioIngresado: new FormControl(Validators.required),
     });
     this.user = this.usuariosSrv.getUserLoggedIn();
+    this.userAdm = this.adminSrv.getUserLoggedIn();
   }
 
   getNoticia() {
@@ -142,7 +146,6 @@ export class NoticiaComponent implements OnInit {
       comentarioIn.comentario = this.comentarioIngresado;
       comentarioIn.fecha_publicacion = new Date();
       comentarioIn.id_noticia = this.noticia.id_noticia;
-      console.log(this.usuario.id_usuario)
       comentarioIn.id_usuario = this.usuario.id_usuario;
       this.ComentariosSrv.addComentario(comentarioIn).subscribe(
         response => {

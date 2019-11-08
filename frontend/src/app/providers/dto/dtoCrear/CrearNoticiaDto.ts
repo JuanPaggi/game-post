@@ -1,7 +1,7 @@
 export class CrearNoticiaDto {
-    titulo: string;
-    descripcion: string;
-    cuerpo: string;
+    titulo: String;
+    descripcion: String;
+    cuerpo: String;
     fecha_publicacion: Date;
     id_admin_creado: number;
     tags: number[];

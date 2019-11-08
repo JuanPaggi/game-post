@@ -8,6 +8,7 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.game.controllers.admin.dto.AdminInput;
 import com.game.controllers.admin.dto.AdminItem;
 import com.game.persistence.models.Admin;
 import com.game.persistence.models.Privilegios;
@@ -73,12 +74,11 @@ public class AdminService {
 		
 	}
 	
-	public long addAdmin(AdminItem adminIn) throws PrivilegioNotFound {
+	public long addAdmin(AdminInput adminIn) throws PrivilegioNotFound {
 		
 		Admin admin = new Admin();
 		List<Privilegios> lista_privilegios= privilegiosRepository.findAllById(adminIn.privilegios);
 		if(lista_privilegios.size() != adminIn.privilegios.size()) throw new PrivilegioNotFound();
-		admin.setId_admin(adminIn.id_admin);
 		admin.setUsuario(adminIn.usuario);
 		admin.setClave(adminIn.clave);
 		admin.setPrivilegios(lista_privilegios);
@@ -106,6 +106,14 @@ public class AdminService {
 		if(lista_privilegios.size() != adminIn.privilegios.size()) throw new PrivilegioNotFound();
 		adminObj.setPrivilegios(lista_privilegios);
 		adminRepository.save(adminObj);
+		
+	}
+	
+	public long verificarLogin(String usuario, String clave){
+		
+		Optional<Admin> user = adminRepository.findByUser(usuario,clave);
+		if(user.isEmpty()) return 0;
+		return user.get().getId_admin();
 		
 	}
 	

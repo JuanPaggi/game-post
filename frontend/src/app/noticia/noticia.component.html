@@ -37,7 +37,7 @@
 
     <br><br><br>
 
-    <div *ngIf="user">
+    <div *ngIf="user || userAdm">
       <li class="list-group-item">
         <div class="media-body media-middle">
             <label>Agregar Comentario:</label>
@@ -49,7 +49,7 @@
 
     <br><br><br>
 
-    <div *ngIf="user">
+    <div *ngIf="userAdm">
       <button class="btn btn-success" (click)="borrarNoticia()">Borrar Noticia</button>
     </div>
 
