@@ -3,3 +3,38 @@
     display: flex;
     justify-content: center;
 }
+
+.contenedor-panel{
+    height: 500px;
+    width: 800px;
+    background-color: rgb(236, 236, 236);
+    border-radius: 15px;
+    box-shadow: 0px 0px 2px 4px rgb(182, 182, 182);
+}
+
+.panel-botones{
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 50%;
+}
+
+.btn-panel{
+    height: 150px;
+    width: 150px;
+    border-radius: 10px;
+    box-shadow: 2px 3px 8px 2px rgb(182, 182, 182);
+    border: none;
+    color: #000000b8;
+}
+
+.btn-panel:active{
+    border: 2px solid #cacaca;
+}
+
+button:focus {outline:0;}
+
+.img-panel{
+    height: 50px;
+    width: 50px;
+}

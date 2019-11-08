@@ -1,4 +1,26 @@
 <div class="container">
+
+    <div class="row">
+        <div class="col d-flex justify-content-center">
+            <div class="contenedor-panel mb-5">
+                <div class="panel-botones pt-4">
+                    <button class="btn-panel">
+                        <img class="img-panel mt-2" src="../../assets/ajustes.svg" alt="">
+                        <p class="m-1 mt-2">Configuracion</p>
+                        <p>Juegos</p>
+                    </button>
+                    <button class="btn-panel">Noticias</button>
+                    <button class="btn-panel">Requisitos</button>
+                </div>
+                <div class="panel-botones pb-4">
+                    <button class="btn-panel">Usuarios</button>
+                    <button class="btn-panel">Admin</button>
+                    <button class="btn-panel">Privilegios</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <div class="row" *ngIf="userAdm">
         <div class="col-md-12">
             <h2 class="titulo">Crear Requisito</h2>
@@ -243,7 +265,9 @@
             <button class="btn btn-success" (click)="agregarNoticia()">Guardar</button>
         </div>
     </div>
+
     <div class="btn-volver">
         <button class="btn btn-primary m-3" (click)="volverHome()">Volver</button>
     </div>
+
 </div>
