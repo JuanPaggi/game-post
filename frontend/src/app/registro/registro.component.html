@@ -5,11 +5,9 @@
             <li class="list-group-item">
                 <div class="media-body media-middle form-group item-form">
                     <label>Usuario</label>
-                    <input type="text" class="form-control" [(ngModel)]="usuario" required minlength="8" [ngModelOptions]="{standalone: true}">
-                    <div *ngIf="!usuario" class="alert alert-danger">
-                        <div>
-                            El usuario es requerido.
-                        </div>
+                    <div class="input-obligatorio">
+                        <input type="text" class="form-control" [(ngModel)]="usuario" required minlength="8" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2 mr-4">*</p>
                     </div>
                 </div>
             </li>
@@ -17,11 +15,9 @@
             <li class="list-group-item">
                 <div class="media-body media-middle form-group item-form">
                     <label>Contraseña</label>
-                    <input type="text" class="form-control" [(ngModel)]="clave" required minlength="8" [ngModelOptions]="{standalone: true}">
-                    <div *ngIf="!clave" class="alert alert-danger">
-                        <div>
-                            Contraseña es requerido.
-                        </div>
+                    <div class="input-obligatorio">
+                        <input type="text" class="form-control" [(ngModel)]="clave" required minlength="8" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2 mr-4">*</p>
                     </div>
                 </div>
             </li>
@@ -29,11 +25,9 @@
             <li class="list-group-item">
                 <div class="media-body media-middle form-group item-form">
                     <label>Email</label>
-                    <input type="text" class="form-control" [(ngModel)]="email" required minlength="8" [ngModelOptions]="{standalone: true}">
-                    <div *ngIf="!email" class="alert alert-danger">
-                        <div>
-                            Email es requerido.
-                        </div>
+                    <div class="input-obligatorio">
+                        <input type="text" class="form-control" [(ngModel)]="email" required minlength="8" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2 mr-4">*</p>
                     </div>
                 </div>
             </li>
@@ -41,23 +35,19 @@
             <li class="list-group-item">
                 <div class="media-body media-middle form-group item-form">
                     <label>Nombre</label>
-                    <input type="text" class="form-control" [(ngModel)]="nombre" required minlength="8" [ngModelOptions]="{standalone: true}">
-                    <div *ngIf="!nombre" class="alert alert-danger">
-                        <div>
-                            Nombre es requerido.
-                        </div>
+                    <div class="input-obligatorio">
+                        <input type="text" class="form-control" [(ngModel)]="nombre" required minlength="8" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2 mr-4">*</p>
                     </div>
                 </div>
             </li>
 
             <li class="list-group-item">
                 <div class="media-body media-middle form-group item-form">
-                    <label>Aperrido</label>
-                    <textarea class="form-control" [(ngModel)]="apellido" required minlength="8" [ngModelOptions]="{standalone: true}"></textarea>
-                    <div *ngIf="!apellido" class="alert alert-danger">
-                        <div>
-                            El apellido es requerida.
-                        </div>
+                    <label>Apellido</label>
+                    <div class="input-obligatorio">
+                        <input class="form-control" [(ngModel)]="apellido" required minlength="8" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2 mr-4">*</p>
                     </div>
                 </div>
             </li>
@@ -65,11 +55,9 @@
             <li class="list-group-item">
                 <div class="media-body media-middle">
                     <label>Pais</label>
-                    <textarea class="form-control" [(ngModel)]="pais" required minlength="8" [ngModelOptions]="{standalone: true}"></textarea>
-                    <div *ngIf="!pais" class="alert alert-danger">
-                        <div>
-                            El pais es requerido.
-                        </div>
+                    <div class="input-obligatorio">
+                        <input class="form-control" [(ngModel)]="pais" required minlength="8" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2 mr-4">*</p>
                     </div>
                 </div>
             </li>
