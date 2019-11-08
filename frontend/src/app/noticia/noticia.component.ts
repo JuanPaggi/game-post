@@ -146,7 +146,6 @@ export class NoticiaComponent implements OnInit {
       comentarioIn.comentario = this.comentarioIngresado;
       comentarioIn.fecha_publicacion = new Date();
       comentarioIn.id_noticia = this.noticia.id_noticia;
-      console.log(this.usuario.id_usuario)
       comentarioIn.id_usuario = this.usuario.id_usuario;
       this.ComentariosSrv.addComentario(comentarioIn).subscribe(
         response => {

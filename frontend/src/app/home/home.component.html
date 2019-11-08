@@ -2,8 +2,8 @@
     <div class="main">
         <button class="enlace-juego" (click)="clickedJuegos()">Juegos</button>
         <button class="enlace-juego" (click)="clickedNoticias()">Noticias</button>
-        <button *ngIf="userAdm" class="enlace-juego" (click)="clickedPanel()">Panel</button>
-        <button *ngIf="!user && !userAdm" class="enlace-juego" (click)="clickedLogin()">Login</button>
+        <button *ngIf="userAdm" class="enlace-juego" (click)="clickedPanel()">Panel Admin</button>
+        <button *ngIf="!user && !userAdm" class="enlace-juego" (click)="clickedLogin()">Login User</button>
         <button *ngIf="!user && !userAdm" class="enlace-juego" (click)="clickedLoginAdmin()">Login Admin</button>
         <button *ngIf="!user && !userAdm" class="enlace-juego" (click)="clickedRegistrarse()">Registrarse</button>
         <button *ngIf="user || userAdm" class="enlace-juego" (click)="clickedSalir()">Salir</button>
