@@ -55,4 +55,8 @@ export class LoginComponent implements OnInit {
     this.usuariosSrv.setUserLoggedIn(u);
   }
 
+  volverHome(){
+    this.router.navigateByUrl(`/`);
+  }
+
 }

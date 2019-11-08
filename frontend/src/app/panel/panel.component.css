@@ -19,8 +19,3 @@
 .input-obligatorio{
     display: flex;
 }
-
-.btn-volver{
-    display: flex;
-    justify-content: center;
-}
