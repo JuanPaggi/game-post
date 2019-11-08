@@ -1,17 +1,5 @@
-.titulo-requisito{
+.titulo{
     color: white;
     display: flex;
     justify-content: center;
-}
-
-.titulo-juego{
-    display: flex;
-    justify-content: center;
-    color: white;
-}
-
-.noticia-titulo{
-    display: flex;
-    justify-content: center;
-    color: white;
 }

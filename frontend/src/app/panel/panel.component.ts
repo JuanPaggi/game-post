@@ -17,7 +17,6 @@ import { JuegosService } from '../services/juegos/juegos.service';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { NoticiasService } from '../services/noticias/noticias.service';
 import { CrearNoticiaDto } from '../providers/dto/dtoCrear/CrearNoticiaDto';
-import { NoticiasDto } from '../providers/dto/NoticiasDto';
 
 @Component({
   selector: 'app-panel',
