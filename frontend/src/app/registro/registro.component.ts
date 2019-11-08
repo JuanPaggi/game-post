@@ -63,4 +63,8 @@ export class RegistroComponent implements OnInit {
     }
   }
 
+  volverHome(){
+    this.router.navigateByUrl(`/`);
+  }
+
 }
