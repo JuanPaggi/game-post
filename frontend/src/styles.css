@@ -11,3 +11,7 @@ body{
 .input-obligatorio{
     display: flex;
 }
+
+.panel-page{
+    min-height: calc(100vh - 393px);
+}

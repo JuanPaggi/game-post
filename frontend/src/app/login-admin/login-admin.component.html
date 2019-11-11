@@ -1,4 +1,4 @@
-<section class="container" *ngIf="!user && !userAdmin">
+<section class="container panel-page" *ngIf="!user && !userAdmin">
     <div class="m-3">
         <ul class="list-group">
 
@@ -21,7 +21,7 @@
         </ul>
         <button class="btn btn-primary" (click)="ComprobarAdmin()">Entrar</button>
     </div>
+    <div class="btn-volver">
+        <button class="btn btn-primary m-3" (click)="volverHome()">Volver</button>
+    </div>
 </section>
-<div class="btn-volver">
-    <button class="btn btn-primary m-3" (click)="volverHome()">Volver</button>
-</div>
