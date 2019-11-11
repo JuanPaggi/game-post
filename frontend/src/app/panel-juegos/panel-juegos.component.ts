@@ -201,7 +201,7 @@ export class PanelJuegosComponent implements OnInit {
 
     for (let index = 0; index < this.juegos.length; index++) {
       if (this.juegos[index].id_juego === id) {
-        this.juegos.splice(index);
+        this.juegos.splice(index,1);
       }
     }
     
