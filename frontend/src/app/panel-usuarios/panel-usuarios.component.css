@@ -1,0 +1,13 @@
+.titulo{
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+
+.col-titulo{
+    width: 50%;
+}
+
+.col-opc{
+    width: 25%;
+}

@@ -1,0 +1,24 @@
+<section class="container" *ngIf="userAdm">
+    <table class="table table-hover table-dark">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="col-titulo">Usuario</th>
+                <th scope="col" class="col-opc">Fecha</th>
+                <th scope="col" class="col-opc">Opciones</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let usuario of usuarios; let i = index">
+            <tr>
+                <th scope="row">{{i}}</th>
+                <td class="col-titulo">{{usuario.usuario}}</td>
+                <td class="col-opc">{{usuario.id_usuario}}</td>
+                <td class="col-opc"><button class="btn btn-warning mr-2">Editar</button><button class="btn btn-danger" (click)="borrarUsuario(usuario.id_usuario)">Borrar</button></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <div class="btn-volver">
+        <button class="btn btn-primary m-3" (click)="volverPanel()">Volver</button>
+    </div>
+</section>

@@ -11,6 +11,8 @@ import { PanelComponent } from './panel/panel.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { PanelJuegosComponent } from './panel-juegos/panel-juegos.component';
 import { PanelNoticiasComponent } from './panel-noticias/panel-noticias.component';
+import { PanelUsuariosComponent } from './panel-usuarios/panel-usuarios.component';
+import { PanelAdminComponent } from './panel-admin/panel-admin.component';
 
 
 const routes: Routes = [
@@ -57,6 +59,14 @@ const routes: Routes = [
   {
     path: 'panel/panel-noticias',
     component: PanelNoticiasComponent
+  },
+  {
+    path: 'panel/panel-usuarios',
+    component: PanelUsuariosComponent
+  },
+  {
+    path: 'panel/panel-admin',
+    component: PanelAdminComponent
   }
 ];
 

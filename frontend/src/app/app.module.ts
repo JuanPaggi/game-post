@@ -19,6 +19,8 @@ import { PanelComponent } from './panel/panel.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { PanelJuegosComponent } from './panel-juegos/panel-juegos.component';
 import { PanelNoticiasComponent } from './panel-noticias/panel-noticias.component';
+import { PanelUsuariosComponent } from './panel-usuarios/panel-usuarios.component';
+import { PanelAdminComponent } from './panel-admin/panel-admin.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +37,9 @@ import { PanelNoticiasComponent } from './panel-noticias/panel-noticias.componen
     PanelComponent,
     LoginAdminComponent,
     PanelJuegosComponent,
-    PanelNoticiasComponent
+    PanelNoticiasComponent,
+    PanelUsuariosComponent,
+    PanelAdminComponent
   ],
   imports: [
     BrowserModule,
