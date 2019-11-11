@@ -1,5 +1,5 @@
 .header{
-    height: 250px;
+    height: 150px;
 }
 .navbar{
     height: 20%;
@@ -25,52 +25,6 @@
 
 .enlace-header:hover{
     color: #ffde23;
-}
-
-.buscador-header{
-    height: 70%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.input-header{
-    height: 40px;
-    width: 30%;
-    border: none;
-    outline: none;
-    padding: 0px 5px;
-    border-bottom-left-radius: 6px;
-    border-top-left-radius: 6px;
-}
-
-.boton-buscar {
-    height: 40px;
-	background:linear-gradient(to bottom, #ffec64 5%, #ffab23 100%);
-	background-color:#ffec64;
-    border-bottom-right-radius: 6px;
-    border-top-right-radius: 6px;
-	border:none;
-	display:inline-block;
-	cursor:pointer;
-	color:#333333;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
-	padding:6px 24px;
-	text-decoration:none;
-    text-shadow:0px 1px 0px #ffee66;
-    outline: none;
-}
-
-.boton-buscar:hover {
-	background:linear-gradient(to bottom, #ffab23 5%, #ffec64 100%);
-	background-color:#ffab23;
-}
-
-.boton-buscar:active {
-	background:linear-gradient(to bottom, #ffa30f 5%, #ffe72e 100%);
-	background-color:#f39d12;
 }
 
 .login-bienvenido{

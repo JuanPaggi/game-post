@@ -29,6 +29,8 @@ export class PanelJuegosComponent implements OnInit {
   grafica: String;
   almacenamiento: String;
 
+  juegos: JuegoItem[];
+
   juego: JuegoItem;
   tituloJuego: String;
   descripcionJuego: String;
@@ -64,7 +66,10 @@ export class PanelJuegosComponent implements OnInit {
     private juegosSrv: JuegosService,
     private tagsSrv: TagsService,
     private requisitoSrv: RequisitosService,
-  ) { }
+  ) { 
+    this.imageFileJuego = [];
+    this.imagenesUrlJuego = [];
+  }
 
   ngOnInit() {
     this.userAdm = this.adminSrv.getUserLoggedIn();
@@ -186,8 +191,6 @@ export class PanelJuegosComponent implements OnInit {
     this.router.navigateByUrl(`panel`);
   }
 
-  juegos: JuegoItem[];
-
   getJuegos() {
     this.juegosSrv.getJuegos(new JuegosDto()).subscribe(
       response => {
@@ -198,13 +201,11 @@ export class PanelJuegosComponent implements OnInit {
 
   borrarJuego(id:number){
     this.juegosSrv.deleteJuego(id).subscribe();
-
     for (let index = 0; index < this.juegos.length; index++) {
       if (this.juegos[index].id_juego === id) {
         this.juegos.splice(index,1);
       }
     }
-    
   }
 
 }

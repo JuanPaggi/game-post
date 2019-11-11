@@ -9,6 +9,7 @@ import { Router } from '@angular/router';
 import { TagsService } from '../services/tags/tags.service';
 import { NoticiasService } from '../services/noticias/noticias.service';
 import { TagsDto } from '../providers/dto/TagsDto';
+import { NoticiasDto } from '../providers/dto/NoticiasDto';
 
 @Component({
   selector: 'app-panel-noticias',
@@ -16,6 +17,8 @@ import { TagsDto } from '../providers/dto/TagsDto';
   styleUrls: ['./panel-noticias.component.css']
 })
 export class PanelNoticiasComponent implements OnInit {
+
+  noticias: NoticiaItem[];
 
   noticia: NoticiaItem;
   tituloNoticia: String;
@@ -57,6 +60,7 @@ export class PanelNoticiasComponent implements OnInit {
       tagsIdNoticia: new FormControl(Validators.required),
     });
     this.getTags();
+    this.getNoticias();
   }
 
   getTags() {
@@ -105,6 +109,7 @@ export class PanelNoticiasComponent implements OnInit {
       noticia.nombreImagen = "hola";
       noticia.archivoImagen = this.imageFileNoticia;
       this.noticiasSrv.addNoticia(noticia).subscribe();
+      window.location.reload();
     } else {
       console.log('Formulario invalido');
     }
@@ -118,6 +123,23 @@ export class PanelNoticiasComponent implements OnInit {
 
   volverPanel(){
     this.router.navigateByUrl(`panel`);
+  }
+
+  getNoticias() {
+    this.noticiasSrv.getAllNoticias(new NoticiasDto()).subscribe(
+      response => {
+        this.noticias = response;
+      }
+    );
+  }
+
+  borrarNoticia(id:number){
+    this.noticiasSrv.deleteNoticia(id).subscribe();
+    for (let index = 0; index < this.noticias.length; index++) {
+      if (this.noticias[index].id_noticia === id) {
+        this.noticias.splice(index,1);
+      }
+    }
   }
 
 }

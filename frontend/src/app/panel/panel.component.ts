@@ -33,4 +33,12 @@ export class PanelComponent implements OnInit {
     this.router.navigateByUrl(`panel/panel-noticias`);
   }
 
+  irPanelUsuarios(){
+    this.router.navigateByUrl(`panel/panel-usuarios`);
+  }
+
+  irPanelAdmin(){
+    this.router.navigateByUrl(`panel/panel-admin`);
+  }
+
 }

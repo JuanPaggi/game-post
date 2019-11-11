@@ -1,5 +1,4 @@
 .home{
-    height: 500px;
     display: grid;
     grid-template-areas: "main";
     margin: 0 3%;
