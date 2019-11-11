@@ -1,4 +1,4 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
+import { Component, OnInit, ElementRef, ViewChild, Directive } from '@angular/core';
 import { User } from '../providers/model/user.model';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { TagItem } from '../providers/entities/TagItem.entity';
@@ -14,6 +14,7 @@ import { CrearRequisitoDto } from '../providers/dto/dtoCrear/CrearRequisitoDto';
 import { TagsDto } from '../providers/dto/TagsDto';
 import { ModosDto } from '../providers/dto/ModosDto';
 import { CrearJuegoDto } from '../providers/dto/dtoCrear/CrearJuegoDto';
+import { JuegosDto } from '../providers/dto/JuegosDto';
 
 @Component({
   selector: 'app-panel-juegos',
@@ -85,6 +86,7 @@ export class PanelJuegosComponent implements OnInit {
     });
     this.getTags();
     this.getModos();
+    this.getJuegos();
   }
 
   agregarRequisito(){
@@ -150,7 +152,7 @@ export class PanelJuegosComponent implements OnInit {
       juego.fecha_lanzamiento = this.fecha_lanzamientoJuego;
       juego.analisis_negativos = 0;
       juego.analisis_positivos = 0;
-      juego.id_admin_creado = 1;
+      juego.id_admin_creado = this.userAdm.id_usuario;
       juego.id_requisitos = 1;
       if (this.tagsIdJuego != null) {
         juego.tags = this.tagsIdJuego.split(',').map(Number);
@@ -163,8 +165,13 @@ export class PanelJuegosComponent implements OnInit {
         juego.modos= [];
       }
       juego.nombreImagen = "image";
-      juego.archivoImagen = this.imageFileJuego;
+      if (juego.archivoImagen != null) {
+        juego.archivoImagen = this.imageFileJuego;
+      }else{
+        juego.archivoImagen = [];
+      }
       this.juegosSrv.addJuego(juego).subscribe();
+      window.location.reload();
     } else {
       console.log('Formulario invalido');
     }
@@ -177,6 +184,27 @@ export class PanelJuegosComponent implements OnInit {
 
   volverPanel(){
     this.router.navigateByUrl(`panel`);
+  }
+
+  juegos: JuegoItem[];
+
+  getJuegos() {
+    this.juegosSrv.getJuegos(new JuegosDto()).subscribe(
+      response => {
+        this.juegos = response;
+      }
+    );
+  }
+
+  borrarJuego(id:number){
+    this.juegosSrv.deleteJuego(id).subscribe();
+
+    for (let index = 0; index < this.juegos.length; index++) {
+      if (this.juegos[index].id_juego === id) {
+        this.juegos.splice(index);
+      }
+    }
+    
   }
 
 }
