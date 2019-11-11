@@ -199,10 +199,6 @@ export class NoticiaComponent implements OnInit {
 
   }
 
-  borrarNoticia(){
-    this.noticiasSrv.deleteNoticia(this.noticia.id_noticia).subscribe();
-  }
-
   volverNoticias(){
     this.router.navigateByUrl(`/noticias`);
   }
