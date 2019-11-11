@@ -16,7 +16,7 @@
     display: flex;
     justify-content: space-evenly;
     align-items: center;
-    height: 50%;
+    height: 43%;
 }
 
 .btn-panel{
@@ -37,4 +37,14 @@ button:focus {outline:0;}
 .img-panel{
     height: 50px;
     width: 50px;
+}
+
+.titulo-panel{
+    display: flex;
+    justify-content: center;
+}
+
+.titulo-panel-h2{
+    margin: 0;
+    font-weight: 600;
 }
