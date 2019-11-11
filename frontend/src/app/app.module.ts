@@ -17,6 +17,8 @@ import { JuegosComponent } from './juegos/juegos.component';
 import { JuegoComponent } from './juego/juego.component';
 import { PanelComponent } from './panel/panel.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { PanelJuegosComponent } from './panel-juegos/panel-juegos.component';
+import { PanelNoticiasComponent } from './panel-noticias/panel-noticias.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +33,9 @@ import { LoginAdminComponent } from './login-admin/login-admin.component';
     JuegosComponent,
     JuegoComponent,
     PanelComponent,
-    LoginAdminComponent
+    LoginAdminComponent,
+    PanelJuegosComponent,
+    PanelNoticiasComponent
   ],
   imports: [
     BrowserModule,

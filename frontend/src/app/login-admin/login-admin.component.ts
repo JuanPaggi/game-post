@@ -59,4 +59,8 @@ export class LoginAdminComponent implements OnInit {
     this.adminSrv.setUserLoggedIn(u);
   }
 
+  volverHome(){
+    this.router.navigateByUrl(`/`);
+  }
+
 }

@@ -174,10 +174,6 @@ export class JuegoComponent implements OnInit {
 
   }
 
-  borrarJuego(){
-    this.juegosSrv.deleteJuego(this.juego.id_juego).subscribe();
-  }
-
   volverJuegos(){
     this.router.navigateByUrl(`/juegos`);
   }
