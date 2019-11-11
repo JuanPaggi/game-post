@@ -4,17 +4,17 @@
             <thead>
                 <tr>
                     <th scope="col">#</th>
-                    <th scope="col">Titulo</th>
-                    <th scope="col">Admin</th>
-                    <th scope="col">Opciones</th>
+                    <th scope="col" class="col-titulo">Titulo</th>
+                    <th scope="col" class="col-opc">Admin</th>
+                    <th scope="col" class="col-opc">Opciones</th>
                 </tr>
             </thead>
             <tbody *ngFor="let juego of juegos; let i = index">
                 <tr>
                     <th scope="row">{{i}}</th>
-                    <td>{{juego.titulo}}</td>
-                    <td>{{juego.id_admin_creado}}</td>
-                    <td><button class="btn btn-warning mr-2">Editar</button><button class="btn btn-danger" (click)="borrarJuego(juego.id_juego)">Borrar</button></td>
+                    <td class="col-titulo">{{juego.titulo}}</td>
+                    <td class="col-opc">{{juego.id_admin_creado}}</td>
+                    <td class="col-opc"><button class="btn btn-warning mr-2">Editar</button><button class="btn btn-danger" (click)="borrarJuego(juego.id_juego)">Borrar</button></td>
                 </tr>
             </tbody>
         </table>
