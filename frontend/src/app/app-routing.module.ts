@@ -9,6 +9,8 @@ import { JuegosComponent } from './juegos/juegos.component';
 import { JuegoComponent } from './juego/juego.component';
 import { PanelComponent } from './panel/panel.component';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
+import { PanelJuegosComponent } from './panel-juegos/panel-juegos.component';
+import { PanelNoticiasComponent } from './panel-noticias/panel-noticias.component';
 
 
 const routes: Routes = [
@@ -47,6 +49,14 @@ const routes: Routes = [
   {
     path: 'panel',
     component: PanelComponent
+  },
+  {
+    path: 'panel/panel-juegos',
+    component: PanelJuegosComponent
+  },
+  {
+    path: 'panel/panel-noticias',
+    component: PanelNoticiasComponent
   }
 ];
 
