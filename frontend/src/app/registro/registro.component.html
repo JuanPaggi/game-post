@@ -4,19 +4,19 @@
         <div class="row">
             <div class="col">
                 <div class="separador-input">
-                    <p class="texto-input-up">Usuario</p>
+                    <p class="texto-input-up">Usuario *</p>
                     <input class="input-register" type="text" [(ngModel)]="usuario" [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="separador-input">
-                    <p class="texto-input-up">Contraseña</p>
+                    <p class="texto-input-up">Contraseña *</p>
                     <input class="input-register" type="text" [(ngModel)]="clave" [ngModelOptions]="{standalone: true}">
                 </div>
                 <div class="separador-input">
-                    <p class="texto-input-up">Repetir Contraseña</p>
+                    <p class="texto-input-up">Repetir Contraseña *</p>
                     <input class="input-register" type="text" [(ngModel)]="Rclave" [ngModelOptions]="{standalone: true}" >
                 </div>
                 <div class="separador-input">
-                    <p class="texto-input-up">E-mail</p>
+                    <p class="texto-input-up">E-mail *</p>
                     <input class="input-register" type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
                 </div>
             </div>
@@ -24,26 +24,27 @@
                 <div>
                     <div class="d-flex">
                         <div class="separador-nombre">
-                            <p class="texto-input-up">Nombre</p>
+                            <p class="texto-input-up">Nombre *</p>
                             <input class="input-register-2" type="text" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}">
                         </div>
                         <div class="separador-input">
-                            <p class="texto-input-up">Apellido</p>
+                            <p class="texto-input-up">Apellido *</p>
                             <input class="input-register-2" type="text" [(ngModel)]="apellido" [ngModelOptions]="{standalone: true}">
                         </div>
                     </div>
-                    <p class="texto-input-up">Pais</p>
-                    <select [(ngModel)]="pais" [ngModelOptions]="{standalone: true}" class="input-register">
+                    <p class="texto-input-up">Pais *</p>
+                    <select [(ngModel)]="pais" [ngModelOptions]="{standalone: true}" class="input-register-pais">
                         <option class="pais" *ngFor="let city of paisSelect">{{city}}</option>
                     </select>
                     <div class="d-flex contenedor-terminos">
                         <input class="checkbox-terminos" type="checkbox" [(ngModel)]="check" [ngModelOptions]="{standalone: true}">
+                        <div class="triangulo"></div>
                         <p class="texto-terminos">Acepto <strong>terminos y condiciones</strong></p>
                     </div>
                     <button class="boton-registro" (click)="agregarUsuario()">Registrarse</button>
+                    <div class="error-login error-texto" [innerHtml]="htmlToAdd"></div>
                 </div>
             </div>
-            <div class="error-login" [innerHtml]="htmlToAdd"></div>
         </div>
     </form>
 </section>

@@ -1,5 +1,15 @@
+@font-face {
+    font-family: 'Agency FB Bold';
+    src: URL('../../assets/AgencyFB.ttf') format('truetype');
+}
+
 p{
     color:#cecece;
+    font-family: 'Agency FB Bold', arial;
+}
+
+h1{
+    font-family: 'Agency FB Bold', arial;
 }
 
 .container-opc{
@@ -8,7 +18,8 @@ p{
 
 .texto-input-up{
     margin-bottom: 0;
-    font-size: 30px;
+    font-size: 36px;
+    font-weight: 500;
 }
 
 .titulo{
@@ -16,6 +27,7 @@ p{
     display: flex;
     justify-content: center;
     font-weight: 600;
+    font-size: 48px;
     margin: 0px;
     margin-bottom: 25px ;
 }
@@ -78,13 +90,13 @@ p{
 
 .texto-terminos{
     margin:0px;
-    margin-top: 6px;
+    margin-top: 2px;
 }
 
 .checkbox-terminos{
     margin: 5px;
-    width: 25px;
-    height: 25px;
+    width: 20px;
+    height: 20px;
     border-radius: 5px;
 }
 
@@ -96,10 +108,11 @@ p{
     color: white;
     border: none;
     font-weight: 600;
-    font-size: 18px;
+    font-size: 24px;
     margin-top: 15px;
     outline: none;
     box-shadow: inset -2px -2px 7px -1px #0c5284;
+    font-family: 'Agency FB Bold', arial;
 }
 
 .boton-registro:active{
@@ -107,5 +120,44 @@ p{
 }
 
 .pais{
-    color: #434343;
+    color: #dcdcdc;
+    background-color: #737373;
+}
+
+.error-login{
+    color: red;
+}
+
+.error-texto{
+    margin-top: 15px;
+    font-size: 24px;
+    font-family: 'Agency FB Bold', arial;
+}
+
+.input-register-pais{
+    width: 350px;
+    height: 50px;
+    border-top-right-radius: 14px;
+    border-top-left-radius: 14px;
+    border: none;
+    outline: none;
+    background: linear-gradient(180deg, rgba(29,29,29,1) 0%, rgba(71,71,71,1) 63%, rgba(117,117,117,1) 100%);
+    color: rgb(194, 194, 194);
+    font-size: 24px;
+    padding: 6px;
+    padding-left: 10px;
+    box-shadow: -1px 2px 2px 0px #444444;
+}
+
+.triangulo {
+    position: absolute;
+    width: 0;
+    height: 0;
+    transform: rotate(90deg);
+    top: 206px;
+    right: 165px;
+    border-left: 16px solid #8c8c8c;
+    border-top: 10px solid transparent;
+    border-bottom: 10px solid transparent;
+    pointer-events: none;
 }

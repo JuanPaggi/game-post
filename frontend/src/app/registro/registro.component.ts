@@ -61,7 +61,7 @@ export class RegistroComponent implements OnInit {
             this.router.navigateByUrl(`/login`);
           }, err => {
             if(err.status === 400){
-              this.htmlToAdd = '<p class="list-group-item">Datos Incorrectos<p>';
+              this.htmlToAdd = '<p>Datos Incorrectos</p>';
             }
           }
         )
@@ -69,7 +69,7 @@ export class RegistroComponent implements OnInit {
         console.log('Formulario invalido');
       }
     } else {
-      this.htmlToAdd = '<p class="list-group-item">Datos Incorrectos<p>';
+      this.htmlToAdd = '<p >Datos Incorrectos</p>';
     }
   }
 
