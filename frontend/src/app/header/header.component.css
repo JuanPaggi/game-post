@@ -1,5 +1,6 @@
 .header{
-    height: 100px;
+    height: 70px;
+    background: linear-gradient(to bottom, #000000 5%, #151515 100%);
 }
 .navbar{
     height: 20%;

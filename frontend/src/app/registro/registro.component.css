@@ -13,6 +13,7 @@ h1{
 }
 
 .container-opc{
+    background: linear-gradient(to bottom, #151515c9 50%, #151515cc 100%);
     padding: 0px 70px;
 }
 
@@ -36,7 +37,7 @@ h1{
 
 .input-register{
     width: 350px;
-    height: 50px;
+    height: 40px;
     border-radius: 14px;
     border: none;
     outline: none;
@@ -62,7 +63,7 @@ h1{
 
 .input-register-2{
     width: 225px;
-    height: 50px;
+    height: 40px;
     border-radius: 10px;
     border: none;
     outline: none;
@@ -116,7 +117,7 @@ h1{
 }
 
 .boton-registro:active{
-    box-shadow: inset 4px 2px 5px 1px #0c5284;
+    box-shadow: inset 4px 4px 5px 1px #0c5284;
 }
 
 .pais{
@@ -136,7 +137,7 @@ h1{
 
 .input-register-pais{
     width: 350px;
-    height: 50px;
+    height: 40px;
     border-top-right-radius: 14px;
     border-top-left-radius: 14px;
     border: none;
@@ -154,7 +155,7 @@ h1{
     width: 0;
     height: 0;
     transform: rotate(90deg);
-    top: 206px;
+    top: 191px;
     right: 165px;
     border-left: 16px solid #8c8c8c;
     border-top: 10px solid transparent;

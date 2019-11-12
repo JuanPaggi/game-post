@@ -1,11 +1,13 @@
 <section class="home panel-page">
     <div class="main">
-        <button class="enlace-juego" (click)="clickedJuegos()">Juegos</button>
-        <button class="enlace-juego" (click)="clickedNoticias()">Noticias</button>
-        <button *ngIf="userAdm" class="enlace-juego" (click)="clickedPanel()">Panel Admin</button>
-        <button *ngIf="!user && !userAdm" class="enlace-juego" (click)="clickedLogin()">Login User</button>
-        <button *ngIf="!user && !userAdm" class="enlace-juego" (click)="clickedLoginAdmin()">Login Admin</button>
-        <button *ngIf="!user && !userAdm" class="enlace-juego" (click)="clickedRegistrarse()">Registrarse</button>
-        <button *ngIf="user || userAdm" class="enlace-juego" (click)="clickedSalir()">Salir</button>
+        <div class="nav">
+            <a class="enlace-juego borde-l" (click)="clickedJuegos()">Juegos</a>
+            <a class="enlace-juego" (click)="clickedNoticias()">Noticias</a>
+            <a *ngIf="userAdm" class="enlace-juego" (click)="clickedPanel()">Panel Admin</a>
+            <a *ngIf="!user && !userAdm" class="enlace-juego" (click)="clickedLogin()">Login User</a>
+            <a *ngIf="!user && !userAdm" class="enlace-juego" (click)="clickedLoginAdmin()">Login Admin</a>
+            <a *ngIf="!user && !userAdm" class="enlace-juego borde-r" (click)="clickedRegistrarse()">Registrarse</a>
+            <a *ngIf="user || userAdm" class="enlace-juego borde-r" (click)="clickedSalir()">Salir</a>
+        </div>
     </div>
 </section>

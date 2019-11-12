@@ -17,7 +17,7 @@
                 </div>
                 <div class="separador-input">
                     <p class="texto-input-up">E-mail *</p>
-                    <input class="input-register" type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
+                    <input class="input-register" type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}" autocomplete="nope">
                 </div>
             </div>
             <div class="col formulario-2">
@@ -25,20 +25,20 @@
                     <div class="d-flex">
                         <div class="separador-nombre">
                             <p class="texto-input-up">Nombre *</p>
-                            <input class="input-register-2" type="text" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}">
+                            <input class="input-register-2" type="text" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}" autocomplete="nope">
                         </div>
                         <div class="separador-input">
                             <p class="texto-input-up">Apellido *</p>
-                            <input class="input-register-2" type="text" [(ngModel)]="apellido" [ngModelOptions]="{standalone: true}">
+                            <input class="input-register-2" type="text" [(ngModel)]="apellido" [ngModelOptions]="{standalone: true}" autocomplete="nope">
                         </div>
                     </div>
                     <p class="texto-input-up">Pais *</p>
                     <select [(ngModel)]="pais" [ngModelOptions]="{standalone: true}" class="input-register-pais">
                         <option class="pais" *ngFor="let city of paisSelect">{{city}}</option>
                     </select>
+                    <div class="triangulo"></div>
                     <div class="d-flex contenedor-terminos">
                         <input class="checkbox-terminos" type="checkbox" [(ngModel)]="check" [ngModelOptions]="{standalone: true}">
-                        <div class="triangulo"></div>
                         <p class="texto-terminos">Acepto <strong>terminos y condiciones</strong></p>
                     </div>
                     <button class="boton-registro" (click)="agregarUsuario()">Registrarse</button>
@@ -47,8 +47,7 @@
             </div>
         </div>
     </form>
+    <div class="btn-volver">
+        <button class="btn btn-primary m-3" (click)="volverHome()">Volver</button>
+    </div>
 </section>
-
-<div class="btn-volver">
-    <button class="btn btn-primary m-3" (click)="volverHome()">Volver</button>
-</div>
