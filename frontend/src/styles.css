@@ -1,3 +1,8 @@
+@font-face {
+    font-family: 'Agency FB Bold';
+    src: URL('assets/AgencyFB.ttf') format('truetype');
+}
+
 body{
     background-color: #151515;
     background-image: url("assets/circuito.svg");
