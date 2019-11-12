@@ -1,73 +1,53 @@
-<section class="container panel-page" *ngIf="!user">
+<section class="container panel-page container-opc" *ngIf="!user">
+    <h1 class="titulo">Unete a nuestra comunidad, registrate gratis!</h1>
     <form [formGroup] = "formAddNoticia">
-        <ul class="list-group">
-
-            <li class="list-group-item">
-                <div class="media-body media-middle form-group item-form">
-                    <label>Usuario</label>
-                    <div class="input-obligatorio">
-                        <input type="text" class="form-control" [(ngModel)]="usuario" required minlength="8" [ngModelOptions]="{standalone: true}">
-                        <p class="ml-2 mr-4">*</p>
-                    </div>
+        <div class="row">
+            <div class="col">
+                <div class="separador-input">
+                    <p class="texto-input-up">Usuario</p>
+                    <input class="input-register" type="text" [(ngModel)]="usuario" [ngModelOptions]="{standalone: true}">
                 </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="media-body media-middle form-group item-form">
-                    <label>Contraseña</label>
-                    <div class="input-obligatorio">
-                        <input type="text" class="form-control" [(ngModel)]="clave" required minlength="8" [ngModelOptions]="{standalone: true}">
-                        <p class="ml-2 mr-4">*</p>
-                    </div>
+                <div class="separador-input">
+                    <p class="texto-input-up">Contraseña</p>
+                    <input class="input-register" type="text" [(ngModel)]="clave" [ngModelOptions]="{standalone: true}">
                 </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="media-body media-middle form-group item-form">
-                    <label>Email</label>
-                    <div class="input-obligatorio">
-                        <input type="text" class="form-control" [(ngModel)]="email" required minlength="8" [ngModelOptions]="{standalone: true}">
-                        <p class="ml-2 mr-4">*</p>
-                    </div>
+                <div class="separador-input">
+                    <p class="texto-input-up">Repetir Contraseña</p>
+                    <input class="input-register" type="text" [(ngModel)]="Rclave" [ngModelOptions]="{standalone: true}" >
                 </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="media-body media-middle form-group item-form">
-                    <label>Nombre</label>
-                    <div class="input-obligatorio">
-                        <input type="text" class="form-control" [(ngModel)]="nombre" required minlength="8" [ngModelOptions]="{standalone: true}">
-                        <p class="ml-2 mr-4">*</p>
-                    </div>
+                <div class="separador-input">
+                    <p class="texto-input-up">E-mail</p>
+                    <input class="input-register" type="text" [(ngModel)]="email" [ngModelOptions]="{standalone: true}">
                 </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="media-body media-middle form-group item-form">
-                    <label>Apellido</label>
-                    <div class="input-obligatorio">
-                        <input class="form-control" [(ngModel)]="apellido" required minlength="8" [ngModelOptions]="{standalone: true}">
-                        <p class="ml-2 mr-4">*</p>
+            </div>
+            <div class="col formulario-2">
+                <div>
+                    <div class="d-flex">
+                        <div class="separador-nombre">
+                            <p class="texto-input-up">Nombre</p>
+                            <input class="input-register-2" type="text" [(ngModel)]="nombre" [ngModelOptions]="{standalone: true}">
+                        </div>
+                        <div class="separador-input">
+                            <p class="texto-input-up">Apellido</p>
+                            <input class="input-register-2" type="text" [(ngModel)]="apellido" [ngModelOptions]="{standalone: true}">
+                        </div>
                     </div>
-                </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="media-body media-middle">
-                    <label>Pais</label>
-                    <div class="input-obligatorio">
-                        <input class="form-control" [(ngModel)]="pais" required minlength="8" [ngModelOptions]="{standalone: true}">
-                        <p class="ml-2 mr-4">*</p>
+                    <p class="texto-input-up">Pais</p>
+                    <select [(ngModel)]="pais" [ngModelOptions]="{standalone: true}" class="input-register">
+                        <option class="pais" *ngFor="let city of paisSelect">{{city}}</option>
+                    </select>
+                    <div class="d-flex contenedor-terminos">
+                        <input class="checkbox-terminos" type="checkbox" [(ngModel)]="check" [ngModelOptions]="{standalone: true}">
+                        <p class="texto-terminos">Acepto <strong>terminos y condiciones</strong></p>
                     </div>
+                    <button class="boton-registro" (click)="agregarUsuario()">Registrarse</button>
                 </div>
-            </li>
-
+            </div>
             <div class="error-login" [innerHtml]="htmlToAdd"></div>
-
-        </ul>
-        <button class="btn btn-primary" (click)="agregarUsuario()">Registrarse</button>
+        </div>
     </form>
 </section>
+
 <div class="btn-volver">
     <button class="btn btn-primary m-3" (click)="volverHome()">Volver</button>
 </div>

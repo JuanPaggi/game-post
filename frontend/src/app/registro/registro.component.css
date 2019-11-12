@@ -1,3 +1,111 @@
-.error-login{
-    color: red;
+p{
+    color:#cecece;
+}
+
+.container-opc{
+    padding: 0px 70px;
+}
+
+.texto-input-up{
+    margin-bottom: 0;
+    font-size: 30px;
+}
+
+.titulo{
+    color:  #cecece;
+    display: flex;
+    justify-content: center;
+    font-weight: 600;
+    margin: 0px;
+    margin-bottom: 25px ;
+}
+
+/* ---- Formulario izquierdo ---- */
+
+.input-register{
+    width: 350px;
+    height: 50px;
+    border-radius: 14px;
+    border: none;
+    outline: none;
+    background: linear-gradient(180deg, rgba(29,29,29,1) 0%, rgba(71,71,71,1) 63%, rgba(117,117,117,1) 100%);
+    color: rgb(194, 194, 194);
+    font-size: 24px;
+    padding: 6px;
+    padding-left: 10px;
+    box-shadow: -1px 2px 2px 0px #444444;
+}
+
+.separador-input{
+    margin: 15px;
+}
+
+/* ---- Formulario derecho ---- */
+
+.formulario-2{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.input-register-2{
+    width: 225px;
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    outline: none;
+    background: linear-gradient(180deg, rgba(29,29,29,1) 0%, rgba(71,71,71,1) 63%, rgba(117,117,117,1) 100%);
+    color: rgb(194, 194, 194);
+    font-size: 24px;
+    padding: 6px;
+    padding-left: 4px;
+    box-shadow: -1px 2px 2px 0px #444444;
+}
+
+.separador-nombre{
+    margin-bottom: 15px;
+    margin-top: 15px;
+    margin-right: 15px;
+    margin-left: 0px;
+}
+
+.contenedor-terminos{
+    margin-bottom: 15px;
+    margin-top: 40px;
+    margin-right: 15px;
+    margin-left: 0px;
+}
+
+.texto-terminos{
+    margin:0px;
+    margin-top: 6px;
+}
+
+.checkbox-terminos{
+    margin: 5px;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+}
+
+.boton-registro{
+    border-radius: 10px;
+    width: 120px;
+    height: 40px;
+    background-color: #0069a7;
+    color: white;
+    border: none;
+    font-weight: 600;
+    font-size: 18px;
+    margin-top: 15px;
+    outline: none;
+    box-shadow: inset -2px -2px 7px -1px #0c5284;
+}
+
+.boton-registro:active{
+    box-shadow: inset 4px 2px 5px 1px #0c5284;
+}
+
+.pais{
+    color: #434343;
 }
