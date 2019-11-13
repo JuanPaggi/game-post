@@ -23,6 +23,7 @@ import { PanelUsuariosComponent } from './panel-usuarios/panel-usuarios.componen
 import { PanelAdminComponent } from './panel-admin/panel-admin.component';
 import { BarraNavegacionComponent } from './barra-navegacion/barra-navegacion.component';
 import { CrearNoticiaComponent } from './crear-noticia/crear-noticia.component';
+import { CrearJuegoComponent } from './crear-juego/crear-juego.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { CrearNoticiaComponent } from './crear-noticia/crear-noticia.component';
     PanelUsuariosComponent,
     PanelAdminComponent,
     BarraNavegacionComponent,
-    CrearNoticiaComponent
+    CrearNoticiaComponent,
+    CrearJuegoComponent
   ],
   imports: [
     BrowserModule,

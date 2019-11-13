@@ -11,7 +11,7 @@
         </thead>
         <tbody *ngFor="let noticia of noticias; let i = index">
             <tr>
-                <th scope="row">{{i}}</th>
+                <th scope="row">{{i+1}}</th>
                 <td class="col-titulo">{{noticia.titulo}}</td>
                 <td class="col-opc">{{noticia.id_admin_creado}}</td>
                 <td class="col-opc"><button class="btn btn-warning mr-2">Editar</button><button class="btn btn-danger" (click)="borrarNoticia(noticia.id_noticia)">Borrar</button></td>
