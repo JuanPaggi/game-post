@@ -1,5 +1,7 @@
 .fondo{
     background: #1f1f1f;
+    padding: 25px;
+    padding-top: 0px;
 }
 
 .juegos{
@@ -7,18 +9,19 @@
     margin-top: 20px;
 }
 
+.titulo-juego{
+    display: flex;
+    color: white;
+}
+
 .juego-container{
-    border-radius: 15px;
-    margin: 10px 0;
+    border: 1px solid gray;
     padding: 20px;
     background-color: white;
+    margin-top: 10px;
+    border-radius: 5px;
 }
 
 .enlace-juego{
     cursor: pointer;
-}
-
-.titulo-juego{
-    display: flex;
-    color: white;
 }
