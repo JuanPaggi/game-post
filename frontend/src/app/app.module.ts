@@ -22,6 +22,7 @@ import { PanelNoticiasComponent } from './panel-noticias/panel-noticias.componen
 import { PanelUsuariosComponent } from './panel-usuarios/panel-usuarios.component';
 import { PanelAdminComponent } from './panel-admin/panel-admin.component';
 import { BarraNavegacionComponent } from './barra-navegacion/barra-navegacion.component';
+import { CrearNoticiaComponent } from './crear-noticia/crear-noticia.component';
 
 @NgModule({
   declarations: [
@@ -41,7 +42,8 @@ import { BarraNavegacionComponent } from './barra-navegacion/barra-navegacion.co
     PanelNoticiasComponent,
     PanelUsuariosComponent,
     PanelAdminComponent,
-    BarraNavegacionComponent
+    BarraNavegacionComponent,
+    CrearNoticiaComponent
   ],
   imports: [
     BrowserModule,

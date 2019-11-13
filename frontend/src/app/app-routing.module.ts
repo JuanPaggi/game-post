@@ -13,6 +13,7 @@ import { PanelJuegosComponent } from './panel-juegos/panel-juegos.component';
 import { PanelNoticiasComponent } from './panel-noticias/panel-noticias.component';
 import { PanelUsuariosComponent } from './panel-usuarios/panel-usuarios.component';
 import { PanelAdminComponent } from './panel-admin/panel-admin.component';
+import { CrearNoticiaComponent } from './crear-noticia/crear-noticia.component';
 
 
 const routes: Routes = [
@@ -67,6 +68,10 @@ const routes: Routes = [
   {
     path: 'panel/panel-admin',
     component: PanelAdminComponent
+  },
+  {
+    path: 'panel/panel-noticias/crear-noticia',
+    component: CrearNoticiaComponent
   }
 ];
 
