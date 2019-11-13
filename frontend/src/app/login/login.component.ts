@@ -16,6 +16,8 @@ export class LoginComponent implements OnInit {
   clave: String;
   htmlToAdd: String;
 
+  check:boolean;
+
   id_usuario:number;
 
   usuarios: UsuarioItem[];
@@ -43,7 +45,7 @@ export class LoginComponent implements OnInit {
           this.logIn(this.usuario, this.id_usuario, event);
           window.location.href = "/";
         } else{
-          this.htmlToAdd = '<p class="list-group-item">Datos Incorrectos<p>';
+          this.htmlToAdd = '<p>Datos Incorrectos<p>';
         }
       }
     )
@@ -57,6 +59,10 @@ export class LoginComponent implements OnInit {
 
   volverHome(){
     this.router.navigateByUrl(`/`);
+  }
+
+  clickedLoginAdmin(){
+    this.router.navigateByUrl(`/loginAdmin`);
   }
 
 }

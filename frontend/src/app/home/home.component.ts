@@ -34,25 +34,4 @@ export class HomeComponent implements OnInit {
     this.router.navigateByUrl(`/noticias`);
   }
 
-  clickedLogin(){
-    this.router.navigateByUrl(`/login`);
-  }
-
-  clickedLoginAdmin(){
-    this.router.navigateByUrl(`/loginAdmin`);
-  }
-
-  clickedRegistrarse(){
-    this.router.navigateByUrl(`/registro`);
-  }
-  clickedPanel(){
-    this.router.navigateByUrl(`/panel`);
-  }
-
-  clickedSalir(){
-    this.usuariosSrv.setUserLoggedOut();
-    this.AdminSrv.setUserLoggedOut();
-    window.location.reload();
-  }
-
 }

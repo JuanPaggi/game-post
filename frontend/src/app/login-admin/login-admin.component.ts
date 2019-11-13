@@ -60,7 +60,7 @@ export class LoginAdminComponent implements OnInit {
   }
 
   volverHome(){
-    this.router.navigateByUrl(`/`);
+    this.router.navigateByUrl(`/login`);
   }
 
 }
