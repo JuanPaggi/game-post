@@ -14,6 +14,9 @@ import { ModoItem } from '../providers/entities/ModoItem.entity';
 import { ModosService } from '../services/modos/modos.service';
 import { ModosDto } from '../providers/dto/ModosDto';
 import { AdminService } from '../services/admin/admin.service';
+import { AnalisisItem } from '../providers/entities/AnalisisItem.entity';
+import { AnalisisService } from '../services/analisis/analisis.service';
+import { AnalisisDto } from '../providers/dto/AnalisisDto';
 
 @Component({
   selector: 'app-juego',
@@ -44,6 +47,9 @@ export class JuegoComponent implements OnInit {
   id_juego: number;
   apiURL: String;
 
+  analisis: AnalisisItem[];
+  analisisTexto: String[];
+
   urlImagen: String[];
   hayImagen: boolean;
 
@@ -54,6 +60,7 @@ export class JuegoComponent implements OnInit {
     private juegosSrv: JuegosService,
     private tagsSrv: TagsService,
     private modosSrv: ModosService,
+    private analisisSrv: AnalisisService,
     private route: ActivatedRoute,
     private router: Router,
     private adminSrv: AdminService,
@@ -64,6 +71,9 @@ export class JuegoComponent implements OnInit {
 
     this.modos = [];
     this.modosLista = [];
+
+    this.analisis = [];
+    this.analisisTexto = [];
 
 
     this.location.onPopState(() => {
@@ -95,6 +105,7 @@ export class JuegoComponent implements OnInit {
         }
         this.showDataJuego(this.juego);
         this.getTags();
+        this.getAnalisis();
         this.getModos();
       }
     },
@@ -177,4 +188,34 @@ export class JuegoComponent implements OnInit {
   volverJuegos(){
     this.router.navigateByUrl(`/juegos`);
   }
+
+  getAnalisis(){
+    this.analisisSrv.getAllAnalisis(new AnalisisDto()).subscribe(
+      response => {
+        if (response) {
+        this.analisis = response;
+        this.showDataAnalisis(this.juego);
+      }
+    },
+    err => {
+      console.log(err);
+      if (err === 401) {
+      }
+    }
+    );
+  }
+
+  showDataAnalisis(juego: JuegoItem) {
+
+    let i = 0;
+    for (let index = 0; index < this.analisis.length; index++) {
+      if (this.analisis[index].id_analisis === juego.analisis[i]) {
+        i++;
+        this.analisisTexto.push(this.analisis[index].analisis);
+      }
+    }
+
+  }
 }
+
+

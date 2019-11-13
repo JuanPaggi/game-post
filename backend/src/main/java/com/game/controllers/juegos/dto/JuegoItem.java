@@ -19,5 +19,6 @@ public class JuegoItem {
 	public ArrayList<Long> tags;
 	public ArrayList<Long> modos;
 	public ArrayList<String> archivoImagen;
+	public ArrayList<Long> analisis;
 	
 }

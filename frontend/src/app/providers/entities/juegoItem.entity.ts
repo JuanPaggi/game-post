@@ -14,4 +14,5 @@ export class JuegoItem {
     archivoImagen: String[];
 	tags: number[];
 	modos: number[];
+	analisis: number[];
 }

@@ -51,6 +51,12 @@
             </div>
           </div>
 
+          <div class="juego-analisis">
+            <div *ngFor="let analisis of analisisTexto">
+              <p>{{ analisis }}</p>
+            </div>
+          </div>
+
         </div>
 
         <button class="btn btn-primary" (click)="volverJuegos()">Volver</button>

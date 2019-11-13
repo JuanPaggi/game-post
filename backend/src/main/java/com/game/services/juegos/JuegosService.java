@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.game.controllers.juegos.dto.JuegoInput;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.persistence.models.Admin;
+import com.game.persistence.models.Analisis;
 import com.game.persistence.models.Imagenes;
 import com.game.persistence.models.Juegos;
 import com.game.persistence.models.Modos;
@@ -92,6 +93,15 @@ public class JuegosService {
 		}
 		juegoItem.tags = tag_id;
 		juegoItem.modos = modo_id;
+		
+		List<Analisis> analisis_juego = juego.get().getAnalisis();
+		ArrayList<Long> analisis_id = new ArrayList<>();
+		
+		for (Analisis analisis : analisis_juego) {
+			analisis_id.add(analisis.getId_analisis());
+		}
+		
+		juegoItem.analisis = analisis_id;
 		
 		ArrayList<String> imagenes = new ArrayList<String>();
 		for (Imagenes imagen : juego.get().getImagenes()) {
