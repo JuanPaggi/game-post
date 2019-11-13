@@ -57,6 +57,18 @@
             </div>
           </div>
 
+          <br><br><br>
+
+          <div *ngIf="user">
+            <li class="list-group-item">
+              <div class="media-body media-middle">
+                  <label>Agregar Analisis:</label>
+                  <textarea class="form-control" [(ngModel)]="analisisIngresado" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                  <button class="btn btn-success" (click)="agregarAnalisis()">Agregar</button>
+              </div>
+            </li>
+          </div>
+
         </div>
 
         <button class="btn btn-primary" (click)="volverJuegos()">Volver</button>
