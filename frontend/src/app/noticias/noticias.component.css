@@ -1,7 +1,9 @@
+.fondo{
+    background: #1f1f1f;
+}
 
 .noticias{
     display: flex;
-    justify-content: center;
     margin-top: 20px;
 }
 
@@ -18,7 +20,6 @@
 
 .noticia-titulo{
     display: flex;
-    justify-content: center;
     color: white;
 }
 
