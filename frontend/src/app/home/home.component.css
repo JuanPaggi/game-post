@@ -15,7 +15,7 @@
 }
 
 .main{
-    background: linear-gradient(to bottom, #151515c9 50%, #151515cc 100%);
+    background: linear-gradient(to bottom, #1f1f1fcc 50%, #1f1f1fcc 100%);
     width: 1440px;
     display: flex;
     justify-content: center;

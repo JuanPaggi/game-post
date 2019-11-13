@@ -1,6 +1,6 @@
 .header{
     height: 70px;
-    background: linear-gradient(to bottom, #000000 5%, #151515 100%);
+    background: linear-gradient(to bottom, #006494 5%, #11465f 50%, #2b5b8e 100%);
 }
 .navbar{
     height: 20%;
@@ -31,20 +31,21 @@
 .login-bienvenido{
     color: white;
     font-family: 'Agency FB Bold', arial;
-    font-size: 24px;
+    font-size: 20px;
+    margin-top: 4px;
 }
 
 .enlace{
-    color: #cef3ff !important;
-    margin-right: 10px;
+    color: #f1fcff !important;
     font-family: 'Agency FB Bold', arial;
     font-size: 20px;
     cursor: pointer;
     font-weight: 600;
+    margin-top: 3px;
 }
 
 .enlace-salir{
-    color: #cef3ff !important;
+    color: #f1fcff !important;
     margin-right: 10px;
     font-family: 'Agency FB Bold', arial;
     font-size: 20px;
@@ -54,7 +55,7 @@
 }
 
 .enlace-panel{
-    color: #cef3ff !important;
+    color: #f1fcff !important;
     font-family: 'Agency FB Bold', arial;
     font-size: 20px;
     cursor: pointer;
@@ -63,7 +64,7 @@
 }
 
 .enlace-guion{
-    color: #cef3ff !important;
+    color: #f1fcff !important;
     margin-right: 10px;
     font-family: 'Agency FB Bold', arial;
     font-size: 20px;
