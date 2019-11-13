@@ -4,6 +4,7 @@ import { UsuarioItem } from '../providers/entities/UsuarioItem.entity';
 import { Router } from '@angular/router';
 import { User } from '../providers/model/user.model';
 import { LoginDto } from '../providers/dto/dtoLogin/LoginDto';
+import { AdminService } from '../services/admin/admin.service';
 
 @Component({
   selector: 'app-login',
@@ -23,14 +24,17 @@ export class LoginComponent implements OnInit {
   usuarios: UsuarioItem[];
 
   user: User;
+  userAdm: User;
 
   constructor(
     private router: Router,
     private usuariosSrv: UsuariosService,
+    private adminSrv: AdminService,
   ) { }
 
   ngOnInit() {
     this.user = this.usuariosSrv.getUserLoggedIn();
+    this.userAdm = this.adminSrv.getUserLoggedIn();
 
   }
 
