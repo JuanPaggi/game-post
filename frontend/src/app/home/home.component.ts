@@ -4,6 +4,7 @@ import '../services/usuarios/usuarios.service';
 import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { User } from '../providers/model/user.model';
 import { AdminService } from '../services/admin/admin.service';
+import { BarraNavegacionComponent } from '../barra-navegacion/barra-navegacion.component';
 
 @Component({
   selector: 'app-home',
@@ -24,14 +25,6 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.user = this.usuariosSrv.getUserLoggedIn();
     this.userAdm = this.AdminSrv.getUserLoggedIn();
-  }
-
-  clickedJuegos(){
-    this.router.navigateByUrl(`/juegos`);
-  }
-
-  clickedNoticias(){
-    this.router.navigateByUrl(`/noticias`);
   }
 
 }

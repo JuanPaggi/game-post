@@ -1,18 +1,6 @@
-.home{
-    margin: 0 3%;
-    display: flex;
-    justify-content: center;
-}
-
 .item{
     background-color: turquoise;
     border: 1px solid red;
-}
-
-.main{
-    width: 1440px;
-    display: flex;
-    justify-content: center;
 }
 
 .enlace-juego{
@@ -35,8 +23,7 @@
     color: #81e0ff !important;
 }
 
-.nav{
+.barra{
     display: flex;
     justify-content: center;
-    width: 1024px;
 }
