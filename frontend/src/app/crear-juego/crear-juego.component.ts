@@ -110,6 +110,7 @@ export class CrearJuegoComponent implements OnInit {
     this.tagsSrv.getAllTags(new TagsDto()).subscribe(
       response => {
         this.tagsJuego = response;
+        this.tagsJuego.reverse();
       }
     );
   }
