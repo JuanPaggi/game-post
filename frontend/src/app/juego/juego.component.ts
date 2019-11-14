@@ -14,6 +14,13 @@ import { ModoItem } from '../providers/entities/ModoItem.entity';
 import { ModosService } from '../services/modos/modos.service';
 import { ModosDto } from '../providers/dto/ModosDto';
 import { AdminService } from '../services/admin/admin.service';
+import { AnalisisItem } from '../providers/entities/AnalisisItem.entity';
+import { AnalisisService } from '../services/analisis/analisis.service';
+import { AnalisisDto } from '../providers/dto/AnalisisDto';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { CrearAnalisisDto } from '../providers/dto/dtoCrear/CrearAnalisisDto';
+import { UsuarioItem } from '../providers/entities/UsuarioItem.entity';
+import { UsuarioByIdDto } from '../providers/dto/dtoById/UsuarioByIdDto';
 
 @Component({
   selector: 'app-juego',
@@ -28,10 +35,12 @@ export class JuegoComponent implements OnInit {
   modos: ModoItem[];
   modosLista: String[];
 
+  usuario: UsuarioItem;
+  id_usuario: number;
+
   titulo: String;
   descripcion: String;
   genero: String;
-	tipo: String;
 	desarrollador: String;
   fecha_lanzamiento: Date;
   fecha:String;
@@ -44,6 +53,12 @@ export class JuegoComponent implements OnInit {
   id_juego: number;
   apiURL: String;
 
+  analisis: AnalisisItem[];
+  analisisTexto: String[];
+
+  analisisIngresado: String;
+  formAddAnalisis: FormGroup;
+
   urlImagen: String[];
   hayImagen: boolean;
 
@@ -54,6 +69,8 @@ export class JuegoComponent implements OnInit {
     private juegosSrv: JuegosService,
     private tagsSrv: TagsService,
     private modosSrv: ModosService,
+    private usuariosSrv: UsuariosService,
+    private analisisSrv: AnalisisService,
     private route: ActivatedRoute,
     private router: Router,
     private adminSrv: AdminService,
@@ -64,6 +81,9 @@ export class JuegoComponent implements OnInit {
 
     this.modos = [];
     this.modosLista = [];
+
+    this.analisis = [];
+    this.analisisTexto = [];
 
 
     this.location.onPopState(() => {
@@ -78,8 +98,16 @@ export class JuegoComponent implements OnInit {
     this.route.params.subscribe(params => {
         this.id_juego = parseInt(params.id_juego, 10);
     });
+    this.formAddAnalisis = new FormGroup({
+      comentarioIngresado: new FormControl(Validators.required),
+    });
     this.getJuego();
     this.userAdm = this.adminSrv.getUserLoggedIn();
+    this.user = this.usuariosSrv.getUserLoggedIn();
+    if(this.user){
+      this.id_usuario = this.user.id_usuario;
+      this.getUsuario();
+    }
   }
 
   getJuego(){
@@ -95,6 +123,7 @@ export class JuegoComponent implements OnInit {
         }
         this.showDataJuego(this.juego);
         this.getTags();
+        this.getAnalisis();
         this.getModos();
       }
     },
@@ -109,7 +138,6 @@ export class JuegoComponent implements OnInit {
     this.genero = juego.genero;
     this.descripcion = juego.descripcion;
     this.desarrollador = juego.desarrollador;
-    this.tipo = juego.tipo;
     this.analisis_negativos = juego.analisis_negativos;
     this.analisis_positivos = juego.analisis_positivos;
     this.id_admin_creado = juego.id_admin_creado;
@@ -177,4 +205,60 @@ export class JuegoComponent implements OnInit {
   volverJuegos(){
     this.router.navigateByUrl(`/juegos`);
   }
+
+  getAnalisis(){
+    this.analisisSrv.getAllAnalisis(new AnalisisDto()).subscribe(
+      response => {
+        if (response) {
+        this.analisis = response;
+        this.showDataAnalisis(this.juego);
+      }
+    },
+    err => {
+      console.log(err);
+      if (err === 401) {
+      }
+    }
+    );
+  }
+
+  showDataAnalisis(juego: JuegoItem) {
+
+    let i = 0;
+    for (let index = 0; index < this.analisis.length; index++) {
+      if (this.analisis[index].id_analisis === juego.analisis[i]) {
+        i++;
+        this.analisisTexto.push(this.analisis[index].analisis);
+      }
+    }
+
+  }
+
+  agregarAnalisis(){
+    if (this.formAddAnalisis.valid) {
+      const analisisIn = new CrearAnalisisDto();
+      analisisIn.analisis = this.analisisIngresado;
+      analisisIn.fecha_publicacion = new Date();
+      analisisIn.id_juego = this.juego.id_juego;
+      analisisIn.valoracion = true;
+      analisisIn.id_usuario = this.usuario.id_usuario;
+      this.analisisSrv.addAnalisis(analisisIn).subscribe(
+        response => {
+          this.analisisTexto.push(analisisIn.analisis);
+        }
+      );
+    } else {
+      console.log('Formulario invalido');
+    }
+  }
+
+  getUsuario(){
+    this.usuariosSrv.getUsuario(new UsuarioByIdDto(this.id_usuario)).subscribe(
+      response => {
+        this.usuario = response;
+      }
+    );
+  }
 }
+
+

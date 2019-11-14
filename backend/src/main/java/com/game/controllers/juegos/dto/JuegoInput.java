@@ -11,8 +11,6 @@ public class JuegoInput {
 	
 	public String genero;
 	
-	public String tipo;
-	
 	public String desarrollador;
 	
 	public Date fecha_lanzamiento;

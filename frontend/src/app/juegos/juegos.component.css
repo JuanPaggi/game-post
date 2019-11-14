@@ -1,22 +1,27 @@
-.juego-container{
-    border-radius: 15px;
-    margin: 10px 0;
-    padding: 20px;
-    background-color: white;
-}
-
-.enlace-juego{
-    cursor: pointer;
-}
-
-.titulo-juego{
-    display: flex;
-    justify-content: center;
-    color: white;
+.fondo{
+    background: #1f1f1f;
+    padding: 25px;
+    padding-top: 0px;
 }
 
 .juegos{
     display: flex;
-    justify-content: center;
     margin-top: 20px;
+}
+
+.titulo-juego{
+    display: flex;
+    color: white;
+}
+
+.juego-container{
+    border: 1px solid gray;
+    padding: 20px;
+    background-color: white;
+    margin-top: 10px;
+    border-radius: 5px;
+}
+
+.enlace-juego{
+    cursor: pointer;
 }

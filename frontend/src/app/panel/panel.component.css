@@ -1,3 +1,8 @@
+.container-opc{
+    background: linear-gradient(to bottom, #1f1f1fcc 50%, #1f1f1fcc 100%);
+    padding: 0px 70px;
+}
+
 .titulo{
     color: white;
     display: flex;
@@ -5,6 +10,7 @@
 }
 
 .contenedor-panel{
+    margin-top: 50px;
     height: 500px;
     width: 800px;
     background-color: rgb(236, 236, 236);

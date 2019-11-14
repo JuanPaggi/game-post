@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import com.game.controllers.juegos.dto.JuegoInput;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.persistence.models.Admin;
+import com.game.persistence.models.Analisis;
 import com.game.persistence.models.Imagenes;
 import com.game.persistence.models.Juegos;
 import com.game.persistence.models.Modos;
@@ -73,7 +74,6 @@ public class JuegosService {
 		juegoItem.titulo = juego.get().getTitulo();
 		juegoItem.descripcion = juego.get().getDescripcion();
 		juegoItem.genero = juego.get().getGenero();
-		juegoItem.tipo = juego.get().getTipo();
 		juegoItem.desarrollador = juego.get().getDesarrollador();
 		juegoItem.fecha_lanzamiento = juego.get().getFecha_lanzamiento();
 		juegoItem.analisis_positivos = juego.get().getAnalisis_positivos();
@@ -92,6 +92,15 @@ public class JuegosService {
 		}
 		juegoItem.tags = tag_id;
 		juegoItem.modos = modo_id;
+		
+		List<Analisis> analisis_juego = juego.get().getAnalisis();
+		ArrayList<Long> analisis_id = new ArrayList<>();
+		
+		for (Analisis analisis : analisis_juego) {
+			analisis_id.add(analisis.getId_analisis());
+		}
+		
+		juegoItem.analisis = analisis_id;
 		
 		ArrayList<String> imagenes = new ArrayList<String>();
 		for (Imagenes imagen : juego.get().getImagenes()) {
@@ -116,7 +125,6 @@ public class JuegosService {
 		juego.setTitulo(juegoIn.titulo);
 		juego.setDescripcion(juegoIn.descripcion);
 		juego.setGenero(juegoIn.genero);
-		juego.setTipo(juegoIn.tipo);
 		juego.setDesarrollador(juegoIn.desarrollador);
 		juego.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juego.setAnalisis_positivos(juegoIn.analisis_positivos);
@@ -128,7 +136,12 @@ public class JuegosService {
 		
 		Set<Imagenes> imagenes = new HashSet<Imagenes>();
 		for (byte[] imagen : juegoIn.archivoImagen) {
-			imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));
+			Optional<Imagenes> aux = fileService.selectImageFile(imagen);
+			if (aux.isPresent()) {
+				imagenes.add(aux.get());
+			}else {
+				imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));				
+			}
 		}
 		juego.setImagenes(imagenes);	
 		
@@ -147,7 +160,6 @@ public class JuegosService {
 			item.titulo = juego.getTitulo();
 			item.descripcion = juego.getDescripcion();
 			item.genero = juego.getGenero();
-			item.tipo = juego.getTipo();
 			item.desarrollador = juego.getDesarrollador();
 			item.fecha_lanzamiento = juego.getFecha_lanzamiento();
 			item.analisis_positivos = juego.getAnalisis_positivos();
@@ -199,7 +211,6 @@ public class JuegosService {
 		juegoObj.setTitulo(juegoIn.titulo);
 		juegoObj.setDescripcion(juegoIn.descripcion);
 		juegoObj.setGenero(juegoIn.genero);
-		juegoObj.setTipo(juegoIn.tipo);
 		juegoObj.setDesarrollador(juegoIn.desarrollador);
 		juegoObj.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juegoObj.setAnalisis_positivos(juegoIn.analisis_positivos);

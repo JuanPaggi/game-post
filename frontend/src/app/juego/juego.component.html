@@ -1,3 +1,4 @@
+<app-barra-navegacion></app-barra-navegacion>
 <section class="container panel-page">
         <div class="juego">
       
@@ -7,10 +8,6 @@
       
           <div class="juego-descripcion">
             <p>{{ descripcion }}</p>
-          </div>
-      
-          <div class="juego-tipo">
-            <p>{{ tipo }}</p>
           </div>
       
           <div class="juego-genero">
@@ -49,6 +46,24 @@
             <div  *ngFor="let imagen of urlImagen">
                 <img [src]="apiURL + imagen" style="width: 40px; height: 40px;" />
             </div>
+          </div>
+
+          <div class="juego-analisis">
+            <div *ngFor="let analisis of analisisTexto">
+              <p>{{ analisis }}</p>
+            </div>
+          </div>
+
+          <br><br><br>
+
+          <div *ngIf="user">
+            <li class="list-group-item">
+              <div class="media-body media-middle">
+                  <label>Agregar Analisis:</label>
+                  <textarea class="form-control" [(ngModel)]="analisisIngresado" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                  <button class="btn btn-success" (click)="agregarAnalisis()">Agregar</button>
+              </div>
+            </li>
           </div>
 
         </div>

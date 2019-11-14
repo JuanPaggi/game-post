@@ -1,7 +1,7 @@
 .home{
-    display: grid;
-    grid-template-areas: "main";
     margin: 0 3%;
+    display: flex;
+    justify-content: center;
 }
 
 .item{
@@ -10,9 +10,33 @@
 }
 
 .main{
-    grid-area: main;
+    width: 1440px;
+    display: flex;
+    justify-content: center;
 }
 
 .enlace-juego{
+    display: flex;
+    justify-content: center;
+    align-items: center;
     cursor: pointer;
+    width: 120px;
+    height: 40px;
+    background: linear-gradient(to bottom,#151515 5%, #314344 50%, #151515 100%);
+    color: #cef3ff !important;
+    text-decoration: none;
+    font-family: 'Agency FB Bold', arial;
+    font-size: 24px;
+    font-weight: 600;
+}
+
+.enlace-juego:hover{
+    box-shadow: inset 0px -5px 3px -2px #525252;
+    color: #81e0ff !important;
+}
+
+.nav{
+    display: flex;
+    justify-content: center;
+    width: 1024px;
 }

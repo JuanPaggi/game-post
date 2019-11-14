@@ -9,7 +9,6 @@ public class JuegoItem {
 	public String titulo;
 	public String descripcion;
 	public String genero;
-	public String tipo;
 	public String desarrollador;
 	public Date fecha_lanzamiento;
 	public long analisis_positivos;
@@ -19,5 +18,6 @@ public class JuegoItem {
 	public ArrayList<Long> tags;
 	public ArrayList<Long> modos;
 	public ArrayList<String> archivoImagen;
+	public ArrayList<Long> analisis;
 	
 }

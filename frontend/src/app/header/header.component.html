@@ -4,8 +4,22 @@
       <img src="../../assets/ganador.svg" alt="" height="50" width="50">
       <h1 class="titulo-header">World Game</h1>
     </a>
-    <div *ngIf="user || userAdm">
-      <p class="login-bienvenido">Bienvenido {{usuario}}</p>
+    
+    <div class="mt-1">
+      <div class="d-flex mt-1" *ngIf="user">
+        <p class="login-bienvenido">Bienvenido {{usuario}}</p>
+        <p class="enlace-guion">-</p><a *ngIf="user || userAdm" class="enlace-salir" (click)="clickedSalir()">Salir</a>
+      </div>
+      <div class="d-flex mt-1" *ngIf="userAdm">
+        <p class="login-bienvenido">Bienvenido {{usuario}}</p>
+        <p class="enlace-guion">-</p><a *ngIf="userAdm" class="enlace-panel" (click)="clickedPanel()">Panel Admin</a>
+        <p class="enlace-guion">-</p><a *ngIf="user || userAdm" class="enlace-salir" (click)="clickedSalir()">Salir</a>
+      </div>
+      <div class="d-flex mt-1">
+        <a *ngIf="!user && !userAdm" class="enlace mr-1" (click)="clickedLogin()">Entrar</a>
+        <p *ngIf="!user && !userAdm" class="enlace-guion">-</p>
+        <a *ngIf="!user && !userAdm" class="enlace" (click)="clickedRegistrarse()">Registrarse</a>
+      </div>
     </div>
   </nav>
 </header>

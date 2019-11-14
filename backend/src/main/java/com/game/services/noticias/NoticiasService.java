@@ -147,7 +147,12 @@ public class NoticiasService {
 		
 		Set<Imagenes> imagenes = new HashSet<Imagenes>();
 		for (byte[] imagen : noticiaIn.archivoImagen) {
-			imagenes.add(fileService.uploadImageFile(imagen, noticiaIn.nombreImagen, admin.get()));
+			Optional<Imagenes> aux = fileService.selectImageFile(imagen);
+			if (aux.isPresent()) {
+				imagenes.add(aux.get());
+			}else {
+				imagenes.add(fileService.uploadImageFile(imagen, noticiaIn.nombreImagen, admin.get()));
+			}
 		}
 		noticia.setImagenes(imagenes);	
 		

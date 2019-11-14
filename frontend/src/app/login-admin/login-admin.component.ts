@@ -47,7 +47,7 @@ export class LoginAdminComponent implements OnInit {
           this.logIn(this.usuario, this.id_admin, event);
           window.location.href = "/";
         } else{
-          this.htmlToAdd = '<p class="list-group-item">Datos Incorrectos<p>';
+          this.htmlToAdd = '<p>Datos Incorrectos<p>';
         }
       }
     )
@@ -59,8 +59,8 @@ export class LoginAdminComponent implements OnInit {
     this.adminSrv.setUserLoggedIn(u);
   }
 
-  volverHome(){
-    this.router.navigateByUrl(`/`);
+  volverLogin(){
+    this.router.navigateByUrl(`/login`);
   }
 
 }

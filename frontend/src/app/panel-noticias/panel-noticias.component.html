@@ -1,100 +1,26 @@
-<section class="container panel-page" *ngIf="userAdm">
+<section class="container panel-page container-opc" *ngIf="userAdm">
 
+    <h1 class="titulo">Panel de Noticias</h1>
     <table class="table table-hover table-dark">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col" class="col-titulo">Titulo</th>
-                    <th scope="col" class="col-opc">Admin</th>
-                    <th scope="col" class="col-opc">Opciones</th>
-                </tr>
-            </thead>
-            <tbody *ngFor="let noticia of noticias; let i = index">
-                <tr>
-                    <th scope="row">{{i}}</th>
-                    <td class="col-titulo">{{noticia.titulo}}</td>
-                    <td class="col-opc">{{noticia.id_admin_creado}}</td>
-                    <td class="col-opc"><button class="btn btn-warning mr-2">Editar</button><button class="btn btn-danger" (click)="borrarNoticia(noticia.id_noticia)">Borrar</button></td>
-                </tr>
-            </tbody>
-        </table>
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col" class="col-titulo">Titulo</th>
+                <th scope="col" class="col-opc">Admin</th>
+                <th scope="col" class="col-opc">Opciones</th>
+            </tr>
+        </thead>
+        <tbody *ngFor="let noticia of noticias; let i = index">
+            <tr>
+                <th scope="row">{{i+1}}</th>
+                <td class="col-titulo">{{noticia.titulo}}</td>
+                <td class="col-opc">{{noticia.id_admin_creado}}</td>
+                <td class="col-opc"><button class="btn btn-warning mr-2">Editar</button><button class="btn btn-danger" (click)="borrarNoticia(noticia.id_noticia)">Borrar</button></td>
+            </tr>
+        </tbody>
+    </table>
 
-    <div class="row">
-        <div class="col-md-12">
-            <h2 class="titulo">Crear noticia</h2>
-            <form [formGroup] = "formAddNoticia">
-                    <ul class="list-group">
-    
-                        <li class="list-group-item">
-                            <div class="media-body media-middle form-group item-form">
-                                <label>Titulo</label>
-                                <div class="input-obligatorio">
-                                    <input type="text" class="form-control" [(ngModel)]="tituloNoticia" required minlength="10" [ngModelOptions]="{standalone: true}">
-                                    <p class="ml-2 mr-4">*</p>
-                                </div>
-                            </div>
-                        </li>
-    
-                        <li class="list-group-item">
-                            <div class="media-body media-middle form-group item-form">
-                                <label>Descripcion</label>
-                                <div class="input-obligatorio">
-                                    <textarea class="form-control" [(ngModel)]="descripcionNoticia" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
-                                    <p class="ml-2 mr-4">*</p>
-                                </div>
-                            </div>
-                        </li>
-    
-                        <li class="list-group-item">
-                            <div class="media-body media-middle">
-                                <label>Cuerpo</label>
-                                <div class="input-obligatorio">
-                                    <textarea class="form-control" [(ngModel)]="cuerpoNoticia" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
-                                    <p class="ml-2 mr-4">*</p>
-                                </div>
-                            </div>
-                        </li>
-    
-                        <li class="list-group-item">
-                            <div class="media-body media-middle">
-                                <label>Fecha Publicacion</label>
-                                <div class="input-obligatorio">
-                                    <input class="form-control" [(ngModel)]="fecha_publicacionNoticia" required minlength="10" [ngModelOptions]="{standalone: true}">
-                                    <p class="ml-2 mr-4">*</p>
-                                </div>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item">
-                            <div class="media-body media-middle">
-                                <label>Tags:</label>
-                                <div *ngFor="let tag of tagsNoticia"> {{tag.id_tag}}.{{tag.etiqueta}}</div>
-                                <p>Ingrese el numero de la etiqueta: (separados por comas)</p>
-                                <textarea class="form-control" [(ngModel)]="tagsIdNoticia" [ngModelOptions]="{standalone: true}"></textarea>
-                            </div>
-                        </li>
-
-                        <li class="list-group-item">
-                            <div class="media-body">
-                                <label>Imagen</label>
-                                <button type="button" class="btn btn-primary" (click)="openImageNoticia()">Elegir imagen</button>
-                                <input type="file" #imageUpload accept="image/*" style="display: none"/>
-                                <div *ngIf="!imageUpload" class="alert alert-danger">
-                                    <div>
-                                        La imagen es requerida.
-                                    </div>
-                                </div>
-                                <div class="previews">
-                                    <img *ngFor="let imagen of imagenesUrlNoticia; let i = index" [src]="imagen" (click)="deleteImageNoticia(i)" style="width: 50px; height: 50px;cursor: not-allowed;" />
-                                </div>
-                            </div>
-                        </li>
-
-                    </ul>
-                </form>
-            <button class="btn btn-success" (click)="agregarNoticia()">Guardar</button>
-        </div>
-    </div>
+    <button class="btn btn-success ml-3" (click)="agregarNoticia()">Agregar</button>
 
     <div class="btn-volver">
         <button class="btn btn-primary m-3" (click)="volverPanel()">Volver</button>

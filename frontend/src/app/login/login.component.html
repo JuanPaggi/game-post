@@ -1,26 +1,24 @@
-<section class="container panel-page" *ngIf="!user">
-    <div class="m-3">
-        <ul class="list-group">
-
-            <li class="list-group-item">
-                <div class="media-body media-middle form-group item-form">
-                    <label>Usuario</label>
-                    <input type="text" class="form-control" [(ngModel)]="usuario" [ngModelOptions]="{standalone: true}">
+<section class="container panel-page container-opc" *ngIf="!user && !userAdm">
+    <h1 class="titulo pt-3">Comparte tu opinion a la comunidad, entra ahora!</h1>
+    <form>
+        <div class="row">
+            <div class="col">
+                <div class="separador-input">
+                    <p class="texto-input-up">Usuario</p>
+                    <input class="input-register" type="text" [(ngModel)]="usuario" [ngModelOptions]="{standalone: true}">
                 </div>
-            </li>
-
-            <li class="list-group-item">
-                <div class="media-body media-middle form-group item-form">
-                    <label>Contraseña</label>
-                    <input type="text" class="form-control" [(ngModel)]="clave" [ngModelOptions]="{standalone: true}">
+                <div class="separador-input">
+                    <p class="texto-input-up">Contraseña</p>
+                    <input class="input-register" type="password" [(ngModel)]="clave" [ngModelOptions]="{standalone: true}">
                 </div>
-            </li>
-
-            <div class="error-login" [innerHtml]="htmlToAdd"></div>
-
-        </ul>
-        <button class="btn btn-primary" (click)="ComprobarUsuario()">Entrar</button>
-    </div>
+                <button class="boton-registro" (click)="ComprobarUsuario()">Entrar</button>
+                <div class="contenedor-enlace-admin">
+                    <a *ngIf="!user && !userAdm" class="enlace-admin" (click)="clickedLoginAdmin()">Soy Admin</a>
+                </div>
+                <div class="error-login error-texto" [innerHtml]="htmlToAdd"></div>
+            </div>
+        </div>
+    </form>
     <div class="btn-volver">
         <button class="btn btn-primary m-3" (click)="volverHome()">Volver</button>
     </div>

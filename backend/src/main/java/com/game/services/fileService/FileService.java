@@ -47,4 +47,8 @@ public class FileService {
 		return imagenesRepository.save(img);
 	}
 	
+	public Optional<Imagenes> selectImageFile(byte[] image_file) throws NoSuchAlgorithmException {
+		return imagenesRepository.findByImgen(image_file);
+	}
+	
 }

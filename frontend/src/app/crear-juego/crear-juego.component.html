@@ -1,0 +1,164 @@
+<section class="container panel-page container-opc" *ngIf="userAdm">
+
+    <div class="linea-separacion"></div>
+    
+    <div class="row">
+        <div class="col">
+            <h2 class="titulo">Crear Juego</h2>
+            <form class="centrado" [formGroup] = "formAddJuego">
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Titulo</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <input class="input-entrada" type="text" [(ngModel)]="tituloJuego" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Descripcion</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <textarea class="input-entrada descripcion" [(ngModel)]="descripcionJuego" [ngModelOptions]="{standalone: true}"></textarea>
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Genero</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <input class="input-entrada" [(ngModel)]="generoJuego" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Desarrollador</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <input class="input-entrada" [(ngModel)]="desarrolladorJuego" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Fecha Lanzamiento</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <input class="input-entrada" [(ngModel)]="fecha_lanzamientoJuego" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Tags:</label>
+                    </div> 
+                    <div class="input-titulo">
+                        <p *ngFor="let tag of tagsJuego">&nbsp; {{tag.id_tag}}.{{tag.etiqueta}}</p>
+                    </div>
+                    <p class="input-titulo">Ingrese el numero de la etiqueta: (separados por comas)</p>
+                    <textarea class="input-entrada" [(ngModel)]="tagsIdJuego" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Modos:</label>
+                    </div>
+                    <div class="input-titulo">
+                        <p *ngFor="let modo of modosJuego">&nbsp; {{modo.id_modo}}.{{modo.modo}}</p> 
+                    </div>
+                    <p class="input-titulo">Ingrese el numero del Modo: (separados por comas)</p>
+                    <textarea class="input-entrada" [(ngModel)]="modosIdJuego" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Imagenes:</label>
+                    </div>
+                    <div class="tabla-imagenes">
+                        <img class="m-2" *ngFor="let imagen of imagenesUrlJuego; let i = index" [src]="imagen" (click)="deleteImage(i)" style="width: 50px; height: 50px;cursor: not-allowed;" />
+                    </div>
+                    <input type="file" #imageUpload accept="image/*" style="display: none"/>
+                    <button type="button" class="btn btn-primary" (click)="openImage()">Subir imagen</button>
+                </div>
+
+                <button class="btn btn-success mb-4 mt-3" (click)="agregarJuego()">Añadir</button>
+            </form>
+        </div>
+    </div> 
+
+    <div class="linea-separacion"></div>
+    
+    <div class="row">
+        <div class="col">
+            <h2 class="titulo">Crear Requisito</h2>
+            <form class="centrado" [formGroup] = "formAddJuego">
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Sistema Operativo</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <input class="input-entrada" type="text" [(ngModel)]="sistema_operativo" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Procesador</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <input class="input-entrada" [(ngModel)]="procesador" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Memoria</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <input class="input-entrada" [(ngModel)]="memoria" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Grafica</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <input class="input-entrada" [(ngModel)]="grafica" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Almacenamiento</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <input class="input-entrada" [(ngModel)]="almacenamiento" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <button class="btn btn-success mt-4" (click)="agregarRequisito()">Añadir</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="btn-volver mt-5">
+        <button class="btn btn-primary m-3" (click)="volverPanel()">Volver</button>
+    </div>
+
+</section>

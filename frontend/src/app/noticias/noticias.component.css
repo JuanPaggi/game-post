@@ -1,25 +1,25 @@
+.fondo{
+    background: #1f1f1f;
+    padding: 25px;
+    padding-top: 0px;
+}
 
 .noticias{
     display: flex;
-    justify-content: center;
     margin-top: 20px;
 }
 
 .titulo-noticias{
+    display: flex;
     color:white;
 }
 
 .noticia-container{
-    border-radius: 15px;
-    margin: 10px 0;
+    border: 1px solid gray;
     padding: 20px;
     background-color: white;
-}
-
-.noticia-titulo{
-    display: flex;
-    justify-content: center;
-    color: white;
+    margin-top: 10px;
+    border-radius: 5px;
 }
 
 .enlase-noticia{

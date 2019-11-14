@@ -1,0 +1,70 @@
+<section class="container panel-page container-opc" *ngIf="userAdm">
+
+    <div class="linea-separacion"></div>
+
+    <div class="row">
+        <div class="col">
+            <h2 class="titulo">Crear noticia</h2>
+            <form class="centrado" [formGroup] = "formAddNoticia">
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Titulo</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <input class="input-entrada" type="text" [(ngModel)]="tituloNoticia" [ngModelOptions]="{standalone: true}">
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Descripcion</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <textarea class="input-entrada descripcion" [(ngModel)]="descripcionNoticia" [ngModelOptions]="{standalone: true}"></textarea>
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Cuerpo</label>
+                    </div>
+                    <div class="contenedor-input-entrada">
+                        <textarea class="input-entrada descripcion" [(ngModel)]="cuerpoNoticia" [ngModelOptions]="{standalone: true}"></textarea>
+                        <p class="ml-2">*</p>
+                    </div>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Tags:</label>
+                    </div> 
+                    <div class="input-titulo">
+                        <p *ngFor="let tag of tagsNoticia">&nbsp; {{tag.id_tag}}.{{tag.etiqueta}}</p>
+                    </div>
+                    <p class="input-titulo">Ingrese el numero de la etiqueta: (separados por comas)</p>
+                    <textarea class="input-entrada" [(ngModel)]="tagsIdNoticia" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Imagenes:</label>
+                    </div>
+                    <div class="tabla-imagenes">
+                        <img class="m-2" *ngFor="let imagen of imagenesUrlNoticia; let i = index" [src]="imagen" (click)="deleteImage(i)" style="width: 50px; height: 50px;cursor: not-allowed;" />
+                    </div>
+                    <input type="file" #imageUpload accept="image/*" style="display: none"/>
+                    <button type="button" class="btn btn-primary" (click)="openImage()">Elegir imagen</button>
+                </div>
+
+                <button class="btn btn-success mb-4 mt-3" (click)="agregarNoticia()">Guardar</button>
+            </form>
+        </div>
+    </div>
+
+    <div class="btn-volver">
+        <button class="btn btn-primary m-3" (click)="volverPanel()">Volver</button>
+    </div>
+</section>
