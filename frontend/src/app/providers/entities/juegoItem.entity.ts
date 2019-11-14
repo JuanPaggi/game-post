@@ -3,7 +3,6 @@ export class JuegoItem {
 	titulo: String;
 	descripcion: String;
 	genero: String;
-	tipo: String;
 	desarrollador: String;
 	fecha_lanzamiento: Date;
 	analisis_positivos: number;

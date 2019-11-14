@@ -74,7 +74,6 @@ public class JuegosService {
 		juegoItem.titulo = juego.get().getTitulo();
 		juegoItem.descripcion = juego.get().getDescripcion();
 		juegoItem.genero = juego.get().getGenero();
-		juegoItem.tipo = juego.get().getTipo();
 		juegoItem.desarrollador = juego.get().getDesarrollador();
 		juegoItem.fecha_lanzamiento = juego.get().getFecha_lanzamiento();
 		juegoItem.analisis_positivos = juego.get().getAnalisis_positivos();
@@ -126,7 +125,6 @@ public class JuegosService {
 		juego.setTitulo(juegoIn.titulo);
 		juego.setDescripcion(juegoIn.descripcion);
 		juego.setGenero(juegoIn.genero);
-		juego.setTipo(juegoIn.tipo);
 		juego.setDesarrollador(juegoIn.desarrollador);
 		juego.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juego.setAnalisis_positivos(juegoIn.analisis_positivos);
@@ -162,7 +160,6 @@ public class JuegosService {
 			item.titulo = juego.getTitulo();
 			item.descripcion = juego.getDescripcion();
 			item.genero = juego.getGenero();
-			item.tipo = juego.getTipo();
 			item.desarrollador = juego.getDesarrollador();
 			item.fecha_lanzamiento = juego.getFecha_lanzamiento();
 			item.analisis_positivos = juego.getAnalisis_positivos();
@@ -214,7 +211,6 @@ public class JuegosService {
 		juegoObj.setTitulo(juegoIn.titulo);
 		juegoObj.setDescripcion(juegoIn.descripcion);
 		juegoObj.setGenero(juegoIn.genero);
-		juegoObj.setTipo(juegoIn.tipo);
 		juegoObj.setDesarrollador(juegoIn.desarrollador);
 		juegoObj.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juegoObj.setAnalisis_positivos(juegoIn.analisis_positivos);

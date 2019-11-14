@@ -9,7 +9,6 @@ public class JuegoItem {
 	public String titulo;
 	public String descripcion;
 	public String genero;
-	public String tipo;
 	public String desarrollador;
 	public Date fecha_lanzamiento;
 	public long analisis_positivos;

@@ -41,7 +41,6 @@ export class JuegoComponent implements OnInit {
   titulo: String;
   descripcion: String;
   genero: String;
-	tipo: String;
 	desarrollador: String;
   fecha_lanzamiento: Date;
   fecha:String;
@@ -98,15 +97,17 @@ export class JuegoComponent implements OnInit {
     this.apiURL = environment.apiEndpoint;
     this.route.params.subscribe(params => {
         this.id_juego = parseInt(params.id_juego, 10);
-        this.id_usuario = 1;
     });
     this.formAddAnalisis = new FormGroup({
       comentarioIngresado: new FormControl(Validators.required),
     });
     this.getJuego();
-    this.getUsuario();
     this.userAdm = this.adminSrv.getUserLoggedIn();
     this.user = this.usuariosSrv.getUserLoggedIn();
+    if(this.user){
+      this.id_usuario = this.user.id_usuario;
+      this.getUsuario();
+    }
   }
 
   getJuego(){
@@ -137,7 +138,6 @@ export class JuegoComponent implements OnInit {
     this.genero = juego.genero;
     this.descripcion = juego.descripcion;
     this.desarrollador = juego.desarrollador;
-    this.tipo = juego.tipo;
     this.analisis_negativos = juego.analisis_negativos;
     this.analisis_positivos = juego.analisis_positivos;
     this.id_admin_creado = juego.id_admin_creado;

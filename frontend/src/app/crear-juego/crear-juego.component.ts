@@ -32,7 +32,6 @@ export class CrearJuegoComponent implements OnInit {
   tituloJuego: String;
   descripcionJuego: String;
   generoJuego: String;
-  tipoJuego: String;
   desarrolladorJuego: String;
   fecha_lanzamientoJuego: Date;
   fechaJuego: String;
@@ -151,7 +150,6 @@ export class CrearJuegoComponent implements OnInit {
       juego.titulo = this.tituloJuego;
       juego.descripcion = this.descripcionJuego;
       juego.genero = this.generoJuego;
-      juego.tipo = this.tipoJuego;
       juego.desarrollador = this.desarrolladorJuego;
       juego.fecha_lanzamiento = this.fecha_lanzamientoJuego;
       juego.analisis_negativos = 0;

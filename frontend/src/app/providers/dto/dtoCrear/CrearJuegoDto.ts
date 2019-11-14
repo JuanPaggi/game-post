@@ -2,7 +2,6 @@ export class CrearJuegoDto {
 	titulo: String;
 	descripcion: String;
 	genero: String;
-	tipo: String;
 	desarrollador: String;
 	fecha_lanzamiento: Date;
 	analisis_positivos: number;

@@ -38,9 +38,6 @@ public class Juegos {
 	private String genero;
 	
 	@Column(nullable = false)
-	private String tipo;
-	
-	@Column(nullable = false)
 	private String desarrollador;
 	
 	@Column(nullable = false)
@@ -122,14 +119,6 @@ public class Juegos {
 
 	public void setGenero(String genero) {
 		this.genero = genero;
-	}
-
-	public String getTipo() {
-		return tipo;
-	}
-
-	public void setTipo(String tipo) {
-		this.tipo = tipo;
 	}
 
 	public String getDesarrollador() {

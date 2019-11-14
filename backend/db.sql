@@ -1,4 +1,3 @@
-
 -- ---
 -- Table 'usuarios'
 -- 
@@ -34,7 +33,6 @@ CREATE TABLE `juegos` (
   `titulo` VARCHAR(128) NOT NULL,
   `descripcion` MEDIUMTEXT NOT NULL,
   `genero` VARCHAR(64) NOT NULL,
-  `tipo` VARCHAR(128) NOT NULL,
   `desarrollador` VARCHAR(256) NOT NULL,
   `fecha_lanzamiento` DATE NOT NULL,
   `id_requisito` INT NOT NULL,
