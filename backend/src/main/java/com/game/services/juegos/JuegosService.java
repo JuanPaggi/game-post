@@ -138,7 +138,12 @@ public class JuegosService {
 		
 		Set<Imagenes> imagenes = new HashSet<Imagenes>();
 		for (byte[] imagen : juegoIn.archivoImagen) {
-			imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));
+			Optional<Imagenes> aux = fileService.selectImageFile(imagen);
+			if (aux.isPresent()) {
+				imagenes.add(aux.get());
+			}else {
+				imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));				
+			}
 		}
 		juego.setImagenes(imagenes);	
 		

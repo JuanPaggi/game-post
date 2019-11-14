@@ -169,13 +169,16 @@ export class CrearJuegoComponent implements OnInit {
         juego.modos= [];
       }
       juego.nombreImagen = "image";
-      if (juego.archivoImagen != null) {
+      if (this.imageFileJuego != null) {
         juego.archivoImagen = this.imageFileJuego;
       }else{
         juego.archivoImagen = [];
       }
-      this.juegosSrv.addJuego(juego).subscribe();
-      window.location.reload();
+      this.juegosSrv.addJuego(juego).subscribe(
+        response=>{
+          this.router.navigateByUrl(`panel/panel-juegos`);
+        }
+      );
     } else {
       console.log('Formulario invalido');
     }

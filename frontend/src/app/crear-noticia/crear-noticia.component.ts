@@ -68,7 +68,7 @@ export class CrearNoticiaComponent implements OnInit {
     );
   }
 
-  openImageNoticia() {
+  openImage() {
     this.imagInput.nativeElement.click();
     this.imagInput.nativeElement.onchange = () => {
       const fr = new FileReader();
@@ -103,16 +103,24 @@ export class CrearNoticiaComponent implements OnInit {
       }else{
         noticia.tags= [];
       }
-      noticia.nombreImagen = "hola";
+      noticia.nombreImagen = "image";
+      if (this.imageFileNoticia != null) {
+        noticia.archivoImagen = this.imageFileNoticia;
+      }else{
+        noticia.archivoImagen = [];
+      }
       noticia.archivoImagen = this.imageFileNoticia;
-      this.noticiasSrv.addNoticia(noticia).subscribe();
-      this.router.navigateByUrl(`panel/panel-noticias`);
+      this.noticiasSrv.addNoticia(noticia).subscribe(
+        response=>{
+          this.router.navigateByUrl(`panel/panel-noticias`);
+        }
+      );
     } else {
       console.log('Formulario invalido');
     }
   }
 
-  deleteImageNoticia(idx: number) {
+  deleteImage(idx: number) {
     this.imageFileNoticia.splice(idx,1);
     this.imagenesUrlNoticia.splice(idx,1);
   }
