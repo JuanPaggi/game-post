@@ -20,4 +20,10 @@ public class JuegoItem {
 	public ArrayList<String> archivoImagen;
 	public ArrayList<Long> analisis;
 	
+	public String sistema_operativo;
+	public String procesador;
+	public String memoria;
+	public String grafica;
+	public String almacenamiento;
+	
 }

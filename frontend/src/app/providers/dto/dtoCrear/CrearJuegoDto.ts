@@ -6,10 +6,14 @@ export class CrearJuegoDto {
 	fecha_lanzamiento: Date;
 	analisis_positivos: number;
 	analisis_negativos: number;
-	id_requisitos: number;
 	id_admin_creado: number;
     nombreImagen: String;
     archivoImagen: number[][];
 	tags: number[];
 	modos: number[];
+	sistema_operativo: String;
+	procesador: String;
+	memoria: String;
+	grafica: String;
+	almacenamiento: String;
 }

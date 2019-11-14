@@ -2,9 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { CrearJuegoDto } from '../providers/dto/dtoCrear/CrearJuegoDto';
 import { ModosDto } from '../providers/dto/ModosDto';
 import { TagsDto } from '../providers/dto/TagsDto';
-import { CrearRequisitoDto } from '../providers/dto/dtoCrear/CrearRequisitoDto';
 import { FormControl, Validators, FormGroup } from '@angular/forms';
-import { RequisitosService } from '../services/requisitos/requisitos.service';
 import { TagsService } from '../services/tags/tags.service';
 import { JuegosService } from '../services/juegos/juegos.service';
 import { ModosService } from '../services/modos/modos.service';
@@ -37,7 +35,6 @@ export class CrearJuegoComponent implements OnInit {
   fechaJuego: String;
   analisis_positivosJuego: number;
   analisis_negativosJuego: number;
-  id_requisitosJuego: number;
   id_admin_creadoJuego: number;
 
   tagsJuego: TagItem[];
@@ -50,7 +47,6 @@ export class CrearJuegoComponent implements OnInit {
   imageFileJuego: number[][];
   imagenesUrlJuego: string[];
 
-  formAddRequisito: FormGroup;
   formAddJuego: FormGroup;
 
 
@@ -62,7 +58,6 @@ export class CrearJuegoComponent implements OnInit {
     private modosSrv: ModosService,
     private juegosSrv: JuegosService,
     private tagsSrv: TagsService,
-    private requisitoSrv: RequisitosService,
   ) { 
     this.imageFileJuego = [];
     this.imagenesUrlJuego = [];
@@ -70,39 +65,16 @@ export class CrearJuegoComponent implements OnInit {
 
   ngOnInit() {
     this.userAdm = this.adminSrv.getUserLoggedIn();
-    this.formAddRequisito = new FormGroup({
-      sistema_operativo: new FormControl(Validators.required),
-      procesador: new FormControl(Validators.required),
-      memoria: new FormControl(Validators.required),
-      grafica: new FormControl(Validators.required),
-      almacenamiento: new FormControl(Validators.required),
-    });
     this.formAddJuego = new FormGroup({
       tituloJuego: new FormControl(Validators.required),
       descripcionJuego: new FormControl(Validators.required),
       generoJuego: new FormControl(Validators.required),
       tipoJuego: new FormControl(Validators.required),
       desarrolladorJuego: new FormControl(Validators.required),
-      id_requisitosJuego: new FormControl(Validators.required),
       tagsIdJuego: new FormControl(Validators.required),
     });
     this.getTags();
     this.getModos();
-  }
-
-
-  agregarRequisito(){
-    if (this.formAddRequisito.valid) {
-      const requisito = new CrearRequisitoDto();
-      requisito.sistema_operativo = this.sistema_operativo;
-      requisito.procesador = this.procesador;
-      requisito.memoria = this.memoria;
-      requisito.grafica = this.grafica;
-      requisito.almacenamiento = this.almacenamiento;
-      this.requisitoSrv.addRequisito(requisito).subscribe();
-    } else {
-      console.log('Formulario invalido');
-    }
   }
 
   getTags() {
@@ -152,10 +124,14 @@ export class CrearJuegoComponent implements OnInit {
       juego.genero = this.generoJuego;
       juego.desarrollador = this.desarrolladorJuego;
       juego.fecha_lanzamiento = this.fecha_lanzamientoJuego;
+      juego.sistema_operativo = this.sistema_operativo;
+      juego.procesador = this.procesador;
+      juego.memoria = this.memoria;
+      juego.grafica = this.grafica;
+      juego.almacenamiento = this.almacenamiento;
       juego.analisis_negativos = 0;
       juego.analisis_positivos = 0;
       juego.id_admin_creado = this.userAdm.id_usuario;
-      juego.id_requisitos = 1;
       if (this.tagsIdJuego != null) {
         juego.tags = this.tagsIdJuego.split(',').map(Number);
       }else{

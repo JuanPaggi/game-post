@@ -47,7 +47,13 @@ export class JuegoComponent implements OnInit {
   analisis_positivos: number;
   analisis_negativos: number;
   id_requisitos: number;
-	id_admin_creado: number;
+  id_admin_creado: number;
+  
+  sistema_operativo: String;
+  procesador: String;
+  memoria: String;
+  grafica: String;
+  almacenamiento: String;
   
   juego: JuegoItem;
   id_juego: number;
@@ -138,6 +144,11 @@ export class JuegoComponent implements OnInit {
     this.genero = juego.genero;
     this.descripcion = juego.descripcion;
     this.desarrollador = juego.desarrollador;
+    this.sistema_operativo = juego.sistema_operativo;
+    this.procesador = juego.procesador;
+    this.memoria = juego.memoria;
+    this.grafica = juego.grafica;
+    this.almacenamiento = juego.almacenamiento;
     this.analisis_negativos = juego.analisis_negativos;
     this.analisis_positivos = juego.analisis_positivos;
     this.id_admin_creado = juego.id_admin_creado;

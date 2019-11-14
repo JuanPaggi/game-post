@@ -19,13 +19,11 @@ import com.game.persistence.models.Analisis;
 import com.game.persistence.models.Imagenes;
 import com.game.persistence.models.Juegos;
 import com.game.persistence.models.Modos;
-import com.game.persistence.models.Requisitos;
 import com.game.persistence.models.Tag;
 import com.game.persistence.repository.AdminRepository;
 import com.game.persistence.repository.AnalisisRepository;
 import com.game.persistence.repository.JuegosRepository;
 import com.game.persistence.repository.ModosRepository;
-import com.game.persistence.repository.RequisitosRepository;
 import com.game.persistence.repository.TagRepository;
 import com.game.services.fileService.FileService;
 import com.game.services.juegos.exceptions.JuegosNotFound;
@@ -42,9 +40,6 @@ public class JuegosService {
 
 	@Autowired
 	JuegosRepository juegosRepository;
-	
-	@Autowired
-	RequisitosRepository requisitosRepository;
 	
 	@Autowired
 	AnalisisRepository analisisRepository;
@@ -75,10 +70,14 @@ public class JuegosService {
 		juegoItem.descripcion = juego.get().getDescripcion();
 		juegoItem.genero = juego.get().getGenero();
 		juegoItem.desarrollador = juego.get().getDesarrollador();
+		juegoItem.sistema_operativo = juego.get().getSistema_operativo();
+		juegoItem.procesador = juego.get().getProcesador();
+		juegoItem.memoria = juego.get().getMemoria();
+		juegoItem.grafica = juego.get().getGrafica();
+		juegoItem.almacenamiento = juego.get().getAlmacenamiento();
 		juegoItem.fecha_lanzamiento = juego.get().getFecha_lanzamiento();
 		juegoItem.analisis_positivos = juego.get().getAnalisis_positivos();
 		juegoItem.analisis_negativos = juego.get().getAnalisis_negativos();
-		juegoItem.id_requisitos = juego.get().getRequisitos().getId_requisitos();
 		juegoItem.id_admin_creado = juego.get().getAdmin().getId_admin();
 		List<Tag> tag_juego = juego.get().getTag();
 		List<Modos> modo_juego = juego.get().getModos();
@@ -117,19 +116,24 @@ public class JuegosService {
 	public long addJuego(JuegoInput juegoIn) throws TagNotFound, NoSuchAlgorithmException{
 		
 		Juegos juego = new Juegos();
-		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
 		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
 		List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
 		Optional<Admin> admin = adminRepository.findById(juegoIn.id_admin_creado);
-		if(requisitos.isEmpty() || lista_tag.size() != juegoIn.tags.size() || lista_modo.size() != juegoIn.modos.size()) throw new TagNotFound();
+		if(lista_tag.size() != juegoIn.tags.size() || lista_modo.size() != juegoIn.modos.size()) throw new TagNotFound();
 		juego.setTitulo(juegoIn.titulo);
 		juego.setDescripcion(juegoIn.descripcion);
 		juego.setGenero(juegoIn.genero);
 		juego.setDesarrollador(juegoIn.desarrollador);
+		
+		juego.setSistema_operativo(juegoIn.sistema_operativo);
+		juego.setProcesador(juegoIn.procesador);
+		juego.setMemoria(juegoIn.memoria);
+		juego.setGrafica(juegoIn.grafica);
+		juego.setAlmacenamiento(juegoIn.almacenamiento);
+		
 		juego.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juego.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juego.setAnalisis_negativos(juegoIn.analisis_negativos);
-		juego.setRequisitos(requisitos.get());
 		juego.setAdmin(admin.get());
 		juego.setTag(lista_tag);
 		juego.setModos(lista_modo);
@@ -161,10 +165,16 @@ public class JuegosService {
 			item.descripcion = juego.getDescripcion();
 			item.genero = juego.getGenero();
 			item.desarrollador = juego.getDesarrollador();
+			
+			item.sistema_operativo = juego.getSistema_operativo();
+			item.procesador = juego.getProcesador();
+			item.memoria = juego.getMemoria();
+			item.grafica = juego.getGrafica();
+			item.almacenamiento = juego.getAlmacenamiento();
+			
 			item.fecha_lanzamiento = juego.getFecha_lanzamiento();
 			item.analisis_positivos = juego.getAnalisis_positivos();
 			item.analisis_negativos = juego.getAnalisis_negativos();
-			item.id_requisitos = juego.getRequisitos().getId_requisitos();
 			item.id_admin_creado = juego.getAdmin().getId_admin();
 			List<Tag> tag_juego = juego.getTag();
 			List<Modos> modo_juego = juego.getModos();
@@ -204,18 +214,21 @@ public class JuegosService {
 	public void editJuego(String id, JuegoInput juegoIn) throws JuegosNotFound,TagNotFound, NumberFormatException, ModosNotFound, NoSuchAlgorithmException{
 		
 		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
-		Optional<Requisitos> requisitos = requisitosRepository.findById(juegoIn.id_requisitos);
 		Optional<Admin> admin = adminRepository.findById(juegoIn.id_admin_creado);
-		if(juego.isEmpty() && requisitos.isEmpty()) throw new JuegosNotFound();
+		if(juego.isEmpty()) throw new JuegosNotFound();
 		Juegos juegoObj = juego.get();
 		juegoObj.setTitulo(juegoIn.titulo);
 		juegoObj.setDescripcion(juegoIn.descripcion);
 		juegoObj.setGenero(juegoIn.genero);
 		juegoObj.setDesarrollador(juegoIn.desarrollador);
+		juegoObj.setSistema_operativo(juegoIn.sistema_operativo);
+		juegoObj.setProcesador(juegoIn.procesador);
+		juegoObj.setMemoria(juegoIn.memoria);
+		juegoObj.setGrafica(juegoIn.grafica);
+		juegoObj.setAlmacenamiento(juegoIn.almacenamiento);
 		juegoObj.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juegoObj.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
-		juegoObj.setRequisitos(requisitos.get());
 		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
 		List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
 		if(lista_tag.size() != juegoIn.tags.size()) throw new TagNotFound();

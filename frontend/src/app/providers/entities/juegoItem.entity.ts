@@ -14,4 +14,9 @@ export class JuegoItem {
 	tags: number[];
 	modos: number[];
 	analisis: number[];
+	sistema_operativo: String;
+	procesador: String;
+	memoria: String;
+	grafica: String;
+	almacenamiento: String;
 }
