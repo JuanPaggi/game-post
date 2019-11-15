@@ -16,6 +16,7 @@ export class PanelJuegosComponent implements OnInit {
   juegos: JuegoItem[];
 
   user: User;
+  privilegio_agregar_juego = false;
 
   constructor(
     private usuarioSrv: UsuariosService,
@@ -26,6 +27,13 @@ export class PanelJuegosComponent implements OnInit {
   ngOnInit() {
     this.user = this.usuarioSrv.getUserLoggedIn();
     this.getJuegos();
+    if(this.user){
+      this.user.privilegios.forEach(element => {
+        if(element === 1){ // 1 = "Agregar Juego"
+          this.privilegio_agregar_juego = true;
+        }
+      });
+    }
   }
 
   volverPanel(){

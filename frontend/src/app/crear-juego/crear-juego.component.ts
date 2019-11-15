@@ -43,7 +43,7 @@ export class CrearJuegoComponent implements OnInit {
   modosIdJuego: String;
 
   user: User;
-  privilegio_agregar_noticia = false;
+  privilegio_agregar_juego = false;
 
   imageFileJuego: number[][];
   imagenesUrlJuego: string[];
@@ -71,7 +71,7 @@ export class CrearJuegoComponent implements OnInit {
     if(this.user){
       this.user.privilegios.forEach(element => {
         if(element === 1){ // 1 = "Agregar Juego"
-          this.privilegio_agregar_noticia = true;
+          this.privilegio_agregar_juego = true;
         }
       });
     }
