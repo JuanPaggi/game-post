@@ -303,12 +303,12 @@ DROP TABLE IF EXISTS `usuarios_bloqueados`;
 		
 CREATE TABLE `usuarios_bloqueados` (
   `id_usuario_bloqueado` INT NOT NULL AUTO_INCREMENT,
-  `id_usuario` INT NOT NULL,
-  `id_admin` INT NOT NULL,
+  `id_usuario_responsable` INT NOT NULL,
+  `id_usuario_baneado` INT NOT NULL,
   `fecha_bloqueo` TIMESTAMP NOT NULL,
   `motivo` VARCHAR(1024) NOT NULL,
   PRIMARY KEY (`id_usuario_bloqueado`),
-KEY (`id_usuario`, `id_admin`)
+KEY (`id_usuario_responsable`, `id_usuario_baneado`)
 );
 
 -- ---
@@ -366,8 +366,8 @@ ALTER TABLE `solicitudes_amistad` ADD FOREIGN KEY (id_usuario) REFERENCES `usuar
 ALTER TABLE `solicitudes_amistad` ADD FOREIGN KEY (id_amigo) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `mensajes` ADD FOREIGN KEY (id_escritor) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `mensajes` ADD FOREIGN KEY (id_lector) REFERENCES `usuarios` (`id_usuario`);
-ALTER TABLE `usuarios_bloqueados` ADD FOREIGN KEY (id_usuario) REFERENCES `usuarios` (`id_usuario`);
+ALTER TABLE `usuarios_bloqueados` ADD FOREIGN KEY (id_usuario_responsable) REFERENCES `usuarios` (`id_usuario`);
+ALTER TABLE `usuarios_bloqueados` ADD FOREIGN KEY (id_usuario_baneado) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `notificaciones` ADD FOREIGN KEY (id_usuario) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `juegos_imagenes` ADD FOREIGN KEY (id_juego) REFERENCES `juegos` (`id_juego`);
 ALTER TABLE `juegos_imagenes` ADD FOREIGN KEY (id_imagen) REFERENCES `imagenes` (`id_imagen`);
-
