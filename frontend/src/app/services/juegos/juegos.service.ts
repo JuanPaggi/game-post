@@ -27,8 +27,8 @@ export class JuegosService {
     return this.http.get<JuegoItem>( environment.apiEndpoint + '/juegos/' + body.id_juego, headers );
   }
 
-  public addJuego(body: CrearJuegoDto): Observable<Response> {
-    return this.http.post<Response>(
+  public addJuego(body: CrearJuegoDto): Observable<number> {
+    return this.http.post<number>(
         environment.apiEndpoint + '/juegos',
         body
     );

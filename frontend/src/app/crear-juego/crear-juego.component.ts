@@ -43,6 +43,7 @@ export class CrearJuegoComponent implements OnInit {
   modosIdJuego: String;
 
   user: User;
+  privilegio_agregar_noticia = false;
 
   imageFileJuego: number[][];
   imagenesUrlJuego: string[];
@@ -59,12 +60,21 @@ export class CrearJuegoComponent implements OnInit {
     private juegosSrv: JuegosService,
     private tagsSrv: TagsService,
   ) { 
+
+
     this.imageFileJuego = [];
     this.imagenesUrlJuego = [];
   }
 
   ngOnInit() {
     this.user = this.usuariosSrv.getUserLoggedIn();
+    if(this.user){
+      this.user.privilegios.forEach(element => {
+        if(element === 1){ // 1 = "Agregar Juego"
+          this.privilegio_agregar_noticia = true;
+        }
+      });
+    }
     this.formAddJuego = new FormGroup({
       tituloJuego: new FormControl(Validators.required),
       descripcionJuego: new FormControl(Validators.required),
@@ -150,7 +160,11 @@ export class CrearJuegoComponent implements OnInit {
       }
       this.juegosSrv.addJuego(juego).subscribe(
         response=>{
-          this.router.navigateByUrl(`panel/panel-juegos`);
+          if(response === 0){
+            console.log("No se tiene acceso, no se añadio el juego");
+          }else{
+            this.router.navigateByUrl(`panel/panel-juegos`);
+          }
         }
       );
     } else {

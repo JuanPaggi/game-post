@@ -18,6 +18,7 @@ import com.game.persistence.models.Analisis;
 import com.game.persistence.models.Imagenes;
 import com.game.persistence.models.Juegos;
 import com.game.persistence.models.Modos;
+import com.game.persistence.models.Privilegios;
 import com.game.persistence.models.Tag;
 import com.game.persistence.models.Usuarios;
 import com.game.persistence.repository.AnalisisRepository;
@@ -115,42 +116,53 @@ public class JuegosService {
 	
 	public long addJuego(JuegoInput juegoIn) throws TagNotFound, NoSuchAlgorithmException{
 		
-		Juegos juego = new Juegos();
-		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
-		List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
 		Optional<Usuarios> usuario = usuarioRepository.findById(juegoIn.id_usuario_juego);
-		if(lista_tag.size() != juegoIn.tags.size() || lista_modo.size() != juegoIn.modos.size()) throw new TagNotFound();
-		juego.setTitulo(juegoIn.titulo);
-		juego.setDescripcion(juegoIn.descripcion);
-		juego.setGenero(juegoIn.genero);
-		juego.setDesarrollador(juegoIn.desarrollador);
-		
-		juego.setSistema_operativo(juegoIn.sistema_operativo);
-		juego.setProcesador(juegoIn.procesador);
-		juego.setMemoria(juegoIn.memoria);
-		juego.setGrafica(juegoIn.grafica);
-		juego.setAlmacenamiento(juegoIn.almacenamiento);
-		
-		juego.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
-		juego.setAnalisis_positivos(juegoIn.analisis_positivos);
-		juego.setAnalisis_negativos(juegoIn.analisis_negativos);
-		juego.setId_usuario_juego(usuario.get());
-		juego.setTag(lista_tag);
-		juego.setModos(lista_modo);
-		
-		Set<Imagenes> imagenes = new HashSet<Imagenes>();
-		for (byte[] imagen : juegoIn.archivoImagen) {
-			Optional<Imagenes> aux = fileService.selectImageFile(imagen);
-			if (aux.isPresent()) {
-				imagenes.add(aux.get());
-			}else {
-				imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, usuario.get()));				
+		List<Privilegios> usuario_privilegios = usuario.get().getPrivilegios();
+		boolean acceso = false;
+		for (Privilegios privilegios : usuario_privilegios) {
+			if(privilegios.getPrivilegio() == "AGREGAR_JUEGO") {
+				acceso = true;
 			}
 		}
-		juego.setImagenes(imagenes);	
-		
-		juego = juegosRepository.save(juego);
-		return juego.getId_juego();
+		if(acceso) {
+			Juegos juego = new Juegos();
+			List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
+			List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
+			if(lista_tag.size() != juegoIn.tags.size() || lista_modo.size() != juegoIn.modos.size()) throw new TagNotFound();
+			juego.setTitulo(juegoIn.titulo);
+			juego.setDescripcion(juegoIn.descripcion);
+			juego.setGenero(juegoIn.genero);
+			juego.setDesarrollador(juegoIn.desarrollador);
+			
+			juego.setSistema_operativo(juegoIn.sistema_operativo);
+			juego.setProcesador(juegoIn.procesador);
+			juego.setMemoria(juegoIn.memoria);
+			juego.setGrafica(juegoIn.grafica);
+			juego.setAlmacenamiento(juegoIn.almacenamiento);
+			
+			juego.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
+			juego.setAnalisis_positivos(juegoIn.analisis_positivos);
+			juego.setAnalisis_negativos(juegoIn.analisis_negativos);
+			juego.setId_usuario_juego(usuario.get());
+			juego.setTag(lista_tag);
+			juego.setModos(lista_modo);
+			
+			Set<Imagenes> imagenes = new HashSet<Imagenes>();
+			for (byte[] imagen : juegoIn.archivoImagen) {
+				Optional<Imagenes> aux = fileService.selectImageFile(imagen);
+				if (aux.isPresent()) {
+					imagenes.add(aux.get());
+				}else {
+					imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, usuario.get()));				
+				}
+			}
+			juego.setImagenes(imagenes);	
+			
+			juego = juegosRepository.save(juego);
+			return juego.getId_juego();	
+		}else {
+			return 0;
+		}
 	
 	}
 	

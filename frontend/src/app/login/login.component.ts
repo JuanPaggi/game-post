@@ -4,6 +4,8 @@ import { UsuarioItem } from '../providers/entities/UsuarioItem.entity';
 import { Router } from '@angular/router';
 import { User } from '../providers/model/user.model';
 import { LoginDto } from '../providers/dto/dtoLogin/LoginDto';
+import { JuegoByIdDto } from '../providers/dto/dtoById/JuegoByIdDto';
+import { UsuarioByIdDto } from '../providers/dto/dtoById/UsuarioByIdDto';
 
 @Component({
   selector: 'app-login',
@@ -14,13 +16,14 @@ export class LoginComponent implements OnInit {
 
   usuario: String;
   clave: String;
+  privilegios: number[];
   htmlToAdd: String;
 
   check:boolean;
 
   id_usuario:number;
 
-  usuarios: UsuarioItem[];
+  Usuario: UsuarioItem;
 
   user: User;
 
@@ -41,8 +44,13 @@ export class LoginComponent implements OnInit {
       response => {
         if(response != 0){
           this.id_usuario = response;
-          this.logIn(this.usuario, this.id_usuario, event);
-          window.location.href = "/";
+          this.usuariosSrv.getUsuario( new UsuarioByIdDto(this.id_usuario)).subscribe(
+            response=>{
+              this.Usuario = response;
+              this.logIn(this.usuario, this.id_usuario, this.Usuario.privilegios, event);
+              window.location.href = "/";
+            }
+          );
         } else{
           this.htmlToAdd = '<p>Datos Incorrectos<p>';
         }
@@ -50,9 +58,9 @@ export class LoginComponent implements OnInit {
     )
   }
 
-  logIn(username: String, id_usuario: number, event: Event) {
+  logIn(username: String, id_usuario: number, privilegios: number[], event: Event) {
     event.preventDefault(); 
-    let u: User = {username, id_usuario};  
+    let u: User = {username, id_usuario, privilegios};  
     this.usuariosSrv.setUserLoggedIn(u);
   }
 
