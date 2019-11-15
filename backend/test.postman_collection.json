@@ -46,7 +46,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"nombreImagen\": \"primi\" ,\n\"urlImagen\": \"url\",\n\"tags\":\n\t[2,1],\n\"modos\":\n\t[],\n\"imagenes\": [\n\t\t[23,32,12,32,32]\n\t]\n}",
+							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_usuario_juego\": 2,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"nombreImagen\": \"primi\" ,\n\"urlImagen\": \"url\",\n\"tags\":\n\t[],\n\"modos\":\n\t[],\n\"archivoImagen\": [],\n\"sistema_operativo\": \"x\",\n\"procesador\": \"x\",\n\"memoria\": \"x\",\n\"grafica\": \"x\",\n\"almacenamiento\": \"x\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -182,7 +182,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"usuario\": \"2321123\",\n        \"clave\": \"12346\"\n    }",
+							"raw": "{\n\"analisis\": \"212312338\",\n\"fecha_publicacion\": \"2019-08-11\",\n\"valoracion\": false,\n\"id_usuario\": 1,\n\"id_juego\": 23\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -190,7 +190,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/admin",
+							"raw": "http://127.0.0.1:8081/api/v1/analisis",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -202,7 +202,7 @@
 							"path": [
 								"api",
 								"v1",
-								"admin"
+								"analisis"
 							]
 						}
 					},
@@ -222,7 +222,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23\n}",
+							"raw": "{\n\"analisis\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_publicacion\": \"2019-08-11\",\n\"valoracion\": false,\n\"id_usuario\": 1,\n\"id_juego\": 23,\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -333,7 +333,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"pedro\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x\",\n    \"clave\": \"x\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2,\n    \"email_verificado\": true,\n    \"privilegios\": []\n}",
+							"raw": "{\n    \"nombre\": \"pedro2\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x1\",\n    \"clave\": \"x1\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2,\n    \"email_verificado\": true,\n    \"privilegios\": []\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -365,7 +365,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuarios/1",
+							"raw": "http://127.0.0.1:8081/api/v1/usuarios/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -378,7 +378,7 @@
 								"api",
 								"v1",
 								"usuarios",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -565,142 +565,6 @@
 			"protocolProfileBehavior": {}
 		},
 		{
-			"name": "Admin",
-			"item": [
-				{
-					"name": "Get Admin",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/admin",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"admin"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Crear Admin",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\"usuario\": \"ju2an\",\n\"clave\": \"1234\",\n\"privilegios\":[]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/admin",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"admin"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete Admin",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/admin/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"admin",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar Admin",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\"usuario\": \"juan\",\n\"clave\": \"1234\",\n\"privilegios\":[3]\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/admin/6",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"admin",
-								"6"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
 			"name": "Privilegios",
 			"item": [
 				{
@@ -836,7 +700,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"etiqueta\": \"terror\"\n}",
+							"raw": "{\n\"etiqueta\": \"accion\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1547,7 +1411,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"id_usuario\": 2,\n    \"id_admin\": 1,\n    \"fecha_bloqueo\": \"2011-11-11T03:00:00.000+0000\",\n    \"motivo\": \"asd12341wed\"\n}",
+							"raw": "{\n    \"id_usuario_responsable\": 1,\n    \"id_usuario_baneado\": 2,\n    \"fecha_bloqueo\": \"2011-11-11T03:00:00.000+0000\",\n    \"motivo\": \"asd12341wed\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1579,7 +1443,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuariosBloqueados/2",
+							"raw": "http://127.0.0.1:8081/api/v1/usuariosBloqueados/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1592,7 +1456,7 @@
 								"api",
 								"v1",
 								"usuariosBloqueados",
-								"2"
+								"1"
 							]
 						}
 					},
@@ -1737,7 +1601,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n        \"titulo\": \"pedro\",\r\n        \"descripcion\":\"xxx\",\r\n        \"cuerpo\":\"xxxx\",\r\n        \"fecha_publicacion\":\"2019-08-11\",\r\n        \"id_admin_creado\":1,\r\n        \"nombreImagen\": \"cama\",\r\n        \"urlImagen\": \"url\",\r\n        \"tags\": [\r\n        \t\r\n        ],\r\n        \"comentarios\":[\r\n        \t\r\n        ],\r\n        \"archivoImagen\": [\r\n        \t\t[23,123,12]\r\n        \t]\r\n }",
+							"raw": " {\r\n        \"titulo\": \"pedro1\",\r\n        \"descripcion\":\"xxx\",\r\n        \"cuerpo\":\"xxxx\",\r\n        \"fecha_publicacion\":\"2019-08-11\",\r\n        \"id_usuario_noticia\":2,\r\n        \"nombreImagen\": \"cama\",\r\n        \"urlImagen\": \"url\",\r\n        \"tags\": [\r\n        \t\r\n        ],\r\n        \"comentarios\":[\r\n        \t\r\n        ],\r\n        \"archivoImagen\": [\r\n        \t\t[23,123,12]\r\n        \t]\r\n }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1769,7 +1633,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/noticias/1",
+							"raw": "http://127.0.0.1:8081/api/v1/noticias/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1782,7 +1646,7 @@
 								"api",
 								"v1",
 								"noticias",
-								"1"
+								"3"
 							]
 						}
 					},

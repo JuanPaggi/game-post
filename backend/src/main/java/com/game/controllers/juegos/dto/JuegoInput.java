@@ -12,8 +12,7 @@ public class JuegoInput {
 	public Date fecha_lanzamiento;
 	public long analisis_positivos;
 	public long analisis_negativos;
-	public long id_requisitos;
-	public long id_admin_creado;
+	public long id_usuario_juego;
 	public String nombreImagen;
 	public String urlImagen;
 	public ArrayList<Long> tags;

@@ -14,17 +14,17 @@ import org.springframework.stereotype.Service;
 
 import com.game.controllers.juegos.dto.JuegoInput;
 import com.game.controllers.juegos.dto.JuegoItem;
-import com.game.persistence.models.Admin;
 import com.game.persistence.models.Analisis;
 import com.game.persistence.models.Imagenes;
 import com.game.persistence.models.Juegos;
 import com.game.persistence.models.Modos;
 import com.game.persistence.models.Tag;
-import com.game.persistence.repository.AdminRepository;
+import com.game.persistence.models.Usuarios;
 import com.game.persistence.repository.AnalisisRepository;
 import com.game.persistence.repository.JuegosRepository;
 import com.game.persistence.repository.ModosRepository;
 import com.game.persistence.repository.TagRepository;
+import com.game.persistence.repository.UsuariosRepository;
 import com.game.services.fileService.FileService;
 import com.game.services.juegos.exceptions.JuegosNotFound;
 import com.game.services.modos.exceptions.ModosNotFound;
@@ -51,7 +51,7 @@ public class JuegosService {
 	ModosRepository modosRepository;
 	
 	@Autowired
-	AdminRepository adminRepository;
+	UsuariosRepository usuarioRepository;
 	
 	@Autowired
 	FileService fileService;
@@ -78,7 +78,7 @@ public class JuegosService {
 		juegoItem.fecha_lanzamiento = juego.get().getFecha_lanzamiento();
 		juegoItem.analisis_positivos = juego.get().getAnalisis_positivos();
 		juegoItem.analisis_negativos = juego.get().getAnalisis_negativos();
-		juegoItem.id_admin_creado = juego.get().getAdmin().getId_admin();
+		juegoItem.id_usuario_juego = juego.get().getId_usuario_juego().getId_usuario();
 		List<Tag> tag_juego = juego.get().getTag();
 		List<Modos> modo_juego = juego.get().getModos();
 		ArrayList<Long> tag_id = new ArrayList<>();
@@ -118,7 +118,7 @@ public class JuegosService {
 		Juegos juego = new Juegos();
 		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
 		List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
-		Optional<Admin> admin = adminRepository.findById(juegoIn.id_admin_creado);
+		Optional<Usuarios> usuario = usuarioRepository.findById(juegoIn.id_usuario_juego);
 		if(lista_tag.size() != juegoIn.tags.size() || lista_modo.size() != juegoIn.modos.size()) throw new TagNotFound();
 		juego.setTitulo(juegoIn.titulo);
 		juego.setDescripcion(juegoIn.descripcion);
@@ -134,7 +134,7 @@ public class JuegosService {
 		juego.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
 		juego.setAnalisis_positivos(juegoIn.analisis_positivos);
 		juego.setAnalisis_negativos(juegoIn.analisis_negativos);
-		juego.setAdmin(admin.get());
+		juego.setId_usuario_juego(usuario.get());
 		juego.setTag(lista_tag);
 		juego.setModos(lista_modo);
 		
@@ -144,7 +144,7 @@ public class JuegosService {
 			if (aux.isPresent()) {
 				imagenes.add(aux.get());
 			}else {
-				imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));				
+				imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, usuario.get()));				
 			}
 		}
 		juego.setImagenes(imagenes);	
@@ -175,7 +175,7 @@ public class JuegosService {
 			item.fecha_lanzamiento = juego.getFecha_lanzamiento();
 			item.analisis_positivos = juego.getAnalisis_positivos();
 			item.analisis_negativos = juego.getAnalisis_negativos();
-			item.id_admin_creado = juego.getAdmin().getId_admin();
+			item.id_usuario_juego = juego.getId_usuario_juego().getId_usuario();
 			List<Tag> tag_juego = juego.getTag();
 			List<Modos> modo_juego = juego.getModos();
 			ArrayList<Long> tag_id = new ArrayList<>();
@@ -214,7 +214,7 @@ public class JuegosService {
 	public void editJuego(String id, JuegoInput juegoIn) throws JuegosNotFound,TagNotFound, NumberFormatException, ModosNotFound, NoSuchAlgorithmException{
 		
 		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
-		Optional<Admin> admin = adminRepository.findById(juegoIn.id_admin_creado);
+		Optional<Usuarios> usuario = usuarioRepository.findById(juegoIn.id_usuario_juego);
 		if(juego.isEmpty()) throw new JuegosNotFound();
 		Juegos juegoObj = juego.get();
 		juegoObj.setTitulo(juegoIn.titulo);
@@ -238,7 +238,7 @@ public class JuegosService {
 		
 		Set<Imagenes> imagenes = new HashSet<Imagenes>();
 		for (byte[] imagen : juegoIn.archivoImagen) {
-			imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, admin.get()));
+			imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, usuario.get()));
 		}
 		
 		for (Imagenes imagen : juego.get().getImagenes()) {

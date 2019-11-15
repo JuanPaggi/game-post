@@ -34,14 +34,6 @@ public class Privilegios {
     inverseJoinColumns = 
     @JoinColumn(name = "id_usuario", referencedColumnName = "id_usuario"))
 	private List<Usuarios> usuarios;
-	
-	@ManyToMany(fetch = FetchType.LAZY) 
-    @JoinTable(name = "privilegios_admin", 
-    joinColumns = 
-    @JoinColumn(name = "id_privilegio", referencedColumnName = "id_privilegio"), 
-    inverseJoinColumns = 
-    @JoinColumn(name = "id_admin", referencedColumnName = "id_admin"))
-	private List<Admin> admin;
 
 	/*
 	 * ------ Getter and Setter ------ 
@@ -69,14 +61,6 @@ public class Privilegios {
 
 	public void setUsuarios(List<Usuarios> usuarios) {
 		this.usuarios = usuarios;
-	}
-
-	public List<Admin> getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(List<Admin> admin) {
-		this.admin = admin;
 	}
 	
 }

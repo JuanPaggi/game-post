@@ -77,8 +77,8 @@ public class Juegos {
 	private List<Tag> Tag;
 	
 	@ManyToOne(optional = false)
-	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin")
-	private Admin admin;
+	@JoinColumn(name="id_usuario_juego", referencedColumnName = "id_usuario")
+	private Usuarios id_usuario_juego;
 	
 	@ManyToMany(fetch = FetchType.LAZY) 
     @JoinTable(name = "juegos_modos", 
@@ -180,14 +180,6 @@ public class Juegos {
 		Tag = tag;
 	}
 
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
 	public List<Modos> getModos() {
 		return modos;
 	}
@@ -242,6 +234,14 @@ public class Juegos {
 
 	public void setAlmacenamiento(String almacenamiento) {
 		this.almacenamiento = almacenamiento;
+	}
+
+	public Usuarios getId_usuario_juego() {
+		return id_usuario_juego;
+	}
+
+	public void setId_usuario_juego(Usuarios id_usuario_juego) {
+		this.id_usuario_juego = id_usuario_juego;
 	}
 	
 }

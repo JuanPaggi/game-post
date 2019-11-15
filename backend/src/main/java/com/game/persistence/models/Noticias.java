@@ -41,8 +41,8 @@ public class Noticias {
 	private Date fecha_publicacion;
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin")
-	private Admin admin;
+	@JoinColumn(name="id_usuario_noticia", referencedColumnName = "id_usuario")
+	private Usuarios id_usuario_noticia;
 	
 	@ManyToMany(fetch = FetchType.LAZY) 
     @JoinTable(name = "noticias_tag", 
@@ -108,14 +108,6 @@ public class Noticias {
 		this.fecha_publicacion = fecha_publicacion;
 	}
 
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
 	public List<Comentarios> getComentarios() {
 		return comentarios;
 	}
@@ -138,6 +130,14 @@ public class Noticias {
 
 	public void setImagenes(Set<Imagenes> imagenes) {
 		this.imagenes = imagenes;
+	}
+
+	public Usuarios getId_usuario_noticia() {
+		return id_usuario_noticia;
+	}
+
+	public void setId_usuario_noticia(Usuarios id_usuario_noticia) {
+		this.id_usuario_noticia = id_usuario_noticia;
 	}
 	
 }

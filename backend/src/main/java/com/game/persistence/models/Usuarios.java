@@ -105,8 +105,24 @@ public class Usuarios {
 	private List<Privilegios> privilegios;
 	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
-	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
-	private List<UsuariosBloqueados> usuarios_bloqueados;
+	@JoinColumn(name="id_usuario_responsable", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
+	private List<UsuariosBloqueados> usuario_responsable;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_usuario_juego", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
+	private List<Juegos> usuarios_juego;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_usuario_subido", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
+	private List<Imagenes> imagenes;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_usuario_noticia", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
+	private List<Noticias> id_usuario_noticia;
+	
+	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
+	@JoinColumn(name="id_usuario_baneado", referencedColumnName = "id_usuario", nullable = false, insertable = false, updatable = false)
+	private List<UsuariosBloqueados> usuario_baneado;
 
 	/*
 	 * ------ Getter and Setter ------ 
@@ -280,20 +296,52 @@ public class Usuarios {
 		this.privilegios = privilegios;
 	}
 
-	public List<UsuariosBloqueados> getUsuarios_bloqueados() {
-		return usuarios_bloqueados;
-	}
-
-	public void setUsuarios_bloqueados(List<UsuariosBloqueados> usuarios_bloqueados) {
-		this.usuarios_bloqueados = usuarios_bloqueados;
-	}
-
 	public List<Comentarios> getComentarios() {
 		return comentarios;
 	}
 
 	public void setComentarios(List<Comentarios> comentarios) {
 		this.comentarios = comentarios;
+	}
+
+	public List<Juegos> getUsuarios_juego() {
+		return usuarios_juego;
+	}
+
+	public void setUsuarios_juego(List<Juegos> usuarios_juego) {
+		this.usuarios_juego = usuarios_juego;
+	}
+
+	public List<Imagenes> getImagenes() {
+		return imagenes;
+	}
+
+	public void setImagenes(List<Imagenes> imagenes) {
+		this.imagenes = imagenes;
+	}
+
+	public List<Noticias> getId_usuario_noticia() {
+		return id_usuario_noticia;
+	}
+
+	public void setId_usuario_noticia(List<Noticias> id_usuario_noticia) {
+		this.id_usuario_noticia = id_usuario_noticia;
+	}
+
+	public List<UsuariosBloqueados> getUsuario_responsable() {
+		return usuario_responsable;
+	}
+
+	public void setUsuario_responsable(List<UsuariosBloqueados> usuario_responsable) {
+		this.usuario_responsable = usuario_responsable;
+	}
+
+	public List<UsuariosBloqueados> getUsuario_baneado() {
+		return usuario_baneado;
+	}
+
+	public void setUsuario_baneado(List<UsuariosBloqueados> usuario_baneado) {
+		this.usuario_baneado = usuario_baneado;
 	}
 	
 }

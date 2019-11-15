@@ -14,20 +14,20 @@ import org.springframework.stereotype.Service;
 
 import com.game.controllers.noticias.dto.NoticiaInput;
 import com.game.controllers.noticias.dto.NoticiaItem;
-import com.game.persistence.models.Admin;
 import com.game.persistence.models.Comentarios;
 import com.game.persistence.models.Imagenes;
 import com.game.persistence.models.Noticias;
 import com.game.persistence.models.Tag;
-import com.game.persistence.repository.AdminRepository;
+import com.game.persistence.models.Usuarios;
 import com.game.persistence.repository.ComentariosRepository;
 import com.game.persistence.repository.NoticiasRepository;
 import com.game.persistence.repository.TagRepository;
-import com.game.services.admin.exceptions.AdminNotFound;
+import com.game.persistence.repository.UsuariosRepository;
 import com.game.services.comentarios.exceptions.ComentariosNotFound;
 import com.game.services.fileService.FileService;
 import com.game.services.noticias.exceptions.NoticiasNotFound;
 import com.game.services.tag.exceptions.TagNotFound;
+import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
 /**
  * @author negro
@@ -41,7 +41,7 @@ public class NoticiasService {
 	NoticiasRepository noticiasRepository;
 	
 	@Autowired
-	AdminRepository adminRepository;
+	UsuariosRepository usuarioRepository;
 	
 	@Autowired
 	TagRepository tagRepository;
@@ -66,7 +66,7 @@ public class NoticiasService {
 		noticiaItem.descripcion = noticia.get().getDescripcion();
 		noticiaItem.cuerpo = noticia.get().getCuerpo();
 		noticiaItem.fecha_publicacion = noticia.get().getFecha_publicacion();
-		noticiaItem.id_admin_creado = noticia.get().getAdmin().getId_admin();
+		noticiaItem.id_usuario_noticia = noticia.get().getId_usuario_noticia().getId_usuario();
 		List<Tag> tag_noticia = noticia.get().getTags();
 		List<Comentarios> comentarios_noticia = noticia.get().getComentarios();
 		ArrayList<Long> tag_id = new ArrayList<>();
@@ -103,7 +103,7 @@ public class NoticiasService {
 			item.descripcion = noticia.getDescripcion();
 			item.cuerpo = noticia.getCuerpo();
 			item.fecha_publicacion = noticia.getFecha_publicacion();
-			item.id_admin_creado = noticia.getAdmin().getId_admin();
+			item.id_usuario_noticia = noticia.getId_usuario_noticia().getId_usuario();
 			List<Tag> tag_noticia = noticia.getTags();
 			List<Comentarios> comentario_noticia = noticia.getComentarios();
 			ArrayList<Long> tag_id = new ArrayList<>();
@@ -131,18 +131,18 @@ public class NoticiasService {
 		
 	}
 	
-	public long addNoticia(NoticiaInput noticiaIn) throws AdminNotFound,TagNotFound,ComentariosNotFound, NoSuchAlgorithmException{
+	public long addNoticia(NoticiaInput noticiaIn) throws UsuariosNotFound,TagNotFound,ComentariosNotFound, NoSuchAlgorithmException{
 		
 		List<Tag> lista_tag= tagRepository.findAllById(noticiaIn.tags);
-		Optional<Admin> admin = adminRepository.findById(noticiaIn.id_admin_creado);	
+		Optional<Usuarios> usuario = usuarioRepository.findById(noticiaIn.id_usuario_noticia);	
 		Noticias noticia = new Noticias();
-		if(admin.isEmpty()) throw new AdminNotFound();
+		if(usuario.isEmpty()) throw new UsuariosNotFound();
 		if(lista_tag.size() != noticiaIn.tags.size()) throw new TagNotFound();
 		noticia.setTitulo(noticiaIn.titulo);
 		noticia.setDescripcion(noticiaIn.descripcion);
 		noticia.setCuerpo(noticiaIn.cuerpo);
 		noticia.setFecha_publicacion(noticiaIn.fecha_publicacion);
-		noticia.setAdmin(admin.get());
+		noticia.setId_usuario_noticia(usuario.get());
 		noticia.setTags(lista_tag);
 		
 		Set<Imagenes> imagenes = new HashSet<Imagenes>();
@@ -151,7 +151,7 @@ public class NoticiasService {
 			if (aux.isPresent()) {
 				imagenes.add(aux.get());
 			}else {
-				imagenes.add(fileService.uploadImageFile(imagen, noticiaIn.nombreImagen, admin.get()));
+				imagenes.add(fileService.uploadImageFile(imagen, noticiaIn.nombreImagen, usuario.get()));
 			}
 		}
 		noticia.setImagenes(imagenes);	
@@ -172,7 +172,7 @@ public class NoticiasService {
 	public void editNoticia(String id, NoticiaInput noticiaIn) throws NoticiasNotFound, NumberFormatException, TagNotFound, ComentariosNotFound, NoSuchAlgorithmException{
 		
 		Optional<Noticias> noticia = noticiasRepository.findById(Long.parseLong(id));
-		Optional<Admin> admin = adminRepository.findById(noticiaIn.id_admin_creado);	
+		Optional<Usuarios> usuario = usuarioRepository.findById(noticiaIn.id_usuario_noticia);	
 		if(noticia.isEmpty()) throw new NoticiasNotFound();
 		Noticias noticiaObj = noticia.get();
 		noticiaObj.setTitulo(noticiaIn.titulo);
@@ -185,7 +185,7 @@ public class NoticiasService {
 		
 		Set<Imagenes> imagenes = new HashSet<Imagenes>();
 		for (byte[] imagen : noticiaIn.archivoImagen) {
-			imagenes.add(fileService.uploadImageFile(imagen, noticiaIn.nombreImagen , admin.get()));
+			imagenes.add(fileService.uploadImageFile(imagen, noticiaIn.nombreImagen , usuario.get()));
 		}
 		
 		for (Imagenes imagen : noticia.get().getImagenes()) {

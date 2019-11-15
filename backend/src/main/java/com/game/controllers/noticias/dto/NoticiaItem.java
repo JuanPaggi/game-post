@@ -9,7 +9,7 @@ public class NoticiaItem {
 	public String descripcion;
 	public String cuerpo;
 	public Date fecha_publicacion;
-	public long id_admin_creado;
+	public long id_usuario_noticia;
 	public ArrayList<Long> tags;
 	public ArrayList<Long> comentarios;
 	public ArrayList<String> imagenes;

@@ -1,3 +1,4 @@
+
 -- ---
 -- Table 'usuarios'
 -- 
@@ -35,12 +36,16 @@ CREATE TABLE `juegos` (
   `genero` VARCHAR(64) NOT NULL,
   `desarrollador` VARCHAR(256) NOT NULL,
   `fecha_lanzamiento` DATE NOT NULL,
-  `id_requisito` INT NOT NULL,
-  `id_admin_creado` INT NOT NULL,
+  `id_usuario_juego` INT NOT NULL,
   `analisis_positivos` INT NOT NULL,
   `analisis_negativos` INT NOT NULL,
+  `sistema_operativo` VARCHAR(256) NOT NULL,
+  `procesador` VARCHAR(256) NOT NULL,
+  `memoria` VARCHAR(256) NOT NULL,
+  `grafica` VARCHAR(256) NOT NULL,
+  `almacenamiento` VARCHAR(256) NOT NULL,
   PRIMARY KEY (`id_juego`),
-KEY (`id_admin_creado`, `id_requisito`),
+KEY (`id_usuario_juego`),
   UNIQUE KEY (`titulo`)
 );
 
@@ -72,28 +77,13 @@ DROP TABLE IF EXISTS `imagenes`;
 CREATE TABLE `imagenes` (
   `id_imagen` INT NOT NULL AUTO_INCREMENT,
   `nombre` VARCHAR(256) NOT NULL,
-  `imagen` MEDIUMBLOB NOT NULL,
+  `imagen` BLOB NOT NULL,
   `imagen_checksum` BINARY(20) NOT NULL DEFAULT 'NUL',
-  `id_admin_subido` INT NOT NULL,
+  `id_usuario_subido` INT NOT NULL,
   `fecha_subida` DATE NOT NULL,
   PRIMARY KEY (`id_imagen`),
-KEY (`id_admin_subido`),
+KEY (`id_usuario_subido`),
   UNIQUE KEY (`nombre`, `imagen_checksum`)
-);
-
--- ---
--- Table 'admin'
--- 
--- ---
-
-DROP TABLE IF EXISTS `admin`;
-		
-CREATE TABLE `admin` (
-  `id_admin` INT NOT NULL AUTO_INCREMENT,
-  `usuario` VARCHAR(64) NOT NULL,
-  `clave` VARCHAR(64) NOT NULL,
-  PRIMARY KEY (`id_admin`),
-  UNIQUE KEY (`usuario`)
 );
 
 -- ---
@@ -108,19 +98,6 @@ CREATE TABLE `privilegios` (
   `privilegio` VARCHAR(256) NOT NULL,
   PRIMARY KEY (`id_privilegio`),
   UNIQUE KEY (`privilegio`)
-);
-
--- ---
--- Table 'privilegios_admin'
--- 
--- ---
-
-DROP TABLE IF EXISTS `privilegios_admin`;
-		
-CREATE TABLE `privilegios_admin` (
-  `id_privilegio` INT NOT NULL,
-  `id_admin` INT NOT NULL,
-  PRIMARY KEY (`id_privilegio`, `id_admin`)
 );
 
 -- ---
@@ -190,9 +167,9 @@ CREATE TABLE `noticias` (
   `descripcion` VARCHAR(2048) NOT NULL,
   `cuerpo` MEDIUMTEXT NOT NULL,
   `fecha_publicacion` DATE NOT NULL,
-  `id_admin_creado` INT NOT NULL,
+  `id_usuario_noticia` INT NOT NULL,
   PRIMARY KEY (`id_noticia`),
-KEY (`id_admin_creado`),
+KEY (`id_usuario_noticia`),
   UNIQUE KEY (`titulo`)
 );
 
@@ -267,23 +244,6 @@ CREATE TABLE `usuarios_privilegios` (
   `id_usuario` INT NOT NULL,
   `id_privilegio` INT NOT NULL,
   PRIMARY KEY (`id_usuario`, `id_privilegio`)
-);
-
--- ---
--- Table 'requisitos'
--- 
--- ---
-
-DROP TABLE IF EXISTS `requisitos`;
-		
-CREATE TABLE `requisitos` (
-  `id_requisito` INT NOT NULL AUTO_INCREMENT,
-  `sistema_operativo` VARCHAR(512) NOT NULL,
-  `procesador` VARCHAR(512) NOT NULL,
-  `memoria` VARCHAR(128) NOT NULL,
-  `grafica` VARCHAR(512) NOT NULL,
-  `almacenamiento` VARCHAR(128) NOT NULL,
-  PRIMARY KEY (`id_requisito`)
 );
 
 -- ---
@@ -382,18 +342,15 @@ CREATE TABLE `juegos_imagenes` (
 -- Foreign Keys 
 -- ---
 
-ALTER TABLE `juegos` ADD FOREIGN KEY (id_requisito) REFERENCES `requisitos` (`id_requisito`);
-ALTER TABLE `juegos` ADD FOREIGN KEY (id_admin_creado) REFERENCES `admin` (`id_admin`);
+ALTER TABLE `juegos` ADD FOREIGN KEY (id_usuario_juego) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `analisis` ADD FOREIGN KEY (id_juego) REFERENCES `juegos` (`id_juego`);
 ALTER TABLE `analisis` ADD FOREIGN KEY (id_usuario) REFERENCES `usuarios` (`id_usuario`);
-ALTER TABLE `imagenes` ADD FOREIGN KEY (id_admin_subido) REFERENCES `admin` (`id_admin`);
-ALTER TABLE `privilegios_admin` ADD FOREIGN KEY (id_privilegio) REFERENCES `privilegios` (`id_privilegio`);
-ALTER TABLE `privilegios_admin` ADD FOREIGN KEY (id_admin) REFERENCES `admin` (`id_admin`);
+ALTER TABLE `imagenes` ADD FOREIGN KEY (id_usuario_subido) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `juegos_tag` ADD FOREIGN KEY (id_juego) REFERENCES `juegos` (`id_juego`);
 ALTER TABLE `juegos_tag` ADD FOREIGN KEY (id_tag) REFERENCES `tag` (`id_tag`);
 ALTER TABLE `juegos_modos` ADD FOREIGN KEY (id_juego) REFERENCES `juegos` (`id_juego`);
 ALTER TABLE `juegos_modos` ADD FOREIGN KEY (id_modo) REFERENCES `modos` (`id_modo`);
-ALTER TABLE `noticias` ADD FOREIGN KEY (id_admin_creado) REFERENCES `admin` (`id_admin`);
+ALTER TABLE `noticias` ADD FOREIGN KEY (id_usuario_noticia) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `noticias_imagenes` ADD FOREIGN KEY (id_noticia) REFERENCES `noticias` (`id_noticia`);
 ALTER TABLE `noticias_imagenes` ADD FOREIGN KEY (id_imagen) REFERENCES `imagenes` (`id_imagen`);
 ALTER TABLE `donaciones` ADD FOREIGN KEY (id_usuario) REFERENCES `usuarios` (`id_usuario`);
@@ -410,7 +367,7 @@ ALTER TABLE `solicitudes_amistad` ADD FOREIGN KEY (id_amigo) REFERENCES `usuario
 ALTER TABLE `mensajes` ADD FOREIGN KEY (id_escritor) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `mensajes` ADD FOREIGN KEY (id_lector) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `usuarios_bloqueados` ADD FOREIGN KEY (id_usuario) REFERENCES `usuarios` (`id_usuario`);
-ALTER TABLE `usuarios_bloqueados` ADD FOREIGN KEY (id_admin) REFERENCES `admin` (`id_admin`);
 ALTER TABLE `notificaciones` ADD FOREIGN KEY (id_usuario) REFERENCES `usuarios` (`id_usuario`);
 ALTER TABLE `juegos_imagenes` ADD FOREIGN KEY (id_juego) REFERENCES `juegos` (`id_juego`);
 ALTER TABLE `juegos_imagenes` ADD FOREIGN KEY (id_imagen) REFERENCES `imagenes` (`id_imagen`);
+

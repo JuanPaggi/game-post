@@ -17,7 +17,7 @@ public class NoticiaInput {
 	
 	public String urlImagen;
 	
-	public long id_admin_creado;
+	public long id_usuario_noticia;
 	
 	public ArrayList<Long> tags;
 	

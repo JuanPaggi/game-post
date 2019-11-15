@@ -7,8 +7,8 @@ import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.game.persistence.models.Admin;
 import com.game.persistence.models.Imagenes;
+import com.game.persistence.models.Usuarios;
 import com.game.persistence.repository.ImagenesRepository;
 import com.game.services.fileService.exceptions.ImagenNotFound;
 
@@ -38,12 +38,12 @@ public class FileService {
 		throw new ImagenNotFound();
 	}
 	
-	public Imagenes uploadImageFile(byte[] image_file, String name, Admin admin) throws NoSuchAlgorithmException {
+	public Imagenes uploadImageFile(byte[] image_file, String name, Usuarios usuario) throws NoSuchAlgorithmException {
 		Imagenes img = new Imagenes();
 		img.setImagen(image_file);
 		img.setNombre(name);
 		img.setFecha_subida(new Date());
-		img.setAdmin(admin);
+		img.setId_usuario_subido(usuario);
 		return imagenesRepository.save(img);
 	}
 	
