@@ -119,8 +119,10 @@ public class JuegosService {
 		Optional<Usuarios> usuario = usuarioRepository.findById(juegoIn.id_usuario_juego);
 		List<Privilegios> usuario_privilegios = usuario.get().getPrivilegios();
 		boolean acceso = false;
+		String const_agregar = "AGREGAR_JUEGO";
 		for (Privilegios privilegios : usuario_privilegios) {
-			if(privilegios.getPrivilegio() == "AGREGAR_JUEGO") {
+			String aux = privilegios.getPrivilegio();
+			if(const_agregar.equals(aux)) {
 				acceso = true;
 			}
 		}
