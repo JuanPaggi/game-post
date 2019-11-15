@@ -13,7 +13,6 @@ import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { ModoItem } from '../providers/entities/ModoItem.entity';
 import { ModosService } from '../services/modos/modos.service';
 import { ModosDto } from '../providers/dto/ModosDto';
-import { AdminService } from '../services/admin/admin.service';
 import { AnalisisItem } from '../providers/entities/AnalisisItem.entity';
 import { AnalisisService } from '../services/analisis/analisis.service';
 import { AnalisisDto } from '../providers/dto/AnalisisDto';
@@ -69,7 +68,6 @@ export class JuegoComponent implements OnInit {
   hayImagen: boolean;
 
   user: User;
-  userAdm: User;
 
   constructor(
     private juegosSrv: JuegosService,
@@ -79,7 +77,6 @@ export class JuegoComponent implements OnInit {
     private analisisSrv: AnalisisService,
     private route: ActivatedRoute,
     private router: Router,
-    private adminSrv: AdminService,
     private location: LocationStrategy)
   {
     this.tags = [];
@@ -108,7 +105,6 @@ export class JuegoComponent implements OnInit {
       comentarioIngresado: new FormControl(Validators.required),
     });
     this.getJuego();
-    this.userAdm = this.adminSrv.getUserLoggedIn();
     this.user = this.usuariosSrv.getUserLoggedIn();
     if(this.user){
       this.id_usuario = this.user.id_usuario;
@@ -151,7 +147,7 @@ export class JuegoComponent implements OnInit {
     this.almacenamiento = juego.almacenamiento;
     this.analisis_negativos = juego.analisis_negativos;
     this.analisis_positivos = juego.analisis_positivos;
-    this.id_admin_creado = juego.id_admin_creado;
+    this.id_admin_creado = juego.id_usuario_juego;
     this.id_requisitos = juego.id_requisitos;
     this.urlImagen = juego.archivoImagen;
     

@@ -6,7 +6,7 @@ export class CrearJuegoDto {
 	fecha_lanzamiento: Date;
 	analisis_positivos: number;
 	analisis_negativos: number;
-	id_admin_creado: number;
+	id_usuario_juego: number;
     nombreImagen: String;
     archivoImagen: number[][];
 	tags: number[];

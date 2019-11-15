@@ -8,7 +8,7 @@ export class JuegoItem {
 	analisis_positivos: number;
 	analisis_negativos: number;
 	id_requisitos: number;
-	id_admin_creado: number;
+	id_usuario_juego: number;
     nombreImagen: String;
     archivoImagen: String[];
 	tags: number[];

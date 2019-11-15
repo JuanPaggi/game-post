@@ -1,4 +1,4 @@
-<section class="container panel-page container-opc" *ngIf="!user && !userAdm">
+<section class="container panel-page container-opc" *ngIf="!user">
     <h1 class="titulo pt-3">Comparte tu opinion a la comunidad, entra ahora!</h1>
     <form>
         <div class="row">
@@ -12,9 +12,6 @@
                     <input class="input-register" type="password" [(ngModel)]="clave" [ngModelOptions]="{standalone: true}">
                 </div>
                 <button class="boton-registro" (click)="ComprobarUsuario()">Entrar</button>
-                <div class="contenedor-enlace-admin">
-                    <a *ngIf="!user && !userAdm" class="enlace-admin" (click)="clickedLoginAdmin()">Soy Admin</a>
-                </div>
                 <div class="error-login error-texto" [innerHtml]="htmlToAdd"></div>
             </div>
         </div>

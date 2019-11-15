@@ -1,10 +1,10 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { User } from '../providers/model/user.model';
-import { AdminService } from '../services/admin/admin.service';
 import { Router } from '@angular/router';
 import { NoticiasService } from '../services/noticias/noticias.service';
 import { NoticiasDto } from '../providers/dto/NoticiasDto';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-panel-noticias',
@@ -15,18 +15,18 @@ export class PanelNoticiasComponent implements OnInit {
 
   noticias: NoticiaItem[];
 
-  userAdm: User;
+  user: User;
 
   @ViewChild('imageUpload', {static: false}) imagInput: ElementRef;
 
   constructor(
-    private adminSrv: AdminService,
+    private usuarioSrv: UsuariosService,
     private router: Router,
     private noticiasSrv: NoticiasService,
   ) { }
 
   ngOnInit() {
-    this.userAdm = this.adminSrv.getUserLoggedIn();
+    this.user = this.usuarioSrv.getUserLoggedIn();
     this.getNoticias();
   }
 

@@ -16,11 +16,9 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { JuegosComponent } from './juegos/juegos.component';
 import { JuegoComponent } from './juego/juego.component';
 import { PanelComponent } from './panel/panel.component';
-import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { PanelJuegosComponent } from './panel-juegos/panel-juegos.component';
 import { PanelNoticiasComponent } from './panel-noticias/panel-noticias.component';
 import { PanelUsuariosComponent } from './panel-usuarios/panel-usuarios.component';
-import { PanelAdminComponent } from './panel-admin/panel-admin.component';
 import { BarraNavegacionComponent } from './barra-navegacion/barra-navegacion.component';
 import { CrearNoticiaComponent } from './crear-noticia/crear-noticia.component';
 import { CrearJuegoComponent } from './crear-juego/crear-juego.component';
@@ -38,11 +36,9 @@ import { CrearJuegoComponent } from './crear-juego/crear-juego.component';
     JuegosComponent,
     JuegoComponent,
     PanelComponent,
-    LoginAdminComponent,
     PanelJuegosComponent,
     PanelNoticiasComponent,
     PanelUsuariosComponent,
-    PanelAdminComponent,
     BarraNavegacionComponent,
     CrearNoticiaComponent,
     CrearJuegoComponent

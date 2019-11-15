@@ -3,8 +3,8 @@ import { User } from '../providers/model/user.model';
 import { JuegoItem } from '../providers/entities/juegoItem.entity';
 import { JuegosService } from '../services/juegos/juegos.service';
 import { Router } from '@angular/router';
-import { AdminService } from '../services/admin/admin.service';
 import { JuegosDto } from '../providers/dto/JuegosDto';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-panel-juegos',
@@ -15,16 +15,16 @@ export class PanelJuegosComponent implements OnInit {
   
   juegos: JuegoItem[];
 
-  userAdm: User;
+  user: User;
 
   constructor(
-    private adminSrv: AdminService,
+    private usuarioSrv: UsuariosService,
     private router: Router,
     private juegosSrv: JuegosService,
   ) { }
 
   ngOnInit() {
-    this.userAdm = this.adminSrv.getUserLoggedIn();
+    this.user = this.usuarioSrv.getUserLoggedIn();
     this.getJuegos();
   }
 

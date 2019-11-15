@@ -8,11 +8,9 @@ import { RegistroComponent } from './registro/registro.component';
 import { JuegosComponent } from './juegos/juegos.component';
 import { JuegoComponent } from './juego/juego.component';
 import { PanelComponent } from './panel/panel.component';
-import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { PanelJuegosComponent } from './panel-juegos/panel-juegos.component';
 import { PanelNoticiasComponent } from './panel-noticias/panel-noticias.component';
 import { PanelUsuariosComponent } from './panel-usuarios/panel-usuarios.component';
-import { PanelAdminComponent } from './panel-admin/panel-admin.component';
 import { CrearNoticiaComponent } from './crear-noticia/crear-noticia.component';
 import { CrearJuegoComponent } from './crear-juego/crear-juego.component';
 
@@ -25,10 +23,6 @@ const routes: Routes = [
   {
     path: 'login',
     component: LoginComponent
-  },
-  {
-    path: 'loginAdmin',
-    component: LoginAdminComponent
   },
   {
     path: 'registro',
@@ -65,10 +59,6 @@ const routes: Routes = [
   {
     path: 'panel/panel-usuarios',
     component: PanelUsuariosComponent
-  },
-  {
-    path: 'panel/panel-admin',
-    component: PanelAdminComponent
   },
   {
     path: 'panel/panel-noticias/crear-noticia',

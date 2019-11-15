@@ -7,11 +7,11 @@ import { TagsService } from '../services/tags/tags.service';
 import { JuegosService } from '../services/juegos/juegos.service';
 import { ModosService } from '../services/modos/modos.service';
 import { Router } from '@angular/router';
-import { AdminService } from '../services/admin/admin.service';
 import { User } from '../providers/model/user.model';
 import { TagItem } from '../providers/entities/TagItem.entity';
 import { JuegoItem } from '../providers/entities/juegoItem.entity';
 import { ModoItem } from '../providers/entities/ModoItem.entity';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-crear-juego',
@@ -42,7 +42,7 @@ export class CrearJuegoComponent implements OnInit {
   modosJuego: ModoItem[];
   modosIdJuego: String;
 
-  userAdm: User;
+  user: User;
 
   imageFileJuego: number[][];
   imagenesUrlJuego: string[];
@@ -53,7 +53,7 @@ export class CrearJuegoComponent implements OnInit {
   @ViewChild('imageUpload', {static: false}) imagInput: ElementRef;
 
   constructor(
-    private adminSrv: AdminService,
+    private usuariosSrv: UsuariosService,
     private router: Router,
     private modosSrv: ModosService,
     private juegosSrv: JuegosService,
@@ -64,7 +64,7 @@ export class CrearJuegoComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.userAdm = this.adminSrv.getUserLoggedIn();
+    this.user = this.usuariosSrv.getUserLoggedIn();
     this.formAddJuego = new FormGroup({
       tituloJuego: new FormControl(Validators.required),
       descripcionJuego: new FormControl(Validators.required),
@@ -131,7 +131,7 @@ export class CrearJuegoComponent implements OnInit {
       juego.almacenamiento = this.almacenamiento;
       juego.analisis_negativos = 0;
       juego.analisis_positivos = 0;
-      juego.id_admin_creado = this.userAdm.id_usuario;
+      juego.id_usuario_juego = this.user.id_usuario;
       if (this.tagsIdJuego != null) {
         juego.tags = this.tagsIdJuego.split(',').map(Number);
       }else{

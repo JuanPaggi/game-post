@@ -5,8 +5,6 @@ import { NoticiasDto } from '../providers/dto/NoticiasDto';
 import { FormGroup } from '@angular/forms';
 import { TagItem } from '../providers/entities/TagItem.entity';
 import { Router } from '@angular/router';
-import { User } from '../providers/model/user.model';
-import { AdminService } from '../services/admin/admin.service';
 
 @Component({
   selector: 'app-noticias',
@@ -30,19 +28,15 @@ export class NoticiasComponent implements OnInit {
   imageFileNoticia: number[][];
   imagenesUrlNoticia: String[];
 
-  userAdm: User;
-
   @ViewChild('imageUpload', {static: false}) imagInput: ElementRef;
 
   constructor(
     private noticiasSrv: NoticiasService,
     private router: Router,
-    private adminSrv: AdminService,
   ) {}
 
   ngOnInit() {
     this.getNoticias();
-    this.userAdm = this.adminSrv.getUserLoggedIn();
   }
 
   getNoticias() {
