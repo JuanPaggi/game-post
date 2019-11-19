@@ -9,5 +9,5 @@ export class UsuarioItem {
     fecha_inscripcion: Date;
     nivel: number;
     puntos: number;
-    privilegios: String[];
+    privilegios: number[];
 }

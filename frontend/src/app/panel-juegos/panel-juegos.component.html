@@ -1,4 +1,4 @@
-<section class="container panel-page container-opc" *ngIf="userAdm">
+<section class="container panel-page container-opc" *ngIf="user">
 
     <h1 class="titulo">Panel de juegos</h1>
         <table class="table table-hover table-dark">
@@ -6,7 +6,7 @@
                 <tr>
                     <th scope="col">#</th>
                     <th scope="col" class="col-titulo">Titulo</th>
-                    <th scope="col" class="col-opc">Admin</th>
+                    <th scope="col" class="col-opc">Usuario</th>
                     <th scope="col" class="col-opc">Opciones</th>
                 </tr>
             </thead>
@@ -14,13 +14,13 @@
                 <tr>
                     <th scope="row">{{i+1}}</th>
                     <td class="col-titulo">{{juego.titulo}}</td>
-                    <td class="col-opc">{{juego.id_admin_creado}}</td>
+                    <td class="col-opc">{{juego.id_usuario_juego}}</td>
                     <td class="col-opc"><button class="btn btn-warning mr-2">Editar</button><button class="btn btn-danger" (click)="borrarJuego(juego.id_juego)">Borrar</button></td>
                 </tr>
             </tbody>
         </table>
 
-    <button class="btn btn-success ml-3" (click)="agregarJuego()">Agregar</button>
+    <button *ngIf="privilegio_agregar_juego" class="btn btn-success ml-3" (click)="agregarJuego()">Agregar</button>
 
     <div class="btn-volver">
         <button class="btn btn-primary m-3" (click)="volverPanel()">Volver</button>

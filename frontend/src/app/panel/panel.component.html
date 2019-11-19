@@ -1,6 +1,6 @@
-<div class="container panel-page container-opc">
+<section class="container panel-page container-opc" *ngIf="user">
 
-    <div class="row" *ngIf="userAdm">
+    <div class="row">
         <div class="col d-flex justify-content-center">
             <div class="contenedor-panel mb-5">
                 <div class="titulo-panel mt-4">
@@ -25,9 +25,9 @@
                         <img class="img-panel mt-2" src="../../assets/usuarios-panel.svg" alt="">
                         <p>Usuarios</p>
                     </button>
-                    <button class="btn-panel" (click)="irPanelAdmin()">
-                        <img class="img-panel mt-2" src="../../assets/admin-panel.svg" alt="">
-                        <p>Admin</p>
+                    <button class="btn-panel">
+                        <img class="img-panel mt-2" src="../../assets/bloqueo-panel.svg" alt="">
+                        <p>Bloqueos</p>
                     </button>
                     <button class="btn-panel">
                         <img class="img-panel mt-2" src="../../assets/privilegios-panel.svg" alt="">
@@ -42,4 +42,4 @@
         <button class="btn btn-primary m-3" (click)="volverHome()">Volver</button>
     </div>
 
-</div>
+</section>

@@ -3,7 +3,7 @@ export class CrearNoticiaDto {
     descripcion: String;
     cuerpo: String;
     fecha_publicacion: Date;
-    id_admin_creado: number;
+    id_usuario_noticia: number;
     tags: number[];
     nombreImagen: String;
     archivoImagen: number[][];

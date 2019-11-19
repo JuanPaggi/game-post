@@ -74,7 +74,6 @@ export class UsuariosService {
   setUserLoggedOut() {
     this.isUserLoggedIn = false;
     this.usserLogged = null;
-    console.log("we");
     localStorage.setItem('currentUser', JSON.stringify(null));
   }
 

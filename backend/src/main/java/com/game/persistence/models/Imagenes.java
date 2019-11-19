@@ -39,8 +39,8 @@ public class Imagenes {
 	private Date fecha_subida;
 	
 	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name="id_admin_subido", referencedColumnName = "id_admin")
-	private Admin admin;
+	@JoinColumn(name="id_usuario_subido", referencedColumnName = "id_usuario")
+	private Usuarios id_usuario_subido;
 	
 	@ManyToMany(fetch = FetchType.LAZY) 
     @JoinTable(name = "noticias_imagenes", 
@@ -103,12 +103,12 @@ public class Imagenes {
 		this.fecha_subida = fecha_subida;
 	}
 
-	public Admin getAdmin() {
-		return admin;
+	public Usuarios getId_usuario_subido() {
+		return id_usuario_subido;
 	}
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public void setId_usuario_subido(Usuarios id_usuario_subido) {
+		this.id_usuario_subido = id_usuario_subido;
 	}
 
 	public List<Noticias> getNoticias() {
@@ -126,6 +126,5 @@ public class Imagenes {
 	public void setJuegos(List<Juegos> juegos) {
 		this.juegos = juegos;
 	}
-	
 	
 }

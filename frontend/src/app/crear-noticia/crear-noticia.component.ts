@@ -3,12 +3,12 @@ import { NoticiaItem } from '../providers/entities/NoticiaItem.entity';
 import { TagItem } from '../providers/entities/TagItem.entity';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { User } from '../providers/model/user.model';
-import { AdminService } from '../services/admin/admin.service';
 import { Router } from '@angular/router';
 import { TagsService } from '../services/tags/tags.service';
 import { NoticiasService } from '../services/noticias/noticias.service';
 import { TagsDto } from '../providers/dto/TagsDto';
 import { CrearNoticiaDto } from '../providers/dto/dtoCrear/CrearNoticiaDto';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-crear-noticia',
@@ -31,14 +31,14 @@ export class CrearNoticiaComponent implements OnInit {
 
   formAddNoticia: FormGroup;
 
-  userAdm: User;
+  user: User;
 
 
   imageFileNoticia: number[][];
   imagenesUrlNoticia: String[];
 
   constructor(
-    private adminSrv: AdminService,
+    private usuarioSrv: UsuariosService,
     private router: Router,
     private tagsSrv: TagsService,
     private noticiasSrv: NoticiasService,
@@ -48,7 +48,7 @@ export class CrearNoticiaComponent implements OnInit {
    }
 
    ngOnInit() {
-    this.userAdm = this.adminSrv.getUserLoggedIn();
+    this.user = this.usuarioSrv.getUserLoggedIn();
     this.formAddNoticia = new FormGroup({
       titulo: new FormControl(Validators.required),
       descripcion: new FormControl(Validators.required),
@@ -97,7 +97,7 @@ export class CrearNoticiaComponent implements OnInit {
       noticia.descripcion = this.descripcionNoticia;
       noticia.titulo = this.tituloNoticia;
       noticia.fecha_publicacion = new Date();
-      noticia.id_admin_creado = 1;
+      noticia.id_usuario_noticia = this.user.id_usuario;
       if (this.tagsIdNoticia != null) {
         noticia.tags = this.tagsIdNoticia.split(',').map(Number);
       }else{

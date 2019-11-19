@@ -41,6 +41,21 @@ public class Juegos {
 	private String desarrollador;
 	
 	@Column(nullable = false)
+	private String sistema_operativo;
+	
+	@Column(nullable = false)
+	private String procesador;
+	
+	@Column(nullable = false)
+	private String memoria;
+	
+	@Column(nullable = false)
+	private String grafica;
+	
+	@Column(nullable = false)
+	private String almacenamiento;
+	
+	@Column(nullable = false)
 	private Date fecha_lanzamiento;
 	
 	@Column(nullable = false)
@@ -48,10 +63,6 @@ public class Juegos {
 	
 	@Column(nullable = false)
 	private long analisis_negativos;
-	
-	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name="id_requisito", referencedColumnName = "id_requisito")
-	private Requisitos requisitos;
 	
 	@OneToMany(fetch = FetchType.LAZY, orphanRemoval=true)
 	@JoinColumn(name="id_juego", referencedColumnName = "id_juego", nullable = false, insertable = false, updatable = false)
@@ -66,8 +77,8 @@ public class Juegos {
 	private List<Tag> Tag;
 	
 	@ManyToOne(optional = false)
-	@JoinColumn(name="id_admin_creado", referencedColumnName = "id_admin")
-	private Admin admin;
+	@JoinColumn(name="id_usuario_juego", referencedColumnName = "id_usuario")
+	private Usuarios id_usuario_juego;
 	
 	@ManyToMany(fetch = FetchType.LAZY) 
     @JoinTable(name = "juegos_modos", 
@@ -153,14 +164,6 @@ public class Juegos {
 		this.analisis_negativos = analisis_negativos;
 	}
 
-	public Requisitos getRequisitos() {
-		return requisitos;
-	}
-
-	public void setRequisitos(Requisitos requisitos) {
-		this.requisitos = requisitos;
-	}
-
 	public List<Analisis> getAnalisis() {
 		return analisis;
 	}
@@ -177,14 +180,6 @@ public class Juegos {
 		Tag = tag;
 	}
 
-	public Admin getAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
-	}
-
 	public List<Modos> getModos() {
 		return modos;
 	}
@@ -199,6 +194,54 @@ public class Juegos {
 
 	public void setImagenes(Set<Imagenes> imagenes) {
 		this.imagenes = imagenes;
+	}
+
+	public String getSistema_operativo() {
+		return sistema_operativo;
+	}
+
+	public void setSistema_operativo(String sistema_operativo) {
+		this.sistema_operativo = sistema_operativo;
+	}
+
+	public String getProcesador() {
+		return procesador;
+	}
+
+	public void setProcesador(String procesador) {
+		this.procesador = procesador;
+	}
+
+	public String getMemoria() {
+		return memoria;
+	}
+
+	public void setMemoria(String memoria) {
+		this.memoria = memoria;
+	}
+
+	public String getGrafica() {
+		return grafica;
+	}
+
+	public void setGrafica(String grafica) {
+		this.grafica = grafica;
+	}
+
+	public String getAlmacenamiento() {
+		return almacenamiento;
+	}
+
+	public void setAlmacenamiento(String almacenamiento) {
+		this.almacenamiento = almacenamiento;
+	}
+
+	public Usuarios getId_usuario_juego() {
+		return id_usuario_juego;
+	}
+
+	public void setId_usuario_juego(Usuarios id_usuario_juego) {
+		this.id_usuario_juego = id_usuario_juego;
 	}
 	
 }

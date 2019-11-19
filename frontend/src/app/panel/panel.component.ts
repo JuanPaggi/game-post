@@ -1,7 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
 import { User } from '../providers/model/user.model';
-import { AdminService } from '../services/admin/admin.service';
+import { UsuariosService } from '../services/usuarios/usuarios.service';
 
 @Component({
   selector: 'app-panel',
@@ -10,15 +10,15 @@ import { AdminService } from '../services/admin/admin.service';
 })
 export class PanelComponent implements OnInit {
 
-  userAdm: User;
+  user: User;
 
   constructor(
-    private adminSrv: AdminService,
+    private usuarioSrv: UsuariosService,
     private router: Router,
   ) { }
 
   ngOnInit() {
-    this.userAdm = this.adminSrv.getUserLoggedIn();
+    this.user = this.usuarioSrv.getUserLoggedIn();
   }
 
   volverHome(){
@@ -35,10 +35,6 @@ export class PanelComponent implements OnInit {
 
   irPanelUsuarios(){
     this.router.navigateByUrl(`panel/panel-usuarios`);
-  }
-
-  irPanelAdmin(){
-    this.router.navigateByUrl(`panel/panel-admin`);
   }
 
 }

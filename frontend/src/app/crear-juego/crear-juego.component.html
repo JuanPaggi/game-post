@@ -1,4 +1,4 @@
-<section class="container panel-page container-opc" *ngIf="userAdm">
+<section class="container panel-page container-opc" *ngIf="privilegio_agregar_juego">
 
     <div class="linea-separacion"></div>
     
@@ -59,51 +59,6 @@
 
                 <div class="contenedor-input">
                     <div class="contenedor-input-titulo">
-                        <label class="input-titulo">Tags:</label>
-                    </div> 
-                    <div class="input-titulo">
-                        <p *ngFor="let tag of tagsJuego">&nbsp; {{tag.id_tag}}.{{tag.etiqueta}}</p>
-                    </div>
-                    <p class="input-titulo">Ingrese el numero de la etiqueta: (separados por comas)</p>
-                    <textarea class="input-entrada" [(ngModel)]="tagsIdJuego" [ngModelOptions]="{standalone: true}"></textarea>
-                </div>
-
-                <div class="contenedor-input">
-                    <div class="contenedor-input-titulo">
-                        <label class="input-titulo">Modos:</label>
-                    </div>
-                    <div class="input-titulo">
-                        <p *ngFor="let modo of modosJuego">&nbsp; {{modo.id_modo}}.{{modo.modo}}</p> 
-                    </div>
-                    <p class="input-titulo">Ingrese el numero del Modo: (separados por comas)</p>
-                    <textarea class="input-entrada" [(ngModel)]="modosIdJuego" [ngModelOptions]="{standalone: true}"></textarea>
-                </div>
-
-                <div class="contenedor-input">
-                    <div class="contenedor-input-titulo">
-                        <label class="input-titulo">Imagenes:</label>
-                    </div>
-                    <div class="tabla-imagenes">
-                        <img class="m-2" *ngFor="let imagen of imagenesUrlJuego; let i = index" [src]="imagen" (click)="deleteImage(i)" style="width: 50px; height: 50px;cursor: not-allowed;" />
-                    </div>
-                    <input type="file" #imageUpload accept="image/*" style="display: none"/>
-                    <button type="button" class="btn btn-primary" (click)="openImage()">Subir imagen</button>
-                </div>
-
-                <button class="btn btn-success mb-4 mt-3" (click)="agregarJuego()">Añadir</button>
-            </form>
-        </div>
-    </div> 
-
-    <div class="linea-separacion"></div>
-    
-    <div class="row">
-        <div class="col">
-            <h2 class="titulo">Crear Requisito</h2>
-            <form class="centrado" [formGroup] = "formAddJuego">
-
-                <div class="contenedor-input">
-                    <div class="contenedor-input-titulo">
                         <label class="input-titulo">Sistema Operativo</label>
                     </div>
                     <div class="contenedor-input-entrada">
@@ -152,10 +107,45 @@
                     </div>
                 </div>
 
-                <button class="btn btn-success mt-4" (click)="agregarRequisito()">Añadir</button>
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Tags:</label>
+                    </div> 
+                    <div class="input-titulo">
+                        <p *ngFor="let tag of tagsJuego">&nbsp; {{tag.id_tag}}.{{tag.etiqueta}}</p>
+                    </div>
+                    <p class="input-titulo">Ingrese el numero de la etiqueta: (separados por comas)</p>
+                    <textarea class="input-entrada" [(ngModel)]="tagsIdJuego" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Modos:</label>
+                    </div>
+                    <div class="input-titulo">
+                        <p *ngFor="let modo of modosJuego">&nbsp; {{modo.id_modo}}.{{modo.modo}}</p> 
+                    </div>
+                    <p class="input-titulo">Ingrese el numero del Modo: (separados por comas)</p>
+                    <textarea class="input-entrada" [(ngModel)]="modosIdJuego" [ngModelOptions]="{standalone: true}"></textarea>
+                </div>
+
+                <div class="contenedor-input">
+                    <div class="contenedor-input-titulo">
+                        <label class="input-titulo">Imagenes:</label>
+                    </div>
+                    <div class="tabla-imagenes">
+                        <img class="m-2" *ngFor="let imagen of imagenesUrlJuego; let i = index" [src]="imagen" (click)="deleteImage(i)" style="width: 50px; height: 50px;cursor: not-allowed;" />
+                    </div>
+                    <input type="file" #imageUpload accept="image/*" style="display: none"/>
+                    <button type="button" class="btn btn-primary" (click)="openImage()">Subir imagen</button>
+                </div>
+
+                <button class="btn btn-success mb-4 mt-3" (click)="agregarJuego()">Añadir</button>
             </form>
         </div>
-    </div>
+    </div> 
+
+    <div class="linea-separacion"></div>
 
     <div class="btn-volver mt-5">
         <button class="btn btn-primary m-3" (click)="volverPanel()">Volver</button>

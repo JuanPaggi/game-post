@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '../providers/model/user.model';
-import { AdminService } from '../services/admin/admin.service';
 import { UsuarioItem } from '../providers/entities/UsuarioItem.entity';
 import { UsuariosService } from '../services/usuarios/usuarios.service';
 import { UsuariosDto } from '../providers/dto/UsuariosDto';
@@ -27,21 +26,20 @@ export class PanelUsuariosComponent implements OnInit {
   puntos: number;
   privilegios: String[];
 
-  userAdm: User;
+  user: User;
 
   constructor(
     private router: Router,
-    private adminSrv: AdminService,
-    private usuariosSrv: UsuariosService,
+    private usuarioSrv: UsuariosService,
   ) {}
 
   ngOnInit() {
-    this.userAdm = this.adminSrv.getUserLoggedIn();
+    this.user = this.usuarioSrv.getUserLoggedIn();
     this.getUsuarios();
   }
 
   getUsuarios() {
-    this.usuariosSrv.getUsuarios(new UsuariosDto()).subscribe(
+    this.usuarioSrv.getUsuarios(new UsuariosDto()).subscribe(
       response => {
         this.usuarios = response;
       }
@@ -49,7 +47,7 @@ export class PanelUsuariosComponent implements OnInit {
   }
 
   borrarUsuario(id:number){
-    this.usuariosSrv.deleteUsuario(id).subscribe();
+    this.usuarioSrv.deleteUsuario(id).subscribe();
     for (let index = 0; index < this.usuarios.length; index++) {
       if (this.usuarios[index].id_usuario === id) {
         this.usuarios.splice(index,1);

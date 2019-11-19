@@ -8,10 +8,15 @@ export class JuegoItem {
 	analisis_positivos: number;
 	analisis_negativos: number;
 	id_requisitos: number;
-	id_admin_creado: number;
+	id_usuario_juego: number;
     nombreImagen: String;
     archivoImagen: String[];
 	tags: number[];
 	modos: number[];
 	analisis: number[];
+	sistema_operativo: String;
+	procesador: String;
+	memoria: String;
+	grafica: String;
+	almacenamiento: String;
 }

@@ -24,12 +24,12 @@ public class UsuariosBloqueados {
 	private long id_usuario_bloqueado;
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name="id_usuario", referencedColumnName = "id_usuario")
-	private Usuarios usuarios;
+	@JoinColumn(name="id_usuario_responsable", referencedColumnName = "id_usuario")
+	private Usuarios id_usuario_responsable;
 	
 	@ManyToOne(optional = false, fetch = FetchType.LAZY)
-	@JoinColumn(name="id_admin", referencedColumnName = "id_admin")
-	private Admin admin;
+	@JoinColumn(name="id_usuario_baneado", referencedColumnName = "id_usuario")
+	private Usuarios id_usuario_baneado;
 	
 	@Column(nullable = false)
 	private Date fecha_bloqueo;
@@ -49,20 +49,20 @@ public class UsuariosBloqueados {
 		this.id_usuario_bloqueado = id_usuario_bloqueado;
 	}
 
-	public Usuarios getUsuarios() {
-		return usuarios;
+	public Usuarios getId_usuario_responsable() {
+		return id_usuario_responsable;
 	}
 
-	public void setUsuarios(Usuarios usuarios) {
-		this.usuarios = usuarios;
+	public void setId_usuario_responsable(Usuarios id_usuario_responsable) {
+		this.id_usuario_responsable = id_usuario_responsable;
 	}
 
-	public Admin getAdmin() {
-		return admin;
+	public Usuarios getId_usuario_baneado() {
+		return id_usuario_baneado;
 	}
 
-	public void setAdmin(Admin admin) {
-		this.admin = admin;
+	public void setId_usuario_baneado(Usuarios id_usuario_baneado) {
+		this.id_usuario_baneado = id_usuario_baneado;
 	}
 
 	public Date getFecha_bloqueo() {
