@@ -81,6 +81,9 @@
               <div class="media-body media-middle">
                   <label>Agregar Analisis:</label>
                   <textarea class="form-control" [(ngModel)]="analisisIngresado" required minlength="10" [ngModelOptions]="{standalone: true}"></textarea>
+                  <div class="d-flex">
+                    <input type="checkbox" (change)="cambiarValoracion()"> <p>Te gusto?</p>
+                  </div>
                   <button class="btn btn-success" (click)="agregarAnalisis()">Agregar</button>
               </div>
             </li>

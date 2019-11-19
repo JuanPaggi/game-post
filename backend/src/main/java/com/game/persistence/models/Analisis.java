@@ -91,4 +91,6 @@ public class Analisis {
 		this.usuario = usuario;
 	}
 	
+	
+	
 }

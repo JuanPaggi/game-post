@@ -247,7 +247,7 @@ export class JuegoComponent implements OnInit {
       analisisIn.analisis = this.analisisIngresado;
       analisisIn.fecha_publicacion = new Date();
       analisisIn.id_juego = this.juego.id_juego;
-      analisisIn.valoracion = true;
+      analisisIn.valoracion = this.valoracion;
       analisisIn.id_usuario = this.usuario.id_usuario;
       this.analisisSrv.addAnalisis(analisisIn).subscribe(
         response => {
@@ -265,6 +265,16 @@ export class JuegoComponent implements OnInit {
         this.usuario = response;
       }
     );
+  }
+
+  valoracion = false;
+
+  cambiarValoracion(){
+    if (this.valoracion) {
+      this.valoracion = false;
+    }else{
+      this.valoracion = true;
+    }
   }
 }
 

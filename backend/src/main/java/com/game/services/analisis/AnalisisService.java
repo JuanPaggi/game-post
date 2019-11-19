@@ -76,6 +76,7 @@ public class AnalisisService {
 			item.id_juego = analisisAux.getId_analisis();
 			item.analisis = analisisAux.getAnalisis();
 			item.fecha_publicacion = analisisAux.getFecha_publicacion();
+			item.valoracion = analisisAux.isValoracion();
 			item.id_juego = analisisAux.getJuego().getId_juego();
 			item.id_usuario = analisisAux.getUsuario().getId_usuario();
 			out.add(item);
