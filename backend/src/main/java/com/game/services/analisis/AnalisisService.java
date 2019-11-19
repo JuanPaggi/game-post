@@ -16,6 +16,7 @@ import com.game.persistence.repository.AnalisisRepository;
 import com.game.persistence.repository.JuegosRepository;
 import com.game.persistence.repository.UsuariosRepository;
 import com.game.services.analisis.exceptions.AnalisisNotFound;
+import com.game.services.juegos.JuegosService;
 
 /**
  * @author pachi
@@ -33,6 +34,9 @@ public class AnalisisService {
 	
 	@Autowired
 	UsuariosRepository usuariosRepository;
+	
+	@Autowired
+	JuegosService juegosService;
 	
 	public AnalisisItem getAnalisis(long id) throws AnalisisNotFound {
 		
@@ -62,6 +66,7 @@ public class AnalisisService {
 		analisis.setJuego(juego.get());
 		analisis.setUsuario(usuario.get());
 		analisis = analisisRepository.save(analisis);
+		juegosService.agregarValocacion(analisisIn.id_juego, analisisIn.valoracion);
 		return analisis.getId_analisis();
 	
 	}

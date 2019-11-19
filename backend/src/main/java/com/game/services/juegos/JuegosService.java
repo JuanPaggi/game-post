@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
+import javax.transaction.Transactional;
+
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -37,6 +39,7 @@ import com.game.services.tag.exceptions.TagNotFound;
  */
 
 @Service
+@Transactional
 public class JuegosService {
 
 	@Autowired
@@ -263,6 +266,14 @@ public class JuegosService {
 		
 		juegosRepository.save(juegoObj);
 		
+	}
+	
+	public void agregarValocacion(long id_juego, boolean valoracion) {
+		if(valoracion) {
+			juegosRepository.agregarValoracionPositiva(id_juego);
+		}else {
+			juegosRepository.agregarValoracionNegativa(id_juego);
+		}
 	}
 	
 }
