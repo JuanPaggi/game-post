@@ -17,6 +17,7 @@ import com.game.controllers.noticias.dto.NoticiaItem;
 import com.game.persistence.models.Comentarios;
 import com.game.persistence.models.Imagenes;
 import com.game.persistence.models.Noticias;
+import com.game.persistence.models.Privilegios;
 import com.game.persistence.models.Tag;
 import com.game.persistence.models.Usuarios;
 import com.game.persistence.repository.ComentariosRepository;
@@ -133,31 +134,44 @@ public class NoticiasService {
 	
 	public long addNoticia(NoticiaInput noticiaIn) throws UsuariosNotFound,TagNotFound,ComentariosNotFound, NoSuchAlgorithmException{
 		
-		List<Tag> lista_tag= tagRepository.findAllById(noticiaIn.tags);
-		Optional<Usuarios> usuario = usuarioRepository.findById(noticiaIn.id_usuario_noticia);	
-		Noticias noticia = new Noticias();
-		if(usuario.isEmpty()) throw new UsuariosNotFound();
-		if(lista_tag.size() != noticiaIn.tags.size()) throw new TagNotFound();
-		noticia.setTitulo(noticiaIn.titulo);
-		noticia.setDescripcion(noticiaIn.descripcion);
-		noticia.setCuerpo(noticiaIn.cuerpo);
-		noticia.setFecha_publicacion(noticiaIn.fecha_publicacion);
-		noticia.setId_usuario_noticia(usuario.get());
-		noticia.setTags(lista_tag);
-		
-		Set<Imagenes> imagenes = new HashSet<Imagenes>();
-		for (byte[] imagen : noticiaIn.archivoImagen) {
-			Optional<Imagenes> aux = fileService.selectImageFile(imagen);
-			if (aux.isPresent()) {
-				imagenes.add(aux.get());
-			}else {
-				imagenes.add(fileService.uploadImageFile(imagen, noticiaIn.nombreImagen, usuario.get()));
+		Optional<Usuarios> usuario = usuarioRepository.findById(noticiaIn.id_usuario_noticia);
+		List<Privilegios> usuario_privilegios = usuario.get().getPrivilegios();
+		boolean acceso = false;
+		String const_agregar = "AGREGAR_NOTICIA";
+		for (Privilegios privilegios : usuario_privilegios) {
+			String aux = privilegios.getPrivilegio();
+			if(const_agregar.equals(aux)) {
+				acceso = true;
 			}
 		}
-		noticia.setImagenes(imagenes);	
-		
-		noticia = noticiasRepository.save(noticia);
-		return noticia.getId_noticia();
+		if(acceso) {
+			List<Tag> lista_tag= tagRepository.findAllById(noticiaIn.tags);
+			Noticias noticia = new Noticias();
+			if(usuario.isEmpty()) throw new UsuariosNotFound();
+			if(lista_tag.size() != noticiaIn.tags.size()) throw new TagNotFound();
+			noticia.setTitulo(noticiaIn.titulo);
+			noticia.setDescripcion(noticiaIn.descripcion);
+			noticia.setCuerpo(noticiaIn.cuerpo);
+			noticia.setFecha_publicacion(noticiaIn.fecha_publicacion);
+			noticia.setId_usuario_noticia(usuario.get());
+			noticia.setTags(lista_tag);
+			
+			Set<Imagenes> imagenes = new HashSet<Imagenes>();
+			for (byte[] imagen : noticiaIn.archivoImagen) {
+				Optional<Imagenes> aux = fileService.selectImageFile(imagen);
+				if (aux.isPresent()) {
+					imagenes.add(aux.get());
+				}else {
+					imagenes.add(fileService.uploadImageFile(imagen, noticiaIn.nombreImagen, usuario.get()));
+				}
+			}
+			noticia.setImagenes(imagenes);	
+			
+			noticia = noticiasRepository.save(noticia);
+			return noticia.getId_noticia();
+		}else {
+			return 0;
+		}
 	
 	}
 	

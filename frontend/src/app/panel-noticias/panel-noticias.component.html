@@ -20,7 +20,7 @@
         </tbody>
     </table>
 
-    <button class="btn btn-success ml-3" (click)="agregarNoticia()">Agregar</button>
+    <button *ngIf="privilegio_agregar_noticia" class="btn btn-success ml-3" (click)="agregarNoticia()">Agregar</button>
 
     <div class="btn-volver">
         <button class="btn btn-primary m-3" (click)="volverPanel()">Volver</button>

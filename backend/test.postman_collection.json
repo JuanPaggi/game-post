@@ -398,7 +398,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"nombre\": \"x12ijl8i6hikjh3123\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true,\n        \"privilegios\": [2]\n    }",
+							"raw": "    {\n        \"nombre\": \"x12ijl8i6hikjh3123\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true,\n        \"privilegios\": [1,2]\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -406,7 +406,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuarios/11",
+							"raw": "http://127.0.0.1:8081/api/v1/usuarios/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -419,7 +419,7 @@
 								"api",
 								"v1",
 								"usuarios",
-								"11"
+								"1"
 							]
 						}
 					},
@@ -605,7 +605,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"privilegio\": \"admin\"\n}",
+							"raw": "{\n\"privilegio\": \"AGREGAR_NOTICIA\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"

@@ -16,6 +16,7 @@ export class PanelNoticiasComponent implements OnInit {
   noticias: NoticiaItem[];
 
   user: User;
+  privilegio_agregar_noticia = false;
 
   @ViewChild('imageUpload', {static: false}) imagInput: ElementRef;
 
@@ -28,6 +29,13 @@ export class PanelNoticiasComponent implements OnInit {
   ngOnInit() {
     this.user = this.usuarioSrv.getUserLoggedIn();
     this.getNoticias();
+    if(this.user){
+      this.user.privilegios.forEach(element => {
+        if(element === 2){ // 2 = "Agregar Noticia"
+          this.privilegio_agregar_noticia = true;
+        }
+      });
+    }
   }
 
   volverPanel(){
