@@ -1,6 +1,6 @@
-<div class="container panel-page container-opc">
+<section class="container panel-page container-opc" *ngIf="user">
 
-    <div class="row" *ngIf="user">
+    <div class="row">
         <div class="col d-flex justify-content-center">
             <div class="contenedor-panel mb-5">
                 <div class="titulo-panel mt-4">
@@ -42,4 +42,4 @@
         <button class="btn btn-primary m-3" (click)="volverHome()">Volver</button>
     </div>
 
-</div>
+</section>
