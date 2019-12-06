@@ -1,7 +1,6 @@
 package com.game.services.analisis;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -62,8 +61,10 @@ public class AnalisisService {
 			analisisItem.id_juego = analisis.get().getJuego().getId_juego();
 			analisisItem.id_usuario = analisis.get().getUsuario().getId_usuario();
 			return analisisItem;
-		} catch (Exception e) {
-			return null;
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
 		}
 		
 	}
@@ -89,8 +90,10 @@ public class AnalisisService {
 			analisis = analisisRepository.save(analisis);
 			juegosService.agregarValocacion(analisisIn.id_juego, analisisIn.valoracion);
 			return analisis.getId_analisis();
-		} catch (Exception e) {
-			return 0;
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
 		}
 	
 	}
@@ -112,9 +115,10 @@ public class AnalisisService {
 				out.add(item);
 			}
 			return out;
-		} catch (Exception e) {
-			logger.error("Error al devolver los analisis", e);
-			return Collections.emptyList();
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
 		}
 		
 	}
@@ -131,8 +135,10 @@ public class AnalisisService {
 			}else {
 				throw new ApiException(409, "Error al cargar los datos");
 			}
-		} catch (Exception e) {
-			logger.error("Error al eliminar el analisis", e);
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
 		}
 	
 	}
@@ -161,8 +167,10 @@ public class AnalisisService {
 			}else {
 				throw new ApiException(409, "Error al cargar los datos");
 			}
-		} catch (Exception e) {
-			logger.error("Error al editar el analisis", e);
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
 		}
 	}
 	

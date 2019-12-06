@@ -82,7 +82,7 @@ public class AnalisisControllers {
 		try {
 			return new ResponseEntity<Long>(analisisService.addAnalisis(body), HttpStatus.OK);
 		} catch (ApiException e) {
-			switch (e.hashCode()) {
+			switch (e.getCode()) {
 				case 404:
 					logger.error(e.getMessage(), e);
 					return new ResponseEntity<Long>(HttpStatus.NOT_FOUND);
@@ -93,8 +93,8 @@ public class AnalisisControllers {
 					logger.error(e.getMessage(), e);
 					return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-		} catch (Exception e) {
-			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+		} catch (Exception exception) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", exception);
 			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
