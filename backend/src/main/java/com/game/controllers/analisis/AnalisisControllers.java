@@ -22,12 +22,10 @@ import org.springframework.web.bind.annotation.RestController;
 import com.game.controllers.analisis.dto.AnalisisItem;
 import com.game.exceptions.ApiException;
 import com.game.services.analisis.AnalisisService;
-
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import com.game.utils.ModelApiResponse;
 
 /**
- * @author pachi
+ * @author Juan Paggi
  * Controlador de Analisis con get, post, put, y delete.
  * Tenemos dos Get, uno para devolver un analisis seleccionado
  * por su id y otro get para devolver todos los analisis.
@@ -44,17 +42,11 @@ public class AnalisisControllers {
 	AnalisisService analisisService;
 	
 	@GetMapping(path = "/{idAnalisis}")
-	@ApiResponses({ 
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 404, message = "No existe el analisis."),
-		@ApiResponse(code = 409, message = "Error al cargar los datos."),
-		@ApiResponse(code = 500, message = "Unexpected error.") })
-	public @ResponseBody ResponseEntity<AnalisisItem> getAnalisisByID(
-			@PathVariable("idAnalisis") String idAnalisis){
+	public @ResponseBody ResponseEntity<AnalisisItem> getAnalisisByID(@PathVariable("idAnalisis") String idAnalisis){
 		try {
 			return new ResponseEntity<AnalisisItem>(analisisService.getAnalisis(Long.parseLong(idAnalisis)),HttpStatus.OK);
 		} catch (ApiException e) {
-			switch (e.hashCode()) {
+			switch (e.getCode()) {
 				case 404:
 					logger.error(e.getMessage(), e);
 					return new ResponseEntity<AnalisisItem>(HttpStatus.NOT_FOUND);
@@ -72,102 +64,114 @@ public class AnalisisControllers {
 	}
 	
 	@PostMapping(path="")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK, devuelve el id del analisis insertado"),
-		@ApiResponse(code = 404, message = "Juego Inexistente."),
-		@ApiResponse(code = 409, message = "Error al cargar los datos."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Long> addAnalisis( @RequestBody AnalisisItem body){
+	public @ResponseBody ResponseEntity<ModelApiResponse> addAnalisis( @RequestBody AnalisisItem body){
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
-			return new ResponseEntity<Long>(analisisService.addAnalisis(body), HttpStatus.OK);
+			analisisService.addAnalisis(body);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Analisis agregado correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
 		} catch (ApiException e) {
 			switch (e.getCode()) {
 				case 404:
 					logger.error(e.getMessage(), e);
-					return new ResponseEntity<Long>(HttpStatus.NOT_FOUND);
+					respuesta.codigo("ERROR");
+					respuesta.descripcion(e.getMessage());
+					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
 				case 409:
 					logger.error(e.getMessage(), e);
-					return new ResponseEntity<Long>(HttpStatus.CONFLICT);	
+					respuesta.codigo("ERROR");
+					respuesta.descripcion(e.getMessage());
+					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.CONFLICT);	
 				default:
 					logger.error(e.getMessage(), e);
-					return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+					respuesta.codigo("ERROR");
+					respuesta.descripcion(e.getMessage());
+					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
-		} catch (Exception exception) {
-			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", exception);
-			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@GetMapping(path="")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
 	public @ResponseBody ResponseEntity<List<AnalisisItem>> getAnalisis(){
 		try {
 			return new ResponseEntity<List<AnalisisItem>>(analisisService.getAllAnalisis(), HttpStatus.OK);
-		}catch(Exception e) {
-			logger.error("Internal server error", e);
+		} catch(Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@DeleteMapping(path="/{idAnalisis}")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "borrado OK"),
-		@ApiResponse(code = 404, message = "Analisis inexistente."),
-		@ApiResponse(code = 409, message = "Error al cargar los datos."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Void> removeAnalisis(@PathVariable("idAnalisis") String idAnalisis) {
+	public @ResponseBody ResponseEntity<ModelApiResponse> removeAnalisis(@PathVariable("idAnalisis") String idAnalisis) {
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			analisisService.removeAnalisis(idAnalisis);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Analisis borrado correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
 		} catch (ApiException e) {
-			switch (e.hashCode()) {
+			switch (e.getCode()) {
 				case 404:
 					logger.error(e.getMessage(), e);
-					return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+					respuesta.codigo("ERROR");
+					respuesta.descripcion(e.getMessage());
+					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
 				case 409:
 					logger.error(e.getMessage(), e);
-					return new ResponseEntity<Void>(HttpStatus.CONFLICT);	
+					respuesta.codigo("ERROR");
+					respuesta.descripcion(e.getMessage());
+					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.CONFLICT);	
 				default:
 					logger.error(e.getMessage(), e);
-					return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+					respuesta.codigo("ERROR");
+					respuesta.descripcion(e.getMessage());
+					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		} catch (Exception e) {
 			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
-			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@PutMapping(path="/{idAnalisis}")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "Editado OK"),
-		@ApiResponse(code = 404, message = "Analisis inexistente."),
-		@ApiResponse(code = 409, message = "Error al cargar los datos."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Void> editAnalisis(@PathVariable("idAnalisis") String idAnalisis, @RequestBody AnalisisItem body) {
+	public @ResponseBody ResponseEntity<ModelApiResponse> editAnalisis(@PathVariable("idAnalisis") String idAnalisis, @RequestBody AnalisisItem body) {
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			analisisService.editAnalisis( idAnalisis, body);
-			return new ResponseEntity<Void>(HttpStatus.OK);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Analisis editado correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
 		} catch (ApiException e) {
-			switch (e.hashCode()) {
+			switch (e.getCode()) {
 				case 404:
 					logger.error(e.getMessage(), e);
-					return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
+					respuesta.codigo("ERROR");
+					respuesta.descripcion(e.getMessage());
+					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
 				case 409:
 					logger.error(e.getMessage(), e);
-					return new ResponseEntity<Void>(HttpStatus.CONFLICT);	
+					respuesta.codigo("ERROR");
+					respuesta.descripcion(e.getMessage());
+					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.CONFLICT);	
 				default:
 					logger.error(e.getMessage(), e);
-					return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+					respuesta.codigo("ERROR");
+					respuesta.descripcion(e.getMessage());
+					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		} catch (Exception e) {
 			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
-			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

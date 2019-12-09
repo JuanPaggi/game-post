@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,14 +18,12 @@ import com.game.persistence.repository.UsuariosRepository;
 import com.game.services.juegos.JuegosService;
 
 /**
- * @author pachi
+ * @author Juan Paggi
  *
  */
 
 @Service
 public class AnalisisService {
-	
-	public static final Logger logger = LoggerFactory.getLogger(AnalisisService.class);
 	
 	@Autowired
 	AnalisisRepository analisisRepository;
