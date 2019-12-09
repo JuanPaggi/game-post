@@ -19,7 +19,7 @@ import com.game.services.juegos.JuegosService;
 
 /**
  * @author Juan Paggi
- *
+ * Logica de servicio para los analisis
  */
 
 @Service
@@ -41,15 +41,11 @@ public class AnalisisService {
 		
 		try {
 			Optional<Analisis> analisis = analisisRepository.findById(id);
-			Optional<Juegos> juego = juegosRepository.findById(id);
 			AnalisisItem analisisItem = new AnalisisItem();
-			if(analisis.isEmpty() || juego.isEmpty()) {
-				throw new ApiException(404, "No existe el analisis");
-			}
 			if (analisis.isPresent()){
 				analisisItem.id_analisis = analisis.get().getId_analisis();
 			} else {
-				throw new ApiException(409, "Error al cargar los datos");
+				throw new ApiException(404, "No existe el analisis");
 			}
 			analisisItem.analisis = analisis.get().getAnalisis();
 			analisisItem.valoracion = analisis.get().isValoracion();
@@ -71,14 +67,15 @@ public class AnalisisService {
 			Analisis analisis = new Analisis();
 			Optional<Juegos> juego = juegosRepository.findById(analisisIn.id_juego);
 			Optional<Usuarios> usuario = usuariosRepository.findById(analisisIn.id_usuario);
-			if(juego.isEmpty()) {
+			if(juego.isPresent()) {
+				analisis.setJuego(juego.get());
+			}else{
 				throw new ApiException(404, "No existe el juego");
 			}
-			if (juego.isPresent() && usuario.isPresent()) {
-				analisis.setJuego(juego.get());
+			if (usuario.isPresent()) {
 				analisis.setUsuario(usuario.get());
 			}else {
-				throw new ApiException(409, "Error al cargar los datos");
+				throw new ApiException(404, "No existe el usuario");
 			}
 			analisis.setAnalisis(analisisIn.analisis);
 			analisis.setFecha_publicacion(analisisIn.fecha_publicacion);
@@ -123,13 +120,10 @@ public class AnalisisService {
 		
 		try {
 			Optional<Analisis> analisis = analisisRepository.findById(Long.parseLong(id));
-			if(analisis.isEmpty()) {
-				throw new ApiException(404, "No existe el analisis");
-			}
 			if (analisis.isPresent()) {
 				analisisRepository.delete(analisis.get());
 			}else {
-				throw new ApiException(409, "Error al cargar los datos");
+				throw new ApiException(404, "No existe el analisis");
 			}
 		} catch (ApiException e) {
 			throw e;
@@ -145,29 +139,31 @@ public class AnalisisService {
 			Optional<Analisis> analisis = analisisRepository.findById(Long.parseLong(id));
 			Optional<Juegos> juego = juegosRepository.findById(analisisIn.id_juego);
 			Optional<Usuarios> usuario = usuariosRepository.findById(analisisIn.id_usuario);
-			if(analisis.isEmpty() && juego.isEmpty()) {
-				throw new ApiException(404, "No existe el analisis");
-			}
 			if (analisis.isPresent()) {
 				Analisis analisisObj = analisis.get();
-				if (juego.isPresent() && usuario.isPresent()) {
+				if (juego.isPresent()) {
 					analisisObj.setJuego(juego.get());
+				}else {
+					throw new ApiException(404, "No existe el juego");
+				}
+				if (usuario.isPresent()) {
 					analisisObj.setUsuario(usuario.get());
 				}else {
-					throw new ApiException(409, "Error al cargar los datos");
+					throw new ApiException(404, "No existe el usuario");
 				}
 				analisisObj.setAnalisis(analisisIn.analisis);
 				analisisObj.setValoracion(analisisIn.valoracion);
 				analisisObj.setFecha_publicacion(analisisIn.fecha_publicacion);
 				analisisRepository.save(analisisObj);
 			}else {
-				throw new ApiException(409, "Error al cargar los datos");
+				throw new ApiException(404, "No existe el analisis");
 			}
 		} catch (ApiException e) {
 			throw e;
 		} catch (Exception exception) {
 			throw exception; 
 		}
+		
 	}
 	
 }

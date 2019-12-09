@@ -46,16 +46,12 @@ public class AnalisisControllers {
 		try {
 			return new ResponseEntity<AnalisisItem>(analisisService.getAnalisis(Long.parseLong(idAnalisis)),HttpStatus.OK);
 		} catch (ApiException e) {
-			switch (e.getCode()) {
-				case 404:
-					logger.error(e.getMessage(), e);
-					return new ResponseEntity<AnalisisItem>(HttpStatus.NOT_FOUND);
-				case 409:
-					logger.error(e.getMessage(), e);
-					return new ResponseEntity<AnalisisItem>(HttpStatus.CONFLICT);	
-				default:
-					logger.error(e.getMessage(), e);
-					return new ResponseEntity<AnalisisItem>(HttpStatus.INTERNAL_SERVER_ERROR);
+			if(e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				return new ResponseEntity<AnalisisItem>(HttpStatus.NOT_FOUND);
+			}else{
+				logger.error(e.getMessage(), e);
+				return new ResponseEntity<AnalisisItem>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		} catch (Exception e) {
 			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
@@ -72,22 +68,16 @@ public class AnalisisControllers {
 			respuesta.descripcion("Analisis agregado correctamente");
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
 		} catch (ApiException e) {
-			switch (e.getCode()) {
-				case 404:
-					logger.error(e.getMessage(), e);
-					respuesta.codigo("ERROR");
-					respuesta.descripcion(e.getMessage());
-					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
-				case 409:
-					logger.error(e.getMessage(), e);
-					respuesta.codigo("ERROR");
-					respuesta.descripcion(e.getMessage());
-					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.CONFLICT);	
-				default:
-					logger.error(e.getMessage(), e);
-					respuesta.codigo("ERROR");
-					respuesta.descripcion(e.getMessage());
-					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		} catch (Exception e) {
 			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
@@ -116,22 +106,16 @@ public class AnalisisControllers {
 			respuesta.descripcion("Analisis borrado correctamente");
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
 		} catch (ApiException e) {
-			switch (e.getCode()) {
-				case 404:
-					logger.error(e.getMessage(), e);
-					respuesta.codigo("ERROR");
-					respuesta.descripcion(e.getMessage());
-					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
-				case 409:
-					logger.error(e.getMessage(), e);
-					respuesta.codigo("ERROR");
-					respuesta.descripcion(e.getMessage());
-					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.CONFLICT);	
-				default:
-					logger.error(e.getMessage(), e);
-					respuesta.codigo("ERROR");
-					respuesta.descripcion(e.getMessage());
-					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		} catch (Exception e) {
 			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
@@ -150,22 +134,16 @@ public class AnalisisControllers {
 			respuesta.descripcion("Analisis editado correctamente");
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
 		} catch (ApiException e) {
-			switch (e.getCode()) {
-				case 404:
-					logger.error(e.getMessage(), e);
-					respuesta.codigo("ERROR");
-					respuesta.descripcion(e.getMessage());
-					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
-				case 409:
-					logger.error(e.getMessage(), e);
-					respuesta.codigo("ERROR");
-					respuesta.descripcion(e.getMessage());
-					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.CONFLICT);	
-				default:
-					logger.error(e.getMessage(), e);
-					respuesta.codigo("ERROR");
-					respuesta.descripcion(e.getMessage());
-					return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 			}
 		} catch (Exception e) {
 			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
