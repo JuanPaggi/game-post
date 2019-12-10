@@ -24,7 +24,6 @@ import com.game.persistence.repository.ComentariosRepository;
 import com.game.persistence.repository.NoticiasRepository;
 import com.game.persistence.repository.TagRepository;
 import com.game.persistence.repository.UsuariosRepository;
-import com.game.services.comentarios.exceptions.ComentariosNotFound;
 import com.game.services.fileService.FileService;
 import com.game.services.noticias.exceptions.NoticiasNotFound;
 import com.game.services.tag.exceptions.TagNotFound;
@@ -132,7 +131,7 @@ public class NoticiasService {
 		
 	}
 	
-	public long addNoticia(NoticiaInput noticiaIn) throws UsuariosNotFound,TagNotFound,ComentariosNotFound, NoSuchAlgorithmException{
+	public long addNoticia(NoticiaInput noticiaIn) throws UsuariosNotFound,TagNotFound, NoSuchAlgorithmException{
 		
 		Optional<Usuarios> usuario = usuarioRepository.findById(noticiaIn.id_usuario_noticia);
 		List<Privilegios> usuario_privilegios = usuario.get().getPrivilegios();
@@ -183,7 +182,7 @@ public class NoticiasService {
 	
 	}
 	
-	public void editNoticia(String id, NoticiaInput noticiaIn) throws NoticiasNotFound, NumberFormatException, TagNotFound, ComentariosNotFound, NoSuchAlgorithmException{
+	public void editNoticia(String id, NoticiaInput noticiaIn) throws NoticiasNotFound, NumberFormatException, TagNotFound, NoSuchAlgorithmException{
 		
 		Optional<Noticias> noticia = noticiasRepository.findById(Long.parseLong(id));
 		Optional<Usuarios> usuario = usuarioRepository.findById(noticiaIn.id_usuario_noticia);	

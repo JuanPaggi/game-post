@@ -59,6 +59,16 @@ public class AnalisisControllers {
 		}
 	}
 	
+	@GetMapping(path="")
+	public @ResponseBody ResponseEntity<List<AnalisisItem>> getAnalisis(){
+		try {
+			return new ResponseEntity<List<AnalisisItem>>(analisisService.getAllAnalisis(), HttpStatus.OK);
+		} catch(Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
 	@PostMapping(path="")
 	public @ResponseBody ResponseEntity<ModelApiResponse> addAnalisis( @RequestBody AnalisisItem body){
 		ModelApiResponse respuesta = new ModelApiResponse();
@@ -84,16 +94,6 @@ public class AnalisisControllers {
 			respuesta.codigo("ERROR");
 			respuesta.descripcion(e.getMessage());
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
-	@GetMapping(path="")
-	public @ResponseBody ResponseEntity<List<AnalisisItem>> getAnalisis(){
-		try {
-			return new ResponseEntity<List<AnalisisItem>>(analisisService.getAllAnalisis(), HttpStatus.OK);
-		} catch(Exception e) {
-			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

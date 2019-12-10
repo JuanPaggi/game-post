@@ -1,6 +1,5 @@
 package com.game.controllers.comentarios;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -21,14 +20,12 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.controllers.comentarios.dto.ComentarioItem;
+import com.game.exceptions.ApiException;
 import com.game.services.comentarios.ComentariosService;
-import com.game.services.comentarios.exceptions.ComentariosNotFound;
-
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import com.game.utils.ModelApiResponse;
 
 /**
- * @author negro
+ * @author Juan Paggi
  * Controlador de Comentarios con get, post, put, y delete.
  */
 
@@ -37,100 +34,120 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("${v1API}/comentarios")
 public class ComentariosControllers {
 
-	public static Logger logger = LoggerFactory.getLogger(ComentariosControllers.class);
+	public static final Logger logger = LoggerFactory.getLogger(ComentariosControllers.class);
 
 	@Autowired
 	ComentariosService comentariosService;
-
-	@GetMapping(path="")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 404, message = "Not found."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<List<ComentarioItem>> getComentarios(){
-		try {
-			return new ResponseEntity<List<ComentarioItem>>(comentariosService.getAllComentarios(), HttpStatus.OK);
-		} catch(ParseException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
 	
 	@GetMapping(path = "/{idComentario}")
-	@ApiResponses({ 
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 404, message = "Not found."),
-		@ApiResponse(code = 500, message = "Unexpected error.") })
-	public @ResponseBody ResponseEntity<ComentarioItem> getComentarioByID(
-			@PathVariable("idComentario") String idComentario){
+	public @ResponseBody ResponseEntity<ComentarioItem> getComentarioByID(@PathVariable("idComentario") String idComentario){
 		try {
-			return new ResponseEntity<ComentarioItem>(
-					comentariosService.getComentario(Long.parseLong(idComentario)),
-					HttpStatus.OK);
-		} catch (ComentariosNotFound e) {
-			return new ResponseEntity<ComentarioItem>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<ComentarioItem>(comentariosService.getComentario(Long.parseLong(idComentario)),HttpStatus.OK);
+		} catch (ApiException e) {
+			if(e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				return new ResponseEntity<ComentarioItem>(HttpStatus.NOT_FOUND);
+			}else{
+				logger.error(e.getMessage(), e);
+				return new ResponseEntity<ComentarioItem>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		} catch (Exception e) {
-			logger.error("Internal server error", e);
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
 			return new ResponseEntity<ComentarioItem>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@PostMapping(path="")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK, devuelve el id del comentario insertado"),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Long> addComentario( @RequestBody ComentarioItem body){
+	@GetMapping(path="")
+	public @ResponseBody ResponseEntity<List<ComentarioItem>> getComentarios(){
 		try {
-			return new ResponseEntity<Long>(comentariosService.addComentario(body), HttpStatus.OK);
+			return new ResponseEntity<List<ComentarioItem>>(comentariosService.getAllComentarios(), HttpStatus.OK);
 		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(path="")
+	public @ResponseBody ResponseEntity<ModelApiResponse> addComentario( @RequestBody ComentarioItem body){
+		ModelApiResponse respuesta = new ModelApiResponse();
+		try {
+			comentariosService.addComentario(body);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Comentario agregado correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
+		} catch (ApiException e) {
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@DeleteMapping(path="/{idComentario}")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "borrado OK"),
-		@ApiResponse(code = 404, message = "Comentario inexistente."),
-		@ApiResponse(code = 400, message = "Id no valido."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Void> removeComentario(@PathVariable("idComentario") String idComentario) {
+	public @ResponseBody ResponseEntity<ModelApiResponse> removeComentario(@PathVariable("idComentario") String idComentario) {
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			comentariosService.removeComentario(idComentario);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(ComentariosNotFound e) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		} catch(NumberFormatException e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Comentario borrado correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
+		} catch (ApiException e) {
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@PutMapping(path="/{idComentario}")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "Editado OK"),
-		@ApiResponse(code = 404, message = "Comentario inexistente."),
-		@ApiResponse(code = 400, message = "Id no valido."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Void> editComentario(@PathVariable("idComentario") String idComentario, @RequestBody ComentarioItem body) {
+	public @ResponseBody ResponseEntity<ModelApiResponse> editComentario(@PathVariable("idComentario") String idComentario, @RequestBody ComentarioItem body) {
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			comentariosService.editComentario( idComentario, body);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(ComentariosNotFound e) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		} catch(NumberFormatException e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Comentario editado correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
+		} catch (ApiException e) {
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 }

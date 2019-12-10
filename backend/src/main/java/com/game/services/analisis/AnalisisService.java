@@ -44,15 +44,40 @@ public class AnalisisService {
 			AnalisisItem analisisItem = new AnalisisItem();
 			if (analisis.isPresent()){
 				analisisItem.id_analisis = analisis.get().getId_analisis();
+				analisisItem.analisis = analisis.get().getAnalisis();
+				analisisItem.valoracion = analisis.get().isValoracion();
+				analisisItem.fecha_publicacion = analisis.get().getFecha_publicacion();
+				analisisItem.id_juego = analisis.get().getJuego().getId_juego();
+				analisisItem.id_usuario = analisis.get().getUsuario().getId_usuario();
 			} else {
 				throw new ApiException(404, "No existe el analisis");
 			}
-			analisisItem.analisis = analisis.get().getAnalisis();
-			analisisItem.valoracion = analisis.get().isValoracion();
-			analisisItem.fecha_publicacion = analisis.get().getFecha_publicacion();
-			analisisItem.id_juego = analisis.get().getJuego().getId_juego();
-			analisisItem.id_usuario = analisis.get().getUsuario().getId_usuario();
 			return analisisItem;
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
+		}
+		
+	}
+	
+	public List<AnalisisItem> getAllAnalisis(){
+		
+		try {
+			List<Analisis> analisis = analisisRepository.findAll();
+			List<AnalisisItem> out = new ArrayList<AnalisisItem>();
+			for(Analisis analisisAux: analisis) {
+				AnalisisItem item = new AnalisisItem();
+				item.id_analisis = analisisAux.getId_analisis();
+				item.id_juego = analisisAux.getId_analisis();
+				item.analisis = analisisAux.getAnalisis();
+				item.fecha_publicacion = analisisAux.getFecha_publicacion();
+				item.valoracion = analisisAux.isValoracion();
+				item.id_juego = analisisAux.getJuego().getId_juego();
+				item.id_usuario = analisisAux.getUsuario().getId_usuario();
+				out.add(item);
+			}
+			return out;
 		} catch (ApiException e) {
 			throw e;
 		} catch (Exception exception) {
@@ -89,31 +114,6 @@ public class AnalisisService {
 			throw exception; 
 		}
 	
-	}
-	
-	public List<AnalisisItem> getAllAnalisis(){
-		
-		try {
-			List<Analisis> analisis = analisisRepository.findAll();
-			List<AnalisisItem> out = new ArrayList<AnalisisItem>();
-			for(Analisis analisisAux: analisis) {
-				AnalisisItem item = new AnalisisItem();
-				item.id_analisis = analisisAux.getId_analisis();
-				item.id_juego = analisisAux.getId_analisis();
-				item.analisis = analisisAux.getAnalisis();
-				item.fecha_publicacion = analisisAux.getFecha_publicacion();
-				item.valoracion = analisisAux.isValoracion();
-				item.id_juego = analisisAux.getJuego().getId_juego();
-				item.id_usuario = analisisAux.getUsuario().getId_usuario();
-				out.add(item);
-			}
-			return out;
-		} catch (ApiException e) {
-			throw e;
-		} catch (Exception exception) {
-			throw exception; 
-		}
-		
 	}
 	
 	public void removeAnalisis(String id) {
