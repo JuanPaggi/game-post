@@ -17,11 +17,9 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.controllers.donaciones.dto.DonacionesItem;
+import com.game.exceptions.ApiException;
 import com.game.services.donaciones.DonacionesService;
-import com.game.services.usuarios.exceptions.UsuariosNotFound;
-
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import com.game.utils.ModelApiResponse;
 
 /**
  * @author pachi
@@ -32,62 +30,82 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("${v1API}/donaciones")
 public class DonacionesControllers {
 	
-	public static Logger logger = LoggerFactory.getLogger(DonacionesControllers.class);
+	public static final Logger logger = LoggerFactory.getLogger(DonacionesControllers.class);
 	
 	@Autowired
 	DonacionesService donacionesService;
 	
 	@GetMapping(path = "/{idDonacion}")
-	@ApiResponses({ 
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 404, message = "Not found."),
-		@ApiResponse(code = 500, message = "Unexpected error.") })
-	public @ResponseBody ResponseEntity<List<DonacionesItem>> getDonacionesByID(
-			@PathVariable("idDonacion") String idDonacion){
+	public @ResponseBody ResponseEntity<List<DonacionesItem>> getDonacionesByID(@PathVariable("idDonacion") String idDonacion){
 		try {
-			return new ResponseEntity<List<DonacionesItem>>(
-					donacionesService.getDonaciones(Long.parseLong(idDonacion)),
-					HttpStatus.OK);
-		} catch (UsuariosNotFound e) {
-			return new ResponseEntity<List<DonacionesItem>>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<List<DonacionesItem>>(donacionesService.getDonaciones(Long.parseLong(idDonacion)),HttpStatus.OK);
+		} catch (ApiException e) {
+			if(e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				return new ResponseEntity<List<DonacionesItem>>(HttpStatus.NOT_FOUND);
+			}else{
+				logger.error(e.getMessage(), e);
+				return new ResponseEntity<List<DonacionesItem>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		} catch (Exception e) {
-			logger.error("Internal server error", e);
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
 			return new ResponseEntity<List<DonacionesItem>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@PostMapping(path="")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK, devuelve el id de la donacion insertada"),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Long> addDonacion( @RequestBody DonacionesItem body){
+	public @ResponseBody ResponseEntity<ModelApiResponse> addDonacion( @RequestBody DonacionesItem body){
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
-			return new ResponseEntity<Long>(donacionesService.addDonacion(body), HttpStatus.OK);
-		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+			donacionesService.addDonacion(body);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Donacion agregada correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta , HttpStatus.OK);
+		} catch (ApiException e) {
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@DeleteMapping(path="/{idDonacion}")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "borrado OK"),
-		@ApiResponse(code = 404, message = "Donacion inexistente."),
-		@ApiResponse(code = 400, message = "Id no valido."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Void> removeDoancion(@PathVariable("idDonacion") String idDonacion) {
+	public @ResponseBody ResponseEntity<ModelApiResponse> removeDoancion(@PathVariable("idDonacion") String idDonacion) {
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			donacionesService.removeDonacion(idDonacion);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(UsuariosNotFound e) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		} catch(NumberFormatException e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Donacion borrada correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
+		} catch (ApiException e) {
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
