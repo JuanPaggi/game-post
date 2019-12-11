@@ -23,12 +23,7 @@ import com.game.controllers.juegos.dto.JuegoInput;
 import com.game.controllers.juegos.dto.JuegoItem;
 import com.game.exceptions.ApiException;
 import com.game.services.juegos.JuegosService;
-import com.game.services.juegos.exceptions.JuegosNotFound;
-import com.game.services.tag.exceptions.TagNotFound;
 import com.game.utils.ModelApiResponse;
-
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
 
 /**
  * @author pachi
@@ -82,7 +77,7 @@ public class JuegosControllers {
 		try {
 			juegosService.addJuego(body);
 			respuesta.codigo("OK");
-			respuesta.descripcion("Analisis agregado correctamente");
+			respuesta.descripcion("Juego agregado correctamente");
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
 		} catch (ApiException e) {
 			if (e.getCode() == 404) {
@@ -105,46 +100,58 @@ public class JuegosControllers {
 	}
 	
 	@DeleteMapping(path="/{idJuego}")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "borrado OK"),
-		@ApiResponse(code = 404, message = "Juego inexistente."),
-		@ApiResponse(code = 400, message = "Id no valido."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Void> removeJuego(@PathVariable("idJuego") String idJuego) {
+	public @ResponseBody ResponseEntity<ModelApiResponse> removeJuego(@PathVariable("idJuego") String idJuego) {
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			juegosService.removeJuego(idJuego);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(JuegosNotFound e) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		} catch(NumberFormatException e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Juego borrado correctamente");
+			return new ResponseEntity<ModelApiResponse>(HttpStatus.OK);
+		} catch (ApiException e) {
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
 	@PutMapping(path="/{idJuego}")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "Editado OK"),
-		@ApiResponse(code = 404, message = "Juego inexistente."),
-		@ApiResponse(code = 400, message = "Id no valido."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Void> editJuego(@PathVariable("idJuego") String idJuego, @RequestBody JuegoInput body) {
+	public @ResponseBody ResponseEntity<ModelApiResponse> editJuego(@PathVariable("idJuego") String idJuego, @RequestBody JuegoInput body) {
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			juegosService.editJuego( idJuego, body);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(JuegosNotFound e) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		} catch(TagNotFound e) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		} catch(NumberFormatException e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Juego editado correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
+		} catch (ApiException e) {
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

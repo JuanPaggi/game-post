@@ -29,9 +29,6 @@ import com.game.persistence.repository.ModosRepository;
 import com.game.persistence.repository.TagRepository;
 import com.game.persistence.repository.UsuariosRepository;
 import com.game.services.fileservice.FileService;
-import com.game.services.juegos.exceptions.JuegosNotFound;
-import com.game.services.modos.exceptions.ModosNotFound;
-import com.game.services.tag.exceptions.TagNotFound;
 
 /**
  * @author Juan Paggi
@@ -188,22 +185,14 @@ public class JuegosService {
 			if (!usuario.isPresent()) {
 				throw new ApiException(404, "No existe el usuario");								
 			}
-			List<Privilegios> usuario_privilegios = usuario.get().getPrivilegios();
-			boolean acceso = false;
-			String const_agregar = "AGREGAR_JUEGO";
-			for (Privilegios privilegios : usuario_privilegios) {
-				String aux = privilegios.getPrivilegio();
-				if(const_agregar.equals(aux)) {
-					acceso = true;
-				}
-			}
-			if(acceso) {
+			if(obtenerAcceso(usuario.get())) {
 				Juegos juego = new Juegos();
 				List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
 				List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
-				if(lista_tag.size() != juegoIn.tags.size() || lista_modo.size() != juegoIn.modos.size()) {
-					throw new ApiException(404, "Error al obtener los tags y modos");
-				}
+				if(lista_tag.size() != juegoIn.tags.size()) throw new ApiException(404, "Error al cargar los Tags");
+				juego.setTag(lista_tag);
+				if(lista_modo.size() != juegoIn.modos.size()) throw new ApiException(404, "Error al cargar los Modos");
+				juego.setModos(lista_modo);
 				juego.setTitulo(juegoIn.titulo);
 				juego.setDescripcion(juegoIn.descripcion);
 				juego.setGenero(juegoIn.genero);
@@ -236,7 +225,7 @@ public class JuegosService {
 				juego = juegosRepository.save(juego);
 				return juego.getId_juego();	
 			}else {
-				return 0;
+				throw new ApiException(404, "Acceso denegado");	
 			}
 		} catch (ApiException e) {
 			throw e;
@@ -246,51 +235,84 @@ public class JuegosService {
 	
 	}
 	
-	public void removeJuego(String id) throws JuegosNotFound, NumberFormatException {
+	private boolean obtenerAcceso(Usuarios usuario) {
+		List<Privilegios> usuario_privilegios = usuario.getPrivilegios();
+		boolean acceso = false;
+		String const_agregar = "AGREGAR_JUEGO";
+		for (Privilegios privilegios : usuario_privilegios) {
+			String aux = privilegios.getPrivilegio();
+			if(const_agregar.equals(aux)) {
+				acceso = true;
+			}
+		}
+		return acceso;
+	}
+	
+	public void removeJuego(String id) {
 		
-		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
-		if(juego.isEmpty()) throw new JuegosNotFound();
-		juegosRepository.delete(juego.get());
+		try {
+			Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
+			if (juego.isPresent()) {
+				juegosRepository.delete(juego.get());
+			}else {
+				throw new ApiException(404, "No existe el analisis");
+			}		
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
+		}
 	
 	}
 	
-	public void editJuego(String id, JuegoInput juegoIn) throws JuegosNotFound,TagNotFound, NumberFormatException, ModosNotFound, NoSuchAlgorithmException{
+	public void editJuego(String id, JuegoInput juegoIn) throws NoSuchAlgorithmException{
 		
-		Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
-		Optional<Usuarios> usuario = usuarioRepository.findById(juegoIn.id_usuario_juego);
-		if(juego.isEmpty()) throw new JuegosNotFound();
-		Juegos juegoObj = juego.get();
-		juegoObj.setTitulo(juegoIn.titulo);
-		juegoObj.setDescripcion(juegoIn.descripcion);
-		juegoObj.setGenero(juegoIn.genero);
-		juegoObj.setDesarrollador(juegoIn.desarrollador);
-		juegoObj.setSistema_operativo(juegoIn.sistema_operativo);
-		juegoObj.setProcesador(juegoIn.procesador);
-		juegoObj.setMemoria(juegoIn.memoria);
-		juegoObj.setGrafica(juegoIn.grafica);
-		juegoObj.setAlmacenamiento(juegoIn.almacenamiento);
-		juegoObj.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
-		juegoObj.setAnalisis_positivos(juegoIn.analisis_positivos);
-		juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
-		List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
-		List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
-		if(lista_tag.size() != juegoIn.tags.size()) throw new TagNotFound();
-		juegoObj.setTag(lista_tag);
-		if(lista_modo.size() != juegoIn.modos.size()) throw new ModosNotFound();
-		juegoObj.setModos(lista_modo);
-		
-		Set<Imagenes> imagenes = new HashSet<Imagenes>();
-		for (byte[] imagen : juegoIn.archivoImagen) {
-			imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, usuario.get()));
+		try {
+			Optional<Juegos> juego = juegosRepository.findById(Long.parseLong(id));
+			Optional<Usuarios> usuario = usuarioRepository.findById(juegoIn.id_usuario_juego);
+			if(!juego.isPresent()) {
+				throw new ApiException(404, "No existe el juego");
+			}
+			if(!usuario.isPresent()) {
+				throw new ApiException(404, "No existe el usuario");
+			}
+			Juegos juegoObj = juego.get();
+			juegoObj.setTitulo(juegoIn.titulo);
+			juegoObj.setDescripcion(juegoIn.descripcion);
+			juegoObj.setGenero(juegoIn.genero);
+			juegoObj.setDesarrollador(juegoIn.desarrollador);
+			juegoObj.setSistema_operativo(juegoIn.sistema_operativo);
+			juegoObj.setProcesador(juegoIn.procesador);
+			juegoObj.setMemoria(juegoIn.memoria);
+			juegoObj.setGrafica(juegoIn.grafica);
+			juegoObj.setAlmacenamiento(juegoIn.almacenamiento);
+			juegoObj.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
+			juegoObj.setAnalisis_positivos(juegoIn.analisis_positivos);
+			juegoObj.setAnalisis_negativos(juegoIn.analisis_negativos);
+			List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
+			List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
+			if(lista_tag.size() != juegoIn.tags.size()) throw new ApiException(404, "Error al cargar los Tags");
+			juegoObj.setTag(lista_tag);
+			if(lista_modo.size() != juegoIn.modos.size()) throw new ApiException(404, "Error al cargar los Modos");
+			juegoObj.setModos(lista_modo);
+			
+			Set<Imagenes> imagenes = new HashSet<Imagenes>();
+			for (byte[] imagen : juegoIn.archivoImagen) {
+				imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, usuario.get()));
+			}
+			
+			for (Imagenes imagen : juego.get().getImagenes()) {
+				fileService.removeImage(imagen.getId_imagen());
+			}
+			
+			juegoObj.setImagenes(imagenes);	
+			
+			juegosRepository.save(juegoObj);
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
 		}
-		
-		for (Imagenes imagen : juego.get().getImagenes()) {
-			fileService.removeImage(imagen.getId_imagen());
-		}
-		
-		juegoObj.setImagenes(imagenes);	
-		
-		juegosRepository.save(juegoObj);
 		
 	}
 	
