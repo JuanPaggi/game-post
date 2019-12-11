@@ -1,6 +1,5 @@
 package com.game.controllers.juegos;
 
-import java.text.ParseException;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -22,9 +21,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.game.controllers.juegos.dto.JuegoInput;
 import com.game.controllers.juegos.dto.JuegoItem;
+import com.game.exceptions.ApiException;
 import com.game.services.juegos.JuegosService;
 import com.game.services.juegos.exceptions.JuegosNotFound;
 import com.game.services.tag.exceptions.TagNotFound;
+import com.game.utils.ModelApiResponse;
 
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -41,58 +42,65 @@ import io.swagger.annotations.ApiResponses;
 @RequestMapping("${v1API}/juegos")
 public class JuegosControllers {
 	
-	public static Logger logger = LoggerFactory.getLogger(JuegosControllers.class);
+	public static final Logger logger = LoggerFactory.getLogger(JuegosControllers.class);
 
 	@Autowired
 	JuegosService juegosService;
 
-	@GetMapping(path="")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 404, message = "Not found."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<List<JuegoItem>> getJuegos(){
-		try {
-			return new ResponseEntity<List<JuegoItem>>(juegosService.getAllJuegos(), HttpStatus.OK);
-		} catch(ParseException e) {
-			return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
-		}catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-		}
-	}
-	
 	@GetMapping(path = "/{idJuego}")
-	@ApiResponses({ 
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 404, message = "Not found."),
-		@ApiResponse(code = 500, message = "Unexpected error.") })
 	public @ResponseBody ResponseEntity<JuegoItem> getJuegoByID(
 			@PathVariable("idJuego") String idJuego){
 		try {
-			return new ResponseEntity<JuegoItem>(
-					juegosService.getJuego(Long.parseLong(idJuego)),
-					HttpStatus.OK);
-		} catch (JuegosNotFound e) {
-			return new ResponseEntity<JuegoItem>(HttpStatus.NOT_FOUND);
+			return new ResponseEntity<JuegoItem>(juegosService.getJuego(Long.parseLong(idJuego)),HttpStatus.OK);
+		} catch (ApiException e) {
+			if(e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				return new ResponseEntity<JuegoItem>(HttpStatus.NOT_FOUND);
+			}else{
+				logger.error(e.getMessage(), e);
+				return new ResponseEntity<JuegoItem>(HttpStatus.INTERNAL_SERVER_ERROR);
+			}
 		} catch (Exception e) {
-			logger.error("Internal server error", e);
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
 			return new ResponseEntity<JuegoItem>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	
-	@PostMapping(path="")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK, devuelve el id del juego insertado"),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Long> addJuego( @RequestBody JuegoInput body){
+	@GetMapping(path="")
+	public @ResponseBody ResponseEntity<List<JuegoItem>> getJuegos(){
 		try {
-			return new ResponseEntity<Long>(juegosService.addJuego(body), HttpStatus.OK);
+			return new ResponseEntity<List<JuegoItem>>(juegosService.getAllJuegos(), HttpStatus.OK);
 		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+		}
+	}
+	
+	@PostMapping(path="")
+	public @ResponseBody ResponseEntity<ModelApiResponse> addJuego( @RequestBody JuegoInput body){
+		ModelApiResponse respuesta = new ModelApiResponse();
+		try {
+			juegosService.addJuego(body);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Analisis agregado correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
+		} catch (ApiException e) {
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
 	

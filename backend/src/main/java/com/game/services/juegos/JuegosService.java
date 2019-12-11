@@ -1,7 +1,6 @@
 package com.game.services.juegos;
 
 import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
@@ -16,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import com.game.controllers.juegos.dto.JuegoInput;
 import com.game.controllers.juegos.dto.JuegoItem;
+import com.game.exceptions.ApiException;
 import com.game.persistence.models.Analisis;
 import com.game.persistence.models.Imagenes;
 import com.game.persistence.models.Juegos;
@@ -34,8 +34,8 @@ import com.game.services.modos.exceptions.ModosNotFound;
 import com.game.services.tag.exceptions.TagNotFound;
 
 /**
- * @author pachi
- *
+ * @author Juan Paggi
+ * Logica de servicio para los juegos
  */
 
 @Service
@@ -64,160 +64,186 @@ public class JuegosService {
 		return StringUtils.strip(text.replaceAll("([^a-zA-Z0-9]+)", "-"), "-");
 	}
 
-	public JuegoItem getJuego(long id) throws JuegosNotFound {
+	public JuegoItem getJuego(long id) {
 		
-		Optional<Juegos> juego = juegosRepository.findById(id);
-		JuegoItem juegoItem = new JuegoItem();
-		if(juego.isEmpty()) throw new JuegosNotFound();
-		juegoItem.id_juego = juego.get().getId_juego();
-		juegoItem.titulo = juego.get().getTitulo();
-		juegoItem.descripcion = juego.get().getDescripcion();
-		juegoItem.genero = juego.get().getGenero();
-		juegoItem.desarrollador = juego.get().getDesarrollador();
-		juegoItem.sistema_operativo = juego.get().getSistema_operativo();
-		juegoItem.procesador = juego.get().getProcesador();
-		juegoItem.memoria = juego.get().getMemoria();
-		juegoItem.grafica = juego.get().getGrafica();
-		juegoItem.almacenamiento = juego.get().getAlmacenamiento();
-		juegoItem.fecha_lanzamiento = juego.get().getFecha_lanzamiento();
-		juegoItem.analisis_positivos = juego.get().getAnalisis_positivos();
-		juegoItem.analisis_negativos = juego.get().getAnalisis_negativos();
-		juegoItem.id_usuario_juego = juego.get().getId_usuario_juego().getId_usuario();
-		List<Tag> tag_juego = juego.get().getTag();
-		List<Modos> modo_juego = juego.get().getModos();
-		ArrayList<Long> tag_id = new ArrayList<>();
-		for (Tag tag : tag_juego) {
-			tag_id.add(tag.getId_tag());
-		}
-		ArrayList<Long> modo_id = new ArrayList<>();
-		for (Modos modo : modo_juego) {
-			modo_id.add(modo.getId_modo());
-		}
-		juegoItem.tags = tag_id;
-		juegoItem.modos = modo_id;
-		
-		List<Analisis> analisis_juego = juego.get().getAnalisis();
-		ArrayList<Long> analisis_id = new ArrayList<>();
-		
-		for (Analisis analisis : analisis_juego) {
-			analisis_id.add(analisis.getId_analisis());
-		}
-		
-		juegoItem.analisis = analisis_id;
-		
-		ArrayList<String> imagenes = new ArrayList<String>();
-		for (Imagenes imagen : juego.get().getImagenes()) {
-			if(imagen != null) {
-				imagenes.add("/image/"+imagen.getId_imagen()+"/"+formatSeo(juego.get().getTitulo())+".jpg");
+		try {
+			Optional<Juegos> juego = juegosRepository.findById(id);
+			JuegoItem juegoItem = new JuegoItem();
+			if(juego.isPresent()) {
+				juegoItem.id_juego = juego.get().getId_juego();
+				juegoItem.titulo = juego.get().getTitulo();
+				juegoItem.descripcion = juego.get().getDescripcion();
+				juegoItem.genero = juego.get().getGenero();
+				juegoItem.desarrollador = juego.get().getDesarrollador();
+				juegoItem.sistema_operativo = juego.get().getSistema_operativo();
+				juegoItem.procesador = juego.get().getProcesador();
+				juegoItem.memoria = juego.get().getMemoria();
+				juegoItem.grafica = juego.get().getGrafica();
+				juegoItem.almacenamiento = juego.get().getAlmacenamiento();
+				juegoItem.fecha_lanzamiento = juego.get().getFecha_lanzamiento();
+				juegoItem.analisis_positivos = juego.get().getAnalisis_positivos();
+				juegoItem.analisis_negativos = juego.get().getAnalisis_negativos();
+				juegoItem.id_usuario_juego = juego.get().getId_usuario_juego().getId_usuario();
+				List<Tag> tag_juego = juego.get().getTag();
+				List<Modos> modo_juego = juego.get().getModos();
+				ArrayList<Long> tag_id = new ArrayList<>();
+				for (Tag tag : tag_juego) {
+					tag_id.add(tag.getId_tag());
+				}
+				ArrayList<Long> modo_id = new ArrayList<>();
+				for (Modos modo : modo_juego) {
+					modo_id.add(modo.getId_modo());
+				}
+				juegoItem.tags = tag_id;
+				juegoItem.modos = modo_id;
+				
+				List<Analisis> analisis_juego = juego.get().getAnalisis();
+				ArrayList<Long> analisis_id = new ArrayList<>();
+				
+				for (Analisis analisis : analisis_juego) {
+					analisis_id.add(analisis.getId_analisis());
+				}
+				
+				juegoItem.analisis = analisis_id;
+				
+				ArrayList<String> imagenes = new ArrayList<String>();
+				for (Imagenes imagen : juego.get().getImagenes()) {
+					if(imagen != null) {
+						imagenes.add("/image/"+imagen.getId_imagen()+"/"+formatSeo(juego.get().getTitulo())+".jpg");
+					}
+				}
+				juegoItem.archivoImagen = imagenes;
+				
+				return juegoItem;
+			}else {
+				throw new ApiException(404, "No existe el juego");
 			}
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
 		}
-		juegoItem.archivoImagen = imagenes;
-		
-		return juegoItem;
 		
 	}
 	
-	public long addJuego(JuegoInput juegoIn) throws TagNotFound, NoSuchAlgorithmException{
+	public List<JuegoItem> getAllJuegos() {
 		
-		Optional<Usuarios> usuario = usuarioRepository.findById(juegoIn.id_usuario_juego);
-		List<Privilegios> usuario_privilegios = usuario.get().getPrivilegios();
-		boolean acceso = false;
-		String const_agregar = "AGREGAR_JUEGO";
-		for (Privilegios privilegios : usuario_privilegios) {
-			String aux = privilegios.getPrivilegio();
-			if(const_agregar.equals(aux)) {
-				acceso = true;
-			}
-		}
-		if(acceso) {
-			Juegos juego = new Juegos();
-			List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
-			List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
-			if(lista_tag.size() != juegoIn.tags.size() || lista_modo.size() != juegoIn.modos.size()) throw new TagNotFound();
-			juego.setTitulo(juegoIn.titulo);
-			juego.setDescripcion(juegoIn.descripcion);
-			juego.setGenero(juegoIn.genero);
-			juego.setDesarrollador(juegoIn.desarrollador);
-			
-			juego.setSistema_operativo(juegoIn.sistema_operativo);
-			juego.setProcesador(juegoIn.procesador);
-			juego.setMemoria(juegoIn.memoria);
-			juego.setGrafica(juegoIn.grafica);
-			juego.setAlmacenamiento(juegoIn.almacenamiento);
-			
-			juego.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
-			juego.setAnalisis_positivos(juegoIn.analisis_positivos);
-			juego.setAnalisis_negativos(juegoIn.analisis_negativos);
-			juego.setId_usuario_juego(usuario.get());
-			juego.setTag(lista_tag);
-			juego.setModos(lista_modo);
-			
-			Set<Imagenes> imagenes = new HashSet<Imagenes>();
-			for (byte[] imagen : juegoIn.archivoImagen) {
-				Optional<Imagenes> aux = fileService.selectImageFile(imagen);
-				if (aux.isPresent()) {
-					imagenes.add(aux.get());
-				}else {
-					imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, usuario.get()));				
+		try {
+			List<Juegos> juegos = juegosRepository.findAll();
+			List<JuegoItem> out = new ArrayList<JuegoItem>();
+			for(Juegos juego: juegos) {
+				JuegoItem item = new JuegoItem();
+				item.id_juego = juego.getId_juego();
+				item.titulo = juego.getTitulo();
+				item.descripcion = juego.getDescripcion();
+				item.genero = juego.getGenero();
+				item.desarrollador = juego.getDesarrollador();
+				
+				item.sistema_operativo = juego.getSistema_operativo();
+				item.procesador = juego.getProcesador();
+				item.memoria = juego.getMemoria();
+				item.grafica = juego.getGrafica();
+				item.almacenamiento = juego.getAlmacenamiento();
+				
+				item.fecha_lanzamiento = juego.getFecha_lanzamiento();
+				item.analisis_positivos = juego.getAnalisis_positivos();
+				item.analisis_negativos = juego.getAnalisis_negativos();
+				item.id_usuario_juego = juego.getId_usuario_juego().getId_usuario();
+				List<Tag> tag_juego = juego.getTag();
+				List<Modos> modo_juego = juego.getModos();
+				ArrayList<Long> tag_id = new ArrayList<>();
+				for (Tag tag : tag_juego) {
+					tag_id.add(tag.getId_tag());
 				}
+				ArrayList<Long> modo_id = new ArrayList<>();
+				for (Modos modo : modo_juego) {
+					modo_id.add(modo.getId_modo());
+				}
+				item.tags = tag_id;
+				item.modos = modo_id;
+				
+				ArrayList<String> imagenes = new ArrayList<String>();
+				for (Imagenes imagen : juego.getImagenes()) {
+					if(imagen != null) {
+						imagenes.add("/image/"+imagen.getId_imagen()+"/"+formatSeo(juego.getTitulo())+".jpg");
+					}
+				}
+				item.archivoImagen = imagenes;
+				
+				out.add(item);
 			}
-			juego.setImagenes(imagenes);	
-			
-			juego = juegosRepository.save(juego);
-			return juego.getId_juego();	
-		}else {
-			return 0;
+			return out;
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
 		}
-	
+		
 	}
 	
-	public List<JuegoItem> getAllJuegos() throws ParseException{
+	public long addJuego(JuegoInput juegoIn)throws NoSuchAlgorithmException {
 		
-		List<Juegos> juegos = juegosRepository.findAll();
-		List<JuegoItem> out = new ArrayList<JuegoItem>();
-		for(Juegos juego: juegos) {
-			JuegoItem item = new JuegoItem();
-			item.id_juego = juego.getId_juego();
-			item.titulo = juego.getTitulo();
-			item.descripcion = juego.getDescripcion();
-			item.genero = juego.getGenero();
-			item.desarrollador = juego.getDesarrollador();
-			
-			item.sistema_operativo = juego.getSistema_operativo();
-			item.procesador = juego.getProcesador();
-			item.memoria = juego.getMemoria();
-			item.grafica = juego.getGrafica();
-			item.almacenamiento = juego.getAlmacenamiento();
-			
-			item.fecha_lanzamiento = juego.getFecha_lanzamiento();
-			item.analisis_positivos = juego.getAnalisis_positivos();
-			item.analisis_negativos = juego.getAnalisis_negativos();
-			item.id_usuario_juego = juego.getId_usuario_juego().getId_usuario();
-			List<Tag> tag_juego = juego.getTag();
-			List<Modos> modo_juego = juego.getModos();
-			ArrayList<Long> tag_id = new ArrayList<>();
-			for (Tag tag : tag_juego) {
-				tag_id.add(tag.getId_tag());
+		try {
+			Optional<Usuarios> usuario = usuarioRepository.findById(juegoIn.id_usuario_juego);
+			if (!usuario.isPresent()) {
+				throw new ApiException(404, "No existe el usuario");								
 			}
-			ArrayList<Long> modo_id = new ArrayList<>();
-			for (Modos modo : modo_juego) {
-				modo_id.add(modo.getId_modo());
-			}
-			item.tags = tag_id;
-			item.modos = modo_id;
-			
-			ArrayList<String> imagenes = new ArrayList<String>();
-			for (Imagenes imagen : juego.getImagenes()) {
-				if(imagen != null) {
-					imagenes.add("/image/"+imagen.getId_imagen()+"/"+formatSeo(juego.getTitulo())+".jpg");
+			List<Privilegios> usuario_privilegios = usuario.get().getPrivilegios();
+			boolean acceso = false;
+			String const_agregar = "AGREGAR_JUEGO";
+			for (Privilegios privilegios : usuario_privilegios) {
+				String aux = privilegios.getPrivilegio();
+				if(const_agregar.equals(aux)) {
+					acceso = true;
 				}
 			}
-			item.archivoImagen = imagenes;
-			
-			out.add(item);
+			if(acceso) {
+				Juegos juego = new Juegos();
+				List<Tag> lista_tag= tagRepository.findAllById(juegoIn.tags);
+				List<Modos> lista_modo= modosRepository.findAllById(juegoIn.modos);
+				if(lista_tag.size() != juegoIn.tags.size() || lista_modo.size() != juegoIn.modos.size()) {
+					throw new ApiException(404, "Error al obtener los tags y modos");
+				}
+				juego.setTitulo(juegoIn.titulo);
+				juego.setDescripcion(juegoIn.descripcion);
+				juego.setGenero(juegoIn.genero);
+				juego.setDesarrollador(juegoIn.desarrollador);
+				
+				juego.setSistema_operativo(juegoIn.sistema_operativo);
+				juego.setProcesador(juegoIn.procesador);
+				juego.setMemoria(juegoIn.memoria);
+				juego.setGrafica(juegoIn.grafica);
+				juego.setAlmacenamiento(juegoIn.almacenamiento);
+				
+				juego.setFecha_lanzamiento(juegoIn.fecha_lanzamiento);
+				juego.setAnalisis_positivos(juegoIn.analisis_positivos);
+				juego.setAnalisis_negativos(juegoIn.analisis_negativos);
+				juego.setId_usuario_juego(usuario.get());
+				juego.setTag(lista_tag);
+				juego.setModos(lista_modo);
+				
+				Set<Imagenes> imagenes = new HashSet<Imagenes>();
+				for (byte[] imagen : juegoIn.archivoImagen) {
+					Optional<Imagenes> aux = fileService.selectImageFile(imagen);
+					if (aux.isPresent()) {
+						imagenes.add(aux.get());
+					}else {
+						imagenes.add(fileService.uploadImageFile(imagen, juegoIn.nombreImagen, usuario.get()));				
+					}
+				}
+				juego.setImagenes(imagenes);	
+				
+				juego = juegosRepository.save(juego);
+				return juego.getId_juego();	
+			}else {
+				return 0;
+			}
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
 		}
-		return out;
-		
+	
 	}
 	
 	public void removeJuego(String id) throws JuegosNotFound, NumberFormatException {
