@@ -12,6 +12,11 @@ import com.game.persistence.models.Imagenes;
 import com.game.persistence.models.Usuarios;
 import com.game.persistence.repository.ImagenesRepository;
 
+/**
+ * @author Juan Paggi
+ * Logica de servicio para las imagenes
+ */
+
 @Service
 public class FileService { 
 

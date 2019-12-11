@@ -16,6 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.game.services.fileservice.FileService;
 
+/**
+ * @author Juan Paggi
+ * Controlador de Imagenes con get.
+ * Las imagenes se añaden con los juegos o noticias.
+ */
+
 @RestController
 @CrossOrigin(origins = "*", methods= {RequestMethod.GET})
 @RequestMapping("${v1API}")

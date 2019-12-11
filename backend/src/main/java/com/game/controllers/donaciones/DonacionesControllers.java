@@ -22,7 +22,7 @@ import com.game.services.donaciones.DonacionesService;
 import com.game.utils.ModelApiResponse;
 
 /**
- * @author pachi
+ * @author Juan Paggi
  * Controlador de Donaciones con get, post y delete.
  */
 
