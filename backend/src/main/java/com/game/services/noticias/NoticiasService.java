@@ -24,7 +24,7 @@ import com.game.persistence.repository.ComentariosRepository;
 import com.game.persistence.repository.NoticiasRepository;
 import com.game.persistence.repository.TagRepository;
 import com.game.persistence.repository.UsuariosRepository;
-import com.game.services.fileService.FileService;
+import com.game.services.fileservice.FileService;
 import com.game.services.noticias.exceptions.NoticiasNotFound;
 import com.game.services.tag.exceptions.TagNotFound;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;

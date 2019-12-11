@@ -1,4 +1,4 @@
-package com.game.services.fileService.exceptions;
+package com.game.services.fileservice.exceptions;
 
 public class ImagenNotFound extends Exception {
 	

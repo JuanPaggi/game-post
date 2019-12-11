@@ -28,7 +28,7 @@ import com.game.persistence.repository.JuegosRepository;
 import com.game.persistence.repository.ModosRepository;
 import com.game.persistence.repository.TagRepository;
 import com.game.persistence.repository.UsuariosRepository;
-import com.game.services.fileService.FileService;
+import com.game.services.fileservice.FileService;
 import com.game.services.juegos.exceptions.JuegosNotFound;
 import com.game.services.modos.exceptions.ModosNotFound;
 import com.game.services.tag.exceptions.TagNotFound;
