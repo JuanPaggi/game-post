@@ -72,7 +72,7 @@ public class JuegosControllers {
 	}
 	
 	@PostMapping(path="")
-	public @ResponseBody ResponseEntity<ModelApiResponse> addJuego( @RequestBody JuegoInput body){
+	public @ResponseBody ResponseEntity<ModelApiResponse> agregarJuego( @RequestBody JuegoInput body){
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			juegosService.addJuego(body);
@@ -100,7 +100,7 @@ public class JuegosControllers {
 	}
 	
 	@DeleteMapping(path="/{idJuego}")
-	public @ResponseBody ResponseEntity<ModelApiResponse> removeJuego(@PathVariable("idJuego") String idJuego) {
+	public @ResponseBody ResponseEntity<ModelApiResponse> borrarJuego(@PathVariable("idJuego") String idJuego) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			juegosService.removeJuego(idJuego);
@@ -128,7 +128,7 @@ public class JuegosControllers {
 	}
 	
 	@PutMapping(path="/{idJuego}")
-	public @ResponseBody ResponseEntity<ModelApiResponse> editJuego(@PathVariable("idJuego") String idJuego, @RequestBody JuegoInput body) {
+	public @ResponseBody ResponseEntity<ModelApiResponse> editarJuego(@PathVariable("idJuego") String idJuego, @RequestBody JuegoInput body) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			juegosService.editJuego( idJuego, body);

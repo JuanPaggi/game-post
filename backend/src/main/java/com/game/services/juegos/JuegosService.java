@@ -317,11 +317,13 @@ public class JuegosService {
 	}
 	
 	public void agregarValocacion(long id_juego, boolean valoracion) {
+		
 		if(valoracion) {
 			juegosRepository.agregarValoracionPositiva(id_juego);
-		}else {
+		} else {
 			juegosRepository.agregarValoracionNegativa(id_juego);
-		}
+		}	
+		
 	}
 	
 }
