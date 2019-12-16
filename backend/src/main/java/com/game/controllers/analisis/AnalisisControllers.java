@@ -25,31 +25,31 @@ import com.game.services.analisis.AnalisisService;
 import com.game.utils.ModelApiResponse;
 
 /**
- * @author Juan Paggi
- * Controlador de Analisis con get, post, put, y delete.
- * Tenemos dos Get, uno para devolver un analisis seleccionado
- * por su id y otro get para devolver todos los analisis.
+ * @author Juan Paggi Controlador de Analisis con get, post, put, y delete.
+ *         Tenemos dos Get, uno para devolver un analisis seleccionado por su id
+ *         y otro get para devolver todos los analisis.
  */
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.POST})
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
 @RequestMapping("${v1API}/analisis")
 public class AnalisisControllers {
-	
+
 	public static final Logger logger = LoggerFactory.getLogger(AnalisisControllers.class);
-	
+
 	@Autowired
 	AnalisisService analisisService;
-	
+
 	@GetMapping(path = "/{idAnalisis}")
-	public @ResponseBody ResponseEntity<AnalisisItem> getAnalisisByID(@PathVariable("idAnalisis") String idAnalisis){
+	public @ResponseBody ResponseEntity<AnalisisItem> getAnalisisByID(@PathVariable("idAnalisis") String idAnalisis) {
 		try {
-			return new ResponseEntity<AnalisisItem>(analisisService.getAnalisis(Long.parseLong(idAnalisis)),HttpStatus.OK);
+			return new ResponseEntity<AnalisisItem>(analisisService.getAnalisis(Long.parseLong(idAnalisis)),
+					HttpStatus.OK);
 		} catch (ApiException e) {
-			if(e.getCode() == 404) {
+			if (e.getCode() == 404) {
 				logger.error(e.getMessage(), e);
 				return new ResponseEntity<AnalisisItem>(HttpStatus.NOT_FOUND);
-			}else{
+			} else {
 				logger.error(e.getMessage(), e);
 				return new ResponseEntity<AnalisisItem>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -58,19 +58,19 @@ public class AnalisisControllers {
 			return new ResponseEntity<AnalisisItem>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@GetMapping(path="")
-	public @ResponseBody ResponseEntity<List<AnalisisItem>> getAnalisis(){
+
+	@GetMapping(path = "")
+	public @ResponseBody ResponseEntity<List<AnalisisItem>> getAnalisis() {
 		try {
 			return new ResponseEntity<List<AnalisisItem>>(analisisService.getAllAnalisis(), HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@PostMapping(path="")
-	public @ResponseBody ResponseEntity<ModelApiResponse> addAnalisis( @RequestBody AnalisisItem body){
+
+	@PostMapping(path = "")
+	public @ResponseBody ResponseEntity<ModelApiResponse> addAnalisis(@RequestBody AnalisisItem body) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			analisisService.addAnalisis(body);
@@ -96,9 +96,10 @@ public class AnalisisControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@DeleteMapping(path="/{idAnalisis}")
-	public @ResponseBody ResponseEntity<ModelApiResponse> removeAnalisis(@PathVariable("idAnalisis") String idAnalisis) {
+
+	@DeleteMapping(path = "/{idAnalisis}")
+	public @ResponseBody ResponseEntity<ModelApiResponse> removeAnalisis(
+			@PathVariable("idAnalisis") String idAnalisis) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			analisisService.removeAnalisis(idAnalisis);
@@ -124,12 +125,13 @@ public class AnalisisControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@PutMapping(path="/{idAnalisis}")
-	public @ResponseBody ResponseEntity<ModelApiResponse> editAnalisis(@PathVariable("idAnalisis") String idAnalisis, @RequestBody AnalisisItem body) {
+
+	@PutMapping(path = "/{idAnalisis}")
+	public @ResponseBody ResponseEntity<ModelApiResponse> editAnalisis(@PathVariable("idAnalisis") String idAnalisis,
+			@RequestBody AnalisisItem body) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
-			analisisService.editAnalisis( idAnalisis, body);
+			analisisService.editAnalisis(idAnalisis, body);
 			respuesta.codigo("OK");
 			respuesta.descripcion("Analisis editado correctamente");
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
@@ -152,5 +154,5 @@ public class AnalisisControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 }
