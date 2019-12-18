@@ -16,7 +16,6 @@ import com.game.persistence.models.Usuarios;
 import com.game.persistence.repository.Lista_amigosRepository;
 import com.game.persistence.repository.PrivilegiosRepository;
 import com.game.persistence.repository.UsuariosRepository;
-import com.game.services.privilegios.exceptions.PrivilegioNotFound;
 import com.game.services.usuarios.exceptions.UsuarioExistent;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
 
@@ -134,7 +133,7 @@ public class UsuariosService {
 	
 	}
 	
-	public void editUsuario(String id, UsuarioItem usuarioIn) throws UsuariosNotFound,PrivilegioNotFound, NumberFormatException{
+	public void editUsuario(String id, UsuarioItem usuarioIn) throws UsuariosNotFound, NumberFormatException{
 		
 		Optional<Usuarios> usuario = usuariosrepository.findById(Long.parseLong(id));
 		if(usuario.isEmpty()) throw new UsuariosNotFound();
@@ -149,7 +148,7 @@ public class UsuariosService {
 		usuarioObj.setPuntos(usuarioIn.puntos);
 		usuarioObj.setEmail_verificado(usuarioIn.email_verificado);
 		List<Privilegios> lista_privilegios= privilegiosRepository.findAllById(usuarioIn.privilegios);
-		if(lista_privilegios.size() != usuarioIn.privilegios.size()) throw new PrivilegioNotFound();
+		if(lista_privilegios.size() != usuarioIn.privilegios.size()) throw new UsuariosNotFound();
 		usuarioObj.setPrivilegios(lista_privilegios);
 		usuariosrepository.save(usuarioObj);
 		

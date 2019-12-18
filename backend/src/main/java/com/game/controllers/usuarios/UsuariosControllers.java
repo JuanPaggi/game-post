@@ -23,7 +23,6 @@ import org.springframework.web.bind.annotation.RestController;
 import com.game.controllers.usuarios.dto.UsuarioInput;
 import com.game.controllers.usuarios.dto.UsuarioItem;
 import com.game.controllers.usuarios.dto.UsuarioLogin;
-import com.game.services.privilegios.exceptions.PrivilegioNotFound;
 import com.game.services.usuarios.UsuariosService;
 import com.game.services.usuarios.exceptions.UsuarioExistent;
 import com.game.services.usuarios.exceptions.UsuariosNotFound;
@@ -149,8 +148,6 @@ public class UsuariosControllers {
 			usuariosService.editUsuario( idUsuario, body);
 			return new ResponseEntity<Void>(HttpStatus.OK);
 		} catch(UsuariosNotFound e) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		} catch(PrivilegioNotFound e) {
 			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
 		} catch(NumberFormatException e) {
 			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
