@@ -17,78 +17,90 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.game.controllers.notificaciones.dto.NotificacionItem;
+import com.game.exceptions.ApiException;
 import com.game.services.notificaciones.NotificacionesService;
-import com.game.services.usuarios.exceptions.UsuariosNotFound;
-
-import io.swagger.annotations.ApiResponse;
-import io.swagger.annotations.ApiResponses;
+import com.game.utils.ModelApiResponse;
 
 /**
- * @author pachi
- * Controlador de Donaciones con get, post y delete.
+ * @author Juan Paggi. Controlador de Donaciones con get, post y delete.
  */
 
 @RestController
 @RequestMapping("${v1API}/notificaciones")
 public class NotificacionesControllers {
-	
-	public static Logger logger = LoggerFactory.getLogger(NotificacionesControllers.class);
-	
+
+	public static final Logger logger = LoggerFactory.getLogger(NotificacionesControllers.class);
+
 	@Autowired
 	NotificacionesService notificacionesService;
-	
+
 	@GetMapping(path = "/{idNotificacion}")
-	@ApiResponses({ 
-		@ApiResponse(code = 200, message = "OK"),
-		@ApiResponse(code = 404, message = "Not found."),
-		@ApiResponse(code = 500, message = "Unexpected error.") })
 	public @ResponseBody ResponseEntity<List<NotificacionItem>> getNotificacionesByID(
-			@PathVariable("idNotificacion") String idNotificacion){
+			@PathVariable("idNotificacion") String idNotificacion) {
 		try {
 			return new ResponseEntity<List<NotificacionItem>>(
-					notificacionesService.getNotificaciones(Long.parseLong(idNotificacion)),
-					HttpStatus.OK);
-		} catch (UsuariosNotFound e) {
-			return new ResponseEntity<List<NotificacionItem>>(HttpStatus.NOT_FOUND);
+					notificacionesService.getNotificaciones(Long.parseLong(idNotificacion)), HttpStatus.OK);
 		} catch (Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<List<NotificacionItem>>(HttpStatus.INTERNAL_SERVER_ERROR);
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@PostMapping(path="")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "OK, devuelve el id de la notificacion insertada"),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Long> addNotificacion( @RequestBody NotificacionItem body){
+
+	@PostMapping(path = "")
+	public @ResponseBody ResponseEntity<ModelApiResponse> addNotificacion(@RequestBody NotificacionItem body) {
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
-			return new ResponseEntity<Long>(notificacionesService.addNotificacion(body), HttpStatus.OK);
-		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Long>(HttpStatus.INTERNAL_SERVER_ERROR);
+			notificacionesService.addNotificacion(body);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Notificacion agregada correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
+		} catch (ApiException e) {
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@DeleteMapping(path="/{idNotificacion}")
-	@ApiResponses({
-		@ApiResponse(code = 200, message = "borrado OK"),
-		@ApiResponse(code = 404, message = "Notificacion inexistente."),
-		@ApiResponse(code = 400, message = "Id no valido."),
-		@ApiResponse(code = 500, message = "Unexpected error.")
-		})
-	public @ResponseBody ResponseEntity<Void> removeNotificacion(@PathVariable("idNotificacion") String idNotificacion) {
+
+	@DeleteMapping(path = "/{idNotificacion}")
+	public @ResponseBody ResponseEntity<ModelApiResponse> removeNotificacion(
+			@PathVariable("idNotificacion") String idNotificacion) {
+		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			notificacionesService.removeNotificacion(idNotificacion);
-			return new ResponseEntity<Void>(HttpStatus.OK);
-		} catch(UsuariosNotFound e) {
-			return new ResponseEntity<Void>(HttpStatus.NOT_FOUND);
-		} catch(NumberFormatException e) {
-			return new ResponseEntity<Void>(HttpStatus.BAD_REQUEST);
-		} catch(Exception e) {
-			logger.error("Internal server error", e);
-			return new ResponseEntity<Void>(HttpStatus.INTERNAL_SERVER_ERROR);
+			respuesta.codigo("OK");
+			respuesta.descripcion("Notificacion borrado correctamente");
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
+		} catch (ApiException e) {
+			if (e.getCode() == 404) {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.NOT_FOUND);
+			} else {
+				logger.error(e.getMessage(), e);
+				respuesta.codigo("ERROR");
+				respuesta.descripcion(e.getMessage());
+				return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
+			}
+		} catch (Exception e) {
+			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
+			respuesta.codigo("ERROR");
+			respuesta.descripcion(e.getMessage());
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 }
