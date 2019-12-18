@@ -1,6 +1,5 @@
 package com.game.services.tag;
 
-import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -9,12 +8,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.game.controllers.tags.dto.TagItem;
+import com.game.exceptions.ApiException;
 import com.game.persistence.models.Tag;
 import com.game.persistence.repository.TagRepository;
-import com.game.services.tag.exceptions.TagNotFound;
 
 /**
- * @author pachi
+ * @author Juan Paggi
  *
  */
 
@@ -24,55 +23,94 @@ public class TagService {
 	@Autowired
 	TagRepository tagRepository;
 	
-	public TagItem getTag(long id) throws TagNotFound{
+	public TagItem getTag(long id) {
 		
-		Optional<Tag> tag = tagRepository.findById(id);
-		TagItem tagItem = new TagItem();
-		if(tag.isEmpty()) throw new TagNotFound();
-		tagItem.id_tag = tag.get().getId_tag();
-		tagItem.etiqueta = tag.get().getEtiqueta();
-		return tagItem;
-		
-	}
-	
-	public List<TagItem> getAllTags() throws ParseException{
-		
-		List<Tag> tags = tagRepository.findAll();
-		List<TagItem> out = new ArrayList<TagItem>();
-		for(Tag tag: tags) {
-			TagItem item = new TagItem();
-			item.id_tag = tag.getId_tag();
-			item.etiqueta = tag.getEtiqueta();
-			out.add(item);
+		try {			
+			Optional<Tag> tag = tagRepository.findById(id);
+			TagItem tagItem = new TagItem();
+			if(tag.isPresent()) {				
+				tagItem.id_tag = tag.get().getId_tag();
+				tagItem.etiqueta = tag.get().getEtiqueta();
+				return tagItem;
+			}else {
+				throw new ApiException(404, "No existe el tag");
+			}
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
 		}
-		return out;
 		
 	}
 	
-	public long addTag(TagItem tagIn) throws TagNotFound{
+	public List<TagItem> getAllTags() {
 		
-		Tag tag = new Tag();
-		tag.setEtiqueta(tagIn.etiqueta);
-		tag = tagRepository.save(tag);
-		return tag.getId_tag();
+		try {			
+			List<Tag> tags = tagRepository.findAll();
+			List<TagItem> out = new ArrayList<TagItem>();
+			for(Tag tag: tags) {
+				TagItem item = new TagItem();
+				item.id_tag = tag.getId_tag();
+				item.etiqueta = tag.getEtiqueta();
+				out.add(item);
+			}
+			return out;
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
+		}
 		
 	}
 	
-	public void removeTag(String id) throws TagNotFound, NumberFormatException {
+	public long addTag(TagItem tagIn) {
 		
-		Optional<Tag> tag = tagRepository.findById(Long.parseLong(id));
-		if(tag.isEmpty()) throw new TagNotFound();
-		tagRepository.delete(tag.get());
+		try {			
+			Tag tag = new Tag();
+			tag.setEtiqueta(tagIn.etiqueta);
+			tag = tagRepository.save(tag);
+			return tag.getId_tag();
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
+		}
 		
 	}
 	
-	public void editTag(String id, TagItem tagIn) throws TagNotFound, NumberFormatException{
+	public void removeTag(String id) {
 		
-		Optional<Tag> tag = tagRepository.findById(Long.parseLong(id));
-		if(tag.isEmpty()) throw new TagNotFound();
-		Tag tagObj = tag.get();
-		tagObj.setEtiqueta(tagIn.etiqueta);
-		tagRepository.save(tagObj);
+		try {			
+			Optional<Tag> tag = tagRepository.findById(Long.parseLong(id));
+			if (tag.isPresent()) {
+				tagRepository.delete(tag.get());
+			}else {
+				throw new ApiException(404, "No existe el tag");
+			}	
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
+		}
+		
+	}
+	
+	public void editTag(String id, TagItem tagIn) {
+		
+		try {			
+			Optional<Tag> tag = tagRepository.findById(Long.parseLong(id));
+			if(tag.isPresent()) {
+				Tag tagObj = tag.get();
+				tagObj.setEtiqueta(tagIn.etiqueta);
+				tagRepository.save(tagObj);
+			}else {
+				throw new ApiException(404, "No existe el tag");
+			}
+		} catch (ApiException e) {
+			throw e;
+		} catch (Exception exception) {
+			throw exception; 
+		}
 		
 	}
 	

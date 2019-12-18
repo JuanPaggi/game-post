@@ -1,7 +1,0 @@
-package com.game.services.usuarios.exceptions;
-
-public class UsuariosNotFound extends Exception {
-
-	private static final long serialVersionUID = -3194213321102594352L;
-
-}
