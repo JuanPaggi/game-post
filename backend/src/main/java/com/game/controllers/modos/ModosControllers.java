@@ -29,7 +29,7 @@ import com.game.utils.ModelApiResponse;
 
 @RestController
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET })
-@RequestMapping("${v1API}/modos")
+@RequestMapping("/modos")
 public class ModosControllers {
 
 	public static final Logger logger = LoggerFactory.getLogger(ModosControllers.class);

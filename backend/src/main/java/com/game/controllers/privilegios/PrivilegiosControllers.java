@@ -22,11 +22,11 @@ import com.game.services.privilegios.PrivilegiosService;
 import com.game.utils.ModelApiResponse;
 
 /**
- * @author Juan Paggi Controlador de Usuarios con get, post y delete.
+ * @author Juan Paggi. Controlador de Usuarios con get, post y delete.
  */
 
 @RestController
-@RequestMapping("${v1API}/privilegios")
+@RequestMapping("/privilegios")
 public class PrivilegiosControllers {
 
 	public static final Logger logger = LoggerFactory.getLogger(PrivilegiosControllers.class);

@@ -22,13 +22,13 @@ import com.game.services.usuarios_bloqueados.UsuariosBloqueadosService;
 import com.game.utils.ModelApiResponse;
 
 /**
- * @author pachi Controlador de Usuarios_bloqueados con get, post y delete.
- *         Tenemos dos Get, uno para devolver un juego seleccionado por su id y
- *         otro get para devolver todos los juegos.
+ * @author Juan Paggi. Controlador de Usuarios_bloqueados con get, post y
+ *         delete. Tenemos dos Get, uno para devolver un juego seleccionado por
+ *         su id y otro get para devolver todos los juegos.
  */
 
 @RestController
-@RequestMapping("${v1API}/usuariosBloqueados")
+@RequestMapping("/usuariosBloqueados")
 public class UsuariosBloqueadosControllers {
 
 	public static final Logger logger = LoggerFactory.getLogger(UsuariosBloqueadosControllers.class);

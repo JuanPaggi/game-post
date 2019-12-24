@@ -26,32 +26,30 @@ import com.game.services.juegos.JuegosService;
 import com.game.utils.ModelApiResponse;
 
 /**
- * @author pachi
- * Controlador de Juegos con get, post, put, y delete.
- * Tenemos dos Get, uno para devolver un juego seleccionado
- * por su id y otro get para devolver todos los juegos.
+ * @author Juan Paggi. Controlador de Juegos con get, post, put, y delete.
+ *         Tenemos dos Get, uno para devolver un juego seleccionado por su id y
+ *         otro get para devolver todos los juegos.
  */
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET,RequestMethod.DELETE,RequestMethod.POST})
-@RequestMapping("${v1API}/juegos")
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.DELETE, RequestMethod.POST })
+@RequestMapping("/juegos")
 public class JuegosControllers {
-	
+
 	public static final Logger logger = LoggerFactory.getLogger(JuegosControllers.class);
 
 	@Autowired
 	JuegosService juegosService;
 
 	@GetMapping(path = "/{idJuego}")
-	public @ResponseBody ResponseEntity<JuegoItem> getJuegoByID(
-			@PathVariable("idJuego") String idJuego){
+	public @ResponseBody ResponseEntity<JuegoItem> getJuegoByID(@PathVariable("idJuego") String idJuego) {
 		try {
-			return new ResponseEntity<JuegoItem>(juegosService.getJuego(Long.parseLong(idJuego)),HttpStatus.OK);
+			return new ResponseEntity<JuegoItem>(juegosService.getJuego(Long.parseLong(idJuego)), HttpStatus.OK);
 		} catch (ApiException e) {
-			if(e.getCode() == 404) {
+			if (e.getCode() == 404) {
 				logger.error(e.getMessage(), e);
 				return new ResponseEntity<JuegoItem>(HttpStatus.NOT_FOUND);
-			}else{
+			} else {
 				logger.error(e.getMessage(), e);
 				return new ResponseEntity<JuegoItem>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -60,19 +58,19 @@ public class JuegosControllers {
 			return new ResponseEntity<JuegoItem>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@GetMapping(path="")
-	public @ResponseBody ResponseEntity<List<JuegoItem>> getJuegos(){
+
+	@GetMapping(path = "")
+	public @ResponseBody ResponseEntity<List<JuegoItem>> getJuegos() {
 		try {
 			return new ResponseEntity<List<JuegoItem>>(juegosService.getAllJuegos(), HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@PostMapping(path="")
-	public @ResponseBody ResponseEntity<ModelApiResponse> agregarJuego( @RequestBody JuegoInput body){
+
+	@PostMapping(path = "")
+	public @ResponseBody ResponseEntity<ModelApiResponse> agregarJuego(@RequestBody JuegoInput body) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			juegosService.addJuego(body);
@@ -98,8 +96,8 @@ public class JuegosControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@DeleteMapping(path="/{idJuego}")
+
+	@DeleteMapping(path = "/{idJuego}")
 	public @ResponseBody ResponseEntity<ModelApiResponse> borrarJuego(@PathVariable("idJuego") String idJuego) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
@@ -126,12 +124,13 @@ public class JuegosControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@PutMapping(path="/{idJuego}")
-	public @ResponseBody ResponseEntity<ModelApiResponse> editarJuego(@PathVariable("idJuego") String idJuego, @RequestBody JuegoInput body) {
+
+	@PutMapping(path = "/{idJuego}")
+	public @ResponseBody ResponseEntity<ModelApiResponse> editarJuego(@PathVariable("idJuego") String idJuego,
+			@RequestBody JuegoInput body) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
-			juegosService.editJuego( idJuego, body);
+			juegosService.editJuego(idJuego, body);
 			respuesta.codigo("OK");
 			respuesta.descripcion("Juego editado correctamente");
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
@@ -154,5 +153,5 @@ public class JuegosControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 }

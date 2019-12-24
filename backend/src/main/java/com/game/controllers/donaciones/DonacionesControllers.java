@@ -22,28 +22,29 @@ import com.game.services.donaciones.DonacionesService;
 import com.game.utils.ModelApiResponse;
 
 /**
- * @author Juan Paggi
- * Controlador de Donaciones con get, post y delete.
+ * @author Juan Paggi. Controlador de Donaciones con get, post y delete.
  */
 
 @RestController
-@RequestMapping("${v1API}/donaciones")
+@RequestMapping("/donaciones")
 public class DonacionesControllers {
-	
+
 	public static final Logger logger = LoggerFactory.getLogger(DonacionesControllers.class);
-	
+
 	@Autowired
 	DonacionesService donacionesService;
-	
+
 	@GetMapping(path = "/{idDonacion}")
-	public @ResponseBody ResponseEntity<List<DonacionesItem>> getDonacionesByID(@PathVariable("idDonacion") String idDonacion){
+	public @ResponseBody ResponseEntity<List<DonacionesItem>> getDonacionesByID(
+			@PathVariable("idDonacion") String idDonacion) {
 		try {
-			return new ResponseEntity<List<DonacionesItem>>(donacionesService.getDonaciones(Long.parseLong(idDonacion)),HttpStatus.OK);
+			return new ResponseEntity<List<DonacionesItem>>(donacionesService.getDonaciones(Long.parseLong(idDonacion)),
+					HttpStatus.OK);
 		} catch (ApiException e) {
-			if(e.getCode() == 404) {
+			if (e.getCode() == 404) {
 				logger.error(e.getMessage(), e);
 				return new ResponseEntity<List<DonacionesItem>>(HttpStatus.NOT_FOUND);
-			}else{
+			} else {
 				logger.error(e.getMessage(), e);
 				return new ResponseEntity<List<DonacionesItem>>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -52,15 +53,15 @@ public class DonacionesControllers {
 			return new ResponseEntity<List<DonacionesItem>>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@PostMapping(path="")
-	public @ResponseBody ResponseEntity<ModelApiResponse> addDonacion( @RequestBody DonacionesItem body){
+
+	@PostMapping(path = "")
+	public @ResponseBody ResponseEntity<ModelApiResponse> addDonacion(@RequestBody DonacionesItem body) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			donacionesService.addDonacion(body);
 			respuesta.codigo("OK");
 			respuesta.descripcion("Donacion agregada correctamente");
-			return new ResponseEntity<ModelApiResponse>(respuesta , HttpStatus.OK);
+			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);
 		} catch (ApiException e) {
 			if (e.getCode() == 404) {
 				logger.error(e.getMessage(), e);
@@ -80,9 +81,10 @@ public class DonacionesControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@DeleteMapping(path="/{idDonacion}")
-	public @ResponseBody ResponseEntity<ModelApiResponse> removeDoancion(@PathVariable("idDonacion") String idDonacion) {
+
+	@DeleteMapping(path = "/{idDonacion}")
+	public @ResponseBody ResponseEntity<ModelApiResponse> removeDoancion(
+			@PathVariable("idDonacion") String idDonacion) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			donacionesService.removeDonacion(idDonacion);
@@ -108,5 +110,5 @@ public class DonacionesControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 }

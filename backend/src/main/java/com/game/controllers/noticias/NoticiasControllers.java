@@ -31,7 +31,7 @@ import com.game.utils.ModelApiResponse;
 
 @RestController
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST, RequestMethod.DELETE })
-@RequestMapping("${v1API}/noticias")
+@RequestMapping("/noticias")
 public class NoticiasControllers {
 
 	public static final Logger logger = LoggerFactory.getLogger(NoticiasControllers.class);

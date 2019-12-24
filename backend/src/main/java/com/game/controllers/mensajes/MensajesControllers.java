@@ -22,15 +22,15 @@ import com.game.services.mensajes.MensajesService;
 import com.game.utils.ModelApiResponse;
 
 /**
- * @author pachi
+ * @author Juan Paggi
  * Controlador de Mensajes con get, post y delete.
  */
 
 @RestController
-@RequestMapping("${v1API}/mensajes")
+@RequestMapping("/mensajes")
 public class MensajesControllers {
 
-	public static Logger logger = LoggerFactory.getLogger(MensajesControllers.class);
+	public static final Logger logger = LoggerFactory.getLogger(MensajesControllers.class);
 	
 	@Autowired
 	MensajesService mensajesService;

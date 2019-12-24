@@ -26,7 +26,7 @@ import com.game.utils.ModelApiResponse;
  */
 
 @RestController
-@RequestMapping("${v1API}/solicitudes")
+@RequestMapping("/solicitudes")
 public class SolicitudAmistadControllers {
 
 	@Autowired

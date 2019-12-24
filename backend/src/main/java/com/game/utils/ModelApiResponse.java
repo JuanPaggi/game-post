@@ -7,13 +7,11 @@ import org.springframework.validation.annotation.Validated;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-import io.swagger.annotations.ApiModelProperty;
 
 /**
  * ModelApiResponse
  */
 @Validated
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2019-09-05T20:03:21.053Z")
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class ModelApiResponse {
 	@JsonProperty("codigo")
@@ -32,7 +30,6 @@ public class ModelApiResponse {
 	 * 
 	 * @return codigo
 	 **/
-	@ApiModelProperty(value = "")
 
 	public String getCodigo() {
 		return codigo;
@@ -52,7 +49,6 @@ public class ModelApiResponse {
 	 * 
 	 * @return descripcion
 	 **/
-	@ApiModelProperty(value = "")
 
 	public String getDescripcion() {
 		return descripcion;

@@ -25,29 +25,30 @@ import com.game.services.comentarios.ComentariosService;
 import com.game.utils.ModelApiResponse;
 
 /**
- * @author Juan Paggi
- * Controlador de Comentarios con get, post, put, y delete.
+ * @author Juan Paggi. Controlador de Comentarios con get, post, put, y delete.
  */
 
 @RestController
-@CrossOrigin(origins = "*", methods= {RequestMethod.GET, RequestMethod.POST})
-@RequestMapping("${v1API}/comentarios")
+@CrossOrigin(origins = "*", methods = { RequestMethod.GET, RequestMethod.POST })
+@RequestMapping("/comentarios")
 public class ComentariosControllers {
 
 	public static final Logger logger = LoggerFactory.getLogger(ComentariosControllers.class);
 
 	@Autowired
 	ComentariosService comentariosService;
-	
+
 	@GetMapping(path = "/{idComentario}")
-	public @ResponseBody ResponseEntity<ComentarioItem> getComentarioByID(@PathVariable("idComentario") String idComentario){
+	public @ResponseBody ResponseEntity<ComentarioItem> getComentarioByID(
+			@PathVariable("idComentario") String idComentario) {
 		try {
-			return new ResponseEntity<ComentarioItem>(comentariosService.getComentario(Long.parseLong(idComentario)),HttpStatus.OK);
+			return new ResponseEntity<ComentarioItem>(comentariosService.getComentario(Long.parseLong(idComentario)),
+					HttpStatus.OK);
 		} catch (ApiException e) {
-			if(e.getCode() == 404) {
+			if (e.getCode() == 404) {
 				logger.error(e.getMessage(), e);
 				return new ResponseEntity<ComentarioItem>(HttpStatus.NOT_FOUND);
-			}else{
+			} else {
 				logger.error(e.getMessage(), e);
 				return new ResponseEntity<ComentarioItem>(HttpStatus.INTERNAL_SERVER_ERROR);
 			}
@@ -56,19 +57,19 @@ public class ComentariosControllers {
 			return new ResponseEntity<ComentarioItem>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@GetMapping(path="")
-	public @ResponseBody ResponseEntity<List<ComentarioItem>> getComentarios(){
+
+	@GetMapping(path = "")
+	public @ResponseBody ResponseEntity<List<ComentarioItem>> getComentarios() {
 		try {
 			return new ResponseEntity<List<ComentarioItem>>(comentariosService.getAllComentarios(), HttpStatus.OK);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@PostMapping(path="")
-	public @ResponseBody ResponseEntity<ModelApiResponse> addComentario( @RequestBody ComentarioItem body){
+
+	@PostMapping(path = "")
+	public @ResponseBody ResponseEntity<ModelApiResponse> addComentario(@RequestBody ComentarioItem body) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			comentariosService.addComentario(body);
@@ -94,9 +95,10 @@ public class ComentariosControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@DeleteMapping(path="/{idComentario}")
-	public @ResponseBody ResponseEntity<ModelApiResponse> removeComentario(@PathVariable("idComentario") String idComentario) {
+
+	@DeleteMapping(path = "/{idComentario}")
+	public @ResponseBody ResponseEntity<ModelApiResponse> removeComentario(
+			@PathVariable("idComentario") String idComentario) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			comentariosService.removeComentario(idComentario);
@@ -122,12 +124,13 @@ public class ComentariosControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@PutMapping(path="/{idComentario}")
-	public @ResponseBody ResponseEntity<ModelApiResponse> editComentario(@PathVariable("idComentario") String idComentario, @RequestBody ComentarioItem body) {
+
+	@PutMapping(path = "/{idComentario}")
+	public @ResponseBody ResponseEntity<ModelApiResponse> editComentario(
+			@PathVariable("idComentario") String idComentario, @RequestBody ComentarioItem body) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
-			comentariosService.editComentario( idComentario, body);
+			comentariosService.editComentario(idComentario, body);
 			respuesta.codigo("OK");
 			respuesta.descripcion("Comentario editado correctamente");
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.OK);

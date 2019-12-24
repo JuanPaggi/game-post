@@ -26,7 +26,7 @@ import com.game.utils.ModelApiResponse;
  */
 
 @RestController
-@RequestMapping("${v1API}/notificaciones")
+@RequestMapping("/notificaciones")
 public class NotificacionesControllers {
 
 	public static final Logger logger = LoggerFactory.getLogger(NotificacionesControllers.class);

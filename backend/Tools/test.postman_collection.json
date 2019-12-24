@@ -14,7 +14,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/juegos",
+							"raw": "http://127.0.0.1:8081/juegos",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -24,8 +24,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"juegos"
 							]
 						}
@@ -46,7 +44,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_usuario_juego\": 2,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"nombreImagen\": \"primi\" ,\n\"urlImagen\": \"url\",\n\"tags\":\n\t[],\n\"modos\":\n\t[],\n\"archivoImagen\": [],\n\"sistema_operativo\": \"x\",\n\"procesador\": \"x\",\n\"memoria\": \"x\",\n\"grafica\": \"x\",\n\"almacenamiento\": \"x\"\n}",
+							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_usuario_juego\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"nombreImagen\": \"primi\" ,\n\"urlImagen\": \"url\",\n\"tags\":\n\t[1],\n\"modos\":\n\t[7],\n\"archivoImagen\": [],\n\"sistema_operativo\": \"x\",\n\"procesador\": \"x\",\n\"memoria\": \"x\",\n\"grafica\": \"x\",\n\"almacenamiento\": \"x\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -54,7 +52,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/juegos",
+							"raw": "http://127.0.0.1:8081/juegos",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -64,8 +62,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"juegos"
 							]
 						}
@@ -78,7 +74,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/juegos/20",
+							"raw": "http://127.0.0.1:8081/juegos/20",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -88,8 +84,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"juegos",
 								"20"
 							]
@@ -111,7 +105,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"nombreImagen\": \"primi12\" ,\n\"urlImagen\": \"url\",\n\"tags\":\n\t[1],\n\"modos\":\n\t[1],\n\"archivoImagen\": []\n}",
+							"raw": "{\n\"titulo\": \"2123123333\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_usuario_juego\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23,\n\"nombreImagen\": \"primi\" ,\n\"urlImagen\": \"url\",\n\"tags\":\n\t[1],\n\"modos\":\n\t[],\n\"archivoImagen\": [],\n\"sistema_operativo\": \"x\",\n\"procesador\": \"x\",\n\"memoria\": \"x\",\n\"grafica\": \"x\",\n\"almacenamiento\": \"x\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -119,7 +113,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/juegos/2",
+							"raw": "http://127.0.0.1:8081/juegos/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -129,10 +123,46 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"juegos",
 								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Agregar Valoracion",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\"id_juego\": 1,\n\"valoracion\": 0\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/juegos",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
+								"juegos"
 							]
 						}
 					},
@@ -150,7 +180,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/analisis",
+							"raw": "http://127.0.0.1:8081/analisis/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -160,9 +190,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
-								"analisis"
+								"analisis",
+								"1"
 							]
 						}
 					},
@@ -182,7 +211,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"analisis\": \"212312338\",\n\"fecha_publicacion\": \"2019-08-11\",\n\"valoracion\": false,\n\"id_usuario\": 1,\n\"id_juego\": 23\n}",
+							"raw": "{\n\"analisis\": \"212312338\",\n\"fecha_publicacion\": \"2019-08-11\",\n\"valoracion\": false,\n\"id_usuario\": 1,\n\"id_juego\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -190,7 +219,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/analisis",
+							"raw": "http://127.0.0.1:8081/analisis",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -200,8 +229,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"analisis"
 							]
 						}
@@ -222,7 +249,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"analisis\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_publicacion\": \"2019-08-11\",\n\"valoracion\": false,\n\"id_usuario\": 1,\n\"id_juego\": 23,\n}",
+							"raw": "{\n\"analisis\": \"212312338\",\n\"fecha_publicacion\": \"2019-08-11\",\n\"valoracion\": false,\n\"id_usuario\": 1,\n\"id_juego\": 1\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -230,7 +257,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/analisis/4",
+							"raw": "http://127.0.0.1:8081/analisis/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -240,10 +267,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"analisis",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -271,7 +296,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/mensajes",
+							"raw": "http://127.0.0.1:8081/analisis/299",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -281,9 +306,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
-								"mensajes"
+								"analisis",
+								"299"
 							]
 						}
 					},
@@ -301,7 +325,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuarios",
+							"raw": "http://127.0.0.1:8081/usuarios/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -311,9 +335,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
-								"usuarios"
+								"usuarios",
+								"1"
 							]
 						}
 					},
@@ -333,7 +356,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"nombre\": \"pedro2\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x1\",\n    \"clave\": \"x1\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2,\n    \"email_verificado\": true,\n    \"privilegios\": []\n}",
+							"raw": "{\n    \"nombre\": \"p1ed25ro2\",\n    \"apellido\": \"x\",\n    \"email\": \"x\",\n    \"usuario\": \"x171\",\n    \"clave\": \"x1\",\n    \"pais\": \"x\",\n    \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n    \"nivel\": 2,\n    \"puntos\": 2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -341,7 +364,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuarios",
+							"raw": "http://127.0.0.1:8081/usuarios",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -351,8 +374,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"usuarios"
 							]
 						}
@@ -365,7 +386,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuarios/2",
+							"raw": "http://127.0.0.1:8081/usuarios/4",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -375,10 +396,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"usuarios",
-								"2"
+								"4"
 							]
 						}
 					},
@@ -398,7 +417,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"nombre\": \"x12ijl8i6hikjh3123\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true,\n        \"privilegios\": [1,2]\n    }",
+							"raw": "    {\n        \"nombre\": \"x12ijl8i6hikjh3123\",\n        \"apellido\": \"x\",\n        \"email\": \"x\",\n        \"usuario\": \"x\",\n        \"clave\": \"x\",\n        \"pais\": \"x\",\n        \"fecha_inscripcion\": \"2011-11-11T03:00:00.000+0000\",\n        \"nivel\": 2,\n        \"puntos\": 2,\n        \"email_verificado\": true,\n        \"privilegios\": [1,5]\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -406,7 +425,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuarios/1",
+							"raw": "http://127.0.0.1:8081/usuarios/6",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -416,146 +435,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"usuarios",
-								"1"
-							]
-						}
-					},
-					"response": []
-				}
-			],
-			"protocolProfileBehavior": {}
-		},
-		{
-			"name": "Requisitos",
-			"item": [
-				{
-					"name": "Get requisitos",
-					"request": {
-						"method": "GET",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/requisitos",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"requisitos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Crear requisito",
-					"request": {
-						"method": "POST",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "    {\n        \"sistema_operativo\": \"x123d12\",\n        \"procesador\": \"x\",\n        \"memoria\": \"x\",\n        \"grafica\": \"x\",\n        \"almacenamiento\": \"x\"\n    }",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/requisitos",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"requisitos"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Delete requisitos",
-					"request": {
-						"method": "DELETE",
-						"header": [],
-						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/requisitos/1",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"requisitos",
-								"1"
-							]
-						}
-					},
-					"response": []
-				},
-				{
-					"name": "Actualizar requisito",
-					"request": {
-						"method": "PUT",
-						"header": [
-							{
-								"key": "Content-Type",
-								"name": "Content-Type",
-								"value": "application/json",
-								"type": "text"
-							}
-						],
-						"body": {
-							"mode": "raw",
-							"raw": "{\n\"titulo\": \"212312338\",\n\"descripcion\": \"descripcion\",\n\"genero\": \"genero\",\n\"tipo\": \"hola soy el nombre el tipo\",\n\"desarrollador\": \"soy el desarrollador\",\n\"fecha_lanzamiento\": \"2019-08-11\",\n\"id_requisitos\": 1,\n\"id_admin_creado\": 1,\n\"analisis_positivos\": 32,\n\"analisis_negativos\": 23\n}",
-							"options": {
-								"raw": {
-									"language": "json"
-								}
-							}
-						},
-						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/juegos/2",
-							"protocol": "http",
-							"host": [
-								"127",
-								"0",
-								"0",
-								"1"
-							],
-							"port": "8081",
-							"path": [
-								"api",
-								"v1",
-								"juegos",
-								"2"
+								"6"
 							]
 						}
 					},
@@ -573,7 +454,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/privilegios",
+							"raw": "http://127.0.0.1:8081/privilegios",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -583,8 +464,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"privilegios"
 							]
 						}
@@ -605,7 +484,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"privilegio\": \"AGREGAR_NOTICIA\"\n}",
+							"raw": "{\n\"privilegio\": \"AGREGAR_NOTICIA22\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -613,7 +492,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/privilegios",
+							"raw": "http://127.0.0.1:8081/privilegios",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -623,8 +502,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"privilegios"
 							]
 						}
@@ -637,7 +514,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/privilegios/1",
+							"raw": "http://127.0.0.1:8081/privilegios/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -647,10 +524,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"privilegios",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -668,7 +543,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/tags",
+							"raw": "http://127.0.0.1:8081/tags",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -678,8 +553,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"tags"
 							]
 						}
@@ -700,7 +573,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\"etiqueta\": \"accion\"\n}",
+							"raw": "{\n\"etiqueta\": \"acc2ion\"\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -708,7 +581,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/tags",
+							"raw": "http://127.0.0.1:8081/tags",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -718,8 +591,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"tags"
 							]
 						}
@@ -732,7 +603,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/tags/4",
+							"raw": "http://127.0.0.1:8081/tags/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -742,10 +613,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"tags",
-								"4"
+								"2"
 							]
 						}
 					},
@@ -773,7 +642,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/tags/1",
+							"raw": "http://127.0.0.1:8081/tags/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -783,10 +652,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"tags",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -804,7 +671,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/amigos/4",
+							"raw": "http://127.0.0.1:8081/amigos/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -814,10 +681,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"amigos",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -837,7 +702,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"id_usuario\":4,\n        \"id_amigo\":7\n    }",
+							"raw": "    {\n        \"id_usuario\":1,\n        \"id_amigo\":2\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -845,7 +710,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/amigos",
+							"raw": "http://127.0.0.1:8081/amigos",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -855,8 +720,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"amigos"
 							]
 						}
@@ -877,7 +740,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"id_usuario\": 6,\n        \"id_amigo\": 6\n    }",
+							"raw": "    {\n        \"id_usuario\": 2,\n        \"id_amigo\": 1\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -885,7 +748,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/amigos",
+							"raw": "http://127.0.0.1:8081/amigos",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -895,8 +758,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"amigos"
 							]
 						}
@@ -922,7 +783,7 @@
 							"raw": ""
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/solicitudes/8",
+							"raw": "http://127.0.0.1:8081/solicitudes/8",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -932,8 +793,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"solicitudes",
 								"8"
 							]
@@ -955,7 +814,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"id_usuario\":7,\n        \"id_amigo\":8,\n        \"fecha_solicitud\": \"2019-08-10T03:00:00.000+0000\"\n    }",
+							"raw": "    {\n        \"id_usuario\":2,\n        \"id_amigo\":1,\n        \"fecha_solicitud\": \"2019-08-10T03:00:00.000+0000\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -963,7 +822,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/solicitudes",
+							"raw": "http://127.0.0.1:8081/solicitudes",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -973,8 +832,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"solicitudes"
 							]
 						}
@@ -995,7 +852,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n\t\"id_usuario\":7,\n\t\"id_amigo\":8\n}",
+							"raw": "{\n\t\"id_usuario\":1,\n\t\"id_amigo\":2\n}",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1003,7 +860,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/solicitudes",
+							"raw": "http://127.0.0.1:8081/solicitudes",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1013,8 +870,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"solicitudes"
 							]
 						}
@@ -1052,7 +907,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/mensajes/9/10",
+							"raw": "http://127.0.0.1:8081/mensajes/9/10",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1062,8 +917,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"mensajes",
 								"9",
 								"10"
@@ -1086,7 +939,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"id_escritor\": 9,\n        \"id_lector\": 10,\n        \"cuerpo\": \"hola como estas\",\n        \"fecha\": \"2019-08-10T03:00:00.000+0000\"\n    }",
+							"raw": "    {\n        \"id_escritor\": 1,\n        \"id_lector\": 2,\n        \"cuerpo\": \"hola como estas\",\n        \"fecha\": \"2019-08-10T03:00:00.000+0000\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1094,7 +947,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/mensajes",
+							"raw": "http://127.0.0.1:8081/mensajes",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1104,8 +957,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"mensajes"
 							]
 						}
@@ -1116,9 +967,25 @@
 					"name": "Delete Mensaje",
 					"request": {
 						"method": "DELETE",
-						"header": [],
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n\t\"id_escritor\":1,\n\t\"id_lector\":18,\n\t\"cuerpo\":\"hola como estas\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/analisis/11",
+							"raw": "http://127.0.0.1:8081/mensajes",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1128,10 +995,7 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
-								"analisis",
-								"11"
+								"mensajes"
 							]
 						}
 					},
@@ -1168,7 +1032,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/donaciones/4",
+							"raw": "http://127.0.0.1:8081/donaciones/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1178,10 +1042,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"donaciones",
-								"4"
+								"1"
 							]
 						}
 					},
@@ -1201,7 +1063,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"id_usuario\": 4,\n        \"monto\": 1000,\n        \"fecha_donacion\": \"2019-08-10T03:00:00.000+0000\",\n        \"comentario\": \"gracias\"\n    }",
+							"raw": "    {\n        \"id_usuario\": 1,\n        \"monto\": 1000,\n        \"fecha_donacion\": \"2019-08-10T03:00:00.000+0000\",\n        \"comentario\": \"gracias\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1209,7 +1071,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/donaciones",
+							"raw": "http://127.0.0.1:8081/donaciones",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1219,8 +1081,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"donaciones"
 							]
 						}
@@ -1233,7 +1093,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/donaciones/1",
+							"raw": "http://127.0.0.1:8081/donaciones/3",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1243,10 +1103,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"donaciones",
-								"1"
+								"3"
 							]
 						}
 					},
@@ -1283,7 +1141,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/notificaciones/6",
+							"raw": "http://127.0.0.1:8081/notificaciones/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1293,10 +1151,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"notificaciones",
-								"6"
+								"1"
 							]
 						}
 					},
@@ -1316,7 +1172,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "    {\n        \"id_usuario\": 6,\n        \"notificacion\": \"soli\"\n    }",
+							"raw": "    {\n        \"id_usuario\": 1,\n        \"notificacion\": \"soli\"\n    }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1324,7 +1180,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/notificaciones",
+							"raw": "http://127.0.0.1:8081/notificaciones",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1334,8 +1190,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"notificaciones"
 							]
 						}
@@ -1348,7 +1202,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/notificaciones/1",
+							"raw": "http://127.0.0.1:8081/notificaciones/1",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1358,8 +1212,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"notificaciones",
 								"1"
 							]
@@ -1379,7 +1231,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuariosBloqueados",
+							"raw": "http://127.0.0.1:8081/usuariosBloqueados",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1389,8 +1241,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"usuariosBloqueados"
 							]
 						}
@@ -1419,7 +1269,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuariosBloqueados",
+							"raw": "http://127.0.0.1:8081/usuariosBloqueados",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1429,8 +1279,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"usuariosBloqueados"
 							]
 						}
@@ -1443,7 +1291,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/usuariosBloqueados/1",
+							"raw": "http://127.0.0.1:8081/usuariosBloqueados/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1453,10 +1301,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"usuariosBloqueados",
-								"1"
+								"2"
 							]
 						}
 					},
@@ -1474,7 +1320,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/modos",
+							"raw": "http://127.0.0.1:8081/modos",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1484,8 +1330,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"modos"
 							]
 						}
@@ -1514,7 +1358,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/modos",
+							"raw": "http://127.0.0.1:8081/modos",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1524,8 +1368,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"modos"
 							]
 						}
@@ -1538,7 +1380,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/modos/3",
+							"raw": "http://127.0.0.1:8081/modos/12",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1548,10 +1390,8 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"modos",
-								"3"
+								"12"
 							]
 						}
 					},
@@ -1569,7 +1409,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/noticias",
+							"raw": "http://127.0.0.1:8081/noticias",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1579,8 +1419,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"noticias"
 							]
 						}
@@ -1601,7 +1439,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n        \"titulo\": \"pedro1\",\r\n        \"descripcion\":\"xxx\",\r\n        \"cuerpo\":\"xxxx\",\r\n        \"fecha_publicacion\":\"2019-08-11\",\r\n        \"id_usuario_noticia\":2,\r\n        \"nombreImagen\": \"cama\",\r\n        \"urlImagen\": \"url\",\r\n        \"tags\": [\r\n        \t\r\n        ],\r\n        \"comentarios\":[\r\n        \t\r\n        ],\r\n        \"archivoImagen\": [\r\n        \t\t[23,123,12]\r\n        \t]\r\n }",
+							"raw": " {\r\n        \"titulo\": \"pedro1\",\r\n        \"descripcion\":\"xxx\",\r\n        \"cuerpo\":\"xxxx\",\r\n        \"fecha_publicacion\":\"2019-08-11\",\r\n        \"id_usuario_noticia\":1,\r\n        \"nombreImagen\": \"cama\",\r\n        \"urlImagen\": \"url\",\r\n        \"tags\": [\r\n        \t\r\n        ],\r\n        \"comentarios\":[\r\n        \t\r\n        ],\r\n        \"archivoImagen\": [\r\n        \t]\r\n }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1609,7 +1447,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/noticias",
+							"raw": "http://127.0.0.1:8081/noticias",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1619,8 +1457,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"noticias"
 							]
 						}
@@ -1633,7 +1469,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/noticias/3",
+							"raw": "http://127.0.0.1:8081/api/v1/noticias/",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1646,7 +1482,7 @@
 								"api",
 								"v1",
 								"noticias",
-								"3"
+								""
 							]
 						}
 					},
@@ -1666,7 +1502,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n        \"titulo\": \"pe966792dro\",\r\n        \"descripcion\":\"xxx\",\r\n        \"cuerpo\":\"xxxx\",\r\n        \"fecha_publicacion\":\"2019-08-11\",\r\n        \"id_admin_creado\":1,\r\n        \"nombreImagen\": \"cassssma\",\r\n        \"urlImagen\": \"url\",\r\n        \"tags\": [\r\n        \t\r\n        ],\r\n        \"comentarios\":[\r\n        \t1,2\r\n        ],\r\n        \"archivoImagen\": [\r\n        \t\t[213,123,122]\r\n        \t]\r\n }",
+							"raw": " {\r\n        \"titulo\": \"pe966792dro\",\r\n        \"descripcion\":\"xxx\",\r\n        \"cuerpo\":\"xxxx\",\r\n        \"fecha_publicacion\":\"2019-08-11\",\r\n        \"id_usuario_noticia\":1,\r\n        \"nombreImagen\": \"cassssma\",\r\n        \"urlImagen\": \"url\",\r\n        \"tags\": [\r\n        \t\r\n        ],\r\n        \"comentarios\":[\r\n        \t1,2\r\n        ],\r\n        \"archivoImagen\": [\r\n        \t\t[213,123,122]\r\n        \t]\r\n }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1674,7 +1510,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/noticias/2",
+							"raw": "http://127.0.0.1:8081/noticias/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1684,8 +1520,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"noticias",
 								"2"
 							]
@@ -1705,7 +1539,7 @@
 						"method": "GET",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/comentarios",
+							"raw": "http://127.0.0.1:8081/comentarios",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1715,8 +1549,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"comentarios"
 							]
 						}
@@ -1737,7 +1569,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": " {\r\n        \"comentario\": \"genie2feghn5al!!!\",\r\n        \"fecha_publicacion\": \"2019-08-11\",\r\n        \"id_usuario\":1,\r\n        \"id_noticia\":10\r\n }",
+							"raw": " {\r\n        \"comentario\": \"genie2feghn5al!!!\",\r\n        \"fecha_publicacion\": \"2019-08-11\",\r\n        \"id_usuario\":424,\r\n        \"id_noticia\":1\r\n }",
 							"options": {
 								"raw": {
 									"language": "json"
@@ -1745,7 +1577,7 @@
 							}
 						},
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/comentarios",
+							"raw": "http://127.0.0.1:8081/comentarios",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1755,8 +1587,6 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
 								"comentarios"
 							]
 						}
@@ -1769,7 +1599,7 @@
 						"method": "DELETE",
 						"header": [],
 						"url": {
-							"raw": "http://127.0.0.1:8081/api/v1/comentarios/2",
+							"raw": "http://127.0.0.1:8081/comentarios/2",
 							"protocol": "http",
 							"host": [
 								"127",
@@ -1779,8 +1609,45 @@
 							],
 							"port": "8081",
 							"path": [
-								"api",
-								"v1",
+								"comentarios",
+								"2"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Editar comentario",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Content-Type",
+								"name": "Content-Type",
+								"type": "text",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "    {\n        \"comentario\": \"32111111111111111\",\n        \"fecha_publicacion\": \"2019-11-28T12:17:35.000+0000\"\n    }",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://127.0.0.1:8081/comentarios/2",
+							"protocol": "http",
+							"host": [
+								"127",
+								"0",
+								"0",
+								"1"
+							],
+							"port": "8081",
+							"path": [
 								"comentarios",
 								"2"
 							]

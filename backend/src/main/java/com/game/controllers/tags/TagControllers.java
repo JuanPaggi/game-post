@@ -25,14 +25,14 @@ import com.game.services.tag.TagService;
 import com.game.utils.ModelApiResponse;
 
 /**
- * @author pachi Controlador de Tag con get, post, put, y delete. Tenemos dos
- *         Get, uno para devolver un Tag seleccionado por su id y otro get para
- *         devolver todos los Tags.
+ * @author Juan Paggi. Controlador de Tag con get, post, put, y delete. Tenemos
+ *         dos Get, uno para devolver un Tag seleccionado por su id y otro get
+ *         para devolver todos los Tags.
  */
 
 @RestController
 @CrossOrigin(origins = "*", methods = { RequestMethod.GET })
-@RequestMapping("${v1API}/tags")
+@RequestMapping("/tags")
 public class TagControllers {
 
 	public static final Logger logger = LoggerFactory.getLogger(TagControllers.class);

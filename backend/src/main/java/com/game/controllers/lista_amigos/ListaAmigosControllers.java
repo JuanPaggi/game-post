@@ -22,31 +22,32 @@ import com.game.services.lista_amigos.ListaAmigosService;
 import com.game.utils.ModelApiResponse;
 
 /**
- * @author Juan Paggi
- * Controlador de ListaAmigos con get, post y delete.
+ * @author Juan Paggi. Controlador de ListaAmigos con get, post y delete.
  */
 
 @RestController
-@RequestMapping("${v1API}/amigos")
+@RequestMapping("/amigos")
 public class ListaAmigosControllers {
-	
+
 	@Autowired
 	ListaAmigosService listaAmigosService;
-	
+
 	public static final Logger logger = LoggerFactory.getLogger(ListaAmigosControllers.class);
-	
-	@GetMapping(path="{idUsuario}")
-	public @ResponseBody ResponseEntity<List<ListaAmigosItem>> getUsuarios(@PathVariable("idUsuario") String idUsuario){
+
+	@GetMapping(path = "{idUsuario}")
+	public @ResponseBody ResponseEntity<List<ListaAmigosItem>> getUsuarios(
+			@PathVariable("idUsuario") String idUsuario) {
 		try {
-			return new ResponseEntity<List<ListaAmigosItem>>(listaAmigosService.getAllAmigos(Long.parseLong(idUsuario)), HttpStatus.OK);
-		} catch(Exception e) {
+			return new ResponseEntity<List<ListaAmigosItem>>(listaAmigosService.getAllAmigos(Long.parseLong(idUsuario)),
+					HttpStatus.OK);
+		} catch (Exception e) {
 			logger.error("El servidor encontró una condición inesperada, no se pudo cumplir la solicitud", e);
 			return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@PostMapping(path="")
-	public @ResponseBody ResponseEntity<ModelApiResponse> addAmigos( @RequestBody ListaAmigosItem body){
+
+	@PostMapping(path = "")
+	public @ResponseBody ResponseEntity<ModelApiResponse> addAmigos(@RequestBody ListaAmigosItem body) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
 			listaAmigosService.addAmigo(body);
@@ -77,8 +78,8 @@ public class ListaAmigosControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
-	@DeleteMapping(path="")
+
+	@DeleteMapping(path = "")
 	public @ResponseBody ResponseEntity<ModelApiResponse> removeUsuario(@RequestBody ListaAmigosItem body) {
 		ModelApiResponse respuesta = new ModelApiResponse();
 		try {
@@ -105,5 +106,5 @@ public class ListaAmigosControllers {
 			return new ResponseEntity<ModelApiResponse>(respuesta, HttpStatus.INTERNAL_SERVER_ERROR);
 		}
 	}
-	
+
 }
