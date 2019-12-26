@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- SQL XML created by WWW SQL Designer, https://github.com/ondras/wwwsqldesigner/ -->
+<!-- Active URL: http://sql.tandilserver.com/ -->
+<sql>
+<datatypes db="mysql">
+	<group label="Numeric" color="rgb(238,238,170)">
+		<type label="Integer" length="0" sql="INTEGER" quote=""/>
+	 	<type label="TINYINT" length="0" sql="TINYINT" quote=""/>
+	 	<type label="SMALLINT" length="0" sql="SMALLINT" quote=""/>
+	 	<type label="MEDIUMINT" length="0" sql="MEDIUMINT" quote=""/>
+	 	<type label="INT" length="0" sql="INT" quote=""/>
+		<type label="BIGINT" length="0" sql="BIGINT" quote=""/>
+		<type label="Decimal" length="1" sql="DECIMAL" re="DEC" quote=""/>
+		<type label="Single precision" length="0" sql="FLOAT" quote=""/>
+		<type label="Double precision" length="0" sql="DOUBLE" re="DOUBLE" quote=""/>
+	</group>
+
+	<group label="Character" color="rgb(255,200,200)">
+		<type label="Char" length="1" sql="CHAR" quote="'"/>
+		<type label="Varchar" length="1" sql="VARCHAR" quote="'"/>
+		<type label="Text" length="0" sql="MEDIUMTEXT" re="TEXT" quote="'"/>
+		<type label="Binary" length="1" sql="BINARY" quote="'"/>
+		<type label="Varbinary" length="1" sql="VARBINARY" quote="'"/>
+		<type label="BLOB" length="0" sql="BLOB" re="BLOB" quote="'"/>
+	</group>
+
+	<group label="Date &amp; Time" color="rgb(200,255,200)">
+		<type label="Date" length="0" sql="DATE" quote="'"/>
+		<type label="Time" length="0" sql="TIME" quote="'"/>
+		<type label="Datetime" length="0" sql="DATETIME" quote="'"/>
+		<type label="Year" length="0" sql="YEAR" quote=""/>
+		<type label="Timestamp" length="0" sql="TIMESTAMP" quote="'"/>
+	</group>
+	
+	<group label="Miscellaneous" color="rgb(200,200,255)">
+		<type label="ENUM" length="1" sql="ENUM" quote=""/>
+		<type label="SET" length="1" sql="SET" quote=""/>
+		<type label="Bit" length="0" sql="bit" quote=""/>
+	</group>
+</datatypes><table x="1493" y="471" name="usuarios">
+<row name="id_usuario" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="nombre" null="0" autoincrement="0">
+<datatype>VARCHAR(64)</datatype>
+</row>
+<row name="apellido" null="0" autoincrement="0">
+<datatype>VARCHAR(64)</datatype>
+</row>
+<row name="email" null="0" autoincrement="0">
+<datatype>VARCHAR(128)</datatype>
+</row>
+<row name="usuario" null="0" autoincrement="0">
+<datatype>VARCHAR(32)</datatype>
+</row>
+<row name="clave" null="0" autoincrement="0">
+<datatype>VARCHAR(64)</datatype>
+</row>
+<row name="pais" null="0" autoincrement="0">
+<datatype>VARCHAR(128)</datatype>
+</row>
+<row name="nivel" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="puntos" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="fecha_inscripcion" null="0" autoincrement="0">
+<datatype>TIMESTAMP</datatype>
+</row>
+<row name="email_verificado" null="0" autoincrement="0">
+<datatype>bit</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id_usuario</part>
+</key>
+<key type="UNIQUE" name="">
+<part>email</part>
+<part>usuario</part>
+</key>
+</table>
+<table x="1158" y="68" name="juegos">
+<row name="id_juego" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="titulo" null="0" autoincrement="0">
+<datatype>VARCHAR(128)</datatype>
+</row>
+<row name="descripcion" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="genero" null="0" autoincrement="0">
+<datatype>VARCHAR(64)</datatype>
+</row>
+<row name="desarrollador" null="0" autoincrement="0">
+<datatype>VARCHAR(256)</datatype>
+</row>
+<row name="fecha_lanzamiento" null="0" autoincrement="0">
+<datatype>DATE</datatype>
+</row>
+<row name="id_admin_creado" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="admin" row="id_admin" />
+</row>
+<row name="analisis_positivos" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="analisis_negativos" null="0" autoincrement="0">
+<datatype>INT</datatype>
+</row>
+<row name="sistema_operativo" null="0" autoincrement="0">
+<datatype>VARCHAR(256)</datatype>
+</row>
+<row name="procesador" null="0" autoincrement="0">
+<datatype>VARCHAR(256)</datatype>
+</row>
+<row name="memoria" null="0" autoincrement="0">
+<datatype>VARCHAR(256)</datatype>
+</row>
+<row name="grafica" null="0" autoincrement="0">
+<datatype>VARCHAR</datatype>
+</row>
+<row name="almacenamiento" null="0" autoincrement="0">
+<datatype>VARCHAR(256)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id_juego</part>
+</key>
+<key type="INDEX" name="">
+<part>id_admin_creado</part>
+</key>
+<key type="UNIQUE" name="">
+<part>titulo</part>
+</key>
+</table>
+<table x="1430" y="234" name="analisis">
+<row name="id_analisis" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="analisis" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="valoracion" null="0" autoincrement="0">
+<datatype>bit</datatype>
+</row>
+<row name="fecha_publicacion" null="0" autoincrement="0">
+<datatype>TIMESTAMP</datatype>
+</row>
+<row name="id_juego" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="juegos" row="id_juego" />
+</row>
+<row name="id_usuario" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_analisis</part>
+</key>
+<key type="INDEX" name="">
+<part>id_juego</part>
+<part>id_usuario</part>
+</key>
+</table>
+<table x="547" y="354" name="imagenes">
+<row name="id_imagen" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="nombre" null="0" autoincrement="0">
+<datatype>VARCHAR(256)</datatype>
+</row>
+<row name="imagen" null="0" autoincrement="0">
+<datatype>BLOB</datatype>
+</row>
+<row name="imagen_checksum" null="0" autoincrement="0">
+<datatype>BINARY(20)</datatype>
+<default>'NUL'</default></row>
+<row name="id_admin_subido" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="admin" row="id_admin" />
+</row>
+<row name="fecha_subida" null="0" autoincrement="0">
+<datatype>DATE</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id_imagen</part>
+</key>
+<key type="INDEX" name="">
+<part>id_admin_subido</part>
+</key>
+<key type="UNIQUE" name="">
+<part>nombre</part>
+<part>imagen_checksum</part>
+</key>
+</table>
+<table x="621" y="567" name="admin">
+<row name="id_admin" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="usuario" null="0" autoincrement="0">
+<datatype>VARCHAR(64)</datatype>
+</row>
+<row name="clave" null="0" autoincrement="0">
+<datatype>VARCHAR(64)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id_admin</part>
+</key>
+<key type="UNIQUE" name="">
+<part>usuario</part>
+</key>
+</table>
+<table x="1153" y="606" name="privilegios">
+<row name="id_privilegio" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="privilegio" null="0" autoincrement="0">
+<datatype>VARCHAR(256)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id_privilegio</part>
+</key>
+<key type="UNIQUE" name="">
+<part>privilegio</part>
+</key>
+</table>
+<table x="911" y="464" name="privilegios_admin">
+<row name="id_privilegio" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="privilegios" row="id_privilegio" />
+</row>
+<row name="id_admin" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="admin" row="id_admin" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_privilegio</part>
+<part>id_admin</part>
+</key>
+</table>
+<table x="368" y="112" name="tag">
+<row name="id_tag" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="etiqueta" null="0" autoincrement="0">
+<datatype>VARCHAR(128)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id_tag</part>
+</key>
+<key type="UNIQUE" name="">
+<part>etiqueta</part>
+</key>
+</table>
+<table x="650" y="112" name="juegos_tag">
+<row name="id_juego" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="juegos" row="id_juego" />
+</row>
+<row name="id_tag" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="tag" row="id_tag" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_juego</part>
+<part>id_tag</part>
+</key>
+</table>
+<table x="358" y="250" name="modos">
+<row name="id_modo" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="modo" null="0" autoincrement="0">
+<datatype>VARCHAR(128)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id_modo</part>
+</key>
+<key type="UNIQUE" name="">
+<part>modo</part>
+</key>
+</table>
+<table x="607" y="226" name="juegos_modos">
+<row name="id_juego" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="juegos" row="id_juego" />
+</row>
+<row name="id_modo" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="modos" row="id_modo" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_juego</part>
+<part>id_modo</part>
+</key>
+</table>
+<table x="265" y="492" name="noticias">
+<row name="id_noticia" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="titulo" null="0" autoincrement="0">
+<datatype>VARCHAR(256)</datatype>
+</row>
+<row name="descripcion" null="0" autoincrement="0">
+<datatype>VARCHAR(2048)</datatype>
+</row>
+<row name="cuerpo" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="fecha_publicacion" null="0" autoincrement="0">
+<datatype>DATE</datatype>
+</row>
+<row name="id_admin_creado" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="admin" row="id_admin" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_noticia</part>
+</key>
+<key type="INDEX" name="">
+<part>id_admin_creado</part>
+</key>
+<key type="UNIQUE" name="">
+<part>titulo</part>
+</key>
+</table>
+<table x="321" y="360" name="noticias_imagenes">
+<row name="id_noticia" null="0" autoincrement="1">
+<datatype>INT</datatype>
+<relation table="noticias" row="id_noticia" />
+</row>
+<row name="id_imagen" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="imagenes" row="id_imagen" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_noticia</part>
+<part>id_imagen</part>
+</key>
+</table>
+<table x="1787" y="706" name="donaciones">
+<row name="id_donacion" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="id_usuario" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<row name="monto" null="0" autoincrement="0">
+<datatype>DECIMAL</datatype>
+</row>
+<row name="fecha_donacion" null="0" autoincrement="0">
+<datatype>TIMESTAMP</datatype>
+</row>
+<row name="comentario" null="1" autoincrement="0">
+<datatype>VARCHAR(2048)</datatype>
+<default>NULL</default></row>
+<key type="PRIMARY" name="">
+<part>id_donacion</part>
+</key>
+<key type="INDEX" name="">
+<part>id_usuario</part>
+</key>
+</table>
+<table x="685" y="715" name="comentarios">
+<row name="id_comentario" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="comentario" null="0" autoincrement="0">
+<datatype>VARCHAR(2048)</datatype>
+</row>
+<row name="fecha_publicacion" null="0" autoincrement="0">
+<datatype>TIMESTAMP</datatype>
+</row>
+<row name="id_usuario" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<row name="id_noticia" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="noticias" row="id_noticia" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_comentario</part>
+</key>
+<key type="INDEX" name="">
+<part>id_usuario</part>
+<part>id_noticia</part>
+</key>
+</table>
+<table x="75" y="274" name="noticias_tag">
+<row name="id_tag" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="tag" row="id_tag" />
+</row>
+<row name="id_noticia" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="noticias" row="id_noticia" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_tag</part>
+<part>id_noticia</part>
+</key>
+</table>
+<table x="1195" y="461" name="usuarios_privilegios">
+<row name="id_usuario" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<row name="id_privilegio" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="privilegios" row="id_privilegio" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_usuario</part>
+<part>id_privilegio</part>
+</key>
+</table>
+<table x="1725" y="224" name="lista_amigos">
+<row name="id_lista_amigos" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="id_usuario" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<row name="id_amigo" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_lista_amigos</part>
+</key>
+<key type="INDEX" name="">
+<part>id_usuario</part>
+<part>id_amigo</part>
+</key>
+</table>
+<table x="1792" y="358" name="solicitudes_amistad">
+<row name="id_solicitud_amistad" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="id_usuario" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<row name="id_amigo" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<row name="fecha_solicitud" null="0" autoincrement="0">
+<datatype>TIMESTAMP</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id_solicitud_amistad</part>
+</key>
+<key type="INDEX" name="">
+<part>id_usuario</part>
+<part>id_amigo</part>
+</key>
+</table>
+<table x="1883" y="535" name="mensajes">
+<row name="id_mensaje" null="0" autoincrement="1">
+<datatype>BIGINT</datatype>
+</row>
+<row name="cuerpo" null="0" autoincrement="0">
+<datatype>MEDIUMTEXT</datatype>
+</row>
+<row name="fecha" null="0" autoincrement="0">
+<datatype>TIMESTAMP</datatype>
+</row>
+<row name="id_escritor" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<row name="id_lector" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_mensaje</part>
+</key>
+<key type="INDEX" name="">
+<part>id_escritor</part>
+<part>id_lector</part>
+</key>
+</table>
+<table x="1140" y="848" name="usuarios_bloqueados">
+<row name="id_usuario_bloqueado" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="id_usuario" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<row name="id_admin" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="admin" row="id_admin" />
+</row>
+<row name="fecha_bloqueo" null="0" autoincrement="0">
+<datatype>TIMESTAMP</datatype>
+</row>
+<row name="motivo" null="0" autoincrement="0">
+<datatype>VARCHAR(1024)</datatype>
+</row>
+<key type="PRIMARY" name="">
+<part>id_usuario_bloqueado</part>
+</key>
+<key type="INDEX" name="">
+<part>id_usuario</part>
+<part>id_admin</part>
+</key>
+</table>
+<table x="1531" y="795" name="notificaciones">
+<row name="id_notificacion" null="0" autoincrement="1">
+<datatype>INT</datatype>
+</row>
+<row name="notificacion" null="0" autoincrement="0">
+<datatype>VARCHAR(2048)</datatype>
+</row>
+<row name="id_usuario" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="usuarios" row="id_usuario" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_notificacion</part>
+</key>
+</table>
+<table x="750" y="309" name="juegos_imagenes">
+<row name="id_juego" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="juegos" row="id_juego" />
+</row>
+<row name="id_imagen" null="0" autoincrement="0">
+<datatype>INT</datatype>
+<relation table="imagenes" row="id_imagen" />
+</row>
+<key type="PRIMARY" name="">
+<part>id_juego</part>
+<part>id_imagen</part>
+</key>
+</table>
+</sql>
